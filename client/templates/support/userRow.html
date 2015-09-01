@@ -1,8 +1,24 @@
 <template name="userRow">
     <tr>
-        <th>{{id}}</th>
-        <th>{{email}}</th>
-        <th>{{name}}</th>
-        <th></th>
+        <th>{{_id}}</th>
+        <th>{{emails.[0].address}}</th>
+        <th>{{username}}</th>
+        <th>
+            <div class="dropdown">
+                <button id="dLabel" type="btn btn-default" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">...</button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" class="btn-impersonate">Войти в кабинет</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" class="btn-sendReset">Восстановление пароля</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" class="btn-setBan">Запретить вход</a>
+                    </li>
+                </ul>
+            </div>
+        </th>
     </tr>
 </template>

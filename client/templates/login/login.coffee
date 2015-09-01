@@ -41,7 +41,7 @@ Template.login.rendered = ()->
   log.trace 'login rendered'
 
 Template.login.helpers
-  "iamlogin": ()->
+  iamlogin: ()->
     'iam login'
 
 Template.login.events

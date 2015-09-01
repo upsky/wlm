@@ -1,4 +1,7 @@
 methodsSecurity =
+  root:
+    authNotRequired: true
+    roles: "all"
   checkLogin:
     authNotRequired: true
     roles: "all"
@@ -7,10 +10,14 @@ methodsSecurity =
     roles: "all"
   logout:
     roles: "all"
+  fakePartners:
+    roles: "sysadmin"
   impersonate:
     roles: "sysadmin"
-  invite:
+  insertInvite:
     roles: "partner"
+  updateProfile:
+    roles: "partner,sysadmin"
 
 Meteor.beforeAllMethods ()->
   methodName = this._methodName
