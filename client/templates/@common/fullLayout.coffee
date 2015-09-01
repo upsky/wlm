@@ -195,8 +195,9 @@ Template.fullLayout.rendered = () ->
   log.trace "fullLayout rendered"
 
 Template.fullLayout.helpers
-  "iamfullLayout": () ->
-    "iam fullLayout"
+  navLinks: () ->
+    db.navBars.findOne
+      "path": Session.get 'currentPath'
 
 Template.fullLayout.events
   "click #fullLayout": (event) ->

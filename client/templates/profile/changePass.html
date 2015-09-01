@@ -1,7 +1,22 @@
 <template name="changePass">
-    {{#Layout template="panel" data=blockData}}
-        <div>
-            <p>Content</p>
-        </div>
+    {{#Layout template="panel" data=changePass}}
+        {{#autoForm id="passForm" type="method" schema="Schemas.passSchema" meteormethod="updatePass" resetOnSuccess=false}}
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="form-group">
+                        {{> afQuickField type="text" class="form-control input-lg" name="oldPass" value=user.profile.name placeholder="schemaLabel"}}
+                    </div>
+                    <div class="form-group">
+                        {{> afQuickField type="text" class="form-control input-lg" name="newPass" value=user.phones.[0].number placeholder="schemaLabel"}}
+                    </div>
+                    <div class="form-group">
+                        {{> afQuickField type="text" class="form-control input-lg" name="confirmPass" value=user.emails.[0].address placeholder="schemaLabel"}}
+                    </div>
+                </li>
+            </ul>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-lg btn-success">{{i18n "buttons.update"}}</button>
+            </div>
+        {{/autoForm}}
     {{/Layout}}
 </template>

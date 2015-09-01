@@ -1,24 +1,28 @@
 <template name="fullLayout">
-    <div id="body">
-        {{> navMenu}}
+    <div id="body" class="default-page">
+      {{> navMenu}}
         <section class="sidebar extended">
         </section>
         <section class="wrapper retracted scrollable">
-            {{> userMenu}}
-            <div id="top" class="panel panel-default panel-block panel-title-block">
-                <div class="panel-heading">
-                    <div>
-                        <i class="fa fa-edit"></i>
-                        <h1>
-                            <span class="page-title">{{pageTitle}}</span>
-                            <small>
-
-                            </small>
-                        </h1>
-                    </div>
-                </div>
+          {{> userMenu}}
+            <div class="quick-launch-bar">
+                <ul>
+                  {{#each navLinks}}
+                      <li class="{{decor}}">
+                        {{#if href}}
+                          {{#if target}}
+                              <a href="{{href}}"><i class="fa {{icon}}"></i><span>{{name}}</span></a>
+                          {{else}}
+                              <a href="{{href}}" target="{{target}}"><i class="fa {{icon}}"></i><span>{{name}}</span></a>
+                          {{/if}}
+                        {{else}}
+                          {{{html}}}
+                        {{/if}}
+                      </li>
+                  {{/each}}
+                </ul>
             </div>
-            {{> yield}}
+          {{> yield}}
         </section>
     </div>
 </template>

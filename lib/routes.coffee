@@ -1,6 +1,8 @@
 Router.configure
   layoutTemplate: 'miniLayout'
+  loadingTemplate: 'loading'
   template: 'error'
+  progressDebug : true
 
 Router.plugin 'dataNotFound',
   notFoundTemplate: 'error'
@@ -28,6 +30,9 @@ else
   Router.route '/network',
     layoutTemplate: 'fullLayout'
     template: 'network'
+    waitOn: ()->
+      Meteor.subscribe 'networkData'
+      Meteor.subscribe 'activeInvites'
 
   Router.route '/profile',
     layoutTemplate: 'fullLayout'
@@ -52,3 +57,6 @@ Router.onBeforeAction (location)->
       @next()
 ,
   except: ['login', 'error', 'down', 'loading', 'blocked']
+
+Router.onRun ()->
+  Session.set 'currentPath', @url

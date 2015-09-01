@@ -66,9 +66,14 @@ Template.userMenu.rendered = ()->
   Meteor.proton.userNav.build()
 
 Template.userMenu.helpers
-  "iamuserMenu": ()->
-    "iam userMenu"
+  iamuserMenu: ()->
+    'iam userMenu'
+  userTitle: ()->
+    if Meteor.user()
+      Meteor.user().username
+    else
+      log.warn "Meteor.user() undefined"
 
 Template.userMenu.events
   "click #userMenu": (event)->
-    "click #userMenu"
+    'click #userMenu'
