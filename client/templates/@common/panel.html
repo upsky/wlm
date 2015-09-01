@@ -1,0 +1,13 @@
+<template name="panel">
+    <div class="panel panel-default panel-block">
+        <div class="list-group">
+            <div class="list-group-item" id="{{blockId}}">
+                <h4 class="section-title">
+                    {{i18n blockTitle}}
+                    {{{videoInstruction blockId}}}
+                </h4>
+                {{> yield}}
+            </div>
+        </div>
+    </div>
+</template>

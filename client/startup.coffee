@@ -1,4 +1,4 @@
-PNotify.prototype.options.styling = "fontawesome"
+PNotify.prototype.options.styling = 'fontawesome'
 #PNotify.desktop.permission()
 
 Meteor.startup ->

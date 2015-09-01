@@ -1,0 +1,13 @@
+<template name="profile">
+    {{#Layout template="twoCols"}}
+        {{> personalInf}}
+
+        {{#contentFor "block2"}}
+            {{> changePass}}
+        {{/contentFor}}
+
+        {{#contentFor "block3"}}
+            {{> settings}}
+        {{/contentFor}}
+    {{/Layout}}
+</template>

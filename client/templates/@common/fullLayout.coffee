@@ -173,20 +173,6 @@ Template.fullLayout.rendered = () ->
           text: "Slide menu will remain closed when you browse other pages, until you open it again."
 
     buildPageData: ->
-      pageTitle = document.title
-      $(".page-title").text pageTitle
-      pageTitle = pageTitle.replace("Proton UI - ", "")
-      $(".bread-page-title").text pageTitle
-      $(".preface p").text pageTitle + " include: "
-      Meteor.proton.sidebar.treeJson = data: [
-        data:
-          title: pageTitle
-          attr:
-            href: "#top"
-            id: "proton-lvl-0"
-
-        children: []
-      ]
       numSections = $(".section-title").length
       $(".section-title").each (index, el) ->
         return if $(this).is(".preface-title")
@@ -199,14 +185,6 @@ Template.fullLayout.rendered = () ->
         # Add item to breadcrumb nav
         $("<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#" + sectionId + "\">" + sectionTitle + "</a></li>").appendTo ".breadcrumb-nav .active .dropdown-menu"
 
-        # creates sidebar link object
-        newLinkObject = data:
-          title: sectionTitle
-          attr:
-            href: "#" + sectionId
-
-        Meteor.proton.sidebar.treeJson.data[0].children.push newLinkObject
-
         # Add item to title bar
         if (index + 1) isnt numSections
           $(".preface p").text $(".preface p").text() + sectionTitle + ", "
@@ -214,7 +192,7 @@ Template.fullLayout.rendered = () ->
           $(".preface p").text $(".preface p").text().slice(0, -2) + " and " + sectionTitle + "."
 
   Meteor.proton.sidebar.build()
-  console.log "fullLayout rendered"
+  log.trace "fullLayout rendered"
 
 Template.fullLayout.helpers
   "iamfullLayout": () ->

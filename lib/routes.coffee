@@ -1,8 +1,6 @@
 Router.configure
   layoutTemplate: 'miniLayout'
   template: 'error'
-  title: ->
-    i18n.get 'pageTitles.' + @route._path
 
 Router.plugin 'dataNotFound',
   notFoundTemplate: 'error'
@@ -27,16 +25,29 @@ else
     layoutTemplate: 'fullLayout'
     template: 'welcome'
 
-Router.onBeforeAction ->
+  Router.route '/network',
+    layoutTemplate: 'fullLayout'
+    template: 'network'
+
+  Router.route '/profile',
+    layoutTemplate: 'fullLayout'
+    template: 'profile'
+
+  Router.route '/support',
+    layoutTemplate: 'fullLayout'
+    template: 'support'
+
+Router.onBeforeAction (location)->
+  log.trace 'onBeforeAction '
   if Meteor.userId()
     @next()
   else
     if !Meteor.loggingIn()
       @layout 'miniLayout'
       @render 'login'
-      @stop()
+      #@stop()
     else
-      @layout "miniLayout"
+      @layout 'miniLayout'
       @render 'loading'
       @next()
 ,

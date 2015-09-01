@@ -1,32 +1,35 @@
 <template name="userMenu">
     <nav class="user-menu">
-        <a href="javascript:;" class="main-menu-access">
+        <a href="#" class="main-menu-access">
             <i class="fa fa-proton-logo"></i>
             <i class="fa fa-reorder"></i>
         </a>
         <section class="user-menu-wrapper">
-            <a href="javascript:;" data-expand=".theme-view" class="view-menu-access">
-                <i class="fa fa-eye-open"></i>
+            <a href="#" data-expand=".theme-view" class="view-menu-access">
+                <i class="fa fa-eye"></i>
             </a>
-            <a href="javascript:;" data-expand=".messages-view" class="messages-access">
-                <i class="fa fa-envelope-alt"></i>
+            <a href="#" data-expand=".messages-view" class="messages-access">
+                <i class="fa fa-envelope-o"></i>
+                {{messagesCount}}
             </a>
-            <a href="javascript:;" data-expand=".notifications-view" class="notifications-access unread">
-                <i class="fa fa-comment-alt"></i>
-                <div class="menu-counter">6</div>
+            <a href="#" data-expand=".notifications-view" class="notifications-access">
+                <i class="fa fa-comment-o"></i>
+                {{#if notifsCount}}
+                <div class="menu-counter">{{notifsCount}}</div>
+                {{/if}}
             </a>
         </section>
 
         <div class="panel panel-default nav-view theme-view">
             <div class="arrow user-menu-arrow"></div>
             <div class="panel-heading">
-                <i class="fa fa-eye-open"></i>
+                <i class="fa fa-eye"></i>
                 <span>Color Scheme</span>
-                <a href="javascript:;" class="close-user-menu"><i class="fa fa-remove"></i></a>
+                <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
             </div>
             <ul class="list-group">
                 <li class="list-group-item" data-theme="default">
-                    <a href="javascript:;">
+                    <a href="#">
                         <i><b class="dark"></b></i>
                         <div class="text-holder">
                                     <span class="title-text">
@@ -36,7 +39,7 @@
                     </a>
                 </li>
                 <li class="list-group-item" data-theme="theme-light">
-                    <a href="javascript:;">
+                    <a href="#">
                         <i><b></b></i>
                         <div class="text-holder">
                                     <span class="title-text">
@@ -46,7 +49,7 @@
                     </a>
                 </li>
                 <li class="list-group-item" data-theme="theme-pastel">
-                    <a href="javascript:;">
+                    <a href="#">
                         <i><b class="pastel"></b></i>
                         <div class="text-holder">
                                     <span class="title-text">
@@ -56,7 +59,7 @@
                     </a>
                 </li>
                 <li class="list-group-item" data-theme="theme-pastel-marine">
-                    <a href="javascript:;">
+                    <a href="#">
                         <i><b class="pastel-marine"></b></i>
                         <div class="text-holder">
                                     <span class="title-text">
@@ -66,7 +69,7 @@
                     </a>
                 </li>
                 <li class="list-group-item" data-theme="theme-terminal">
-                    <a href="javascript:;">
+                    <a href="#">
                         <i><b class="terminal"></b></i>
                         <div class="text-holder">
                                     <span class="title-text">
@@ -76,7 +79,7 @@
                     </a>
                 </li>
                 <li class="list-group-item" data-theme="theme-rio">
-                    <a href="javascript:;">
+                    <a href="#">
                         <i><b class="rio"></b></i>
                         <div class="text-holder">
                                     <span class="title-text">
@@ -91,141 +94,31 @@
         <div class="panel panel-default nav-view messages-view">
             <div class="arrow user-menu-arrow"></div>
             <div class="panel-heading">
-                <i class="fa fa-envelope-alt"></i>
+                <i class="fa fa-envelope-o"></i>
                 <span>Messages</span>
-                <a href="javascript:;" class="close-user-menu"><i class="fa fa-remove"></i></a>
+                <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
             </div>
             <ul class="list-group">
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user1.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Nunc Cenenatis:
-                                </span>
-                                <span class="description-text">
-                                    Hi, can you meet me at the office tomorrow morning?
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                3 mins ago
-                            </span>
-                </li>
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user5.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Prasent Neque:
-                                </span>
-                                <span class="description-text">
-                                    Just a quick question: do you know the balance on the adsense account?
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                17 mins ago
-                            </span>
-                </li>
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user2.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Flor Demoa:
-                                </span>
-                                <span class="description-text">
-                                    Hey, we're going surfing tomorrow. Feel free to join in.
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                3 hrs ago
-                            </span>
-                </li>
+
             </ul>
         </div>
 
         <div class="panel panel-default nav-view notifications-view">
             <div class="arrow user-menu-arrow"></div>
             <div class="panel-heading">
-                <i class="fa fa-comment-alt"></i>
+                <i class="fa fa-comment-o"></i>
                 <span>Notifications</span>
-                <a href="javascript:;" class="close-user-menu"><i class="fa fa-remove"></i></a>
+                <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
             </div>
             <ul class="list-group">
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user1.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Nunc Cenenatis
-                                </span>
-                                <span class="description-text">
-                                    likes your website.
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                32 mins ago
-                            </span>
-                </li>
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user2.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Flor Demoa
-                                </span>
-                                <span class="description-text">
-                                    wrote a new post.
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                3 hrs ago
-                            </span>
-                </li>
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user4.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Nunc Neque
-                                </span>
-                                <span class="description-text">
-                                    wrote a new post.
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                57 mins ago
-                            </span>
-                </li>
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user2.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Flor Demoa
-                                </span>
-                                <span class="description-text">
-                                    submitted a new ticket.
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                1.5 hrs ago
-                            </span>
-                </li>
-                <li class="list-group-item">
-                    <i><img src="images/user-icons/user1.jpg" alt="User Icon"></i>
-                    <div class="text-holder">
-                                <span class="title-text">
-                                    Nunc Cenenatis
-                                </span>
-                                <span class="description-text">
-                                    wrote a new post.
-                                </span>
-                    </div>
-                            <span class="time-ago">
-                                3 hrs ago
-                            </span>
-                </li>
+
             </ul>
         </div>
     </nav>
     <ol class="breadcrumb breadcrumb-nav">
-        <li><a href="."><i class="fa fa-home"></i></a></li>
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
         <li class="active">
-            <a class="bread-page-title" data-toggle="dropdown" href="#"></a>
+            <a class="bread-page-title" data-toggle="dropdown" href="#">{{pageTitle}}</a>
             <ul class="dropdown-menu dropdown-menu-arrow" role="menu">
             </ul>
         </li>

@@ -1,46 +1,49 @@
 Schemas.loginSchema = new SimpleSchema
   login:
     type:String
-    label: i18n.get "fields.login"
+    label: i18n.get 'fields.login'
   password:
     type:String
-    label: i18n.get "fields.password"
+    label: i18n.get 'fields.password'
 
 AutoForm.hooks
   loginForm:
     before:
       method: (doc) ->
-        Session.set "LoginAttempt", doc.password
-        doc.password = "fakePass"
+        Session.set 'LoginAttempt', doc.password
+        doc.password = 'fakePass'
         doc
     onError: (type, error)->
       console.log error
       if error.error == 490
-        Router.go "blocked"
+        Router.go 'blocked'
       else
         new PNotify
           title: document.title
-          type: "error"
-          text: i18n.get "errors.unknownError"
+          type: 'error'
+          text: i18n.get 'errors.unknownError'
     onSuccess: (type, result)->
       console.log result
       if result
-        password = Session.get "LoginAttempt"
-        Session.set "LoginAttempt", undefined
+        password = Session.get 'LoginAttempt'
+        Session.set 'LoginAttempt', undefined
         Meteor.loginWithPassword result, password, (error)->
           if error
+            log.info error
             new PNotify
               title: document.title
-              type: "error"
-              text: i18n.get "errors.loginError"
+              type: 'error'
+              text: i18n.get 'errors.loginError'
+          else
+            Router.go '/'
 
 Template.login.rendered = ()->
-  console.log "login rendered"
+  log.trace 'login rendered'
 
 Template.login.helpers
   "iamlogin": ()->
-    "iam login"
+    'iam login'
 
 Template.login.events
   "click #login": (event)->
-    console.log "click #login"
+    log.trace 'click #login'

@@ -29,9 +29,10 @@ coffeescript
 ostrio:templatehelpers
 less
 mrt:modernizr-meteor
-ostrio:iron-router-title
 ostrio:i18n
 yogiben:autoform-modals
 copleykj:livestamp
 rzymek:moment-locale-ru
 audit-argument-checks
+jag:pince
+seba:method-hooks

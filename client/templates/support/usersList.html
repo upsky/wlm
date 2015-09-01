@@ -1,0 +1,19 @@
+<template name="usersList">
+    {{#Layout template="panel" data=blockData}}
+        <table id="users" class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>email</th>
+                <th>name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each users}}
+                {{> userRow}}
+            {{/each}}
+            </tbody>
+        </table>
+    {{/Layout}}
+</template>

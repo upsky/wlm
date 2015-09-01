@@ -2,50 +2,6 @@
     <div id="body">
         {{> navMenu}}
         <section class="sidebar extended">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="clearfix">
-                        <img src="images/proton-logo.png" alt="proton-logo">
-                        <h5>
-                            <span class="title">
-                                Proton
-                            </span>
-                            <span class="subtitle">
-                                CMS ADMIN PANEL
-                            </span>
-                        </h5>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="title">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>
-                            CATEGORIES
-                        </span>
-                        <a href="javascript:;" class="add">
-                            <i class="fa fa-plus-sign"></i>
-                            <span>
-                                ADD NEW
-                            </span>
-                        </a>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default btn-search" type="button"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body tree-body">
-                    <div class="scrollable">
-                        <div id="proton-tree"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar-handle">
-                <i class="fa fa-ellipsis-horizontal"></i>
-                <i class="fa fa-ellipsis-vertical"></i>
-            </div>
         </section>
         <section class="wrapper retracted scrollable">
             {{> userMenu}}
@@ -54,9 +10,9 @@
                     <div>
                         <i class="fa fa-edit"></i>
                         <h1>
-                            <span class="page-title"></span>
+                            <span class="page-title">{{pageTitle}}</span>
                             <small>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit...
+
                             </small>
                         </h1>
                     </div>

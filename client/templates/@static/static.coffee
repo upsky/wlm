@@ -10,5 +10,5 @@ Template.blocked.rendered = ()->
   fadeIn()
 Template.down.rendered = ()->
   fadeIn()
-Template.errors.rendered = ()->
+Template.error.rendered = ()->
   fadeIn()
