@@ -1,50 +1,38 @@
 <template name="login">
-    <form role="form">
-        <section class="wrapper scrollable animated fadeInDown">
-            <section class="panel panel-default">
-                <div class="panel-heading">
-                    <div>
-                        <img src="images/proton-logo.png" alt="proton-logo">
-                        <h1>
+    <div class="login-page">
+        {{#autoForm id="loginForm" type="method" schema="Schemas.loginSchema" meteormethod="checkLogin" resetOnSuccess=false}}
+            <section class="wrapper scrollable animated fadeInDown">
+                <section class="panel panel-default">
+                    <div class="panel-heading">
+                        <div>
+                            <img src="" alt="">
+                            <h1>
                                 <span class="title">
-                                    Proton
+
                                 </span>
                                 <span class="subtitle">
-                                    CMS ADMIN PANEL
+
                                 </span>
-                        </h1>
+                            </h1>
+                        </div>
                     </div>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                            <span class="welcome-text">
-                                Welcome back to Proton CMS!
-                            </span>
-                            <span class="member">
-                                Not a Member?
-                            </span>
-                        <a href="javascript:;">Sign Up В»</a>
-                    </li>
-                    <li class="list-group-item">
-                            <span class="login-text">
-                                Login with your Proton account
-                            </span>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control input-lg" id="email" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control input-lg" id="password" placeholder="Password">
-                        </div>
-                    </li>
-                </ul>
-                <div class="panel-footer">
-                    <a class="btn btn-lg btn-success" href=".">LOGIN TO YOUR ACCOUNT</a>
-                    <br>
-                    <a class="forgot" href="javascript:;">Forgot Your Password?</a>
-                </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                        </li>
+                        <li class="list-group-item">
+                            <div class="form-group">
+                                {{> afQuickField type="email" class="form-control input-lg" name="login" placeholder="schemaLabel"}}
+                            </div>
+                            <div class="form-group">
+                                {{> afQuickField type="password" class="form-control input-lg" name="password" placeholder="schemaLabel"}}
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="panel-footer">
+                        <button type="submit" class="btn btn-lg btn-success">{{i18n "buttons.enter"}}</button>
+                    </div>
+                </section>
             </section>
-        </section>
-    </form>
+        {{/autoForm}}
+    </div>
 </template>

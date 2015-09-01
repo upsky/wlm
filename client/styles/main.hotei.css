@@ -1,0 +1,9 @@
+.ui-pnotify .alert-danger {
+    background-color: #e77755;
+    border-color: transparent;
+    color: #fff;
+}
+
+.no-touch .ui-pnotify .alert:hover {
+    background-color: #bc401a;
+}

@@ -1,17 +1,18 @@
 Template.userMenu.rendered = ()->
-  proton = {}
-  proton.userNav =
+  unless Meteor.proton
+    Meteor.proton = {}
+  Meteor.proton.userNav =
     build: ->
 
       # Initiate userNav events
-      proton.userNav.events()
+      Meteor.proton.userNav.events()
 
       # Check screen size, shuffle user nav if needed
-      proton.userNav.shuffleUserNav()
+      Meteor.proton.userNav.shuffleUserNav()
 
       # Bounce notification counter
       setTimeout (->
-        proton.userNav.bounceCounter()
+        Meteor.proton.userNav.bounceCounter()
       ), 3000
 
     events: ->
@@ -59,10 +60,10 @@ Template.userMenu.rendered = ()->
         $(".menu-counter").toggleClass "animated bounce"
       ), 1000
       setTimeout (->
-        proton.userNav.bounceCounter()
+        Meteor.proton.userNav.bounceCounter()
       ), 5000
 
-  proton.userNav.build()
+  Meteor.proton.userNav.build()
 
 Template.userMenu.helpers
   "iamuserMenu": ()->

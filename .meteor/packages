@@ -6,13 +6,11 @@
 
 meteor-platform
 iron:router
-tap:i18n
 alanning:roles
 accounts-password
 
 benjaminrh:jquery-cookie
 chhib:morris
-kidovate:pnotify
 http
 matb33:collection-hooks
 aldeed:autoform
@@ -31,3 +29,9 @@ coffeescript
 ostrio:templatehelpers
 less
 mrt:modernizr-meteor
+ostrio:iron-router-title
+ostrio:i18n
+yogiben:autoform-modals
+copleykj:livestamp
+rzymek:moment-locale-ru
+audit-argument-checks

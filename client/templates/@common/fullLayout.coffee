@@ -1,8 +1,9 @@
 Template.fullLayout.rendered = () ->
-  proton = {}
-  proton.common =
+  unless Meteor.proton
+    Meteor.proton = {}
+  Meteor.proton.common =
     build: ->
-      proton.common.events()
+      Meteor.proton.common.events()
       #proton.common.enableTooltips()
 
       # On window resize end (throttle protected) execute proton.commonOnResizeEnd function
@@ -11,7 +12,7 @@ Template.fullLayout.rendered = () ->
       $(window).resize ->
         clearTimeout resizeEnd
         resizeEnd = setTimeout(->
-          proton.common.onResizeEnd()
+          Meteor.proton.common.onResizeEnd()
         , resizeThrottleBuffer)
 
       setTimeout (->
@@ -41,20 +42,20 @@ Template.fullLayout.rendered = () ->
 
     onResizeEnd: ->
       # if current page has a user menu, move the element when entering mobile mode
-      not proton.userNav or proton.userNav.shuffleUserNav()
+      not Meteor.proton.userNav or Meteor.proton.userNav.shuffleUserNav()
 
       # if current page is a dashboard, fill the row with widget placeholder if there are not enough real widgets
-      not proton.dashboard or proton.dashboard.setBlankWidgets()
+      not Meteor.proton.dashboard or Meteor.proton.dashboard.setBlankWidgets()
 
       # if current page has graphs, redraw on resize end
       setTimeout (->
-        not (proton.graphsStats and proton.graphsStats.redrawCharts) or proton.graphsStats.redrawCharts()
-        not (proton.userProfile and proton.userProfile.redrawCharts) or proton.userProfile.redrawCharts()
+        not (Meteor.proton.graphsStats and Meteor.proton.graphsStats.redrawCharts) or Meteor.proton.graphsStats.redrawCharts()
+        not (Meteor.proton.userProfile and Meteor.proton.userProfile.redrawCharts) or Meteor.proton.userProfile.redrawCharts()
       ), 1000
 
       # adjust sidebar CSS for mobile mode change
-      not proton.sidebar or proton.sidebar.retractOnResize()
-      not proton.sidebar or proton.sidebar.setSidebarMobHeight()
+      not Meteor.proton.sidebar or Meteor.proton.sidebar.retractOnResize()
+      not Meteor.proton.sidebar or Meteor.proton.sidebar.setSidebarMobHeight()
 
     enableTooltips: ->
       # Activate tooltips on all elements with class .uses-tooltip
@@ -65,55 +66,50 @@ Template.fullLayout.rendered = () ->
           container: "#body"
           title: progress
 
-  proton.common.build()
+  Meteor.proton.common.build()
 
-  proton.sidebar =
+  Meteor.proton.sidebar =
     build: ->
       # Initiate sidebar events
-      proton.sidebar.events()
+      Meteor.proton.sidebar.events()
 
       # Build Advanced Search sidebar feature
-      not $(".advanced-search").length or proton.sidebar.buildAdvancedSearch()
+      not $(".advanced-search").length or Meteor.proton.sidebar.buildAdvancedSearch()
 
       # Initiate sidebar retraction on smaller screen sizes
-      proton.sidebar.retractOnResize()
+      Meteor.proton.sidebar.retractOnResize()
 
       # Sets max-heigh for sidbar menu in mobile mode (needed for CSS transitions)
-      proton.sidebar.setSidebarMobHeight()
+      Meteor.proton.sidebar.setSidebarMobHeight()
 
       # Builds page data for sidebar menu
-      proton.sidebar.buildPageData()
+      Meteor.proton.sidebar.buildPageData()
 
       # Check if jstree plugin exists, initiate if true
-      not $.jstree or proton.sidebar.jstreeSetup()
+      not $.jstree or Meteor.proton.sidebar.jstreeSetup()
 
     buildAdvancedSearch: ->
-      $(".select2").select2 minimumResultsForSearch: 6
-      $(".datetimepicker-search").datetimepicker
-        format: "yyyy-mm-dd"
-        minView: "month"
-        maxView: "month"
-        autoclose: true
+      $(".select2").select2()
 
       $("input[type=\"radio\"], input[type=\"checkbox\"]").uniform()
 
     events: ->
       $(document).on "click", ".sidebar-handle", (event) ->
         event.preventDefault()
-        proton.sidebar.toogleSidebar()
+        Meteor.proton.sidebar.toggleSidebar()
 
       $(document).on "click", ".btn-advanced-search, .close-advanced-search", (event) ->
         event.preventDefault()
-        proton.sidebar.toogleAdvancedSearch()
+        Meteor.proton.sidebar.toggleAdvancedSearch()
 
 
-    toogleAdvancedSearch: ->
+    toggleAdvancedSearch: ->
       $(".sidebar").toggleClass "search-mode"
 
-    toogleSidebar: ->
+    toggleSidebar: ->
       $(".sidebar").toggleClass("extended").toggleClass "retracted"
       $(".wrapper").toggleClass("extended").toggleClass "retracted"
-      proton.sidebar.toogleAdvancedSearch() if $(".sidebar").is(".search-mode")
+      Meteor.proton.sidebar.toggleAdvancedSearch() if $(".sidebar").is(".search-mode")
       if $(".sidebar").is(".retracted")
         $.cookie "protonSidebar", "retracted",
           expires: 7
@@ -125,11 +121,11 @@ Template.fullLayout.rendered = () ->
           path: "/"
 
       setTimeout (->
-        not (proton.graphsStats and proton.graphsStats.redrawCharts) or proton.graphsStats.redrawCharts()
+        not (Meteor.proton.graphsStats and Meteor.proton.graphsStats.redrawCharts) or Meteor.proton.graphsStats.redrawCharts()
       ), 1000
 
     retractOnResize: ->
-      proton.sidebar.toogleSidebar() if $(".sidebar").is(".extended")
+      Meteor.proton.sidebar.toggleSidebar() if $(".sidebar").is(".extended")
 
     jstreeSetup: ->
       $.jstree._themes = "./styles/vendor/jstree-theme/"
@@ -160,7 +156,7 @@ Template.fullLayout.rendered = () ->
         $(".sidebar").css "max-height", sidebarMaxH
       ), 200
 
-    doThislater: ->
+    doThisLater: ->
       $(".sidebar .sidebar-handle").on "click", ->
         $(".panel, .main-content").toggleClass "retracted"
 
@@ -182,7 +178,7 @@ Template.fullLayout.rendered = () ->
       pageTitle = pageTitle.replace("Proton UI - ", "")
       $(".bread-page-title").text pageTitle
       $(".preface p").text pageTitle + " include: "
-      proton.sidebar.treeJson = data: [
+      Meteor.proton.sidebar.treeJson = data: [
         data:
           title: pageTitle
           attr:
@@ -209,7 +205,7 @@ Template.fullLayout.rendered = () ->
           attr:
             href: "#" + sectionId
 
-        proton.sidebar.treeJson.data[0].children.push newLinkObject
+        Meteor.proton.sidebar.treeJson.data[0].children.push newLinkObject
 
         # Add item to title bar
         if (index + 1) isnt numSections
@@ -217,7 +213,8 @@ Template.fullLayout.rendered = () ->
         else
           $(".preface p").text $(".preface p").text().slice(0, -2) + " and " + sectionTitle + "."
 
-  proton.sidebar.build()
+  Meteor.proton.sidebar.build()
+  console.log "fullLayout rendered"
 
 Template.fullLayout.helpers
   "iamfullLayout": () ->
