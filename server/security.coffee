@@ -37,3 +37,5 @@ Meteor.beforeAllMethods ()->
         throw new Meteor.Error(403, 'No access')
       else
         authLog.info "required roles check success"
+
+Impersonate.admins = ["sysadmin", "support"];

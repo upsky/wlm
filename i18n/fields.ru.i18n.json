@@ -1,0 +1,15 @@
+{
+  "formFields": {
+    "login":{"label":"Логин"},
+    "password":{"label":"Пароль"},
+    "oldPass":{"label":"Старый пароль"},
+    "newPass":{"label":"Новый пароль"},
+    "email": {"label":"Email", "placeholder":"Например: mail@mail.ru"},
+    "phone": {"label":"Телефон", "placeholder":"Например: +79998887766"},
+    "vk": {"label":"Адрес страницы VK.com", "placeholder":"Например: vk.com/winlevel_russia"},
+    "skype": {"label":"Идентификатор Skype", "placeholder":"Например: ivanov"},
+    "passport": {"label":"Номер и серия паспорта", "placeholder":"Например: 88 99 444555"},
+    "name": {"label":"Фамилия Имя Отчество", "placeholder":"Например: Иванов Иван Иванович"},
+    "confirmPass": {"label":"Подтверждение нового пароля"}
+  }
+}

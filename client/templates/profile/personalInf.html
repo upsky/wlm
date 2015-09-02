@@ -4,27 +4,27 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <div class="form-group">
-                        {{> afQuickField type="text" class="form-control input-lg" name="name" value=user.profile.name placeholder="schemaLabel"}}
+                        {{> afQuickField type="text" class="form-control input-lg" name="name" value=user.profile.name}}
                     </div>
                     <div class="form-group">
-                        {{> afQuickField type="text" class="form-control input-lg" name="phone" value=user.phones.[0].number placeholder="schemaLabel"}}
+                        {{> afQuickField type="text" class="form-control input-lg" name="phone" value=user.phones.[0].number}}
                     </div>
                     <div class="form-group">
-                        {{> afQuickField type="email" class="form-control input-lg" name="email" value=user.emails.[0].address placeholder="schemaLabel"}}
+                        {{> afQuickField type="email" class="form-control input-lg" name="email" value=user.emails.[0].address}}
                     </div>
                     <div class="form-group">
-                        {{> afQuickField type="text" class="form-control input-lg" name="vk" value=user.profile.vk placeholder="schemaLabel"}}
+                        {{> afQuickField type="text" class="form-control input-lg" name="vk" value=user.profile.vk}}
                     </div>
                     <div class="form-group">
-                        {{> afQuickField type="text" class="form-control input-lg" name="skype" value=user.profile.skype placeholder="schemaLabel"}}
+                        {{> afQuickField type="text" class="form-control input-lg" name="skype" value=user.profile.skype}}
                     </div>
                     <div class="form-group">
-                        {{> afQuickField type="text" class="form-control input-lg" name="passport" value=user.profile.passport placeholder="schemaLabel"}}
+                        {{> afQuickField type="text" class="form-control input-lg" name="passport" value=user.profile.passport}}
                     </div>
                 </li>
             </ul>
             <div class="panel-footer">
-                <button type="submit" class="btn btn-lg btn-success">{{i18n "buttons.update"}}</button>
+                <button type="submit" class="btn btn-lg btn-success">{{_ "buttons.update"}}</button>
             </div>
         {{/autoForm}}
     {{/Layout}}

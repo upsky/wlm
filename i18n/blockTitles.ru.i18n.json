@@ -1,0 +1,12 @@
+{
+  "blockTitles": {
+    "personalInf": "Персональная информация",
+    "changePass": "Смена пароля",
+    "settings": "Настройки",
+    "newsList": "Новости",
+    "usersList": "Пользователи",
+    "networkInvite": "Форма приглашения",
+    "invitesList": "Активные приглашения",
+    "networkLevels": "Уровни структуры"
+  }
+}

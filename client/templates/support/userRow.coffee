@@ -8,3 +8,4 @@ Template.userRow.helpers
 Template.userRow.events
   "click #userRow": (event)->
     log.trace 'click #userRow'
+  "click .btn-impersonate": (event) ->

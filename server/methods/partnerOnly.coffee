@@ -1,21 +1,23 @@
+Meteor.publish "partnerDoc", ()->
+  log.trace "publish partnerDoc"
+  db.partners.find this.userId
+
 Meteor.publish "networkData", ()->
   log.trace "publish networkData"
   currentUser = this.userId
-  cursor1 = db.partners.find
-    _id: currentUser
-  currentPartner = cursor1.fetch()[0]
+  currentPartner = db.partners.findOne currentUser
   if currentPartner
-    cursor2 = db.partners.find
+    cursor1 = db.partners.find
       path: currentUser
       level:
         $gt: currentPartner.level
         $lte: currentPartner.level + Meteor.settings.networkDeep
-    partners = cursor2.fetch()
+    partners = cursor1.fetch()
     _ids = _.pluck partners, '_id'
-    cursor3 = db.users.find
+    cursor2 = db.users.find
       _id:
         $in: _ids
-    [cursor1, cursor2, cursor3]
+    [cursor1, cursor2]
   else
     @ready()
 
@@ -25,4 +27,11 @@ Meteor.publish "activeInvites", ()->
     initiator: this.userId
 
 Meteor.methods
-  invite: () ->
+  insertInvite: (doc) ->
+    check doc,
+      email: String
+      name: String
+    #inivteLink = Meteor.absoluteUrl() + 'invite/' + Random.secret(24)
+    doc.initiator = Meteor.userId()
+    doc.status = 'active'
+    db.invites.insert doc

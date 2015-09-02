@@ -1,3 +1,8 @@
+::-webkit-input-placeholder {color:red;}
+::-moz-placeholder          {color:#666;}/* Firefox 19+ */
+:-moz-placeholder           {color:#666;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#666;}
+
 .ui-pnotify .alert-danger {
     background-color: #e77755;
     border-color: transparent;

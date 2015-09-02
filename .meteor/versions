@@ -16,6 +16,7 @@ blaze-tools@1.0.3
 boilerplate-generator@1.0.3
 brentjanderson:buzz.js@1.1.4
 callback-hook@1.0.3
+cfs:http-methods@0.0.29
 check@1.0.5
 chhib:morris@0.0.1
 chhib:raphael@0.0.1
@@ -27,6 +28,10 @@ ejson@1.0.6
 email@1.0.6
 fastclick@1.0.3
 geojson-utils@1.0.3
+gwendall:autoform-i18n@0.1.9_1
+gwendall:body-events@0.1.6
+gwendall:impersonate@0.2.1
+gwendall:simple-schema-i18n@0.1.9
 handlebars@1.0.3
 html-tools@1.0.4
 htmljs@1.0.4
@@ -65,12 +70,6 @@ multiply:iron-router-progress@1.0.1
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
 ordered-dict@1.0.3
-ostrio:cookies@1.0.1
-ostrio:cstorage@1.0.1
-ostrio:i18n@1.5.1
-ostrio:jsextensions@0.0.4
-ostrio:meteor-root@1.0.0
-ostrio:templatehelpers@0.3.1
 percolatestudio:synced-cron@1.1.0
 raix:handlebar-helpers@0.2.4
 random@1.0.3
@@ -88,6 +87,7 @@ spacebars@1.0.6
 spacebars-compiler@1.0.6
 srp@1.0.3
 stylus@1.0.7
+tap:i18n@1.4.1
 templating@1.1.1
 tracker@1.0.7
 ui@1.0.6

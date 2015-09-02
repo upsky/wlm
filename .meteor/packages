@@ -26,13 +26,14 @@ aldeed:autoform-select2
 
 iron:layout
 coffeescript
-ostrio:templatehelpers
 less
 mrt:modernizr-meteor
-ostrio:i18n
 yogiben:autoform-modals
 copleykj:livestamp
 rzymek:moment-locale-ru
 audit-argument-checks
 jag:pince
 seba:method-hooks
+gwendall:impersonate
+gwendall:autoform-i18n
+gwendall:simple-schema-i18n

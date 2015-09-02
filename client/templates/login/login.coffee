@@ -1,11 +1,3 @@
-Schemas.loginSchema = new SimpleSchema
-  login:
-    type:String
-    label: i18n.get 'fields.login'
-  password:
-    type:String
-    label: i18n.get 'fields.password'
-
 AutoForm.hooks
   loginForm:
     before:

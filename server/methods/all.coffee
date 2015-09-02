@@ -39,3 +39,6 @@ Meteor.methods
       )._id
       Roles.addUsersToRoles(_id, "sysadmin")
 
+  updateProfile: ()->
+    log.trace arguments
+

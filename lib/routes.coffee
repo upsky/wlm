@@ -26,6 +26,8 @@ else
   Router.route '/',
     layoutTemplate: 'fullLayout'
     template: 'welcome'
+    waitOn: ()->
+      Meteor.subscribe 'partnerDoc'
 
   Router.route '/network',
     layoutTemplate: 'fullLayout'
@@ -33,6 +35,7 @@ else
     waitOn: ()->
       Meteor.subscribe 'networkData'
       Meteor.subscribe 'activeInvites'
+      Meteor.subscribe 'partnerDoc'
 
   Router.route '/profile',
     layoutTemplate: 'fullLayout'

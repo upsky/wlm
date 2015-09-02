@@ -7,11 +7,8 @@ Template.usersList.rendered = ()->
 Template.usersList.helpers
   "iamusersList": ()->
     'iam usersList'
-  blockData: ()->
-    blockId: ()->
-      'usersList'
-    blockTitle: ()->
-      'blockTitles.usersList'
+  usersList: ()->
+    blockId: 'usersList'
   users: ()->
     log.trace "users helper"
     a = db.users.find

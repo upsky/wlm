@@ -1,7 +1,9 @@
 <template name="invitesList">
   {{#Layout template="panel" data=invitesList}}
-      {{#each invites}}
-        {{> inviteitem}}
-      {{/each}}
+      <ul>
+        {{#each invites}}
+          {{> inviteItem}}
+        {{/each}}
+      </ul>
   {{/Layout}}
 </template>

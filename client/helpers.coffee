@@ -16,6 +16,6 @@ UI.registerHelper "videoInstruction", (tag, hash, decor, lang) ->
 UI.registerHelper "pageTitle", ()->
   path = Session.get 'currentPath'
   log.info path
-  pageTitle = i18n.get('pageTitles.' + path)
-  document.title = pageTitle + " / " + i18n.get('pageTitles.topTitle')
+  pageTitle = TAPi18n.__ 'pageTitles.' + path
+  document.title = pageTitle + " / " + TAPi18n.__ 'pageTitles.topTitle'
   pageTitle
