@@ -1,3 +1,10 @@
 <template name="level">
-
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h5>Уровень {{levelNum}} <span class="label label-info">Всего: {{partnersCount}}</span></h5>
+    {{#each partners}}
+        <a href="#{{_id}}" title="{{username}}">{{name}}</a>
+    {{/each}}
+        </li>
+    </ul>
 </template>

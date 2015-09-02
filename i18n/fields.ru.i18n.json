@@ -3,7 +3,7 @@
     "login":{"label":"Логин"},
     "password":{"label":"Пароль"},
     "oldPass":{"label":"Старый пароль"},
-    "newPass":{"label":"Новый пароль"},
+    "newPass":{"label":"Новый пароль","placeholder":"Новый пароль"},
     "email": {"label":"Email", "placeholder":"Например: mail@mail.ru"},
     "phone": {"label":"Телефон", "placeholder":"Например: +79998887766"},
     "vk": {"label":"Адрес страницы VK.com", "placeholder":"Например: vk.com/winlevel_russia"},

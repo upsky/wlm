@@ -1,13 +1,13 @@
 <template name="changePass">
     {{#Layout template="panel" data=changePass}}
-        {{#autoForm id="passForm" type="method" schema="Schemas.passSchema" meteormethod="updatePass" resetOnSuccess=false}}
+        {{#autoForm id="passForm" type="normal" schema="Schemas.passSchema" resetOnSuccess=true}}
             <ul class="list-group">
                 <li class="list-group-item">
                     <div class="form-group">
                         {{> afQuickField type="password" class="form-control input-lg" name="oldPass"}}
                     </div>
                     <div class="form-group">
-                        {{> afQuickField type="password" class="form-control input-lg" name="newPass"}}
+                        {{> afQuickField type="password" class="form-control input-lg" name="newPass" placeholder=""}}
                     </div>
                     <div class="form-group">
                         {{> afQuickField type="password" class="form-control input-lg" name="confirmPass"}}

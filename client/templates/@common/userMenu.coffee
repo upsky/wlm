@@ -70,7 +70,10 @@ Template.userMenu.helpers
     'iam userMenu'
   userTitle: ()->
     if Meteor.user()
-      Meteor.user().username
+      name = Meteor.user().username
+      if Meteor.user().profile?.name?
+        name = Meteor.user().profile.name + ' ' + name
+      name
     else
       log.warn "Meteor.user() undefined"
 

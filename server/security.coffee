@@ -2,6 +2,11 @@ methodsSecurity =
   root:
     authNotRequired: true
     roles: "all"
+  createUser:
+    roles: "sysadmin"
+  reg:
+    authNotRequired: true
+    roles: "all"
   checkLogin:
     authNotRequired: true
     roles: "all"
@@ -9,6 +14,15 @@ methodsSecurity =
     authNotRequired: true
     roles: "all"
   logout:
+    roles: "all"
+  forgotPassword:
+    authNotRequired: true
+    roles: "all"
+  resetPassword:
+    authNotRequired: true
+    roles: "all"
+  updatePass:
+    authNotRequired: true
     roles: "all"
   fakePartners:
     roles: "sysadmin"

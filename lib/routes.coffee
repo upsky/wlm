@@ -19,6 +19,14 @@ else
     layoutTemplate: 'miniLayout'
     template: 'login'
 
+  Router.route '/reg/:_id',
+    layoutTemplate: 'miniLayout'
+    template: 'reg'
+    data: ()->
+      db.invites.findOne @params._id
+    waitOn: ()->
+      Meteor.subscribe 'invite', @params._id
+
   Router.route '/blocked',
     layoutTemplate: 'miniLayout'
     template: 'blocked'
@@ -59,7 +67,7 @@ Router.onBeforeAction (location)->
       @render 'loading'
       @next()
 ,
-  except: ['login', 'error', 'down', 'loading', 'blocked']
+  except: ['login', 'error', 'down', 'loading', 'blocked', 'reg']
 
 Router.onRun ()->
   Session.set 'currentPath', @url

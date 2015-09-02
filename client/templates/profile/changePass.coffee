@@ -1,3 +1,10 @@
+AutoForm.hooks
+  changePass:
+    onSubmit:(insertDoc, updateDoc, currentDoc)->
+      log.trace insertDoc
+      false
+        #Accounts.changePassword doc.oldPass, doc.newPass
+
 Template.changePass.rendered = ()->
   log.trace 'changePass rendered'
 

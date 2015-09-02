@@ -2,7 +2,7 @@ Meteor.publish "usersList", (params)->
   check params, Object
   log.trace "publish usersList"
   log.trace params
-  db.users.find(params, {limit:10})
+  db.users.find(params, {limit:10, sort:{username:1}})
 
 Meteor.methods
   fakePartners: (count = 100) ->
@@ -21,7 +21,7 @@ Meteor.methods
     )._id
     targetPartner = db.partners.findOne randomUser
     path = targetPartner.path
-    path.push randomUser
+    path.push targetPartner._id
     db.partners.insert
       _id:_id
       level:targetPartner.level + 1
@@ -43,7 +43,7 @@ Meteor.methods
 
       targetPartner = db.partners.findOne({}, {skip:randomSkip})
       path = targetPartner.path
-      path.push randomUser
+      path.push targetPartner._id
       db.partners.insert
         _id:_id
         level:targetPartner.level + 1

@@ -13,7 +13,7 @@ AutoForm.hooks
         new PNotify
           title: document.title
           type: 'error'
-          text: i18n.get 'errors.unknownError'
+          text: TAPi18n.__ 'errors.unknownError'
     onSuccess: (type, result)->
       console.log result
       if result
@@ -25,7 +25,7 @@ AutoForm.hooks
             new PNotify
               title: document.title
               type: 'error'
-              text: i18n.get 'errors.loginError'
+              text: TAPi18n.__ 'errors.loginError'
           else
             Router.go '/'
 

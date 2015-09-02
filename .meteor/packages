@@ -37,3 +37,4 @@ seba:method-hooks
 gwendall:impersonate
 gwendall:autoform-i18n
 gwendall:simple-schema-i18n
+accounts-ui-unstyled

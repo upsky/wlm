@@ -11,8 +11,9 @@ Meteor.publish "networkData", ()->
       path: currentUser
       level:
         $gt: currentPartner.level
-        $lte: currentPartner.level + Meteor.settings.networkDeep
+        $lte: currentPartner.level + Meteor.settings.public.networkDeep
     partners = cursor1.fetch()
+    log.trace "publish partners count: " + partners.length
     _ids = _.pluck partners, '_id'
     cursor2 = db.users.find
       _id:

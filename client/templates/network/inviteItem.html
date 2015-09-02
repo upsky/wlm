@@ -1,5 +1,6 @@
 <template name="inviteItem">
   <li>
-      {{name}} <span class="text-success">{{email}}</span> <span class="label label-default">{{statusText}}</span>
+      {{name}} <span class="text-success">{{email}}</span> <span class="label {{statusColor}}">{{statusText}}</span>
+      {{#unless inviteUsed}}<a href="/reg/{{_id}}" target="_blank">ссылка для активации</a>{{/unless}}
   </li>
 </template>

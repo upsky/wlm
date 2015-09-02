@@ -4,7 +4,7 @@ Template.personalInf.rendered = ()->
 Template.personalInf.helpers
   personalInf:
     blockId: "personalInf"
-  user:
+  user:()->
     Meteor.user()
 
 Template.personalInf.events

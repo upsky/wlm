@@ -29,6 +29,7 @@ Schemas.profileSchema = new SimpleSchema
     optional: true
   passport:
     type: String
+    optional: true
 
 Schemas.passSchema = new SimpleSchema
   oldPass:
@@ -37,3 +38,13 @@ Schemas.passSchema = new SimpleSchema
     type: String
   confirmPass:
     type: String
+
+Schemas.regSchema = new SimpleSchema
+  name:
+    type:String
+  email:
+    type:String
+  newPass:
+    type:String
+  _id:
+    type:String

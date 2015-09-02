@@ -1,3 +1,12 @@
 Template.inviteItem.helpers
   statusText: ()->
-    i18n.get 'db.inviteStatus.' + @status
+    TAPi18n.__ 'db.inviteStatus.' + @status
+  statusColor: ()->
+    result = 'label-default'
+    if @status == 'active'
+      result = 'label-danger'
+    if @status == 'used'
+      result = 'label-success'
+    result
+  inviteUsed: ()->
+    @status == 'used'

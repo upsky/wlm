@@ -1,0 +1,62 @@
+<template name="reg">
+    {{#unless inviteUsed}}
+        <div class="login-page">
+            {{#autoForm id="regForm" type="method" schema="Schemas.regSchema" meteormethod="reg" resetOnSuccess=true}}
+                <section class="wrapper scrollable animated fadeInDown">
+                    <section class="panel panel-default">
+                        <div class="panel-heading">
+                            <div>
+                                <img src="" alt="">
+                                <h1>
+                                <span class="title">
+
+                                </span>
+                                <span class="subtitle">
+
+                                </span>
+                                </h1>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                {{_ "messages.welcome"}}
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField type="text" class="form-control input-lg" name="name" placeholder="schemaLabel" value=name}}
+                                </div>
+                                <div class="form-group">
+                                    {{> afQuickField type="text" class="form-control input-lg" name="email" placeholder="schemaLabel" value=email}}
+                                </div>
+                                <div class="form-group">
+                                    {{> afQuickField type="text" class="form-control input-lg" name="newPass" placeholder="schemaLabel"}}
+                                </div>
+                                {{> afQuickField type="hidden" name="_id" value=_id}}
+                            </li>
+                        </ul>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-lg btn-success">{{_ "buttons.enter"}}</button>
+                        </div>
+                    </section>
+                </section>
+            {{/autoForm}}
+        </div>
+    {{else}}
+        <div class="error-page">
+            <section class="wrapper scrollable">
+                <div class="panel panel-default panel-block panel-error-block">
+                    <div class="panel-heading">
+                        <div>
+                            <h1>
+                                <small>{{{_ 'errors.inviteUsed'}}}</small>
+                            </h1>
+                            <div class="error-code">
+                                500
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    {{/unless}}
+</template>

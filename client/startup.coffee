@@ -4,12 +4,11 @@ PNotify.prototype.options.styling = 'fontawesome'
 Meteor.startup ->
   moment.locale 'ru'
   TAPi18n.setLanguage('ru').done(()->
-    log.trace TAPi18n.__ 'formFields.newPass.label'
     _.each(Schemas, (schema) ->
-      log.trace schema
       schema.i18n 'formFields'
       schema
     )
   ).fail((error) ->
+    log.warn "i18n dont loaded: " + error
   )
 
