@@ -22,6 +22,7 @@ else
   Router.route '/reg/:_id',
     layoutTemplate: 'miniLayout'
     template: 'reg'
+    name: 'reg'
     data: ()->
       db.invites.findOne @params._id
     waitOn: ()->
@@ -54,7 +55,7 @@ else
     template: 'support'
 
 Router.onBeforeAction (location)->
-  log.trace 'onBeforeAction '
+  log.trace 'onBeforeAction ' + location.url
   if Meteor.userId()
     @next()
   else

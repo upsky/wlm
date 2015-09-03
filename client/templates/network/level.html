@@ -2,9 +2,11 @@
     <ul class="list-group">
         <li class="list-group-item">
             <h5>Уровень {{levelNum}} <span class="label label-info">Всего: {{partnersCount}}</span></h5>
+            <ul class="list-inline">
     {{#each partners}}
-        <a href="#{{_id}}" title="{{username}}">{{name}}</a>
+        <li><a href="#{{_id}}" title="{{username}}">{{name}}</a></li>
     {{/each}}
+                </ul>
         </li>
     </ul>
 </template>
