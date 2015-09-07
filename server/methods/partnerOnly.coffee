@@ -11,7 +11,7 @@ Meteor.publish "networkData", ()->
       path: currentUser
       level:
         $gt: currentPartner.level
-        $lte: currentPartner.level + Meteor.settings.public.networkDeep
+        $lte: currentPartner.level + 3
     partners = cursor1.fetch()
     log.trace "publish partners count: " + partners.length
     _ids = _.pluck partners, '_id'
@@ -21,6 +21,15 @@ Meteor.publish "networkData", ()->
     [cursor1, cursor2]
   else
     @ready()
+
+Meteor.publish "lastInvites", ()->
+  log.trace "publish lastInvites"
+  db.invites.find
+    initiator: this.userId
+  ,
+    sort:
+      used: 1
+    limit: 10
 
 Meteor.publish "activeInvites", ()->
   log.trace "publish activeInvites"
@@ -36,3 +45,16 @@ Meteor.methods
     doc.initiator = Meteor.userId()
     doc.status = 'active'
     db.invites.insert doc
+  networkCounts: ()->
+    result = []
+    currentUser = this.userId
+    currentPartner = db.partners.findOne currentUser
+    if currentPartner
+      for l in [currentPartner.level + 3..Meteor.settings.public.networkDeep]
+        result.push
+          level: l
+          count: db.partners.find(
+            path: currentUser
+            level: l
+          ).count()
+      result

@@ -1,7 +1,14 @@
 <template name="networkLevels">
   {{#Layout template="panel" data=networkLevels}}
-    {{#each levels}}
-      {{> level}}
-    {{/each}}
+      <ul class="list-group">
+        {{#each levels}}
+          {{> level}}
+        {{/each}}
+        {{#each levelsCounts}}
+            <li class="list-group-item">
+                <h5>Уровень {{level}} <span class="label label-info">Всего: {{count}}</span></h5>
+            </li>
+        {{/each}}
+      </ul>
   {{/Layout}}
 </template>

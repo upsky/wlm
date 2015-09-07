@@ -44,6 +44,7 @@ else
     waitOn: ()->
       Meteor.subscribe 'networkData'
       Meteor.subscribe 'activeInvites'
+      Meteor.subscribe 'lastInvites'
       Meteor.subscribe 'partnerDoc'
 
   Router.route '/profile',

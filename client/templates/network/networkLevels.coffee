@@ -2,7 +2,7 @@ Template.networkLevels.helpers
   networkLevels:
     blockId:"networkLevels"
   levels: ()->
-    currentLevel = db.partners.findOne(Meteor.userId()).level
+    currentLevel = db.partners.findOne(Meteor.userId())?.level
     partners = db.partners.find(
       level:
         $gt: currentLevel
@@ -15,3 +15,8 @@ Template.networkLevels.helpers
       partnersByLevel[partner.level].partners.push partner
     )
     partnersByLevel
+  levelsCounts: ()->
+    Meteor.call 'networkCounts', (error, result)->
+      Session.set 'levelsCounts', result
+      log.trace result
+    Session.get 'levelsCounts'

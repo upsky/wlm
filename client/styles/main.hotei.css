@@ -91,3 +91,13 @@
     margin-bottom: 0px;
     color: #666666;
 }
+
+.login-page .wrapper .panel-heading > div img {
+    position: relative;
+    display: block;
+    float: left;
+    top: 5px;
+    width: 368px;
+    height: auto;
+    margin: 0;
+}

@@ -14,6 +14,7 @@ methodsSecurity =
     authNotRequired: true
     roles: "all"
   logout:
+    authNotRequired: true
     roles: "all"
   forgotPassword:
     authNotRequired: true
@@ -29,6 +30,8 @@ methodsSecurity =
   impersonate:
     roles: "sysadmin"
   insertInvite:
+    roles: "partner"
+  networkCounts:
     roles: "partner"
   updateProfile:
     roles: "partner,sysadmin"
