@@ -1,10 +1,9 @@
 <template name="profile">
     {{#Layout template="twoCols"}}
         {{> personalInf}}
-
-        {{!-- #contentFor "block2"}}
-            {{> changePass}}
-        {{/contentFor --}}
+        {{#contentFor "block2"}}
+	        {{> personalQrCode}}
+        {{/contentFor}}
 
         {{!-- #contentFor "block3"}}
             {{> settings}}

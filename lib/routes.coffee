@@ -51,6 +51,10 @@ else
     layoutTemplate: 'fullLayout'
     template: 'profile'
 
+  Router.route '/qrcode',
+    layoutTemplate: 'fullLayout'
+    template: 'qrcode'
+
   Router.route '/support',
     layoutTemplate: 'fullLayout'
     template: 'support'

@@ -1,0 +1,24 @@
+<template name="personalQrCode">
+	{{#Layout template="panel" data=qrCode}}
+		<div class="qrcode">
+			<div class="row store-block">
+				<p class="text-center">{{_ 'messages.scanQr'}}</p>
+				<div class="col-md-6 text-right">
+					{{> storeButton type='appstore'}}
+				</div>
+				<div class="col-md-6">
+					{{> storeButton type='googleplay'}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					{{#if qrImageUrl}}
+						<img src="{{qrImageUrl}}" class="qr-img">
+					{{else}}
+						<a class="show-qr btn btn-lg btn-primary">{{_ 'buttons.showQr'}}</a>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	{{/Layout}}
+</template>

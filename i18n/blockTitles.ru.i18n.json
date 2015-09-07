@@ -7,6 +7,7 @@
     "usersList": "Пользователи",
     "networkInvite": "Форма приглашения",
     "invitesList": "Активные приглашения",
-    "networkLevels": "Уровни структуры"
+    "networkLevels": "Уровни структуры",
+    "qrCode": "QR код"
   }
 }
