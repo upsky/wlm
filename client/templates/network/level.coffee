@@ -5,16 +5,10 @@ Template.level.helpers
   "iamlevel": ()->
     'iam level'
   levelNum: ()->
-    if @type == 'count'
-      @level
-    else
-      currentLevel = db.partners.findOne(Meteor.userId()).level
-      @partners[0].level - currentLevel
+    currentLevel = db.partners.findOne(Meteor.userId()).level
+    @partners[0].level - currentLevel
   partnersCount: ()->
-    if @type == 'count'
-      @value
-    else
-      @partners.length
+    @partners.length
   username: ()->
     db.users.findOne(@_id)?.username
   name: ()->

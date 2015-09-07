@@ -50,9 +50,9 @@ Meteor.methods
     currentUser = this.userId
     currentPartner = db.partners.findOne currentUser
     if currentPartner
-      for l in [currentPartner.level + 3..Meteor.settings.public.networkDeep]
+      for l in [currentPartner.level + 4..currentPartner.level + Meteor.settings.public.networkDeep]
         result.push
-          level: l
+          level: l - currentPartner.level
           count: db.partners.find(
             path: currentUser
             level: l
