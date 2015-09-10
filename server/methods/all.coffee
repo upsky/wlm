@@ -20,30 +20,6 @@ Meteor.methods
     if user.status == 'blocked'
       throw new Meteor.Error 490, 'User blocked'
     user.username
-  root: () ->
-    if db.users.find().count() == 0
-      Accounts.createUser(
-        username:'root'
-        email: 'root@winlevel.ru'
-        password: Random.secret()
-      )
-      _id = db.users.findOne(
-        username: 'root'
-      )._id
-      db.partners.insert
-        _id:_id
-        level:0
-        path:[]
-      Roles.addUsersToRoles(_id, 'partner')
-      Accounts.createUser(
-        username:'sysadmin'
-        email: 'latnok@li.ru'
-        password: Meteor.settings.sysadminPass
-      )
-      _id = db.users.findOne(
-        username: 'sysadmin'
-      )._id
-      Roles.addUsersToRoles(_id, 'sysadmin')
 
   updateProfile: (doc)->
     check doc, Object

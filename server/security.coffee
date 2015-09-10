@@ -28,13 +28,17 @@ methodsSecurity =
   fakePartners:
     roles: "sysadmin"
   impersonate:
+    roles: "sysadmin,support"
+  setRole:
     roles: "sysadmin"
   insertInvite:
     roles: "partner"
   networkCounts:
     roles: "partner"
   updateProfile:
-    roles: "partner,sysadmin"
+    roles: "partner,sysadmin,support"
+  totalRegs:
+    roles: "president,sysadmin"
 
 Meteor.beforeAllMethods ()->
   methodName = this._methodName
@@ -55,4 +59,4 @@ Meteor.beforeAllMethods ()->
       else
         authLog.info "required roles check success"
 
-Impersonate.admins = ["sysadmin", "support"];
+Impersonate.admins = ["sysadmin", "support"]

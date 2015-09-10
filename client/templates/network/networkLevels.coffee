@@ -1,6 +1,10 @@
 Template.networkLevels.helpers
   networkLevels:
     blockId:"networkLevels"
+  totalRegs: ()->
+    Meteor.call 'totalRegs', (error, result)->
+      Session.set 'totalRegs', result
+    Session.get 'totalRegs'
   levels: ()->
     currentLevel = db.partners.findOne(Meteor.userId())?.level
     partners = db.partners.find(
