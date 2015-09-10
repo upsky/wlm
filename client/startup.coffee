@@ -9,6 +9,6 @@ Meteor.startup ->
       schema
     )
   ).fail((error) ->
-    log.warn "i18n dont loaded: " + error
+    log.warn 'i18n don\'t loaded: ' + error
   )
 

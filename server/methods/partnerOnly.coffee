@@ -1,9 +1,9 @@
-Meteor.publish "partnerDoc", ()->
-  log.trace "publish partnerDoc"
+Meteor.publish 'partnerDoc', ()->
+  log.trace 'publish partnerDoc'
   db.partners.find this.userId
 
-Meteor.publish "networkData", ()->
-  log.trace "publish networkData"
+Meteor.publish 'networkData', ()->
+  log.trace 'publish networkData'
   currentUser = this.userId
   currentPartner = db.partners.findOne currentUser
   if currentPartner
@@ -13,7 +13,7 @@ Meteor.publish "networkData", ()->
         $gt: currentPartner.level
         $lte: currentPartner.level + 3
     partners = cursor1.fetch()
-    log.trace "publish partners count: " + partners.length
+    log.trace 'publish partners count: ' + partners.length
     _ids = _.pluck partners, '_id'
     cursor2 = db.users.find
       _id:
@@ -22,8 +22,8 @@ Meteor.publish "networkData", ()->
   else
     @ready()
 
-Meteor.publish "lastInvites", ()->
-  log.trace "publish lastInvites"
+Meteor.publish 'lastInvites', ()->
+  log.trace 'publish lastInvites'
   db.invites.find
     initiator: this.userId
   ,
@@ -31,8 +31,8 @@ Meteor.publish "lastInvites", ()->
       used: 1
     limit: 10
 
-Meteor.publish "activeInvites", ()->
-  log.trace "publish activeInvites"
+Meteor.publish 'activeInvites', ()->
+  log.trace 'publish activeInvites'
   db.invites.find
     initiator: this.userId
 
