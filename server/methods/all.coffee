@@ -76,7 +76,6 @@ Meteor.methods
       _id: Match.Id
 
     invite = db.invites.findOne doc._id
-    console.log('invite', invite);
 
     unless invite
       throw new Meteor.Error 400, 'Invite not found'
@@ -84,24 +83,15 @@ Meteor.methods
     if invite.status == 'used'
       throw new Meteor.Error 400, 'Invite used'
 
-    console.log('beforePartner');
-
     targetPartner = db.partners.findOne invite.initiator
-
-    console.log('targetPartner', targetPartner);
-
     unless targetPartner
       throw new Meteor.Error 400, 'Partner not found'
-
-    console.log('beforeLastInvite');
 
     lastInvite = db.users.findOne({}, {sort: {uin: -1}})
     if lastInvite
       uin = uinGen(Math.floor(lastInvite.uin / 10) + 1)
     if _.isNaN uin
       uin = uinGen(50)
-
-    console.log('uin', uin);
 
     username = '+' + uin.toString()
 
@@ -113,8 +103,6 @@ Meteor.methods
         name: doc.name
     )
 
-    console.log('_id', _id);
-
     path = targetPartner.path
     path.push targetPartner._id
     db.partners.insert
@@ -124,13 +112,9 @@ Meteor.methods
 
     Roles.addUsersToRoles(_id, 'partner')
 
-    console.log('1');
-
     db.users.update _id,
       $set:
         uin:uin
-
-    console.log('2');
 
     db.invites.update doc._id,
       $set:
