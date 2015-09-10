@@ -1,15 +1,33 @@
-
 var template = Template.inviteCode;
 
-template.onCreated(function() {
-	Session.set('qrInviteImageUrl', 'http://9.mshcdn.com/wp-content/uploads/2011/04/500QR-Code1.jpg');
+template.onCreated(function () {
+  Meteor.call('checkQr');
+});
+
+template.onRendered(function () {
+  var self = this;
+  this.autorun(function () {
+    var qr = db.invites.findOne({status: 'qr'});
+    if (qr) {
+      var $qr = self.$('#invite-qr');
+      var width = parseInt($qr.css('width'));
+      $qr.html('');
+      $qr.qrcode({
+        size: width,
+        color: "#3a3",
+        text: qr._id
+      });
+      Session.set('inviteQr', qr._id);
+    }
+  });
 });
 
 template.helpers({
-	qrCode: {
-		blockId: 'qrCode'
-	},
-	qrInviteImageUrl: function() {
-		return Session.get('qrInviteImageUrl');
-	}
+  panelData: {
+    blockId: 'qrCode'
+  },
+
+  qrCode: function () {
+    return Session.get('inviteQr');
+  }
 });

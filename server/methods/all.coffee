@@ -20,6 +20,7 @@ Meteor.methods
     if user.status == 'blocked'
       throw new Meteor.Error 490, 'User blocked'
     user.username
+
   root: () ->
     if db.users.find().count() == 0
       Accounts.createUser(
@@ -75,6 +76,7 @@ Meteor.methods
       _id: Match.Id
 
     invite = db.invites.findOne doc._id
+    console.log('invite', invite);
 
     unless invite
       throw new Meteor.Error 400, 'Invite not found'
@@ -82,9 +84,16 @@ Meteor.methods
     if invite.status == 'used'
       throw new Meteor.Error 400, 'Invite used'
 
+    console.log('beforePartner');
+
     targetPartner = db.partners.findOne invite.initiator
+
+    console.log('targetPartner', targetPartner);
+
     unless targetPartner
       throw new Meteor.Error 400, 'Partner not found'
+
+    console.log('beforeLastInvite');
 
     lastInvite = db.users.findOne({}, {sort: {uin: -1}})
     if lastInvite
@@ -92,18 +101,19 @@ Meteor.methods
     if _.isNaN uin
       uin = uinGen(50)
 
+    console.log('uin', uin);
+
     username = '+' + uin.toString()
 
-    Accounts.createUser(
+    _id = Accounts.createUser(
       username: username
       email: doc.email
       password: doc.newPass
       profile:
         name: doc.name
     )
-    _id = db.users.findOne(
-      username: username
-    )._id
+
+    console.log('_id', _id);
 
     path = targetPartner.path
     path.push targetPartner._id
@@ -114,9 +124,13 @@ Meteor.methods
 
     Roles.addUsersToRoles(_id, 'partner')
 
+    console.log('1');
+
     db.users.update _id,
       $set:
         uin:uin
+
+    console.log('2');
 
     db.invites.update doc._id,
       $set:
@@ -124,3 +138,23 @@ Meteor.methods
         userId: _id
         username: username
         used: new Date()
+
+  checkQr: ()-> #create new qr
+    qr = db.invites.findOne
+      initiator: @userId
+      status: 'qr'
+
+    unless qr
+      db.invites.insert
+        status: 'qr'
+        initiator: @userId
+        email: ''
+        name: ''
+
+  invalidateQr: (_id)->
+    check _id, Match.Id
+    # invalidate reg qr code if any
+    updCount = db.invites.update({ _id: _id, status: 'qr' }, { $set: { status: 'active' } })
+
+    if updCount
+      Meteor.call('checkQr');

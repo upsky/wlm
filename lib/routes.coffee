@@ -28,6 +28,17 @@ else
     waitOn: ()->
       Meteor.subscribe 'invite', @params._id
 
+  Router.route '/qr/:_id',
+    layoutTemplate: 'miniLayout'
+    template: 'reg'
+    name: 'qr'
+    data: ()->
+      db.invites.findOne @params._id
+    waitOn: ()->
+      Meteor.subscribe 'invite', @params._id
+    onRun: ()->
+      Meteor.call 'invalidateQr', @params._id
+
   Router.route '/blocked',
     layoutTemplate: 'miniLayout'
     template: 'blocked'
@@ -53,7 +64,9 @@ else
 
   Router.route '/qrcode',
     layoutTemplate: 'fullLayout'
-    template: 'qrcode'
+    template: 'qrСode'
+    waitOn: ()->
+      Meteor.subscribe 'activeInvites'
 
   Router.route '/support',
     layoutTemplate: 'fullLayout'

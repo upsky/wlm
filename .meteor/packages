@@ -38,3 +38,4 @@ gwendall:impersonate
 gwendall:autoform-i18n
 gwendall:simple-schema-i18n
 accounts-ui-unstyled
+steeve:jquery-qrcode

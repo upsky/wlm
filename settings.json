@@ -1,0 +1,13 @@
+{
+  "public": {
+    "version": "0.1",
+    "isDebug": true,
+    "isLocal": false,
+    "isDown": false,
+    "networkDeep": 10,
+    "dadata": {
+      "token": "291fd8d034539e4bc0322a72fd27bc58fbe6d8d8"
+    }
+  },
+  "sysadminPass": "test"
+}

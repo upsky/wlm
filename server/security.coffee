@@ -33,6 +33,12 @@ methodsSecurity =
     roles: "partner"
   networkCounts:
     roles: "partner"
+  invalidateQr:
+    authNotRequired: true
+    roles: "all"
+  checkQr:
+    authNotRequired: true
+    roles: "all"
   updateProfile:
     roles: "partner,sysadmin"
 
