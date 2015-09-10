@@ -1,6 +1,6 @@
-Meteor.publish "usersList", (params)->
+Meteor.publish 'usersList', (params)->
   check params, Object
-  log.trace "publish usersList"
+  log.trace 'publish usersList'
   log.trace params
   db.users.find(params, {limit:10, sort:{username:1}})
 
