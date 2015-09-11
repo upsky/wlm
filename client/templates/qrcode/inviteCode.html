@@ -1,5 +1,5 @@
 <template name="inviteCode">
-	{{#Layout template="panel" data=panelData}}
+	{{#Layout template="panel" data=qrCode}}
 		<div class="qrcode">
 			<div class="row store-block">
 				<p class="text-center">{{_ 'messages.inviteQrCode'}}</p>
@@ -10,10 +10,9 @@
 					{{> storeButton type='googleplay'}}
 				</div>
 			</div>
-			<div id="invite-qr-row" class="row">
+			<div class="row">
 				<div class="col-md-12 text-center">
-                    <p><a href="/reg/{{qrCode}}">{{qrCode}}</a></p>
-					<div id="invite-qr" class="qr-img"></div>
+					<img src="{{qrInviteImageUrl}}" class="qr-img" >
 				</div>
 			</div>
 		</div>
