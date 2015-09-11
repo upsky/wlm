@@ -9,5 +9,6 @@
       "token": "291fd8d034539e4bc0322a72fd27bc58fbe6d8d8"
     }
   },
-  "sysadminPass": "test"
+  "sysadminEmail": "admin@wlm.ru",
+  "sysadminPass": "admin"
 }

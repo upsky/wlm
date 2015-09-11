@@ -1,64 +1,68 @@
 methodsSecurity =
   root:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   createUser:
-    roles: "sysadmin"
+    roles: 'sysadmin'
   reg:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   checkLogin:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   login:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   logout:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   forgotPassword:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   resetPassword:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   updatePass:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   fakePartners:
-    roles: "sysadmin"
+    roles: 'sysadmin'
   impersonate:
-    roles: "sysadmin"
+    roles: 'sysadmin,support'
+  setRole:
+    roles: 'sysadmin'
   insertInvite:
-    roles: "partner"
+    roles: 'partner'
   networkCounts:
-    roles: "partner"
+    roles: 'partner'
   invalidateQr:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   checkQr:
     authNotRequired: true
-    roles: "all"
+    roles: 'all'
   updateProfile:
-    roles: "partner,sysadmin"
+    roles: 'partner,sysadmin,support'
+  totalRegs:
+    roles: 'president,sysadmin'
 
 Meteor.beforeAllMethods ()->
   methodName = this._methodName
-  authLog.info "before call method: " + methodName
+  authLog.info 'before call method: ' + methodName
   unless Meteor.userId()
     unless methodsSecurity[methodName].authNotRequired
-      authLog.warn "authorization required"
+      authLog.warn 'authorization required'
       throw new Meteor.Error(403, 'Not authorized')
   else
     roles = methodsSecurity[methodName].roles
-    authLog.info "required roles: " + roles
+    authLog.info 'required roles: ' + roles
     unless roles == 'all'
       if roles.match /,/
         roles = roles.split ','
       unless Roles.userIsInRole(Meteor.userId(), roles)
-        authLog.warn "required roles check failed"
+        authLog.warn 'required roles check failed'
         throw new Meteor.Error(403, 'No access')
       else
-        authLog.info "required roles check success"
+        authLog.info 'required roles check success'
 
-Impersonate.admins = ["sysadmin", "support"];
+Impersonate.admins = ['sysadmin', 'support']
