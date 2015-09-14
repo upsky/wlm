@@ -1,17 +1,32 @@
-
 var template = Template.personalQrCode;
 
 template.helpers({
-	qrCode: {
-		blockId: 'qrCode'
-	},
-	qrImageUrl: function() {
-		return Session.get('qrImageUlr');
-	}
+    qrCode: {
+        blockId: 'qrCode'
+    },
+    qrNotGenerated: function () {
+        return !Session.get('qrGenerated');
+    }
+});
+template.onRendered(function () {
+    Session.set('qrGenerated', false);
 });
 
 template.events({
-	'click .show-qr': function(e) {
-		Session.set('qrImageUlr', 'http://blog.esponce.com/wp-content/uploads/2011/08/super-qr-code.gif');
-	}
+    'click .show-qr': function (e) {
+        Meteor.call('getQrCode', function (error, qrCode) {
+            console.log(qrCode);
+
+            var $qr = $('#invite-qr');
+            var width = parseInt($qr.css('width'));
+            $qr.html('');
+            $qr.qrcode({
+                size: width,
+                color: "#000",
+                text: qrCode
+            });
+
+            Session.set('qrGenerated', true);
+        });
+    }
 });

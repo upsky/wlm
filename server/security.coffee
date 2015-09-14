@@ -41,6 +41,11 @@ methodsSecurity =
   checkQr:
     authNotRequired: true
     roles: 'all'
+  qrApplyCodeMg:
+    authNotRequired: true
+    roles: 'all'
+  getQrCode:
+    roles: 'all'
   updateProfile:
     roles: 'partner,sysadmin,support'
   totalRegs:
