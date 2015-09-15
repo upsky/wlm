@@ -1,8 +1,8 @@
 <template name="userMenu">
     <nav class="user-menu">
-        <a href="#" class="main-menu-access">
+        <a href="#" class="main-menu-access {{userMenuStatus}}">
             <i class="fa fa-proton-logo"></i>
-            <i class="fa fa-reorder"></i>
+            <i class="toggle-main-menu fa fa-reorder"></i>
         </a>
         <section class="user-menu-wrapper">
             <a href="#" data-expand=".theme-view" class="view-menu-access">
@@ -31,6 +31,7 @@
                 <li class="list-group-item" data-theme="default">
                     <a href="#">
                         <i><b class="dark"></b></i>
+
                         <div class="text-holder">
                                     <span class="title-text">
                                         Dark
@@ -41,6 +42,7 @@
                 <li class="list-group-item" data-theme="theme-light">
                     <a href="#">
                         <i><b></b></i>
+
                         <div class="text-holder">
                                     <span class="title-text">
                                         Light
@@ -51,6 +53,7 @@
                 <li class="list-group-item" data-theme="theme-pastel">
                     <a href="#">
                         <i><b class="pastel"></b></i>
+
                         <div class="text-holder">
                                     <span class="title-text">
                                         Pastel Green
@@ -61,6 +64,7 @@
                 <li class="list-group-item" data-theme="theme-pastel-marine">
                     <a href="#">
                         <i><b class="pastel-marine"></b></i>
+
                         <div class="text-holder">
                                     <span class="title-text">
                                         Pastel Marine
@@ -71,6 +75,7 @@
                 <li class="list-group-item" data-theme="theme-terminal">
                     <a href="#">
                         <i><b class="terminal"></b></i>
+
                         <div class="text-holder">
                                     <span class="title-text">
                                         Terminal
@@ -81,6 +86,7 @@
                 <li class="list-group-item" data-theme="theme-rio">
                     <a href="#">
                         <i><b class="rio"></b></i>
+
                         <div class="text-holder">
                                     <span class="title-text">
                                         Rio

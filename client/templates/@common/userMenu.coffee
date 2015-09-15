@@ -1,10 +1,12 @@
 Template.userMenu.rendered = ()->
+  Session.set 'userMenuStatus', false
+
   unless Meteor.proton
     Meteor.proton = {}
   Meteor.proton.userNav =
     build: ->
 
-      # Initiate userNav events
+# Initiate userNav events
       Meteor.proton.userNav.events()
 
       # Check screen size, shuffle user nav if needed
@@ -51,7 +53,7 @@ Template.userMenu.rendered = ()->
 
 
     shuffleUserNav: ->
-      #$(".wrapper .user-menu").prependTo $("#body")
+#$(".wrapper .user-menu").prependTo $("#body")
 
     bounceCounter: ->
       return  unless $(".menu-counter").length
@@ -76,7 +78,11 @@ Template.userMenu.helpers
       name
     else
       log.warn "Meteor.user() undefined"
+  "userMenuStatus": ()->
+    if Session.get 'userMenuStatus' then 'active' else ''
 
 Template.userMenu.events
   "click #userMenu": (event)->
     'click #userMenu'
+  "click .toggle-main-menu": (event)->
+    Session.set 'userMenuStatus', !Session.get 'userMenuStatus'

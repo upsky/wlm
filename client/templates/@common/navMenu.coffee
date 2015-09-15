@@ -4,6 +4,8 @@ Template.navMenu.rendered = ()->
 Template.navMenu.helpers
   "iamnavMenu": ()->
     'iam navMenu'
+  "mainMenuStatus": ()->
+    if Session.get 'userMenuStatus' then 'expanded' else ''
 
 Template.navMenu.events
   "click #navMenu": (event)->
