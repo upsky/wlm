@@ -2,7 +2,7 @@ Router.configure
   layoutTemplate: 'miniLayout'
   loadingTemplate: 'loading'
   template: 'error'
-  progressDebug : true
+  progressDebug: true
 
 Router.plugin 'dataNotFound',
   notFoundTemplate: 'error'
@@ -64,7 +64,7 @@ else
 
   Router.route '/qrcode',
     layoutTemplate: 'fullLayout'
-    template: 'qrСode'
+    template: 'inviteCode'
     waitOn: ()->
       Meteor.subscribe 'activeInvites'
 
@@ -80,7 +80,7 @@ Router.onBeforeAction (location)->
     if !Meteor.loggingIn()
       @layout 'miniLayout'
       @render 'login'
-      #@stop()
+#@stop()
     else
       @layout 'miniLayout'
       @render 'loading'

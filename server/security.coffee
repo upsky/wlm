@@ -41,10 +41,20 @@ methodsSecurity =
   checkQr:
     authNotRequired: true
     roles: 'all'
-  qrApplyCodeMg:
+  qrApplyCode:
     authNotRequired: true
     roles: 'all'
-  getQrCode:
+  cordovaAutoLogin:
+    authNotRequired: true
+    roles: 'all'
+  cordovaAfterLogout:
+    authNotRequired: true
+    roles: 'all'
+  getServerTime:
+    authNotRequired: true
+    roles: 'all'
+  qrAuthCode:
+    authNotRequired: false
     roles: 'all'
   updateProfile:
     roles: 'partner,sysadmin,support'

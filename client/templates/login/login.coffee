@@ -35,40 +35,8 @@ Template.login.rendered = ()->
 Template.login.helpers
   iamlogin: ()->
     'iam login'
-  isCordova: ()->
-    true
-#Meteor.isCordova
 
 Template.login.events
-  "click #login": (event)->
+  "click #login": ()->
     log.trace 'click #login'
-  "click #qr-scanner": (event)->
-    params = {
-      text_title: "Сканируйте QR-код",
-      text_instructions: "Сканирйте код",
-      camera: "back",
-      flash: "auto",
-      drawSight: false
-    };
-    applyCode('1442168478712');
 
-
-applyCode = (qrCode) ->
-  Meteor.call 'qrApplyCodeMg', qrCode, (error, res)->
-    if res.status == 1
-      console.log 'asd'
-    else if res.status == 2
-      console.log res.data
-      Router.go '/qr/' + res.data
-    else
-      Router.go '/qrInvalid/'
-return
-
-setError = (error) ->
-#Session.set 'currentError', 'Неверный QR-код, попробуйте сканировать другой: ' + error
-#Router.go 'error'
-  alert(error);
-return
-
-
-#cloudSky.zBar.scan(params, applyCode, setError);

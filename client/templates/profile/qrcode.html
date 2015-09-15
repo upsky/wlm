@@ -4,21 +4,23 @@
             <div class="row store-block">
                 <p class="text-center">{{_ 'messages.scanQr'}}</p>
 
-                <div class="col-md-6 text-right">
+                <div class="col-md-6 text-center">
                     {{> storeButton type='appstore'}}
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 text-center">
                     {{> storeButton type='googleplay'}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
 
-                    {{#if qrNotGenerated}}
+                    {{#if authCode}}
+                        {{> qrGenerate code=authCode}}
+                    {{else}}
                         <a class="show-qr btn btn-lg btn-primary">{{_ 'buttons.showQr'}}</a>
                     {{/if}}
 
-                    <div id="invite-qr"></div>
+
                 </div>
             </div>
         </div>

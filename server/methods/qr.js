@@ -1,66 +1,102 @@
+var updateQrUser = function (userId) {
+  var newCode = Random.id(13);
+  db.users.update(userId, {
+    $set: {
+      'services.qr.code': newCode,
+      'services.qr.created': Date.now()
+    }
+  });
+  return newCode;
+};
+
+Accounts.registerLoginHandler(function (request) {
+  var user, hashStampedToken;
+
+  check(request.qrToken, Object);
+  hashStampedToken = Accounts._hashStampedToken(request.qrToken);
+  user = Meteor.users.findOne({'services.resume.loginTokens': hashStampedToken});
+
+
+  if (user) {
+    updateQrUser(user._id);
+    db.groundConfig.insert(
+      {
+        userId: user._id,
+        qrToken: request.qrToken,
+        auth: true
+      });
+    return {
+      userId: user._id
+    };
+  }
+  else
+    throw new Meteor.Error(403, 'Auth denied');
+
+});
+
 Meteor.methods({
-    qrApplyCodeMg: function (qrCode) {
-        check(qrCode, String);
+  qrApplyCode: function (qrCode) {
+    var user, invite, deltaTime, qrLifetime, stampedToken, hashStampedToken;
 
-        var res = {};
-        var user, invite;
+    check(qrCode, String);
+    user = db.users.findOne({'services.qr.code': qrCode});
+    qrLifetime = 5 * 60 * 60 * 1000;
 
-        //var user = db.users.findOne({invite: {qr: {code: qrCode}}});
-        user = db.users.findOne({}, {'invite.qr.code': qrCode});
-        invite = db.invites.findOne({status: 'qr'})
+    if (user) {
+      deltaTime = Date.now() - user.services.qr.created;
 
+      if (deltaTime < qrLifetime) {
+        stampedToken = Accounts._generateStampedLoginToken();
+        hashStampedToken = Accounts._hashStampedToken(stampedToken);
 
-        if (user) {
-            res.status = 1;
-            res.data = CryptoJS.MD5('someToken').toString();
-        } else if (invite) {
-            res.status = 2;
-            res.data = invite._id;
-        } else {
-            res.status = 3;
-            res.data = '';
-        }
-
-        res.status = 2;
-        res.data = invite._id;
-
-
-        return res;
-    },
-    getQrCode: function () {
-        var currentUser, currentTimeStamp, deltaTime, qrLifetime, newCode;
-
-        currentUser = db.users.findOne(Meteor.userId());
-        //qrLifetime = 5 * 60 * 60 * 1000;// 5 minutes
-        qrLifetime = 1000;// 1 sec
-        currentTimeStamp = new Date().getTime();
-        deltaTime = (currentUser.hasOwnProperty('invite') ? currentTimeStamp - currentUser.invite.qr.created : null);
-
-
-        if (deltaTime !== null && deltaTime < qrLifetime) {
-            return currentUser.invite.qr.code;
-        }
-
-        /*
-         TODO
-         */
-        newCode = new Date().getTime();
-
-        db.users.update(Meteor.userId(), {
-            $set: {
-                invite: {
-                    //tokens: [],
-                    qr: {
-                        token: '',
-                        code: newCode,
-                        created: new Date().getTime()
-                    }
-                }
-            }
+        db.users.update(user._id, {
+          $push: {
+            'services.resume.loginTokens': hashStampedToken
+          }
         });
 
-        return newCode;
+        return {
+          type: 'auth',
+          token: stampedToken
+        };
+      } else {
+        return {
+          type: 'error'
+        };
+      }
+    }
+    else {
+      invite = db.invites.findOne({_id: qrCode, status: 'qr'});
+      if (invite) {
+        return {
+          type: 'invite',
+          inviteId: invite._id
+        };
+      }
     }
 
-})
-;
+    return {
+      type: 'error'
+    };
+
+  },
+
+  qrAuthCode: function () {
+    return updateQrUser(this.userId);
+  },
+  cordovaAutoLogin: function () {
+    return db.groundConfig.findOne({auth: true});
+  },
+  cordovaAfterLogout: function (userId) {
+    check(userId, String);
+    /**
+     * TODO true way before logout
+     */
+    if (Meteor.isCordova)
+      db.groundConfig.update({userId: userId},
+        {$set: {auth: false}}
+      );
+
+    return true;
+  }
+});
