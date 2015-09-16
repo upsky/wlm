@@ -37,6 +37,7 @@ else
     waitOn: ()->
       Meteor.subscribe 'invite', @params._id
     onRun: ()->
+      Meteor.logout();
       Meteor.call 'invalidateQr', @params._id
 
   Router.route '/blocked',
@@ -86,7 +87,7 @@ Router.onBeforeAction (location)->
       @render 'loading'
       @next()
 ,
-  except: ['login', 'error', 'down', 'loading', 'blocked', 'reg']
+  except: ['login', 'error', 'down', 'loading', 'blocked', 'reg', 'qr']
 
 Router.onRun ()->
   Session.set 'currentPath', @url

@@ -1,26 +1,20 @@
 var template = Template.qrScanner;
-var applyCode, setError;
 
-applyCode = function (qrCode) {
-  Meteor.call('qrApplyCode', qrCode, function (error, res) {
-    if (res.type === 'auth') {
+var applyCode = function (qrCode) {
+  Meteor.loginWithQr(qrCode, function (error, res) {
 
-      Accounts.callLoginMethod({
-        methodArguments: [{
-          qrToken: res.token
-        }]
+    if (error) {// we can't login with this qr
+      Meteor.call('qrApplyCode', qrCode, function (error, res) {
+        if (error) {
+          alert('Ваш qr-code уже использован либо истекло время активации.');
+          return;
+        }
+
+        Router.go('/qr/' + res.inviteId);
       });
-    } else if (res.type === 'invite') {
-
-      Router.go('/qr/' + res.inviteId);
-
-    } else {
-
-      alert('Ваш qr-code уже использован либо истекло время активации.');
     }
   });
 };
-
 
 setError = function (error) {
   //alert(error);
