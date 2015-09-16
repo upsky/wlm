@@ -6,5 +6,3 @@ db.partners = new Meteor.Collection 'partners'
 
 db.videos = new Meteor.Collection 'videos'
 db.navBars = new Meteor.Collection 'navBars'
-
-db.groundConfig = new Ground.Collection('config');
