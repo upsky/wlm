@@ -98,22 +98,6 @@ Meteor.methods
         username: username
         used: new Date()
 
-  checkQr: ()-> #create new qr
-    qr = db.invites.findOne
-      initiator: @userId
-      status: 'qr'
 
-    unless qr
-      db.invites.insert
-        status: 'qr'
-        initiator: @userId
-        email: ''
-        name: ''
 
-  invalidateQr: (_id)->
-    check _id, Match.Id
-    # invalidate reg qr code if any
-    updCount = db.invites.update({ _id: _id, status: 'qr' }, { $set: { status: 'active' } })
 
-    if updCount
-      Meteor.call('checkQr');

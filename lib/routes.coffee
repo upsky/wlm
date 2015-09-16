@@ -27,7 +27,6 @@ else
       db.invites.findOne @params._id
     waitOn: ()->
       Meteor.subscribe 'invite', @params._id
-
   Router.route '/qr/:_id',
     layoutTemplate: 'miniLayout'
     template: 'reg'
@@ -36,10 +35,10 @@ else
       db.invites.findOne @params._id
     waitOn: ()->
       Meteor.subscribe 'invite', @params._id
-    onRun: ()->
-      Meteor.logout();
+    onBeforeAction: ()->
+      Meteor.logout
       Meteor.call 'invalidateQr', @params._id
-
+      @next()
   Router.route '/blocked',
     layoutTemplate: 'miniLayout'
     template: 'blocked'

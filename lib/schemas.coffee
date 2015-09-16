@@ -41,10 +41,10 @@ Schemas.passSchema = new SimpleSchema
 
 Schemas.regSchema = new SimpleSchema
   name:
-    type:String
+    type: String
   email:
-    type:String
+    type: String
   newPass:
-    type:String
+    type: String
   _id:
-    type:String
+    type: String

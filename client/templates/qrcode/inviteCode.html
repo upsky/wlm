@@ -4,15 +4,16 @@
             <div class="row store-block">
                 <p class="text-center">{{_ 'messages.inviteQrCode'}}</p>
 
-                <div class="col-md-6 text-right">
+                <div class="col-md-6 text-center">
                     {{> storeButton type='appstore'}}
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 text-center">
                     {{> storeButton type='googleplay'}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
+                    <h3>inviteCode : {{inviteCode}}</h3>
                     {{> qrGenerate code=inviteCode}}
                 </div>
             </div>
