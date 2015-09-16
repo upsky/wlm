@@ -13,3 +13,5 @@ Template.navMenu.events
   "click #logoutHref": (event)->
     Meteor.logout()
     Router.go '/login'
+  "click": (event)->
+    Session.set 'userMenuStatus', false

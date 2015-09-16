@@ -13,6 +13,7 @@ Schemas.inviteSchema = new SimpleSchema
     type: String
   email:
     type: String
+    regEx: SimpleSchema.RegEx.Email
 
 Schemas.profileSchema = new SimpleSchema
   name:
@@ -21,6 +22,7 @@ Schemas.profileSchema = new SimpleSchema
     type: String
   email:
     type: String
+    regEx: SimpleSchema.RegEx.Email
   vk:
     type: String
     optional: true
@@ -44,6 +46,7 @@ Schemas.regSchema = new SimpleSchema
     type: String
   email:
     type: String
+    regEx: SimpleSchema.RegEx.Email
   newPass:
     type: String
   _id:

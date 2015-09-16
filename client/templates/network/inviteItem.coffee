@@ -10,3 +10,5 @@ Template.inviteItem.helpers
     result
   inviteUsed: ()->
     @status == 'used'
+  inviteLink: ()->
+    Meteor.absoluteUrl() + 'reg/' + @_id

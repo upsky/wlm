@@ -9,6 +9,7 @@ AutoForm.hooks
         doc
     after:
       method: (result)->
+        result
         Meteor.loginWithPassword(Session.get("email"), Session.get("password"))
         Router.go '/'
 
