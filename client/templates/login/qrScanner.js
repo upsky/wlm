@@ -29,7 +29,7 @@ template.events({
   "click #qr-scanner": function () {
     var params = {
       text_title: "Сканируйте QR-код",
-      text_instructions: "Сканирйте код",
+      text_instructions: "Сканируйте код",
       camera: "back",
       flash: "auto",
       drawSight: false
