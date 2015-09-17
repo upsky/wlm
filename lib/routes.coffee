@@ -47,8 +47,11 @@ else
     template: 'blocked'
 
   Router.route '/',
-    layoutTemplate: 'fullLayout'
+#    layoutTemplate: 'fullLayout'
     template: 'welcome'
+    action: ()->
+      @layout 'fullLayout'
+      @render 'welcome'
     waitOn: ()->
       Meteor.subscribe 'partnerDoc'
 
@@ -87,7 +90,6 @@ Router.onBeforeAction (location)->
     else
       @layout 'defaultLayout'
       @render 'loading'
-      @next()
 ,
   except: ['login', 'error', 'down', 'loading', 'blocked', 'reg', 'qr']
 
