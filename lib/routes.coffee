@@ -1,8 +1,11 @@
 Router.configure
-  layoutTemplate: 'miniLayout'
+  layoutTemplate: 'defaultLayout'
   loadingTemplate: 'loading'
   template: 'error'
   progressDebug: true
+
+
+
 
 Router.plugin 'dataNotFound',
   notFoundTemplate: 'error'
@@ -12,15 +15,15 @@ if Meteor.settings.public.isDown
     template: 'down'
 else
   Router.route '/loading',
-    layoutTemplate: 'miniLayout'
+    layoutTemplate: 'defaultLayout'
     template: 'loading'
 
   Router.route '/login',
-    layoutTemplate: 'miniLayout'
+    layoutTemplate: 'defaultLayout'
     template: 'login'
 
   Router.route '/reg/:_id',
-    layoutTemplate: 'miniLayout'
+    layoutTemplate: 'defaultLayout'
     template: 'reg'
     name: 'reg'
     data: ()->
@@ -28,7 +31,7 @@ else
     waitOn: ()->
       Meteor.subscribe 'invite', @params._id
   Router.route '/qr/:_id',
-    layoutTemplate: 'miniLayout'
+    layoutTemplate: 'defaultLayout'
     template: 'reg'
     name: 'qr'
     data: ()->
@@ -40,7 +43,7 @@ else
       Meteor.call 'invalidateQr', @params._id
       @next()
   Router.route '/blocked',
-    layoutTemplate: 'miniLayout'
+    layoutTemplate: 'defaultLayout'
     template: 'blocked'
 
   Router.route '/',
@@ -78,11 +81,11 @@ Router.onBeforeAction (location)->
     @next()
   else
     if !Meteor.loggingIn()
-      @layout 'miniLayout'
+      @layout 'defaultLayout'
       @render 'login'
 #@stop()
     else
-      @layout 'miniLayout'
+      @layout 'defaultLayout'
       @render 'loading'
       @next()
 ,
