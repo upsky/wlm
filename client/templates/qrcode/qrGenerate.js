@@ -10,7 +10,7 @@ Template.qrGenerate.onRendered(function () {
       return;
 
     $qr().qrcode({
-      size: parseInt($qr().css('width')),
+      render: 'image',
       color: "#000",
       text: qrCode
     });
