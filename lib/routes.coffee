@@ -81,8 +81,7 @@ Router.onBeforeAction (location)->
     @next()
   else
     if !Meteor.loggingIn()
-      @layout 'defaultLayout'
-      @render 'login'
+      Router.go 'login'
 #@stop()
     else
       @layout 'defaultLayout'
