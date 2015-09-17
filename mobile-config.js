@@ -1,11 +1,11 @@
-App.info({
-  id: 'ru.wlmarket',
-  name: 'wlmarket',
-  description: 'wlmarket',
-  author: 'wlmarket Group',
-  email: 'contact@example.com',
-  website: 'http://wlmarket.ru'
-});
+//App.info({
+//  id: 'ru.wlmarket',
+//  name: 'wlmarket',
+//  description: 'wlmarket',
+//  author: 'wlmarket Group',
+//  email: 'contact@example.com',
+//  website: 'http://wlmarket.ru'
+//});
 //
 //// Set up resources such as icons and launch screens.
 //App.icons({
