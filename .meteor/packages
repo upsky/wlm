@@ -24,7 +24,6 @@ multiply:iron-router-progress
 zimme:select2-bootstrap3-css
 aldeed:autoform-select2
 iron:layout
-coffeescript
 less
 mrt:modernizr-meteor
 yogiben:autoform-modals
