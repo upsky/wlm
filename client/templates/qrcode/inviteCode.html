@@ -1,20 +1,28 @@
 <template name="inviteCode">
-	{{#Layout template="panel" data=qrCode}}
-		<div class="qrcode">
-			<div class="row store-block">
-				<p class="text-center">{{_ 'messages.inviteQrCode'}}</p>
-				<div class="col-md-6 text-right">
-					{{> storeButton type='appstore'}}
-				</div>
-				<div class="col-md-6">
-					{{> storeButton type='googleplay'}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<img src="{{qrInviteImageUrl}}" class="qr-img">
-				</div>
-			</div>
-		</div>
-	{{/Layout}}
+    {{#Layout template="panel" data=panelData}}
+        <div class="qrcode">
+            <div class="row clearfix">
+                <div class="col-md-3"></div>
+                <div class="store-buttons store-block col-md-6">
+                    <p class="text-center">{{_ 'messages.inviteQrCode'}}</p>
+                    <div class="pull-left">
+
+                        {{> storeButton type='appstore'}}
+                    </div>
+                    <div class="pull-right">
+                        {{> storeButton type='googleplay'}}
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 text-center">
+                    {{> qrGenerate code=inviteCode}}
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    {{/Layout}}
 </template>

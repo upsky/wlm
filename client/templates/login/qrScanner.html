@@ -1,0 +1,13 @@
+<template name="qrScanner">
+    {{#if isCordova}}
+        <p>Выберете способ авторизацц</p>
+
+        <p>
+            <label for="qr-scanner">Войти с помощью QR кода</label>
+            <br/>
+            <button type="button" class="btn btn-lg btn-primary" id="qr-scanner">{{_ 'messages.scanQr'}}
+            </button>
+        </p>
+        <p>или авторизоваться с помощью логина и пароля</p>
+    {{/if}}
+</template>

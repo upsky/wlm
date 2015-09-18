@@ -5,10 +5,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
+tap:i18n
 iron:router
 alanning:roles
 accounts-password
-
 benjaminrh:jquery-cookie
 chhib:morris
 http
@@ -23,9 +23,7 @@ percolatestudio:synced-cron
 multiply:iron-router-progress
 zimme:select2-bootstrap3-css
 aldeed:autoform-select2
-
 iron:layout
-coffeescript
 less
 mrt:modernizr-meteor
 yogiben:autoform-modals
@@ -38,3 +36,6 @@ gwendall:impersonate
 gwendall:autoform-i18n
 gwendall:simple-schema-i18n
 accounts-ui-unstyled
+steeve:jquery-qrcode
+fortawesome:fontawesome
+
