@@ -41,3 +41,5 @@ fortawesome:fontawesome
 
 tap:i18n-bundler
 sacha:spin
+peppelg:bootstrap-3-modal
+twbs:bootstrap

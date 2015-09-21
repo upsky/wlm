@@ -1,4 +1,5 @@
 <template name="login">
+    {{> loginInstructionsModal}}
     <div class="login-page">
         {{#autoForm id="loginForm" type="method" schema="Schemas.loginSchema" meteormethod="checkLogin" resetOnSuccess=false}}
             <section class="wrapper scrollable animated fadeInDown">
@@ -11,12 +12,11 @@
                                 <i class="fa fa-vk"></i>
                                 Техническая поддержка</a>
                             <br/>
-                            <a href="https://youtu.be/TKBFu6bJI18" target="_blank">
+                            <button type="button" class="btn btn-link" name="loginInstructionsShow">
                                 <i class="fa fa-youtube-play"></i>
                                 Видеоинструкция
-                            </a>
+                            </button>
                         </div>
-
                     </div>
 
                     <ul class="list-group">
