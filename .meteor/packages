@@ -39,3 +39,5 @@ accounts-ui-unstyled
 steeve:jquery-qrcode
 fortawesome:fontawesome
 
+tap:i18n-bundler
+sacha:spin
