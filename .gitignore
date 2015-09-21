@@ -88,4 +88,4 @@ local.properties
 .texlipse
 
 #Cordova i18n
-./public/i18n
+.public/i18n/*
