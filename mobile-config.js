@@ -25,8 +25,10 @@ App.setPreference('HideKeyboardFormAccessoryBar', true);
 
 App.accessRule("https://vk.com/*");
 App.accessRule("https://m.vk.com/*", { launchExternal: true });
-App.accessRule("https://www.youtube.com/embed/*", { launchExternal: true });
+App.accessRule("https://s.ytimg.com/yts/*");
+App.accessRule("https://www.youtube.com/embed/*");
 App.accessRule("http://wlmarket.meteor.com/*");
+App.accessRule("*");
 
 // Pass preferences for a particular PhoneGap/Cordova plugin
 //App.configurePlugin('com.phonegap.plugins.facebookconnect', {
