@@ -18,15 +18,17 @@
             </div>
             <br/>
 
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    {{#if authCode}}
-                        {{> qrGenerate code=authCode}}
-                    {{else}}
-                        <a class="show-qr btn btn-lg btn-primary">{{_ 'buttons.showQr'}}</a>
-                    {{/if}}
+            {{#unless isCordova}}
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        {{#if authCode}}
+                            {{> qrGenerate code=authCode}}
+                        {{else}}
+                            <a class="show-qr btn btn-lg btn-primary">{{_ 'buttons.showQr'}}</a>
+                        {{/if}}
+                    </div>
                 </div>
-            </div>
+            {{/unless}}
         </div>
     {{/Layout}}
 </template>

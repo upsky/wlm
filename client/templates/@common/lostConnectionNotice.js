@@ -22,9 +22,10 @@ Deps.autorun(function () {
 
       if (lastConnectionnStatus) {
         noticeError = new PNotify({
-          title: 'Отсутсвует соединение с сервером.',
+          title: 'Отсутсвует&nbsp;соединение&nbsp;с&nbsp;сервером.',
           type: 'error',
-          hide: false
+          addclass: "",
+          mouse_reset: false
         });
       }
 
