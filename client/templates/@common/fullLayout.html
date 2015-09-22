@@ -9,28 +9,32 @@
             </section>
             <section class="wrapper retracted scrollable">
                 {{> userMenu}}
-                <div class="quick-launch-bar">
-                    <ul>
-                        {{#each navLinks}}
-                            <li class="{{decor}}">
-                                {{#if href}}
-                                    {{#if target}}
-                                        <a href="{{href}}"><i class="fa {{icon}}"></i><span>{{name}}</span></a>
-                                    {{else}}
-                                        <a href="{{href}}" target="{{target}}"><i
-                                                class="fa {{icon}}"></i><span>{{name}}</span></a>
-                                    {{/if}}
-                                {{else}}
-                                    {{{html}}}
-                                {{/if}}
-                            </li>
-                        {{/each}}
-                    </ul>
-                </div>
+                {{> quickLaunchBar}}
                 {{> yield}}
             </section>
         </div>
     {{else}}
         {{> loading}}
     {{/if}}
+</template>
+
+<template name="quickLaunchBar">
+    <div class="quick-launch-bar">
+        <ul>
+            {{#each navLinks}}
+                <li class="{{decor}}">
+                    {{#if href}}
+                        {{#if target}}
+                            <a href="{{href}}"><i class="fa {{icon}}"></i><span>{{name}}</span></a>
+                        {{else}}
+                            <a href="{{href}}" target="{{target}}"><i
+                                    class="fa {{icon}}"></i><span>{{name}}</span></a>
+                        {{/if}}
+                    {{else}}
+                        {{{html}}}
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
 </template>

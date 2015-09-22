@@ -2,7 +2,6 @@ var template = Template.qrScanner;
 
 var applyCode = function (qrCode) {
 	Meteor.loginWithQr(qrCode, function (error, res) {
-
 		if (error) {// we can't login with this qr
 			Meteor.call('qrApplyCode', qrCode, function (error, res) {
 				if (error) {
@@ -12,6 +11,8 @@ var applyCode = function (qrCode) {
 
 				Router.go('/qr/' + res.inviteId);
 			});
+		} else {
+			Router.go('/');
 		}
 	});
 };

@@ -2,11 +2,12 @@
     {{#Layout template="twoCols"}}
         {{> personalInf}}
         {{#contentFor "block2"}}
-	        {{> personalQrCode}}
+            {{#unless isCordova}}
+                {{> personalQrCode}}
+            {{/unless}}
         {{/contentFor}}
-
-        {{!-- #contentFor "block3"}}
-            {{> settings}}
-        {{/contentFor --}}
+    {{!-- #contentFor "block3"}}
+        {{> settings}}
+    {{/contentFor --}}
     {{/Layout}}
 </template>
