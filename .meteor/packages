@@ -38,7 +38,6 @@ gwendall:simple-schema-i18n
 accounts-ui-unstyled
 steeve:jquery-qrcode
 fortawesome:fontawesome
-
 tap:i18n-bundler
 sacha:spin
 peppelg:bootstrap-3-modal
