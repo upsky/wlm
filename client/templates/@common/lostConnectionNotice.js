@@ -22,7 +22,7 @@ Deps.autorun(function () {
 
       if (lastConnectionnStatus) {
         noticeError = new PNotify({
-          title: 'Соединение прервано.',
+          title: 'Отсутсвует соединение с сервером.',
           type: 'error',
           hide: false
         });

@@ -46,6 +46,10 @@ Template.login.rendered = function () {
   return log.trace('login rendered');
 };
 
+Template.login.onRendered(function () {
+
+});
+
 Template.login.events({
   "click #login": function () {
     return log.trace('click #login');
