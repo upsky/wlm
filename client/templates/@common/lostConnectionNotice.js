@@ -5,11 +5,9 @@ var lastConnectionnStatus = false;
 var started = false;
 Deps.autorun(function () {
   status = Meteor.status();
-
   if (started)
     if (status.connected) {
       connectionnStatus = true;
-
       if (!lastConnectionnStatus) {
         noticeError.remove();
         new PNotify({
@@ -22,15 +20,17 @@ Deps.autorun(function () {
 
       if (lastConnectionnStatus) {
         noticeError = new PNotify({
-          title: 'Отсутсвует&nbsp;соединение&nbsp;с&nbsp;сервером.',
+          title: 'Отсутсвует соединение с сервером.',
           type: 'error',
-          addclass: "",
-          mouse_reset: false
+          hide: false,
+          width: '500px',
+          nonblock: {
+            nonblock: true
+          }
         });
       }
 
     }
-
 
   lastConnectionnStatus = connectionnStatus;
   started = true;
