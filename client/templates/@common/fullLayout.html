@@ -1,6 +1,7 @@
 <template name="fullLayout">
     {{> lostConnectionNotice}}
-    
+    {{> cordovaSelectionBlocked}}
+
     {{#if currentUser}}
         <div id="body" class="default-page">
             {{> navMenu}}
