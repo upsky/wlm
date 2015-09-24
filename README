@@ -1,5 +1,0 @@
-## Тестовый запуск
-1. Установите метеор (http://meteor.com)
-2. Если метеор уже был установлен - сбросить базу: meteor reset
-3. При каждом запуске: meteor --settings settings.json
-4. Вход под админом: admin@wlm.ru / admin и под партнером: partner@wlm.ru / partner
