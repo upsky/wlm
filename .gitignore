@@ -89,3 +89,6 @@ local.properties
 
 #Cordova i18n
 public/i18n/*
+
+#mobile-config
+mobile-config.js
