@@ -2,5 +2,5 @@
     "helper_name": "_",
     "supported_languages": ["ru"],
     "i18n_files_route": "/i18n",
-    "cdn_path": null
+    "cdn_path": "i18n"
 }

@@ -87,3 +87,5 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+#Cordova i18n
+public/i18n/*

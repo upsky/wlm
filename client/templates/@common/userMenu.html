@@ -1,126 +1,25 @@
 <template name="userMenu">
-    <nav class="user-menu">
-        <a href="#" class="main-menu-access {{userMenuStatus}}">
-            <i class="fa fa-proton-logo"></i>
-            <i class="toggle-main-menu fa fa-reorder"></i>
-        </a>
-        <section class="user-menu-wrapper">
-            <a href="#" data-expand=".theme-view" class="view-menu-access">
-                <i class="fa fa-eye"></i>
-            </a>
-            <!--a href="#" data-expand=".messages-view" class="messages-access">
-                <i class="fa fa-envelope-o"></i>
-                {{messagesCount}}
-            </a>
-            <a href="#" data-expand=".notifications-view" class="notifications-access">
-                <i class="fa fa-comment-o"></i>
-                {{#if notifsCount}}
-                <div class="menu-counter">{{notifsCount}}</div>
-                {{/if}}
-            </a-->
-        </section>
-
-        <div class="panel panel-default nav-view theme-view">
-            <div class="arrow user-menu-arrow"></div>
-            <div class="panel-heading">
-                <i class="fa fa-eye"></i>
-                <span>Color Scheme</span>
-                <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item" data-theme="default">
-                    <a href="#">
-                        <i><b class="dark"></b></i>
-
-                        <div class="text-holder">
-                                    <span class="title-text">
-                                        Dark
-                                    </span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item" data-theme="theme-light">
-                    <a href="#">
-                        <i><b></b></i>
-
-                        <div class="text-holder">
-                                    <span class="title-text">
-                                        Light
-                                    </span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item" data-theme="theme-pastel">
-                    <a href="#">
-                        <i><b class="pastel"></b></i>
-
-                        <div class="text-holder">
-                                    <span class="title-text">
-                                        Pastel Green
-                                    </span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item" data-theme="theme-pastel-marine">
-                    <a href="#">
-                        <i><b class="pastel-marine"></b></i>
-
-                        <div class="text-holder">
-                                    <span class="title-text">
-                                        Pastel Marine
-                                    </span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item" data-theme="theme-terminal">
-                    <a href="#">
-                        <i><b class="terminal"></b></i>
-
-                        <div class="text-holder">
-                                    <span class="title-text">
-                                        Terminal
-                                    </span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item" data-theme="theme-rio">
-                    <a href="#">
-                        <i><b class="rio"></b></i>
-
-                        <div class="text-holder">
-                                    <span class="title-text">
-                                        Rio
-                                    </span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="panel panel-default nav-view messages-view">
-            <div class="arrow user-menu-arrow"></div>
-            <div class="panel-heading">
-                <i class="fa fa-envelope-o"></i>
-                <span>Messages</span>
-                <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
-            </div>
-            <ul class="list-group">
-
-            </ul>
-        </div>
-
-        <div class="panel panel-default nav-view notifications-view">
-            <div class="arrow user-menu-arrow"></div>
-            <div class="panel-heading">
-                <i class="fa fa-comment-o"></i>
-                <span>Notifications</span>
-                <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
-            </div>
-            <ul class="list-group">
-
-            </ul>
-        </div>
-    </nav>
+    <!--<nav class="user-menu">-->
+    <!--<a href="#" class="main-menu-access {{userMenuStatus}}">-->
+    <!--<i class="fa fa-proton-logo"></i>-->
+    <!--<i class="toggle-main-menu fa fa-reorder"></i>-->
+    <!--</a>-->
+    <!--<section class="user-menu-wrapper">-->
+    <!--&lt;!&ndash;<a href="#" data-expand=".theme-view" class="view-menu-access">&ndash;&gt;-->
+    <!--&lt;!&ndash;<i class="fa fa-eye"></i>&ndash;&gt;-->
+    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;a href="#" data-expand=".messages-view" class="messages-access">-->
+    <!--<i class="fa fa-envelope-o"></i>-->
+    <!--{{messagesCount}}-->
+    <!--</a>-->
+    <!--<a href="#" data-expand=".notifications-view" class="notifications-access">-->
+    <!--<i class="fa fa-comment-o"></i>-->
+        <!--{{#if notifsCount}}-->
+    <!--<div class="menu-counter">{{notifsCount}}</div>-->
+        <!--{{/if}}-->
+    <!--</a&ndash;&gt;-->
+    <!--</section>-->
+    <!--</nav>-->
     <div class="user-title">
         <h3>{{userTitle}}</h3>
     </div>
@@ -132,4 +31,107 @@
             </ul>
         </li>
     </ol>
+</template>
+
+<template name="colorChanger">
+    <div class="panel panel-default nav-view theme-view">
+        <div class="arrow user-menu-arrow"></div>
+        <div class="panel-heading">
+            <i class="fa fa-eye"></i>
+            <span>Color Scheme</span>
+            <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item" data-theme="default">
+                <a href="#">
+                    <i><b class="dark"></b></i>
+
+                    <div class="text-holder">
+                                    <span class="title-text">
+                                        Dark
+                                    </span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item" data-theme="theme-light">
+                <a href="#">
+                    <i><b></b></i>
+
+                    <div class="text-holder">
+                                    <span class="title-text">
+                                        Light
+                                    </span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item" data-theme="theme-pastel">
+                <a href="#">
+                    <i><b class="pastel"></b></i>
+
+                    <div class="text-holder">
+                                    <span class="title-text">
+                                        Pastel Green
+                                    </span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item" data-theme="theme-pastel-marine">
+                <a href="#">
+                    <i><b class="pastel-marine"></b></i>
+
+                    <div class="text-holder">
+                                    <span class="title-text">
+                                        Pastel Marine
+                                    </span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item" data-theme="theme-terminal">
+                <a href="#">
+                    <i><b class="terminal"></b></i>
+
+                    <div class="text-holder">
+                                    <span class="title-text">
+                                        Terminal
+                                    </span>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item" data-theme="theme-rio">
+                <a href="#">
+                    <i><b class="rio"></b></i>
+
+                    <div class="text-holder">
+                                    <span class="title-text">
+                                        Rio
+                                    </span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="panel panel-default nav-view messages-view">
+        <div class="arrow user-menu-arrow"></div>
+        <div class="panel-heading">
+            <i class="fa fa-envelope-o"></i>
+            <span>Messages</span>
+            <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
+        </div>
+        <ul class="list-group">
+
+        </ul>
+    </div>
+
+    <div class="panel panel-default nav-view notifications-view">
+        <div class="arrow user-menu-arrow"></div>
+        <div class="panel-heading">
+            <i class="fa fa-comment-o"></i>
+            <span>Notifications</span>
+            <a href="#" class="close-user-menu"><i class="fa fa-times"></i></a>
+        </div>
+        <ul class="list-group">
+
+        </ul>
+    </div>
 </template>

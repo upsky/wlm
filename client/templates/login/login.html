@@ -1,41 +1,43 @@
 <template name="login">
-    <div class="login-page">
+    {{> loginInstructionsModal}}
+    <div class="c-login-page login-page">
         {{#autoForm id="loginForm" type="method" schema="Schemas.loginSchema" meteormethod="checkLogin" resetOnSuccess=false}}
             <section class="wrapper scrollable animated fadeInDown">
                 <section class="panel panel-default">
                     <div class="panel-heading">
                         <img src="/logo.png" style="max-width: 60%" alt=""/>
-
-                        <div class="clearfix">
-                            <a href="https://vk.com/winlevel_ts" target="_blank">
-                                Техническая поддержка</a>
-                            <br/>
-                            <a href="https://youtu.be/TKBFu6bJI18" target="_blank">
-                                <i class="fa fa-youtube-play"></i>
-                                Видеоинструкция
-                            </a>
-                        </div>
-
                     </div>
 
                     <ul class="list-group">
+                        {{#if isCordova}}
+                            <li class="list-group-item">
+                                {{>qrScanner}}
+                            </li>
+                        {{/if}}
                         <li class="list-group-item">
-                            {{>qrScanner}}
-                        </li>
-                        <li class="list-group-item">
+                            {{> afQuickField type="email" class="form-control input-lg" name="login" placeholder="schemaLabel"}}
+                            {{> afQuickField type="password" class="form-control input-lg" name="password" placeholder="schemaLabel"}}
                             <div class="form-group">
-                                {{> afQuickField type="email" class="form-control input-lg" name="login" placeholder="schemaLabel"}}
-                            </div>
-                            <div class="form-group">
-                                {{> afQuickField type="password" class="form-control input-lg" name="password" placeholder="schemaLabel"}}
+                                <input type="submit" class="btn btn-lg btn-success btn-block"
+                                       value="{{_ "buttons.enter"}}"/>
                             </div>
                         </li>
                     </ul>
                     <div class="panel-footer">
-                        <button type="submit" class="btn btn-lg btn-success">{{_ "buttons.enter"}}</button>
+                        <div class="clearfix">
+                            <a href="#" onclick="window.open('https://vk.com/winlevel_ts', '_system');">
+                                <i class="fa fa-vk"></i>
+                                Техническая поддержка</a>
+                            <br/>
+                            <button type="button" class="btn btn-link" name="loginInstructionsShow">
+                                <i class="fa fa-youtube-play"></i>
+                                Видеоинструкция
+                            </button>
+                        </div>
                     </div>
                 </section>
             </section>
         {{/autoForm}}
     </div>
 </template>
+
