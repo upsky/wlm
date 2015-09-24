@@ -1838,7 +1838,9 @@ nav.user-menu .panel .list-group-item .time-ago {
 .login-page .wrapper .form-group label {
     display: none;
 }
-
+.login-page .wrapper .form-group{
+    text-align: center;
+}
 .login-page .wrapper .form-group input {
     width: 262px;
     margin: 0 auto;
