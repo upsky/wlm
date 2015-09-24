@@ -48,29 +48,45 @@ Meteor.methods({
       throw new Meteor.Error(403, "Permission denied. You need to be an admin to impersonate users.");
     }
 
+    var originalUser = -1;
+
     if (params.token) {
       // Impersonating with a token
       var selector = {
         "_id": params.fromUser,
         "services.impersonate.token": params.token
       };
-      var isValid = !!Meteor.users.findOne(selector);
+      var tokenUser = Meteor.users.findOne(selector);
+      var isValid = !!tokenUser;
       if (!isValid) {
         throw new Meteor.Error(403, "Permission denied. Can't impersonate with this token.");
       }
+
+      originalUser = tokenUser._id;
+
     } else {
       // Impersonating with no token
       var user = Meteor.users.findOne({ _id: currentUser }) || {};
       params.token = Meteor._get(user, "services", "resume", "loginTokens", 0, "hashedToken");
+      originalUser = currentUser;
       /*
-      var selector = { _id: currentUser };
-      var modifier = { $set: { _impersonateToken: params.token }};
-      Meteor.users.update(selector, modifier);
-      */
+       var selector = { _id: currentUser };
+       var modifier = { $set: { _impersonateToken: params.token }};
+       Meteor.users.update(selector, modifier);
+       */
     }
 
     this.setUserId(params.toUser);
-    return { fromUser: currentUser, toUser: params.toUser, token: params.token };
 
+    var impersonateInfo = {
+      fromUser: currentUser,
+      toUser: params.toUser,
+      token: params.token
+    };
+
+    // If we return to original impersonation user - remove impersonation
+    this.connection.impersonate = originalUser === params.toUser ? undefined : impersonateInfo;
+
+    return impersonateInfo;
   }
 });
