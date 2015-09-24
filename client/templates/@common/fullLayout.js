@@ -39,14 +39,14 @@ Template.fullLayout.rendered = function () {
 			});
 		},
 		onResizeEnd: function () {
-			!Meteor.proton.userNav || Meteor.proton.userNav.shuffleUserNav();
-			!Meteor.proton.dashboard || Meteor.proton.dashboard.setBlankWidgets();
-			setTimeout((function () {
-				!(Meteor.proton.graphsStats && Meteor.proton.graphsStats.redrawCharts) || Meteor.proton.graphsStats.redrawCharts();
-				return !(Meteor.proton.userProfile && Meteor.proton.userProfile.redrawCharts) || Meteor.proton.userProfile.redrawCharts();
-			}), 1000);
-			!Meteor.proton.sidebar || Meteor.proton.sidebar.retractOnResize();
-			return !Meteor.proton.sidebar || Meteor.proton.sidebar.setSidebarMobHeight();
+			//!Meteor.proton.userNav || Meteor.proton.userNav.shuffleUserNav();
+			//!Meteor.proton.dashboard || Meteor.proton.dashboard.setBlankWidgets();
+			//setTimeout((function () {
+			//	!(Meteor.proton.graphsStats && Meteor.proton.graphsStats.redrawCharts) || Meteor.proton.graphsStats.redrawCharts();
+			//	return !(Meteor.proton.userProfile && Meteor.proton.userProfile.redrawCharts) || Meteor.proton.userProfile.redrawCharts();
+			//}), 1000);
+			//!Meteor.proton.sidebar || Meteor.proton.sidebar.retractOnResize();
+			//return !Meteor.proton.sidebar || Meteor.proton.sidebar.setSidebarMobHeight();
 		},
 		enableTooltips: function () {
 			$(".uses-tooltip").tooltip({
