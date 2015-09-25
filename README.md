@@ -14,3 +14,11 @@
 </dict>
 ```
 НЕ ИСПОЛЬЗОВАТЬ В РЕЛИЗНЫХ ВЕРСИЯХ
+
+1. Build Settings > Use bitcode > NO
+1. Поправить версию
+
+## Archive iOS для распространения
+
+Добавить в Build Settings > Header Search Paths
+  $(BUILT_PRODUCTS_DIR)/../emulator/include
