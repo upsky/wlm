@@ -24,3 +24,7 @@ UI.registerHelper('pageTitle', function() {
   document.title = pageTitle + ' / ' + TAPi18n.__('pageTitles.topTitle');
   return pageTitle;
 });
+
+UI.registerHelper('Session', function (varName) {
+  return Session.get(varName);
+});
