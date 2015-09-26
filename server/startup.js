@@ -3,14 +3,13 @@
  */
 
 Meteor.startup(function () {
-	var smtp = Meteor.settings["smtp"];
-	process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 
+	Mandrill.config(Meteor.settings.mandrill);
 
 	if (db.users.find({}, {limit: 1}).count() > 0)
 		return;
 
-	// create test users
+// create test users
 	var rootId = Accounts.createUser({
 		username: 'root',
 		email: 'root@wlm.ru',
@@ -46,4 +45,5 @@ Meteor.startup(function () {
 		newPass: 'partner',
 		_id: inviteId
 	});
-});
+})
+;

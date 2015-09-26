@@ -5,16 +5,42 @@ Meteor.publish('invite', function (_id) {
 });
 
 Meteor.methods({
-	sendEmail: function (to, from, subject, text) {
-		check([to, from, subject, text], [String]);
+	sendEmail: function (to, from, subject, templateName, data) {
+		check([to, from, subject, templateName], [String]);
+		check(data, Array);
+
+		var email = {
+			receiver: to,
+			template: "invitePartner"
+		};
+
+
 		this.unblock();
-		console.log('sendEmail');
-		Email.send({
-			to: to,
-			from: from,
-			subject: subject,
-			text: text
-		});
+		try {
+			this.unblock();
+			Mandrill.messages.sendTemplate({
+				template_name: 'invitePartner',
+				template_content: [
+					{
+						name: 'body',
+						content: 'Breaking news! Federal Agents Raid Gun Shop, Find Weapons'
+					}
+				],
+				message: {
+					subject: subject,
+					from_email: from,
+					global_merge_vars: data,
+					"merge_vars": [
+						{}
+					],
+					to: [
+						{email: to}
+					]
+				}
+			});
+		} catch (e) {
+			console.log(e);
+		}
 	},
 	checkLogin: function (doc) {
 		var user;

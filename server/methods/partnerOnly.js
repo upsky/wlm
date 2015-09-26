@@ -58,8 +58,21 @@ Meteor.methods({
 		doc.initiator = Meteor.userId();
 		doc.status = 'active';
 
-		if (db.invites.insert(doc)) {
-			Meteor.call('sendEmail', doc.email, 'wlmnlevel@gmail.com/', 'Hello from Meteor!', 'This is a test of Email.send.')
+		var inviteId = db.invites.insert(doc);
+
+		if (inviteId) {
+			Meteor.call('sendEmail',
+				doc.email,
+				'info@wlm.ru',
+				'Приглашение от ' + Meteor.user().profile.name,
+				'invitePartner',
+				[
+					{
+						"name": "reglink",
+						"content": Meteor.getInviteLinks(inviteId)
+					}
+				]
+			)
 		}
 	},
 	networkCounts: function () {
