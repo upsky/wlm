@@ -3,6 +3,13 @@ PNotify.prototype.options.styling = 'fontawesome';
 Meteor.startup(function () {
 	moment.locale('ru');
 
+
+	//Accounts.config({
+	//	sendVerificationEmail: true,
+	//	forbidClientAccountCreation: false
+	//});
+
+
 	return TAPi18n.setLanguage('ru')
 		.done(function () {
 			return _.each(Schemas, function (schema) {

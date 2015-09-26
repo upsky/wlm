@@ -9,6 +9,12 @@
       "token": "291fd8d034539e4bc0322a72fd27bc58fbe6d8d8"
     }
   },
+  "smtp": {
+    "username": "wlmnlevel@gmail.com",
+    "password": ";yL(>3pS5>",
+    "server": "smtp.gmail.com",
+    "port": 25
+  },
   "sysadminEmail": "admin@wlm.ru",
   "sysadminPass": "admin"
 }

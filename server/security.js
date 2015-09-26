@@ -79,6 +79,9 @@ methodsSecurity = {
 		authNotRequired: false,
 		roles: 'all'
 	},
+	sendEmail: {
+		roles: 'all'
+	},
 	updateProfile: {
 		roles: 'partner,sysadmin,support'
 	},
