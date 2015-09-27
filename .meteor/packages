@@ -20,7 +20,6 @@ joshowens:timeago
 brentjanderson:buzz.js
 jrudio:youtubejs
 percolatestudio:synced-cron
-multiply:iron-router-progress
 zimme:select2-bootstrap3-css
 aldeed:autoform-select2
 iron:layout
@@ -43,3 +42,6 @@ sacha:spin
 peppelg:bootstrap-3-modal
 twbs:bootstrap
 kidovate:pnotify
+settinghead:auto-nprogress
+email
+wylio:mandrill

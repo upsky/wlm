@@ -7,31 +7,43 @@
                     <div class="panel-heading">
                         <img src="/logo.png" style="max-width: 60%" alt=""/>
                     </div>
+                    {{#if isCordova}}
+                        <h4 class="text-center">{{_ 'messages.selectAuthenticationMethod'}}</h4>
+                    {{/if}}
 
-                    <ul class="list-group">
+                    <section class="login-form">
                         {{#if isCordova}}
-                            <li class="list-group-item">
-                                {{>qrScanner}}
-                            </li>
-                        {{/if}}
-                        <li class="list-group-item">
-                            {{> afQuickField type="email" class="form-control input-lg" name="login" placeholder="schemaLabel"}}
-                            {{> afQuickField type="password" class="form-control input-lg" name="password" placeholder="schemaLabel"}}
                             <div class="form-group">
-                                <input type="submit" class="btn btn-lg btn-success btn-block"
-                                       value="{{_ "buttons.enter"}}"/>
+                                {{>qrScanner}}
                             </div>
-                        </li>
-                    </ul>
+                            <div class="form-group">
+                                <button type="button"
+                                        class="btn btn-default glyphicon glyphicon-resize-vertical text-center disabled">
+
+                                </button>
+                            </div>
+                            <p class="text-center">{{_ 'messages.loginUsingQrLogin'}}</p>
+                        {{/if}}
+
+                        {{> afQuickField type="email" class="form-control input-lg" name="login" placeholder="schemaLabel"}}
+                        {{> afQuickField type="password" class="form-control input-lg" name="password" placeholder="schemaLabel"}}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-lg btn-success btn-block"
+                                   value="{{_ "buttons.enter"}}"/>
+                        </div>
+                    </section>
+
+
                     <div class="panel-footer">
                         <div class="clearfix">
                             <a href="#" onclick="window.open('https://vk.com/winlevel_ts', '_system');">
                                 <i class="fa fa-vk"></i>
-                                Техническая поддержка</a>
+                                {{_ 'messages.technicalSupport'}}
+                            </a>
                             <br/>
                             <button type="button" class="btn btn-link" name="loginInstructionsShow">
                                 <i class="fa fa-youtube-play"></i>
-                                Видеоинструкция
+                                {{_ 'messages.videoTutorial'}}
                             </button>
                         </div>
                     </div>

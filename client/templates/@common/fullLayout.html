@@ -1,15 +1,11 @@
 <template name="fullLayout">
     {{> lostConnectionNotice}}
-    {{> cordovaSelectionBlocked}}
 
     {{#if currentUser}}
         <div id="body" class="default-page">
             {{> navMenu}}
-            <section class="sidebar extended">
-            </section>
             <section class="wrapper retracted scrollable">
                 {{> userMenu}}
-                {{> quickLaunchBar}}
                 {{> yield}}
             </section>
         </div>

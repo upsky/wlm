@@ -3,44 +3,47 @@
  */
 
 Meteor.startup(function () {
-  if (db.users.find({}, {limit: 1}).count() > 0)
-    return;
 
-  // create test users
-  var rootId = Accounts.createUser({
-    username: 'root',
-    email: 'root@wlm.ru',
-    password: Random.secret()
-  });
+	Mandrill.config(Meteor.settings.mandrill);
 
-  db.partners.insert({
-    _id: rootId,
-    level: 0,
-    path: []
-  });
+	if (db.users.find({}, {limit: 1}).count() > 0)
+		return;
 
-  Roles.addUsersToRoles(rootId, 'partner');
+// create test users
+	var rootId = Accounts.createUser({
+		username: 'root',
+		email: 'root@wlm.ru',
+		password: Random.secret()
+	});
 
-  var adminId = Accounts.createUser({
-    username: 'sysadmin',
-    email: Meteor.settings.sysadminEmail,
-    password: Meteor.settings.sysadminPass
-  });
-  Roles.addUsersToRoles(adminId, 'sysadmin');
+	db.partners.insert({
+		_id: rootId,
+		level: 0,
+		path: []
+	});
+
+	Roles.addUsersToRoles(rootId, 'partner');
+
+	var adminId = Accounts.createUser({
+		username: 'sysadmin',
+		email: Meteor.settings.sysadminEmail,
+		password: Meteor.settings.sysadminPass
+	});
+	Roles.addUsersToRoles(adminId, 'sysadmin');
 
 
-  var inviteId = db.invites.insert({
-    email: '',
-    name: '',
-    initiator: rootId,
-    status: 'active'
-  });
+	var inviteId = db.invites.insert({
+		email: '',
+		name: '',
+		initiator: rootId,
+		status: 'active'
+	});
 
-  Meteor.call('reg', {
-    name: 'Partner Partner',
-    email: 'partner@wlm.ru',
-    newPass: 'partner',
-    _id: inviteId
-  });
-
-});
+	Meteor.call('reg', {
+		name: 'Partner Partner',
+		email: 'partner@wlm.ru',
+		newPass: 'partner',
+		_id: inviteId
+	});
+})
+;

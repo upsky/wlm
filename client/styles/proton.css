@@ -1050,7 +1050,7 @@ body {
         display: block;
         vertical-align: top;
         top: 0;
-        left: 390px;
+        left: 80px;
         right: 0;
         bottom: 0;
         padding: 0;
@@ -1472,7 +1472,7 @@ nav.user-menu .menu-counter {
 
 nav.user-menu .main-menu-access {
     position: relative;
-    float: left;
+    float: right;
     padding: 15px 17px;
     color: #666666;
     -webkit-transition: all 0.1s;
@@ -1838,7 +1838,9 @@ nav.user-menu .panel .list-group-item .time-ago {
 .login-page .wrapper .form-group label {
     display: none;
 }
-
+.login-page .wrapper .form-group{
+    text-align: center;
+}
 .login-page .wrapper .form-group input {
     width: 262px;
     margin: 0 auto;
@@ -3947,7 +3949,7 @@ nav.user-menu .panel .list-group-item .time-ago {
 }
 
 .ui-pnotify {
-    top: 70px;
+    top: 20px;
     max-width: 90%;
 }
 

@@ -19,8 +19,12 @@ UI.registerHelper('videoInstruction', function(tag, hash, decor, lang) {
 
 UI.registerHelper('pageTitle', function() {
   var pageTitle, path;
-  path = Session.get('currentPath');
+  path = Router.current().route.getName();
   pageTitle = TAPi18n.__('pageTitles.' + path);
   document.title = pageTitle + ' / ' + TAPi18n.__('pageTitles.topTitle');
   return pageTitle;
+});
+
+UI.registerHelper('Session', function (varName) {
+  return Session.get(varName);
 });
