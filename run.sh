@@ -16,6 +16,9 @@ case $1 in
     deploy)
         meteor deploy $HOST $SETTINGS
     ;;
+    build)
+        meteor build .out --server=$HOST --mobile-settings settings.json
+    ;;
     *)
         echo "usage: $0 [run|ios] params" && exit 1
         ;;
