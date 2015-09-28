@@ -45,3 +45,4 @@ kidovate:pnotify
 settinghead:auto-nprogress
 email
 wylio:mandrill
+servicelocale:geoip
