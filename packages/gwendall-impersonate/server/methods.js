@@ -31,4 +31,4 @@ var proto = Meteor.Collection.prototype;
 		}
 		return origMethod.apply(this, arguments);
 	}
-})
+});

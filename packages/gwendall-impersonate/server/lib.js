@@ -70,10 +70,10 @@ Meteor.methods({
       params.token = Meteor._get(user, "services", "resume", "loginTokens", 0, "hashedToken");
       originalUser = currentUser;
       /*
-      var selector = { _id: currentUser };
-      var modifier = { $set: { _impersonateToken: params.token }};
-      Meteor.users.update(selector, modifier);
-      */
+       var selector = { _id: currentUser };
+       var modifier = { $set: { _impersonateToken: params.token }};
+       Meteor.users.update(selector, modifier);
+       */
     }
 
     this.setUserId(params.toUser);

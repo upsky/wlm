@@ -28,6 +28,7 @@ App.accessRule("https://m.vk.com/*", {launchExternal: true});
 App.accessRule("https://s.ytimg.com/yts/*");
 App.accessRule("https://www.youtube.com/embed/*");
 App.accessRule("http://wlmarket.meteor.com/*");
+App.accessRule("http://meteor.local/*");
 App.accessRule("*");
 
 // Pass preferences for a particular PhoneGap/Cordova plugin
