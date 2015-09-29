@@ -1,11 +1,4 @@
-/**
- * Created by kriz on 10/09/15.
- */
-
 Meteor.startup(function () {
-
-	Mandrill.config(Meteor.settings.mandrill);
-
 	if (db.users.find({}, {limit: 1}).count() > 0)
 		return;
 

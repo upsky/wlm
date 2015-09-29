@@ -75,11 +75,20 @@ methodsSecurity = {
 		authNotRequired: true,
 		roles: 'all'
 	},
+	recoverPass: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	resetPass: {
+		authNotRequired: true,
+		roles: 'all'
+	},
 	qrAuthCode: {
 		authNotRequired: false,
 		roles: 'all'
 	},
 	sendEmail: {
+		authNotRequired: true,
 		roles: 'all'
 	},
 	updateProfile: {

@@ -9,21 +9,15 @@ Meteor.methods({
 		check([to, from, subject, templateName], [String]);
 		check(data, Array);
 
-		var email = {
-			receiver: to,
-			template: "invitePartner"
-		};
-
-
 		this.unblock();
 		try {
 			this.unblock();
 			Mandrill.messages.sendTemplate({
-				template_name: 'invitePartner',
+				template_name: templateName,
 				template_content: [
 					{
 						name: 'body',
-						content: 'Breaking news! Federal Agents Raid Gun Shop, Find Weapons'
+						content: ''
 					}
 				],
 				message: {
@@ -159,5 +153,18 @@ Meteor.methods({
 				used: new Date()
 			}
 		});
+	},
+	recoverPass: function (doc) {
+		check(doc, {
+			email: String
+		});
+
+		var user = Meteor.users.findOne({emails: {$elemMatch: {address: doc.email}}});
+
+		if (!user) {
+			throw new Meteor.Error(400, 'User not found');
+		}
+
+		return user.emails[0].address;
 	}
 });

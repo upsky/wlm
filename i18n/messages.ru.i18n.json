@@ -9,6 +9,9 @@
     "videoTutorial": "Видеоинструкция",
     "selectAuthenticationMethod": "Выберете способ авторизаци",
     "loginUsingQrCode": "Войти с помощью QR кода",
-    "loginUsingQrLogin": "Войти с помощью логина и пароля"
+    "loginUsingQrLogin": "Войти с помощью логина и пароля",
+    "recoverPass": "Забыли пароль?",
+    "emailSend": "Пиьсмо отправлено",
+    "passwordChanged": "Пароль изменен"
   }
 }
