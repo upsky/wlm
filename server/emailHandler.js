@@ -25,15 +25,7 @@ var MandrillGetHtml = function (templateName, mergeVars) {
 Meteor.startup(function () {
 	Mandrill.config(Meteor.settings.mandrill);
 
-	Accounts.emailTemplates.enrollAccount.html = function () {
 
-		return MandrillGetHtml('enrollAccount',
-			[{
-				name: 'testvar',
-				content: 'enrollAccount'
-			}]
-		);
-	};
 	Accounts.emailTemplates.resetPassword.html = function (user, resetLink) {
 		check(user, Object);
 		check(resetLink, String);
@@ -44,12 +36,12 @@ Meteor.startup(function () {
 				content: resetLink
 			}]);
 	};
-//
-	Accounts.emailTemplates.verifyEmail.html = function () {
+
+	Accounts.emailTemplates.verifyEmail.html = function (user, verifyLink) {
 		return MandrillGetHtml('verifyEmail',
 			[{
-				name: 'testvar',
-				content: 'verifyEmail'
+				name: 'verifyLink',
+				content: verifyLink
 			}]
 		);
 	};

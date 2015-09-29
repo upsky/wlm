@@ -1,6 +1,16 @@
 PNotify.prototype.options.styling = 'fontawesome';
 
 Meteor.startup(function () {
+
+	Deps.autorun(function () {
+		var user = db.users.findOne({_id: Meteor.userId(), 'emails.verified': true});
+
+		if (user)
+			Session.set('emailVerified', true);
+		else
+			Session.set('emailVerified', false);
+	});
+
 	moment.locale('ru');
 
 	return TAPi18n.setLanguage('ru')

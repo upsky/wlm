@@ -31,7 +31,7 @@ AutoForm.hooks({
 						return new PNotify({
 							title: document.title,
 							type: 'error',
-							text: TAPi18n.__('errors.loginError')
+							text: error
 						});
 					} else {
 						return Router.go('/');

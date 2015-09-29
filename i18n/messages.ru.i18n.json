@@ -12,6 +12,7 @@
     "loginUsingQrLogin": "Войти с помощью логина и пароля",
     "recoverPass": "Забыли пароль?",
     "emailSend": "Пиьсмо отправлено",
-    "passwordChanged": "Пароль изменен"
+    "passwordChanged": "Пароль изменен",
+    "emailVerified": "Адрес эл. почты подтвержден"
   }
 }
