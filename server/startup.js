@@ -43,4 +43,5 @@ Meteor.startup(function () {
     _id: inviteId
   });
 
+  Impersonate.admins = ['sysadmin'];
 });
