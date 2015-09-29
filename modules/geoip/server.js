@@ -2,8 +2,8 @@ if (Meteor.isServer) {
 
   Accounts.onLogin (function(res){
     var thisUser = res.user;
-
-    if (thisUser["status.firstLogin"] == undefined){
+    if (thisUser.status == undefined ||
+        thisUser.status.firstLogin == undefined){
 
       var nowIp = res.connection.clientAddress;
       var geo = GeoIP.lookup(nowIp);
