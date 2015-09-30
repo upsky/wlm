@@ -10,7 +10,8 @@
     },
     "vk": {
       "appId": "4477511"
-    }
+    },
+    "showQr": false
   },
 
   "mandrill": {
