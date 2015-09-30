@@ -21,5 +21,6 @@
   },
 
   "sysadminEmail": "admin@wlm.ru",
-  "sysadminPass": "admin"
+  "sysadminPass": "admin",
+  "showQr": false
 }

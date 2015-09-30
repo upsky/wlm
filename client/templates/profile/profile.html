@@ -5,7 +5,9 @@
         {{> personalInf}}
         {{#contentFor "block2"}}
             {{#unless isCordova}}
-                {{> personalQrCode}}
+                {{#if showQr}}
+                    {{> personalQrCode}}
+                {{/if}}
             {{/unless}}
         {{/contentFor}}
     {{!-- #contentFor "block3"}}
