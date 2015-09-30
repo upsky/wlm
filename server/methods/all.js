@@ -18,6 +18,7 @@ Meteor.publish('invite', function (_id) {
 	log.trace('publish invite');
 	return db.invites.find(_id);
 });
+
 Meteor.publish('inviteEmail', function (_id) {
 	check(_id, Match.Id);
 	log.trace('publish inviteEmail');
@@ -105,10 +106,7 @@ registerPartnerWithVerification = function (doc) {
 
 	var res = registerPartner(doc);
 	if (doc.emailHash === res.invite.emailHash && doc.email && res.invite.email) {
-		verifyEmail({
-			userId: res.userId,
-			email: doc.email
-		});
+		verifyEmail(doc.email);
 	} else {
 		Accounts.sendVerificationEmail(res.userId, doc.email);
 	}
