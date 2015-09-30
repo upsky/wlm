@@ -1,7 +1,19 @@
 <template name="newsList">
-  {{#Layout template="panel" data=newsList}}
-    {{#each news}}
-      {{> newsItem}}
-    {{/each}}
-  {{/Layout}}
+    <!--{{#Layout template="panel" data=newsList}}-->
+    <div class="panel panel-default panel-block">
+        <div class="list-group">
+            <div class="list-group-item">
+                <h4 class="section-title">
+                    Новости WL Market
+                    <a href="//vk.com/wlmarket_official" target="_blank" class="pull-right hidden-sm hidden-xs active"><i class="icon-vk"></i> <small>Новости WL Market</small></a>
+                </h4>
+                <ul class="vk-news list-unstyled">
+                    {{#each news}}
+                        {{> newsItem}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--{{/Layout}}-->
 </template>
