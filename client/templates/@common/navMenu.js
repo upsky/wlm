@@ -2,6 +2,25 @@ Template.navMenu.rendered = function() {
   return log.trace('navMenu rendered');
 };
 
+Template.navMenuItem.helpers({
+  "id_data":function(){
+    var templateData=Template.instance().data;
+    return templateData.id != undefined ? templateData.id : '';
+  },
+  "link":function(){
+    var templateData=Template.instance().data;
+    return templateData.href != undefined ? templateData.href : templateData.name;
+  },
+  "isRouterLink":function(){
+    var templateData=Template.instance().data;
+    return templateData.href != '#';
+  },
+  "textClass":function(){
+    var templateData=Template.instance().data;
+    return "pageTitles." + templateData.name;
+  }
+});
+
 Template.navMenu.helpers({
   "iamnavMenu": function() {
     return 'iam navMenu';
