@@ -1,10 +1,10 @@
 <template name="inviteCode">
     {{#Layout template="panel" data=panelData}}
-        <div class="qrcode">
+        <div class="c-qr-code">
             <div class="row clearfix">
-                <div class="col-md-3"></div>
-                <div class="store-buttons store-block col-md-6">
+                <div class="store-buttons store-block">
                     <p class="text-center">{{_ 'messages.inviteQrCode'}}</p>
+
                     <div class="pull-left">
 
                         {{> storeButton type='appstore'}}
@@ -13,15 +13,13 @@
                         {{> storeButton type='googleplay'}}
                     </div>
                 </div>
-                <div class="col-md-3"></div>
             </div>
             <br/>
+
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6 text-center">
+                <div class="text-center">
                     {{> qrGenerate code=inviteCode}}
                 </div>
-                <div class="col-md-3"></div>
             </div>
         </div>
     {{/Layout}}
