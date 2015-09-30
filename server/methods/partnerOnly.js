@@ -72,6 +72,7 @@ Meteor.methods({
 			email: String,
 			name: String
 		});
+		doc.email = doc.email.toLowerCase();
 		doc.initiator = Meteor.userId();
 		doc.status = 'active';
 		doc.emailHash = Random.id(30);

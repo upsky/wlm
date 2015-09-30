@@ -12,7 +12,8 @@ Migrations.add({
 		log.trace('removing duplicate invites for', notUniq.length, 'emails...');
 		var dupCount = 0;
 		_.each(notUniq, function (invite) {
-			var invites = db.invites.find({ email: invite._id }, { fields: { _id: 1, status: 1 } })
+			var invites = db.invites
+				.find({ email: invite._id }, { fields: { _id: 1, status: 1 } })
 				.fetch();
 
 			var ommited = false;
@@ -29,6 +30,12 @@ Migrations.add({
 			}
 		});
 		log.trace('removed ', dupCount, ' duplicates');
+
+		log.trace('making all invite emails lowercase');
+		db.invites.find({ email: /[A-Z]/ }, { fields: { _id: 1, email: 1 }}).forEach(function (invite) {
+			var email = invite.email.toLowerCase();
+			db.invites.update({ _id: invite._id }, { $set: { email: email }});
+		});
 
 		log.trace('creating uniq index on invites.email...');
 		db.invites._ensureIndex({ email: 1 }, { unique: 1 });
