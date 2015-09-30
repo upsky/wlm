@@ -6,6 +6,19 @@ Accounts.onResetPasswordLink(function (token, done) {
 	Session.set('resetToken', token);
 });
 
+Accounts.onEmailVerificationLink(function (token, done) {
+	Accounts.verifyEmail(token, function () {
+		Session.set('emailVerified', true);
+
+		new PNotify({
+			type: 'success',
+			text: TAPi18n.__('messages.emailVerified')
+		});
+
+		Router.go('/');
+	})
+});
+
 template.helpers({
 	resetToken: function () {
 		return Session.get('resetToken');

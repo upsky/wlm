@@ -93,6 +93,13 @@ methodsSecurity = {
 		authNotRequired: true,
 		roles: 'all'
 	},
+	resendVerificationEmail: {
+		roles: 'all'
+	},
+	verifyEmail: {
+		authNotRequired: true,
+		roles: 'all'
+	},
 	updateProfile: {
 		roles: ['partner', 'sysadmin', 'support']
 	},

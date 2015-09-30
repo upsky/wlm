@@ -1,7 +1,30 @@
+/**
+ *
+ * @param doc
+ * @returns {*}
+ */
+var verifyEmail = function (doc) {
+	check(doc, {
+		userId: String,
+		email: String
+	});
+
+	return db.users.update(
+		{_id: doc.userId, 'emails.address': doc.email},
+		{$set: {'emails.$.verified': true}}
+	);
+};
+
+
 Meteor.publish('invite', function (_id) {
 	check(_id, Match.Id);
 	log.trace('publish invite');
 	return db.invites.find(_id);
+});
+Meteor.publish('inviteEmail', function (_id) {
+	check(_id, Match.Id);
+	log.trace('publish inviteEmail');
+	return db.invites.find({'emailHash': _id});
 });
 
 Meteor.methods({
@@ -99,7 +122,8 @@ Meteor.methods({
 			name: String,
 			email: String,
 			newPass: String,
-			_id: Match.Id
+			_id: Match.Id,
+			emailHash: String,
 		});
 		invite = db.invites.findOne(doc._id);
 		if (!invite) {
@@ -145,7 +169,18 @@ Meteor.methods({
 				uin: uin
 			}
 		});
-		return db.invites.update(doc._id, {
+
+
+		if (doc.emailHash === invite.emailHash && doc.email && invite.email) {
+			verifyEmail({
+				userId: _id,
+				email: doc.email
+			});
+		} else {
+			Accounts.sendVerificationEmail(_id, doc.email);
+		}
+
+		db.invites.update(doc._id, {
 			$set: {
 				status: 'used',
 				userId: _id,
@@ -153,6 +188,8 @@ Meteor.methods({
 				used: new Date()
 			}
 		});
+
+		return _id;
 	},
 	recoverPass: function (doc) {
 		check(doc, {
@@ -166,5 +203,8 @@ Meteor.methods({
 		}
 
 		return user.emails[0].address;
+	},
+	resendVerificationEmail: function () {
+		return Accounts.sendVerificationEmail(Meteor.userId());
 	}
 });

@@ -57,8 +57,10 @@ Meteor.methods({
 		});
 		doc.initiator = Meteor.userId();
 		doc.status = 'active';
+		doc.emailHash = Random.id(30);
 
 		var inviteId = db.invites.insert(doc);
+
 
 		if (inviteId) {
 			Meteor.call('sendEmail',
@@ -69,7 +71,7 @@ Meteor.methods({
 				[
 					{
 						"name": "reglink",
-						"content": Meteor.getInviteLinks(inviteId)
+						"content": Meteor.getInviteLinksEmail(doc.emailHash)
 					}
 				]
 			)
