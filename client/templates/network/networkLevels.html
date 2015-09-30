@@ -1,3 +1,4 @@
+
 <template name="networkLevels">
   {{#Layout template="panel" data=networkLevels}}
       {{#if isInRole 'president'}}
@@ -9,7 +10,7 @@
         {{/each}}
         {{#each levelsCounts}}
             <li class="list-group-item">
-                <h5>Уровень {{level}} <span class="label label-info">Всего: {{count}}</span></h5>
+                {{> levelHead level=level count=count}}
             </li>
         {{/each}}
       </ul>
