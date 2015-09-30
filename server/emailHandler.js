@@ -25,6 +25,12 @@ var MandrillGetHtml = function (templateName, mergeVars) {
 Meteor.startup(function () {
 	Mandrill.config(Meteor.settings.mandrill);
 
+	Accounts.emailTemplates.resetPassword.from = function () {
+		return "support@wlm.com";
+	};
+	Accounts.emailTemplates.resetPassword.subject = function () {
+		return 'resetPassword.subject';
+	};
 
 	Accounts.emailTemplates.resetPassword.html = function (user, resetLink) {
 		check(user, Object);
@@ -37,6 +43,12 @@ Meteor.startup(function () {
 			}]);
 	};
 
+	Accounts.emailTemplates.verifyEmail.from = function () {
+		return "support@wlm.com";
+	};
+	Accounts.emailTemplates.verifyEmail.subject = function () {
+		return 'verifyEmail.subject';
+	};
 	Accounts.emailTemplates.verifyEmail.html = function (user, verifyLink) {
 		return MandrillGetHtml('verifyEmail',
 			[{
