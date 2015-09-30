@@ -204,5 +204,7 @@ Meteor.methods({
 
 		return user.emails[0].address;
 	},
-
+	resendVerificationEmail: function () {
+		return Accounts.sendVerificationEmail(Meteor.userId());
+	}
 });

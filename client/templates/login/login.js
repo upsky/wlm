@@ -8,12 +8,14 @@ Accounts.onResetPasswordLink(function (token, done) {
 
 Accounts.onEmailVerificationLink(function (token, done) {
 	Accounts.verifyEmail(token, function () {
-		done();
-		Router.go('/');
+		Session.set('emailVerified', true);
+
 		new PNotify({
 			type: 'success',
 			text: TAPi18n.__('messages.emailVerified')
 		});
+
+		Router.go('/');
 	})
 });
 

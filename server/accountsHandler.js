@@ -24,11 +24,3 @@ Accounts.registerLoginHandler(function (request) {
 		token: stampedToken.token
 	};
 });
-
-//
-//Accounts.validateLoginAttempt(function (type) {
-//	// TODO verify not first email, but specified while login
-//	if (type.user && type.user.emails && !type.user.emails[0].verified)
-//		throw new Meteor.Error(100002, "email not verified");
-//	return true;
-//});
