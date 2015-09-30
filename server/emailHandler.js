@@ -29,7 +29,7 @@ Meteor.startup(function () {
 		return "support@wlm.com";
 	};
 	Accounts.emailTemplates.resetPassword.subject = function () {
-		return 'resetPassword.subject';
+		return 'Восстановление пароля Wl-market';
 	};
 
 	Accounts.emailTemplates.resetPassword.html = function (user, resetLink) {
@@ -47,12 +47,12 @@ Meteor.startup(function () {
 		return "support@wlm.com";
 	};
 	Accounts.emailTemplates.verifyEmail.subject = function () {
-		return 'verifyEmail.subject';
+		return 'Подтверждение почты Wl-market';
 	};
 	Accounts.emailTemplates.verifyEmail.html = function (user, verifyLink) {
-		return MandrillGetHtml('verifyEmail',
+		return MandrillGetHtml('invitePartner',
 			[{
-				name: 'verifyLink',
+				name: 'reglink',
 				content: verifyLink
 			}]
 		);
