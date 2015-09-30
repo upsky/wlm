@@ -3,7 +3,9 @@
         <ul>
             {{> navMenuItem name='index'   icon='fa-home'}}
             {{> navMenuItem name='network' icon='fa-sitemap'}}
-            {{> navMenuItem name='qrcode'  icon='fa-qrcode'}}
+            {{#if showQr}}
+                {{> navMenuItem name='qrcode'  icon='fa-qrcode'}}
+            {{/if}}
         </ul>
         <ul class="logout">
             {{> navMenuItem name='profile' icon='fa-gear'}}

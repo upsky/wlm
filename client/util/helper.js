@@ -5,3 +5,6 @@ Template.registerHelper('isCordova', function () {
 Template.registerHelper('cordovaDedect', function () {
 	return (!Meteor.isCordova ? 'c-cordova' : '');
 });
+Template.registerHelper('showQr', function () {
+	return Meteor.settings.public.showQr;
+});

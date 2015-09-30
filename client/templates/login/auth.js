@@ -21,17 +21,14 @@ AutoForm.hooks({
 		},
 		onSuccess: function (type, result) {
 			var password;
-			console.log(result);
 			if (result) {
 				password = Session.get('LoginAttempt');
 				Session.set('LoginAttempt', void 0);
 				return Meteor.loginWithPassword(result, password, function (error) {
 					if (error) {
-						log.info(error);
 						return new PNotify({
-							title: document.title,
 							type: 'error',
-							text: error
+							text: TAPi18n.__('errors.loginOrPasswordIncorrect')
 						});
 					} else {
 						return Router.go('/');

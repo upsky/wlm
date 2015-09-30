@@ -4,6 +4,7 @@
     "User not found": "Пользователь с таким адресом не найден.",
     "unknownError": "Неизвестная ошибка.<br>Попробуйте повторить позже.",
     "blockedMessage": "Ваш аккаунт заблокирован.<br>Обратитесь в <a href='//vk.com'>тех. поддержку</a>",
-    "passwordMismatch": "Пароли не совпадают"
+    "passwordMismatch": "Пароли не совпадают",
+    "loginOrPasswordIncorrect": "Логин или пароль неверный"
   }
 }

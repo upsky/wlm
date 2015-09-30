@@ -1,11 +1,11 @@
 <template name="personalQrCode">
     {{#Layout template="panel" data=qrCode}}
-        <div class="qrcode">
+        <div class="c-qr-code">
             <div class="row">
                 <p class="text-center">{{_ 'messages.scanQr'}}</p>
             </div>
             <div class="row clearfix">
-                <div class="store-buttons store-block col-md-12">
+                <div class="store-buttons store-block">
                     <p class="text-center">{{_ 'messages.inviteQrCode'}}</p>
 
                     <div class="pull-left">
@@ -19,7 +19,7 @@
             <br/>
 
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="text-center">
                     {{#if authCode}}
                         {{> qrGenerate code=authCode}}
                     {{else}}
