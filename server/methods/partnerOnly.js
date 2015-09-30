@@ -67,7 +67,7 @@ Meteor.publish('activeInvites', function () {
 
 Meteor.methods({
 	insertInvite: function (doc) {
-		check(this.userId, Number);
+		check(this.userId, String);
 		check(doc, {
 			email: String,
 			name: String
@@ -82,7 +82,7 @@ Meteor.methods({
 			if (inviteId) {
 				Meteor.call('sendEmail',
 					doc.email,
-					'info@wlm.ru',
+					Meteor.settings.inviteEmail,
 					'Приглашение от ' + Meteor.user().profile.name,
 					'invitePartner',
 					[
@@ -101,7 +101,7 @@ Meteor.methods({
 		}
 	},
 	networkCounts: function () {
-		check(this.userId, Number);
+		check(this.userId, String);
 		var currentPartner, currentUser, i, result;
 		result = [];
 		currentUser = this.userId;

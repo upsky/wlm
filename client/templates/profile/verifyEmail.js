@@ -13,14 +13,14 @@ template.helpers({
 
 template.events({
 	"click [name='resendEmailVerified']": function () {
-		if (!emailSended.get())
-			Meteor.call('resendVerificationEmail', function () {
-				emailSended.set(true);
-				new PNotify({
-					type: 'success',
-					text: TAPi18n.__('messages.emailSend')
-				});
+		if (!emailSended.get()) {
+			Meteor.call('resendVerificationEmail');
+			emailSended.set(true);
+			new PNotify({
+				type: 'success',
+				text: TAPi18n.__('messages.emailSend')
 			});
+		}
 	}
 });
 template.onRendered(function () {

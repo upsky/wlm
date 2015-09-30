@@ -20,8 +20,10 @@
     "username": "mandrilluser",
     "key": "mandrillkey"
   },
+
   "sysadminEmail": "admin@wlm.ru",
   "sysadminPass": "admin",
+
   "verifyEmail": "admin@wlm.ru",
   "supportEmail": "admin@wlm.ru"
 }

@@ -39,8 +39,7 @@ Template.navMenu.events({
     return log.trace('click #navMenu');
   },
   "click #logoutHref": function(event) {
-    Meteor.logout();
-    return Router.go('/login');
+    Meteor.defer(function () { Router.go('logout') });
   },
   "click": function(event) {
     return Session.set('userMenuStatus', false);
