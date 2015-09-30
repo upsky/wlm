@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-HOST=wlmarket.meteor.com
+HOST=wlm.he24.ru
 SETTINGS="--settings settings.json"
 
 case $1 in
@@ -13,11 +13,17 @@ case $1 in
     ios)
         meteor run ios-device $SETTINGS --mobile-server=$HOST $2 $3 $4
     ;;
-    deploy)
+    android)
+        meteor run android-device $SETTINGS --mobile-server=$HOST $2 $3 $4
+    ;;
+    deploy-meteor)
         meteor deploy $HOST $SETTINGS
     ;;
     build)
         meteor build .out --server=$HOST --mobile-settings settings.json
+    ;;
+    deploy)
+        mupx deploy
     ;;
     *)
         echo "usage: $0 [run|ios] params" && exit 1

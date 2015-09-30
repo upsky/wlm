@@ -7,14 +7,19 @@
     "networkDeep": 10,
     "dadata": {
       "token": "291fd8d034539e4bc0322a72fd27bc58fbe6d8d8"
+    },
+    "vk": {
+      "appId": "4477511"
     }
   },
+
   "mandrill": {
     "host": "smtp.mandrillapp.com",
     "port": "587",
-    "username": "lkdnvc",
-    "key": "A_4f6_bVFKp4i1iI7rq7kA"
+    "username": "mandrilluser",
+    "key": "mandrillkey"
   },
+
   "sysadminEmail": "admin@wlm.ru",
   "sysadminPass": "admin"
 }
