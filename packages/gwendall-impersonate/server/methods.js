@@ -14,7 +14,7 @@ var checkImpersonation = function (impersonate, methodName) {
 
 Meteor.beforeAllMethods(function () {
 	// save impersonation to current fiber to make it available anywhere inside method
-	if (this.connection.impersonate) {
+	if (this.connection && this.connection.impersonate) {
 		var impersonate = Fiber.current.impersonate = this.connection.impersonate;
 
 		checkImpersonation(impersonate, this._methodName);
