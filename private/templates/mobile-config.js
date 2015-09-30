@@ -22,6 +22,7 @@ App.launchScreens({
 //// Set PhoneGap/Cordova preferences
 App.setPreference('StatusBarOverlaysWebView', false);
 App.setPreference('StatusBarStyle', 'black');
+App.setPreference('Orientation', 'portrait');
 
 App.accessRule("https://vk.com/*");
 App.accessRule("https://m.vk.com/*", {launchExternal: true});

@@ -3,31 +3,38 @@ Meteor.publish('partnerDoc', function () {
 	return db.partners.find(this.userId);
 });
 
+// TODO refactor jaliouslessly
 Meteor.publish('networkData', function () {
-	var _ids, currentPartner, currentUser, cursor1, cursor2, partners;
+	var _ids, currentPartner, currentUser, partners, users;
 	log.trace('publish networkData');
 	currentUser = this.userId;
 	currentPartner = db.partners.findOne(currentUser);
-	if (currentPartner) {
-		cursor1 = db.partners.find({
-			path: currentUser,
-			level: {
-				$gt: currentPartner.level,
-				$lte: currentPartner.level + 3
-			}
-		});
-		partners = cursor1.fetch();
-		log.trace('publish partners count: ' + partners.length);
-		_ids = _.pluck(partners, '_id');
-		cursor2 = db.users.find({
-			_id: {
-				$in: _ids
-			}
-		});
-		return [cursor1, cursor2];
-	} else {
-		return this.ready();
-	}
+
+	if (!currentPartner)
+		return this.stop();
+
+	partners = db.partners.find({
+		path: currentUser,
+		level: {
+			$gt: currentPartner.level,
+			$lte: currentPartner.level + 1
+		}
+	}, {limit: 50});
+	partners.fetch();
+	log.trace('publish partners count: ' + partners.count());
+
+	// collect partners ids
+	_ids = [];
+	partners.forEach(function (partner) {
+		_ids.push(partner._id);
+	});
+
+	users = db.users.find(
+		{_id: {$in: _ids}},
+		{fields: {profile: 1}}
+	);
+
+	return [partners, users];
 });
 
 Meteor.publish('lastInvites', function () {
@@ -77,17 +84,18 @@ Meteor.methods({
 			)
 		}
 	},
-	networkCounts: function () {
-		var currentPartner, currentUser, i, l, from, to, result;
+	networkCounts: function (fromLevel) {
+		fromLevel = fromLevel || 2;
+		var currentPartner, currentUser, i, from, to, result;
 		result = [];
 		currentUser = this.userId;
 		currentPartner = db.partners.findOne(currentUser);
 		if (currentPartner) {
 			var partnerLevel = currentPartner.level;
-			from = partnerLevel + 1;
+			from = partnerLevel + fromLevel;
 			to = partnerLevel + Meteor.settings.public.networkDeep;
 
-			for (i = from; from <= to; i++) {
+			for (i = from; i <= to; i++) {
 				result.push({
 					level: i - partnerLevel,
 					count: db.partners.find({
