@@ -1,7 +1,7 @@
 <template name="reg">
     {{#unless inviteUsed}}
         <div class="login-page">
-            {{#autoForm id="regForm" type="method" schema="Schemas.regSchema" meteormethod="reg" resetOnSuccess=true}}
+            {{#autoForm id="regForm" type="method" schema="Schemas.regSchema" meteormethod="registerPartnerWithVerification" resetOnSuccess=true}}
                 <section class="wrapper scrollable animated fadeInDown">
                     <section class="panel panel-default">
                         <a href="/login" class="btn btn-link">&larr; Назад</a>

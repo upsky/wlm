@@ -10,7 +10,11 @@ methodsSecurity = {
 	createUser: {
 		roles: 'sysadmin'
 	},
-	reg: {
+	registerPartner: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	registerPartnerWithVerification: {
 		authNotRequired: true,
 		roles: 'all'
 	},
