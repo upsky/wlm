@@ -6,7 +6,7 @@ Migrations.add({
 	version: 3,
 	name: 'Adds indexes.',
 	up: function () {
-		// removing duplicate invites
+		// removing duplicate emails invites
 		var notUniq = db.invites.aggregate({ $group: { _id: '$email', dupCount: { $sum: 1 } } }, { $match: { dupCount: { $gt: 1 } } });
 
 		log.trace('removing duplicate invites for', notUniq.length, 'emails...');
@@ -33,6 +33,7 @@ Migrations.add({
 		log.trace('creating uniq index on invites.email...');
 		db.invites._ensureIndex({ email: 1 }, { unique: 1 });
 
+		log.trace('creating uniq index on partners.path...');
 		db.partners._ensureIndex({ path: 1 });
 	}
 });

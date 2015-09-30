@@ -1,12 +1,17 @@
 Meteor.publish('partnerDoc', function () {
+	if (!this.userId) return this.ready();
+
 	log.trace('publish partnerDoc');
 	return db.partners.find(this.userId);
 });
 
 // TODO refactor jaliouslessly
 Meteor.publish('networkData', function () {
+	if (!this.userId) return this.ready();
+
 	var _ids, currentPartner, currentUser, partners, users;
 	log.trace('publish networkData');
+
 	currentUser = this.userId;
 	currentPartner = db.partners.findOne(currentUser);
 
@@ -38,6 +43,8 @@ Meteor.publish('networkData', function () {
 });
 
 Meteor.publish('lastInvites', function () {
+	if (!this.userId) return this.ready();
+
 	log.trace('publish lastInvites');
 	return db.invites.find({
 		initiator: this.userId
@@ -50,6 +57,8 @@ Meteor.publish('lastInvites', function () {
 });
 
 Meteor.publish('activeInvites', function () {
+	if (!this.userId) return this.ready();
+
 	log.trace('publish activeInvites');
 	return db.invites.find({
 		initiator: this.userId
@@ -58,6 +67,7 @@ Meteor.publish('activeInvites', function () {
 
 Meteor.methods({
 	insertInvite: function (doc) {
+		check(this.userId, Number);
 		check(doc, {
 			email: String,
 			name: String
@@ -66,25 +76,32 @@ Meteor.methods({
 		doc.status = 'active';
 		doc.emailHash = Random.id(30);
 
-		var inviteId = db.invites.insert(doc);
+		try {
+			var inviteId = db.invites.insert(doc);
 
+			if (inviteId) {
+				Meteor.call('sendEmail',
+					doc.email,
+					'info@wlm.ru',
+					'Приглашение от ' + Meteor.user().profile.name,
+					'invitePartner',
+					[
+						{
+							"name": "reglink",
+							"content": Meteor.getInviteLinksEmail(doc.emailHash)
+						}
+					]
+				)
+			}
 
-		if (inviteId) {
-			Meteor.call('sendEmail',
-				doc.email,
-				'info@wlm.ru',
-				'Приглашение от ' + Meteor.user().profile.name,
-				'invitePartner',
-				[
-					{
-						"name": "reglink",
-						"content": Meteor.getInviteLinksEmail(doc.emailHash)
-					}
-				]
-			)
+			return { status: 'ok' };
+		} catch (err) {
+			log.trace('duplicate email invite ');
+			return { error: 'duplicate' }
 		}
 	},
 	networkCounts: function () {
+		check(this.userId, Number);
 		var currentPartner, currentUser, i, result;
 		result = [];
 		currentUser = this.userId;

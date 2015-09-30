@@ -46,3 +46,4 @@ wylio:mandrill
 reactive-var
 percolate:migrations
 wlm-core
+meteorhacks:aggregate
