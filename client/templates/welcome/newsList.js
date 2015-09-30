@@ -32,8 +32,7 @@ var loadWall = function (wall) {
 			v: "5.24"
 		},
 		function (data) {
-			for (var i in data.response.items) {
-				var item = data.response.items[i];
+			var items = _.map(data.response.items, function (item) {
 				item.jsDate = new Date(item.date * 1000);
 				if (item.copy_history) {
 					item.text = [item.text, item.copy_history[0].text, ''].join(BR);
@@ -59,8 +58,10 @@ var loadWall = function (wall) {
 					.replace(/(?:\r\n|\r|\n)/g, BR)
 					.replace(/#[\wа-яА-Я\d_]{1,}/g, "")
 					.replace(/(https?:[^\s<]+)/g, '<a href="$1">$1</a>');
-			}
-			return Session.set('newsList', data.response.items);
+
+				return item;
+			});
+			return Session.set('newsList', items);
 		});
 };
 
