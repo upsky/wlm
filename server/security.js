@@ -87,10 +87,8 @@ methodsSecurity = {
 	},
 	totalRegs: {
 		roles: 'president,sysadmin'
-	},
-	getCountryChartData: {
-		roles: 'president,sysadmin'
 	}
+
 };
 
 Meteor.beforeAllMethods(function () {

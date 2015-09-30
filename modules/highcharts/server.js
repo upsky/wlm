@@ -1,4 +1,4 @@
-if (Meteor.isServer) {
+/*if (Meteor.isServer) {
 	Meteor.methods({
 		getCountryChartData: function () {
 
@@ -29,3 +29,4 @@ if (Meteor.isServer) {
 		}
 	});
 }
+*/

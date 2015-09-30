@@ -1,4 +1,4 @@
-if (Meteor.isClient) {
+/*if (Meteor.isClient) {
 
 			Meteor.call('getCountryChartData' ,function (error, res) {
 				console.log([res, error]);
@@ -39,4 +39,4 @@ if (Meteor.isClient) {
 			}]
 		};
 	};
-}
+}*/
