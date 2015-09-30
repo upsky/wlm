@@ -14,15 +14,14 @@
     },
     "showQr": false
   },
-
   "mandrill": {
     "host": "smtp.mandrillapp.com",
     "port": "587",
     "username": "mandrilluser",
     "key": "mandrillkey"
   },
-
   "sysadminEmail": "admin@wlm.ru",
   "sysadminPass": "admin",
-  "showQr": false
+  "verifyEmail": "admin@wlm.ru",
+  "supportEmail": "admin@wlm.ru"
 }
