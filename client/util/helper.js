@@ -6,5 +6,5 @@ Template.registerHelper('cordovaDedect', function () {
 	return (!Meteor.isCordova ? 'c-cordova' : '');
 });
 Template.registerHelper('showQr', function () {
-	return Meteor.settings.showQr;
+	return Meteor.settings.public.showQr;
 });
