@@ -14,5 +14,10 @@
     "emailSend": "Пиьсмо отправлено",
     "passwordChanged": "Пароль изменен",
     "emailVerified": "Адрес эл. почты подтвержден"
+  },
+
+  "vk": {
+    "newsHeader": "Новости WL Market",
+    "groupLink": "//vk.com/wlmarket_official"
   }
 }

@@ -84,16 +84,15 @@ Meteor.methods({
 			)
 		}
 	},
-	networkCounts: function (fromLevel) {
-		fromLevel = fromLevel || 2;
-		var currentPartner, currentUser, i, from, to, result;
+	networkCounts: function () {
+		var currentPartner, currentUser, i, result;
 		result = [];
 		currentUser = this.userId;
 		currentPartner = db.partners.findOne(currentUser);
 		if (currentPartner) {
 			var partnerLevel = currentPartner.level;
-			from = partnerLevel + fromLevel;
-			to = partnerLevel + Meteor.settings.public.networkDeep;
+			var from = partnerLevel + 1;
+			var to = partnerLevel + Meteor.settings.public.networkDeep;
 
 			for (i = from; i <= to; i++) {
 				result.push({

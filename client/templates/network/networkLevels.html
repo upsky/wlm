@@ -1,18 +1,12 @@
-
 <template name="networkLevels">
-  {{#Layout template="panel" data=networkLevels}}
-      {{#if isInRole 'president'}}
-          <p>Всего в системе: <b>{{totalRegs}}</b></p>
-      {{/if}}
-          <ul class="list-group">
-        {{#each levels}}
-          {{> level}}
-        {{/each}}
-        {{#each levelsCounts}}
-            <li class="list-group-item">
-                {{> levelHead level=level count=count}}
-            </li>
-        {{/each}}
-      </ul>
-  {{/Layout}}
+    {{#Layout template="panel" data=networkLevels}}
+        {{#if isInRole 'president'}}
+            <p>Всего в системе: <b>{{totalRegs}}</b></p>
+        {{/if}}
+        <ul class="list-group">
+            {{#each levels}}
+                {{> level}}
+            {{/each}}
+        </ul>
+    {{/Layout}}
 </template>
