@@ -9,10 +9,17 @@ _.extend(WlmSecurity, {
 
 			check(options, {
 				authNotRequired: Match.Optional(Match.OneOf(undefined, Boolean)),
-				roles: Match.OneOf(String, [String])
+				roles: Match.OneOf(String, [String]),
+				impersonate: Match.Optional(Boolean)
 			});
 
 			self._methods[methodName] = options;
+			// add to impersonate if needed
+			if (options.impersonate) {
+				imp = {};
+				imp[ methodName ] = 'all';
+				Impersonate.addAllowedMethods(imp)
+			}
 		});
 	}
 });
@@ -23,17 +30,21 @@ Meteor.beforeAllMethods(function () {
 	checkDefaultOptions(Meteor.userId(), WlmSecurity._methods, methodName);
 });
 
-// collect all added methods
-var originalMethods = Meteor.methods;
-Meteor.methods = function (methods) {
-	_.extend(WlmSecurity._methodFuncs, methods);
-	originalMethods.call(this, methods);
-}
+//// collect all added methods
+//var originalMethods = Meteor.methods;
+//Meteor.methods = function (methods) {
+//	_.extend(WlmSecurity._methodFuncs, methods);
+//	originalMethods.call(this, methods);
+//}
 
 // check all methods added to security
-Meteor.startup(function () {
+var checkMethods = function () {
 	var security = _.keys(WlmSecurity._methods);
-	var real = _.keys(WlmSecurity._methodFuncs);
+	var real = _.filter(_.keys(Meteor.server.method_handlers), function (name) {
+		// check that its not one of */insert */update or */remove collection methods
+		var split = name.split('/');
+		return split.length === 1 || (!_.contains(['insert', 'remove', 'update' ], _.last(split)));
+	});
 	var noReal = _.difference(security, real);
 	noReal.forEach(function (method) {
 		log.error('method', method, 'added to WlmSecurty.addMethods but is not present');
@@ -43,4 +54,7 @@ Meteor.startup(function () {
 	unsecured.forEach(function (method) {
 		log.error('method', method, 'is not secured with WlmSecurty.addMethods');
 	});
+};
+Meteor.startup(function () {
+	Meteor.defer(checkMethods);
 });

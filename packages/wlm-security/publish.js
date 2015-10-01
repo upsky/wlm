@@ -24,7 +24,7 @@ _.extend(WlmSecurity, {
 var originalPublish = Meteor.publish;
 Meteor.publish = function (pubName, pubFunc) {
 	WlmSecurity._publishFuncs[pubName] = pubFunc;
-	var wrap = function () {
+	return originalPublish.call(this, pubName, function () {
 		try {
 			if (checkDefaultOptions(this.userId, WlmSecurity._publish, pubName))
 				return pubFunc.apply(this, arguments);
@@ -32,12 +32,11 @@ Meteor.publish = function (pubName, pubFunc) {
 			log.warn('cant publish ', pubName, e.message);
 			this.ready();
 		}
-	};
-	originalPublish.call(this, pubName, wrap);
+	});
 };
 
 // check all methods added to security
-Meteor.startup(function () {
+var checkPublish = function () {
 	var security = _.keys(WlmSecurity._publish);
 	var real = _.keys(WlmSecurity._publishFuncs);
 	var noReal = _.difference(security, real);
@@ -50,4 +49,7 @@ Meteor.startup(function () {
 		log.error('publish', method, 'is not secured with WlmSecurty.addMethods');
 	});
 
+};
+Meteor.startup(function () {
+	Meteor.defer(checkPublish);
 });

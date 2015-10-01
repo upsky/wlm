@@ -13,7 +13,9 @@ Package.describe({
 Package.onUse(function (api) {
 	api.versionsFrom('1.1.0.3');
 	api.imply('alanning:roles');
+	api.imply('gwendall:impersonate');
 	api.use('underscore');
+	api.use('session');
 	api.use('alanning:roles');
 	api.use('seba:method-hooks');
 
@@ -21,7 +23,11 @@ Package.onUse(function (api) {
 		'wlm-security.js',
 		'methods.js',
 		'publish.js'
-	]);
+	], 'server');
+
+	api.addFiles([
+		'cleanup-logout.js'
+	], 'client');
 
 	api.export('WlmSecurity');
 });
