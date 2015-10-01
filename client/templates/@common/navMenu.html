@@ -8,6 +8,7 @@
             {{/if}}
         </ul>
         <ul class="logout">
+            {{#if isInRole 'adminPanel'}}{{> navMenuItem name='adminPanel' icon='fa-ambulance'}}{{/if}}
             {{> navMenuItem name='profile' icon='fa-gear'}}
             {{> navMenuItem name='exit'    icon='fa-power-off' href="#" id="logoutHref"}}
         </ul>
