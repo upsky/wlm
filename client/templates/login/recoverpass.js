@@ -19,9 +19,9 @@ AutoForm.hooks({
 		},
 		onError: function (type, error) {
 
-			return new PNotify({
+			WlmNotify.create({
 				type: 'error',
-				text: TAPi18n.__('errors.' + error.reason)
+				text: 'errors.' + error.reason
 			});
 		},
 		onSuccess: function (type, email) {
@@ -30,9 +30,9 @@ AutoForm.hooks({
 			});
 			resetPass.set(true);
 
-			return new PNotify({
+			WlmNotify.create({
 				type: 'success',
-				text: TAPi18n.__('messages.emailSend')
+				text: 'messages.emailSend'
 			});
 		}
 	}

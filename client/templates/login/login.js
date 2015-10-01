@@ -10,9 +10,9 @@ Accounts.onEmailVerificationLink(function (token, done) {
 	Accounts.verifyEmail(token, function () {
 		Session.set('emailVerified', true);
 
-		new PNotify({
+		WlmNotify.create({
 			type: 'success',
-			text: TAPi18n.__('messages.emailVerified')
+			text: 'messages.emailVerified'
 		});
 
 		Router.go('/');
@@ -35,16 +35,16 @@ AutoForm.hooks({
 
 				Router.go('/');
 
-				new PNotify({
+				WlmNotify.create({
 					type: 'success',
-					text: TAPi18n.__('messages.passwordChanged')
+					text: 'messages.passwordChanged'
 				});
 			});
 
 			return false;
 		},
 		onError: function (type, error) {
-			return new PNotify({
+			WlmNotify.create({
 				type: 'error',
 				text: error
 			});

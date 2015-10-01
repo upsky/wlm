@@ -16,9 +16,17 @@ WlmNotify = {
 	_notify: {},
 	create: function (opt) {
 		// translate
-		var tapParams = opt.params || [];
-		tapParams.unshift(opt.title);
-		opt.title = TAPi18n.__.apply(TAPi18n, tapParams);
+		if (opt.title) {
+			var tapParams = opt.titleParams || [];
+			tapParams.unshift(opt.title);
+			opt.title = TAPi18n.__.apply(TAPi18n, tapParams);
+		}
+
+		if (opt.text) {
+			tapParams = opt.textParams || [];
+			tapParams.unshift(opt.text);
+			opt.text = TAPi18n.__.apply(TAPi18n, tapParams);
+		}
 
 		var pNotify = new PNotify(opt);
 

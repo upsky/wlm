@@ -12,10 +12,11 @@ AutoForm.hooks({
 			if (error.error === 490) {
 				return Router.go('blocked');
 			} else {
-				return new PNotify({
-					title: document.title,
+				return WlmNotify.create({
+					group: 'login',
 					type: 'error',
-					text: TAPi18n.__('errors.unknownError')
+					title: 'errors.loginErrorTitle',
+					text: 'errors.unknownError'
 				});
 			}
 		},
@@ -26,9 +27,11 @@ AutoForm.hooks({
 				Session.set('LoginAttempt', void 0);
 				return Meteor.loginWithPassword(result, password, function (error) {
 					if (error) {
-						return new PNotify({
+						return WlmNotify.create({
+							group: 'login',
 							type: 'error',
-							text: TAPi18n.__('errors.loginOrPasswordIncorrect')
+							title: 'errors.loginErrorTitle',
+							text: 'errors.loginOrPasswordIncorrect'
 						});
 					} else {
 						return Router.go('/');

@@ -11,7 +11,7 @@ AutoForm.hooks({
 			}
 		},
 		onError: function (type, error) {
-			return new PNotify({
+			WlmNotify.create({
 				type: 'error',
 				text: error
 			});
