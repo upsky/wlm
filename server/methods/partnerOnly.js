@@ -1,3 +1,22 @@
+var PARTNER = [ 'partner', 'president' ];
+
+WlmSecurity.addPublish({
+	partnerDoc: {
+		roles: PARTNER
+	},
+	networkData: {
+		roles: PARTNER
+	},
+
+	lastInvites: {
+		roles: PARTNER
+	},
+
+	activeInvites: {
+		roles: PARTNER
+	}
+});
+
 Meteor.publish('partnerDoc', function () {
 	if (!this.userId) return this.ready();
 
@@ -43,8 +62,6 @@ Meteor.publish('networkData', function () {
 });
 
 Meteor.publish('lastInvites', function () {
-	if (!this.userId) return this.ready();
-
 	log.trace('publish lastInvites');
 	return db.invites.find({
 		initiator: this.userId
@@ -57,8 +74,6 @@ Meteor.publish('lastInvites', function () {
 });
 
 Meteor.publish('activeInvites', function () {
-	if (!this.userId) return this.ready();
-
 	log.trace('publish activeInvites');
 	return db.invites.find({
 		initiator: this.userId

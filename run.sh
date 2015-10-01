@@ -3,6 +3,17 @@
 HOST=wlm.he24.ru
 SETTINGS="--settings settings.json"
 
+# check wlm-security is the first package. to init first before other packages
+function check() {
+    WLMSEC=`grep -n  wlm-security .meteor/packages`
+    if [ "$WLMSEC" != "8:wlm-security" ]; then
+        echo "please set wlm-security second string in .meteor/packages after meteor-platform. thanx. exiting..."
+        exit 1
+    fi
+}
+
+check
+
 case $1 in
     "")
         meteor run $SETTINGS

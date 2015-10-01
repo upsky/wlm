@@ -12,6 +12,15 @@ verifyEmail = function (email) {
 	);
 };
 
+WlmSecurity.addPublish({
+	invite: {
+		roles: [ 'partner', 'president' ]
+	},
+	inviteEmail: {
+		roles: [ 'partner', 'president' ]
+	}
+});
+
 
 Meteor.publish('invite', function (_id) {
 	check(_id, Match.Id);
