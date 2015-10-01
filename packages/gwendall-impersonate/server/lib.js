@@ -1,6 +1,18 @@
 Impersonate = {
   admins: ["admin"],
   adminGroups:[], // { role: "admin", group: "organization" }
+  allowedMethods: {
+    impersonate: 'all'
+  },
+  addAllowedMethods: function(methods) {
+    check(methods, Object);
+
+    _.extend(this.allowedMethods, methods);
+    methods.forEach(function (roles, methodName) {
+      check(roles, [String]);
+      self.allowedMethods[methodName] = roles;
+    });
+  }
 };
 
 // Reset all tokens

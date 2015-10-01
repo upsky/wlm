@@ -1,48 +1,25 @@
 <template name="navMenu">
     <nav class="main-menu {{mainMenuStatus}}">
         <ul>
-            <li>
-                <a href="/">
-                    <i class="fa fa-home nav-icon"></i>
-                        <span class="nav-text">
-                            {{_ "pageTitles.index"}}
-                        </span>
-                </a>
-            </li>
-            <li>
-                <a href="/network">
-                    <i class="fa fa-sitemap nav-icon"></i>
-                        <span class="nav-text">
-                            {{_ "pageTitles.network"}}
-                        </span>
-                </a>
-            </li>
-	        <li>
-		        <a href="/qrcode">
-			        <i class="fa fa-qrcode nav-icon"></i>
-                        <span class="nav-text">
-	                        {{_ "pageTitles.qrcode"}}
-                        </span>
-		        </a>
-	        </li>
+            {{> navMenuItem name='index'   icon='fa-home'}}
+            {{> navMenuItem name='network' icon='fa-sitemap'}}
+            {{#if showQr}}
+                {{> navMenuItem name='qrcode'  icon='fa-qrcode'}}
+            {{/if}}
         </ul>
         <ul class="logout">
-	        <li>
-                <a href="/profile">
-                    <i class="fa fa-gear nav-icon"></i>
-                        <span class="nav-text">
-                            {{_ "pageTitles.profile"}}
-                        </span>
-                </a>
-            </li>
-            <li>
-                <a href="#" id="logoutHref">
-                    <i class="fa fa-power-off nav-icon"></i>
-                        <span class="nav-text">
-                            {{_ "pageTitles.exit"}}
-                        </span>
-                </a>
-            </li>
+            {{> navMenuItem name='profile' icon='fa-gear'}}
+            {{> navMenuItem name='exit'    icon='fa-power-off' href="#" id="logoutHref"}}
         </ul>
     </nav>
+</template>
+<template name="navMenuItem">
+    <li>
+        <a href="{{#if isRouterLink}}{{pathFor link}}{{else}}{{link}}{{/if}}" id="{{id_data}}">
+            <i class="fa {{icon}} nav-icon"></i>
+                <span class="nav-text">
+                    {{_ textClass}}
+                </span>
+        </a>
+    </li>
 </template>

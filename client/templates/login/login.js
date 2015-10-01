@@ -1,60 +1,54 @@
+var onResetPasswordLinkDone;
+var template = Template.login;
+
+Accounts.onResetPasswordLink(function (token, done) {
+	onResetPasswordLinkDone = done;
+	Session.set('resetToken', token);
+});
+
+Accounts.onEmailVerificationLink(function (token, done) {
+	Accounts.verifyEmail(token, function () {
+		Session.set('emailVerified', true);
+
+		new PNotify({
+			type: 'success',
+			text: TAPi18n.__('messages.emailVerified')
+		});
+
+		Router.go('/');
+	})
+});
+
+template.helpers({
+	resetToken: function () {
+		return Session.get('resetToken');
+	}
+});
+
+
 AutoForm.hooks({
-  loginForm: {
-    before: {
-      method: function (doc) {
-        Session.set('LoginAttempt', doc.password);
-        doc.password = 'fakePass';
-        return doc;
-      }
-    },
-    onError: function (type, error) {
-      console.log(error);
-      if (error.error === 490) {
-        return Router.go('blocked');
-      } else {
-        return new PNotify({
-          title: document.title,
-          type: 'error',
-          text: TAPi18n.__('errors.unknownError')
-        });
-      }
-    },
-    onSuccess: function (type, result) {
-      var password;
-      console.log(result);
-      if (result) {
-        password = Session.get('LoginAttempt');
-        Session.set('LoginAttempt', void 0);
-        return Meteor.loginWithPassword(result, password, function (error) {
-          if (error) {
-            log.info(error);
-            return new PNotify({
-              title: document.title,
-              type: 'error',
-              text: TAPi18n.__('errors.loginError')
-            });
-          } else {
-            return Router.go('/');
-          }
-        });
-      }
-    }
-  }
+	resetPassForm: {
+		onSubmit: function (doc) {
+
+			Accounts.resetPassword(Session.get('resetToken'), doc.newPass, function () {
+				onResetPasswordLinkDone();
+
+				Router.go('/');
+
+				new PNotify({
+					type: 'success',
+					text: TAPi18n.__('messages.passwordChanged')
+				});
+			});
+
+			return false;
+		},
+		onError: function (type, error) {
+			return new PNotify({
+				type: 'error',
+				text: error
+			});
+		}
+	}
 });
 
-Template.login.rendered = function () {
-  return log.trace('login rendered');
-};
-
-Template.login.onRendered(function () {
-
-});
-
-Template.login.events({
-  "click #login": function () {
-    return log.trace('click #login');
-  },
-  "click [name=loginInstructionsShow]": function () {
-    Modal.show('loginInstructionsModal');
-  }
-});

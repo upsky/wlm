@@ -1,11 +1,10 @@
 <template name="network">
-  {{#Layout template="twoCols"}}
-    {{> networkInvite}}
-    {{#contentFor "block2"}}
-      {{> networkLevels}}
-    {{/contentFor}}
-    {{#contentFor "block3"}}
-      {{> invitesList}}
-    {{/contentFor}}
-  {{/Layout}}
+    {{#Layout template="twoCols"}}
+        {{> networkInvite}}
+        {{> invitesList}}
+
+        {{#contentFor "col2"}}
+            {{> networkLevels}}
+        {{/contentFor}}
+    {{/Layout}}
 </template>

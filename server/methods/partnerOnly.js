@@ -1,36 +1,50 @@
 Meteor.publish('partnerDoc', function () {
+	if (!this.userId) return this.ready();
+
 	log.trace('publish partnerDoc');
 	return db.partners.find(this.userId);
 });
 
+// TODO refactor jaliouslessly
 Meteor.publish('networkData', function () {
-	var _ids, currentPartner, currentUser, cursor1, cursor2, partners;
+	if (!this.userId) return this.ready();
+
+	var _ids, currentPartner, currentUser, partners, users;
 	log.trace('publish networkData');
+
 	currentUser = this.userId;
 	currentPartner = db.partners.findOne(currentUser);
-	if (currentPartner) {
-		cursor1 = db.partners.find({
-			path: currentUser,
-			level: {
-				$gt: currentPartner.level,
-				$lte: currentPartner.level + 3
-			}
-		});
-		partners = cursor1.fetch();
-		log.trace('publish partners count: ' + partners.length);
-		_ids = _.pluck(partners, '_id');
-		cursor2 = db.users.find({
-			_id: {
-				$in: _ids
-			}
-		});
-		return [cursor1, cursor2];
-	} else {
-		return this.ready();
-	}
+
+	if (!currentPartner)
+		return this.stop();
+
+	partners = db.partners.find({
+		path: currentUser,
+		level: {
+			$gt: currentPartner.level,
+			$lte: currentPartner.level + 1
+		}
+	}, {limit: 50});
+	partners.fetch();
+	log.trace('publish partners count: ' + partners.count());
+
+	// collect partners ids
+	_ids = [];
+	partners.forEach(function (partner) {
+		_ids.push(partner._id);
+	});
+
+	users = db.users.find(
+		{_id: {$in: _ids}},
+		{fields: {profile: 1}}
+	);
+
+	return [partners, users];
 });
 
 Meteor.publish('lastInvites', function () {
+	if (!this.userId) return this.ready();
+
 	log.trace('publish lastInvites');
 	return db.invites.find({
 		initiator: this.userId
@@ -43,6 +57,8 @@ Meteor.publish('lastInvites', function () {
 });
 
 Meteor.publish('activeInvites', function () {
+	if (!this.userId) return this.ready();
+
 	log.trace('publish activeInvites');
 	return db.invites.find({
 		initiator: this.userId
@@ -51,42 +67,56 @@ Meteor.publish('activeInvites', function () {
 
 Meteor.methods({
 	insertInvite: function (doc) {
+		check(this.userId, Number);
 		check(doc, {
 			email: String,
 			name: String
 		});
 		doc.initiator = Meteor.userId();
 		doc.status = 'active';
+		doc.emailHash = Random.id(30);
 
-		var inviteId = db.invites.insert(doc);
+		try {
+			var inviteId = db.invites.insert(doc);
 
-		if (inviteId) {
-			Meteor.call('sendEmail',
-				doc.email,
-				'info@wlm.ru',
-				'Приглашение от ' + Meteor.user().profile.name,
-				'invitePartner',
-				[
-					{
-						"name": "reglink",
-						"content": Meteor.getInviteLinks(inviteId)
-					}
-				]
-			)
+			if (inviteId) {
+				Meteor.call('sendEmail',
+					doc.email,
+					'info@wlm.ru',
+					'Приглашение от ' + Meteor.user().profile.name,
+					'invitePartner',
+					[
+						{
+							"name": "reglink",
+							"content": Meteor.getInviteLinksEmail(doc.emailHash)
+						}
+					]
+				)
+			}
+
+			return { status: 'ok' };
+		} catch (err) {
+			log.trace('duplicate email invite ');
+			return { error: 'duplicate' }
 		}
 	},
 	networkCounts: function () {
-		var currentPartner, currentUser, i, l, ref, ref1, result;
+		check(this.userId, Number);
+		var currentPartner, currentUser, i, result;
 		result = [];
 		currentUser = this.userId;
 		currentPartner = db.partners.findOne(currentUser);
 		if (currentPartner) {
-			for (l = i = ref = currentPartner.level + 4, ref1 = currentPartner.level + Meteor.settings["public"].networkDeep; ref <= ref1 ? i <= ref1 : i >= ref1; l = ref <= ref1 ? ++i : --i) {
+			var partnerLevel = currentPartner.level;
+			var from = partnerLevel + 1;
+			var to = partnerLevel + Meteor.settings.public.networkDeep;
+
+			for (i = from; i <= to; i++) {
 				result.push({
-					level: l - currentPartner.level,
+					level: i - partnerLevel,
 					count: db.partners.find({
 						path: currentUser,
-						level: l
+						level: i
 					}).count()
 				});
 			}

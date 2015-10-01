@@ -1,1 +1,15 @@
-<template name="newsItem"></template>
+<template name="newsItem">
+    <li>
+        <small><b class="text-muted">{{livestamp jsDate}}</b></small>
+        <div>
+            {{#if img}}
+                <br>
+                <a href="{{href}}" target="_blank"><img src="{{img}}" class="vkmedia"></a>
+                <br>
+                <br>
+            {{/if}}
+            {{{text}}}
+        </div>
+        <hr>
+    </li>
+</template>
