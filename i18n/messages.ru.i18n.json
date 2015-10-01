@@ -13,12 +13,17 @@
     "recoverPass": "Забыли пароль?",
     "emailSend": "Пиьсмо отправлено",
     "passwordChanged": "Пароль изменен",
-    "emailVerified": "Адрес эл. почты подтвержден"
+    "emailVerified": "Адрес эл. почты подтвержден",
+    "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения."
   },
 
   "vk": {
     "newsHeader": "Новости WL Market",
     "groupLink": "//vk.com/wlmarket_official"
+  },
+
+  "email": {
+    "support": "support@market.winlevel.ru"
   },
 
   "connStatus": {
