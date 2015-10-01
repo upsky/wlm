@@ -1,5 +1,7 @@
 var methodsSecurity;
 
+Impersonate.admins = ['sysadmin', 'support'];
+
 methodsSecurity = {
 	root: {
 		authNotRequired: true,
@@ -8,7 +10,11 @@ methodsSecurity = {
 	createUser: {
 		roles: 'sysadmin'
 	},
-	reg: {
+	registerPartner: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	registerPartnerWithVerification: {
 		authNotRequired: true,
 		roles: 'all'
 	},
@@ -40,7 +46,7 @@ methodsSecurity = {
 		roles: 'sysadmin'
 	},
 	impersonate: {
-		roles: 'sysadmin,support'
+		roles: ['sysadmin', 'support']
 	},
 	setRole: {
 		roles: 'sysadmin'
@@ -75,18 +81,37 @@ methodsSecurity = {
 		authNotRequired: true,
 		roles: 'all'
 	},
+	recoverPass: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	resetPass: {
+		authNotRequired: true,
+		roles: 'all'
+	},
 	qrAuthCode: {
 		authNotRequired: false,
 		roles: 'all'
 	},
 	sendEmail: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	resendVerificationEmail: {
+		roles: 'all'
+	},
+	verifyEmail: {
+		authNotRequired: true,
 		roles: 'all'
 	},
 	updateProfile: {
-		roles: 'partner,sysadmin,support'
+		roles: ['partner', 'sysadmin', 'support']
 	},
 	totalRegs: {
-		roles: 'president,sysadmin'
+		roles: ['president', 'sysadmin']
+	},
+	impersonate: {
+		roles: Impersonate.admins
 	}
 
 };
@@ -104,9 +129,6 @@ Meteor.beforeAllMethods(function () {
 		roles = methodsSecurity[methodName].roles;
 		authLog.info('required roles: ' + roles);
 		if (roles !== 'all') {
-			if (roles.match(/,/)) {
-				roles = roles.split(',');
-			}
 			if (!Roles.userIsInRole(Meteor.userId(), roles)) {
 				authLog.warn('required roles check failed');
 				throw new Meteor.Error(403, 'No access');
@@ -117,4 +139,3 @@ Meteor.beforeAllMethods(function () {
 	}
 });
 
-Impersonate.admins = ['sysadmin', 'support'];

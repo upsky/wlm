@@ -1,6 +1,7 @@
 PNotify.prototype.options.styling = 'fontawesome';
 
 Meteor.startup(function () {
+
 	moment.locale('ru');
 
 	return TAPi18n.setLanguage('ru')

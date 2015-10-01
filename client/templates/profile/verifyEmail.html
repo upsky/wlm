@@ -1,0 +1,25 @@
+<template name="verifyEmail">
+    {{#if emailNotVerified}}
+        <div class="alert alert-danger" role="alert">
+            <p>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <strong>Ваш Email не подввержден.</strong>
+            </p>
+
+            <p>Для того чтобы пользоваться сервисом, нобходимо подтвердить email.</p>
+
+            <p>На вашу почту было отправлено письмо с инструкцией.</p>
+
+            <p>Если письмо не приходит в течении пары минут, проверьте ваш спам фильтр или попробуйте выслать письмо еще
+                раз.
+            </p>
+            {{#unless emailSended}}
+                <button type="button" class="btn btn-link" name="resendEmailVerified">Выслать письмо повторно!</button>
+            {{else}}
+                <p>
+                    Если письмо всё равно не приходит, напишите нам на почту <a href="mailto:support@wlm.ru">support@wlm.ru</a>
+                </p>
+            {{/unless}}
+        </div>
+    {{/if}}
+</template>

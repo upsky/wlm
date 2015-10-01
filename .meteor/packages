@@ -48,3 +48,7 @@ wylio:mandrill
 servicelocale:geoip
 maazalik:highcharts
 overtonik:log-logins
+reactive-var
+percolate:migrations
+wlm-core
+meteorhacks:aggregate

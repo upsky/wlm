@@ -1,55 +1,10 @@
 <template name="login">
     {{> loginInstructionsModal}}
     <div class="c-login-page login-page">
-        {{#autoForm id="loginForm" type="method" schema="Schemas.loginSchema" meteormethod="checkLogin" resetOnSuccess=false}}
-            <section class="wrapper scrollable animated fadeInDown">
-                <section class="panel panel-default">
-                    <div class="panel-heading">
-                        <img src="/logo.png" style="max-width: 60%" alt=""/>
-                    </div>
-                    {{#if isCordova}}
-                        <h4 class="text-center">{{_ 'messages.selectAuthenticationMethod'}}</h4>
-                    {{/if}}
-
-                    <section class="login-form">
-                        {{#if isCordova}}
-                            <div class="form-group">
-                                {{>qrScanner}}
-                            </div>
-                            <div class="form-group">
-                                <button type="button"
-                                        class="btn btn-default glyphicon glyphicon-resize-vertical text-center disabled">
-
-                                </button>
-                            </div>
-                            <p class="text-center">{{_ 'messages.loginUsingQrLogin'}}</p>
-                        {{/if}}
-
-                        {{> afQuickField type="email" class="form-control input-lg" name="login" placeholder="schemaLabel"}}
-                        {{> afQuickField type="password" class="form-control input-lg" name="password" placeholder="schemaLabel"}}
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-lg btn-success btn-block"
-                                   value="{{_ "buttons.enter"}}"/>
-                        </div>
-                    </section>
-
-
-                    <div class="panel-footer">
-                        <div class="clearfix">
-                            <a href="#" onclick="window.open('https://vk.com/winlevel_ts', '_system');">
-                                <i class="fa fa-vk"></i>
-                                {{_ 'messages.technicalSupport'}}
-                            </a>
-                            <br/>
-                            <button type="button" class="btn btn-link" name="loginInstructionsShow">
-                                <i class="fa fa-youtube-play"></i>
-                                {{_ 'messages.videoTutorial'}}
-                            </button>
-                        </div>
-                    </div>
-                </section>
-            </section>
-        {{/autoForm}}
+        {{#if resetToken}}
+            {{>resetpass}}
+        {{else}}
+            {{>auth}}
+        {{/if}}
     </div>
 </template>
-
