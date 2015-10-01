@@ -35,7 +35,7 @@ var proto = Meteor.Collection.prototype;
 		// check impersonation here
 		var impersonate = Fiber.current.impersonate;
 		if (impersonate) {
-			checkImpersonation(impersonate, this._name + methodName);
+			checkImpersonation(impersonate, this._name + '/' + methodName);
 		}
 		return origMethod.apply(this, arguments);
 	}
