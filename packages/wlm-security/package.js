@@ -1,5 +1,5 @@
 Package.describe({
-	name: 'wlm-core',
+	name: 'wlm-security',
 	version: '0.0.1',
 	// Brief, one-line summary of the package.
 	summary: '',
@@ -12,18 +12,22 @@ Package.describe({
 
 Package.onUse(function (api) {
 	api.versionsFrom('1.1.0.3');
-	api.imply('wlm-security');
-	api.use('wlm-security');
+	api.imply('alanning:roles');
+	api.use('underscore');
+	api.use('alanning:roles');
+	api.use('seba:method-hooks');
+
 	api.addFiles([
-		'wlm-core.js',
-		'collections.js'
+		'wlm-security.js',
+		'methods.js',
+		'publish.js'
 	]);
 
-	api.export('db');
+	api.export('WlmSecurity');
 });
 
 Package.onTest(function (api) {
 	api.use('tinytest');
-	api.use('wlm-core');
-	api.addFiles('wlm-core-tests.js');
+	api.use('wlm-security');
+	api.addFiles('wlm-security-tests.js');
 });
