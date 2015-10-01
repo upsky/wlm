@@ -190,25 +190,26 @@ Meteor.methods({
 				'profile.passport': doc.passport
 			};
 		}
+
 		if (doc.email != null) {
+			//TODO Accounts.addEmail(this.userId, doc.email);
 			updateObj['$push'] = {
 				emails: {
 					address: doc.email,
 					verified: false
 				}
-			};
+			}
 		}
+
 		if (doc.phone != null) {
-			updateObj['$push'] = {
+			updateObj['$addToSet'] = {
 				'profile.phones': {
 					number: doc.phone,
 					verified: false
 				}
 			};
 		}
-		return db.users.update(Meteor.userId(), updateObj, {
-			multi: true
-		});
+		return db.users.update(this.userId, updateObj);
 	},
 	/**
 	 *

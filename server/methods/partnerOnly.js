@@ -16,6 +16,12 @@ WlmSecurity.addPublish({
 		roles: PARTNER
 	}
 });
+WlmSecurity.addMethods({
+	networkCounts: {
+		roles: 'partner',
+		impersonate: true
+	}
+});
 
 Meteor.publish('partnerDoc', function () {
 	if (!this.userId) return this.ready();

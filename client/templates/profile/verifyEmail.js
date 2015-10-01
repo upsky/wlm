@@ -25,8 +25,13 @@ template.events({
 });
 template.onRendered(function () {
 	Meteor.autorun(function () {
-		Meteor.user().emails.forEach(function (item) {
-			if (item.verified === true)emailNotVerified.set(false);
+		var user = Meteor.user();
+		if (!user)
+			return;
+
+		var verified = _.any(user.emails, function (item) {
+			return item.verified;
 		});
+		emailNotVerified.set(verified);
 	})
 });

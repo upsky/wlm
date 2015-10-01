@@ -1,5 +1,27 @@
 Impersonate.admins = ['sysadmin', 'support'];
 
+// configure meteor methods
+WlmSecurity.addMethods({
+	login: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	logout: { roles: 'all' },
+	logoutOtherClients: { roles: 'all' },
+	getNewToken: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	removeOtherTokens: {
+		authNotRequired: true,
+		roles: 'all'
+	},
+	configureLoginService: {
+		authNotRequired: true,
+		roles: 'all'
+	}
+});
+
 WlmSecurity.addMethods({
 	createUser: {
 		roles: 'sysadmin'
@@ -27,9 +49,6 @@ WlmSecurity.addMethods({
 		roles: ['sysadmin', 'support']
 	},
 	insertInvite: {
-		roles: 'partner'
-	},
-	networkCounts: {
 		roles: 'partner'
 	},
 	invalidateQr: {
@@ -70,6 +89,6 @@ WlmSecurity.addMethods({
 		roles: ['president', 'sysadmin']
 	},
 	impersonate: {
-		roles: Impersonate.admins
+		roles: 'all'
 	}
 });
