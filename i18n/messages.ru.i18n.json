@@ -19,5 +19,11 @@
   "vk": {
     "newsHeader": "Новости WL Market",
     "groupLink": "//vk.com/wlmarket_official"
+  },
+
+  "connStatus": {
+    "connecting": "Подключаемся к серверу",
+    "connected": "Подключение восстановлено",
+    "offline": "Подключение к серверу отсутствует"
   }
 }
