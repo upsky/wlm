@@ -7,4 +7,4 @@ Meteor.autorun(function () {
 		// unset all the sessions
 		Object.keys(Session.keys).forEach(function(key){ Session.set(key, undefined); })
 	}
-})
+});

@@ -14,9 +14,11 @@ verifyEmail = function (email) {
 
 WlmSecurity.addPublish({
 	invite: {
+		authNotRequired: true,
 		roles: [ 'partner', 'president' ]
 	},
 	inviteEmail: {
+		authNotRequired: true,
 		roles: [ 'partner', 'president' ]
 	}
 });

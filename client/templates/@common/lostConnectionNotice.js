@@ -1,7 +1,6 @@
-
 Meteor.startup(Deps.autorun.bind(Deps, function () {
 	var status = Meteor.status();
-	switch(status.status) {
+	switch (status.status) {
 		case 'connecting':
 			WlmNotify.create({
 				group: 'connect',
@@ -29,4 +28,10 @@ Meteor.startup(Deps.autorun.bind(Deps, function () {
 
 	}
 }));
+
+Template.lostConnectionNotice.events({
+	'click #reload': function () {
+		location.reload();
+	}
+});
 

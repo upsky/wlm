@@ -24,6 +24,9 @@ case $1 in
     ios)
         meteor run ios-device $SETTINGS --mobile-server=$HOST $2 $3 $4
     ;;
+    ios-local)
+        meteor run ios-device $SETTINGS $2 $3 $4
+    ;;
     android)
         meteor run android-device $SETTINGS --mobile-server=$HOST $2 $3 $4
     ;;
