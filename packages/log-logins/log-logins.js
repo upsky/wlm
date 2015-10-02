@@ -14,6 +14,8 @@ Accounts.onLogin(function (res) {
 			city: geo.city,
 			ll: geo.ll
 		});
+	} else {
+		geoUpdate.geo = 'no data';
 	}
 
 	if (thisUser.status == undefined ||

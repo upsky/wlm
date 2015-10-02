@@ -13,6 +13,7 @@ Package.describe({
 Package.onUse(function (api) {
 	api.versionsFrom('1.1.0.3');
 	api.imply('wlm-security');
+	api.use('underscore');
 	api.use('wlm-security');
 	api.addFiles([
 		'wlm-core.js',

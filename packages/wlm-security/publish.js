@@ -5,6 +5,7 @@
 _.extend(WlmSecurity, {
 	_publish: {},
 	_publishFuncs: {},
+	_excludePublish: [],
 	addPublish: function (publish) {
 		var self = this;
 		_.each(publish, function (options, publishName) {
@@ -18,7 +19,11 @@ _.extend(WlmSecurity, {
 
 			self._publish[publishName] = options;
 		});
+	},
+	excludePublish: function (regEx) {
+		this._excludePublish.push(regEx);
 	}
+
 });
 
 var originalPublish = Meteor.publish;
@@ -44,11 +49,19 @@ var checkPublish = function () {
 		log.error('publish', publish, 'added to WlmSecurty.addMethods but is not present');
 	});
 
+	var exclude = {};
 	var unsecured = _.difference(real, security);
 	unsecured.forEach(function (method) {
-		log.error('publish', method, 'is not secured with WlmSecurty.addMethods');
+		var ex = _.any(WlmSecurity._excludePublish, function (regExp) { return regExp.test(method); });
+		if (ex)
+			exclude[method] = {
+				authNotRequired: true,
+				roles: 'all'
+			};
+		else
+			log.error('publish', method, 'is not secured with WlmSecurty.addMethods');
 	});
-
+	WlmSecurity.addPublish(exclude);
 };
 Meteor.startup(function () {
 	Meteor.defer(checkPublish);

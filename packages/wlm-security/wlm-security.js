@@ -26,4 +26,4 @@ checkDefaultOptions = function(userId, options, name) {
 		}
 	}
 	return true;
-}
+};

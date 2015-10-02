@@ -97,6 +97,7 @@ Meteor.methods({
 		doc.initiator = Meteor.userId();
 		doc.status = 'active';
 		doc.emailHash = Random.id(30);
+		doc.created = new Date();
 
 		try {
 			var inviteId = db.invites.insert(doc);

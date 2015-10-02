@@ -1,6 +1,7 @@
 _.extend(WlmSecurity, {
 	_methods: {},
 	_methodFuncs: {},
+	_excludeMethods: [],
 	addMethods: function (methods) {
 		var self = this;
 		_.each(methods, function (options, methodName) {
@@ -21,6 +22,10 @@ _.extend(WlmSecurity, {
 				Impersonate.addAllowedMethods(imp)
 			}
 		});
+	},
+
+	excludeMethods: function (regEx) {
+		this._excludeMethods.push(regEx);
 	}
 });
 
@@ -52,8 +57,20 @@ var checkMethods = function () {
 
 	var unsecured = _.difference(real, security);
 	unsecured.forEach(function (method) {
-		log.error('method', method, 'is not secured with WlmSecurty.addMethods');
 	});
+
+	var exclude = {};
+	unsecured.forEach(function (method) {
+		var ex = _.any(WlmSecurity._excludeMethods, function (regExp) { return regExp.test(method); });
+		if (ex)
+			exclude[method] = {
+				authNotRequired: true,
+				roles: 'all'
+			};
+		else
+			log.error('method', method, 'is not secured with WlmSecurty.addMethods');
+	});
+	WlmSecurity.addMethods(exclude);
 };
 Meteor.startup(function () {
 	Meteor.defer(checkMethods);

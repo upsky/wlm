@@ -34,7 +34,7 @@ case $1 in
         meteor build .out --server=$HOST --mobile-settings settings.json
     ;;
     deploy)
-        mupx deploy
+        mupx deploy --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json
     ;;
     *)
         echo "usage: $0 [run|ios] params" && exit 1
