@@ -17,8 +17,8 @@
   "mandrill": {
     "host": "smtp.mandrillapp.com",
     "port": "587",
-    "username": "mandrilluser",
-    "key": "mandrillkey"
+    "username": "admin@wintwin.ru",
+    "key": "tjcWyMN0xGRJrnKk5ZiwVQ"
   },
 
   "sysadminEmail": "admin@wlm.ru",

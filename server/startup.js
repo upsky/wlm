@@ -3,5 +3,6 @@ Meteor.startup(function () {
 });
 
 WlmSecurity.excludePublish(/^MeteorToy.*/);
+WlmSecurity.excludePublish(/^meteor.*/);
 WlmSecurity.excludeMethods(/^MeteorToy.*/);
 WlmSecurity.excludeMethods(/^Mongol.*/);

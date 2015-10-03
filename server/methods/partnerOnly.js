@@ -68,7 +68,7 @@ Meteor.publish('networkData', function () {
 });
 
 Meteor.publish('lastInvites', function () {
-	log.trace('publish lastInvites');
+	log.trace('publish lastInvites for', this.userId);
 	return db.invites.find({
 		initiator: this.userId
 	}, {
@@ -80,7 +80,7 @@ Meteor.publish('lastInvites', function () {
 });
 
 Meteor.publish('activeInvites', function () {
-	log.trace('publish activeInvites');
+	log.trace('publish activeInvites for', this.userId);
 	return db.invites.find({
 		initiator: this.userId
 	});

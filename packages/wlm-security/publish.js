@@ -27,42 +27,57 @@ _.extend(WlmSecurity, {
 });
 
 var originalPublish = Meteor.publish;
+var pubHandlers = [];
 Meteor.publish = function (pubName, pubFunc) {
-	WlmSecurity._publishFuncs[pubName] = pubFunc;
 	return originalPublish.call(this, pubName, function () {
+		var self = this;
+		var args = arguments;
+
 		try {
-			if (checkDefaultOptions(this.userId, WlmSecurity._publish, pubName))
-				return pubFunc.apply(this, arguments);
+			_.each(pubHandlers, function (handler) {
+				return handler.call(self, args);
+			});
+			return pubFunc.apply(self, args);
 		} catch (e) {
-			log.warn('cant publish ', pubName, e.message);
 			this.ready();
 		}
 	});
 };
 
+Meteor.beforeAllPublish = function (func) {
+	pubHandlers.push(func);
+};
+
+Meteor.beforeAllPublish(function () {
+	var publishName = this._name;
+	authLog.info('before call publish: ' + publishName);
+	checkDefaultOptions(this.userId, WlmSecurity._publish, publishName);
+});
+
 // check all methods added to security
 var checkPublish = function () {
 	var security = _.keys(WlmSecurity._publish);
-	var real = _.keys(WlmSecurity._publishFuncs);
+	var real = _.keys(Meteor.server.publish_handlers);
 	var noReal = _.difference(security, real);
 	noReal.forEach(function (publish) {
-		log.error('publish', publish, 'added to WlmSecurty.addMethods but is not present');
+		log.error('publish', publish, 'added to WlmSecurty.addPublish but is not present');
 	});
 
 	var exclude = {};
 	var unsecured = _.difference(real, security);
-	unsecured.forEach(function (method) {
-		var ex = _.any(WlmSecurity._excludePublish, function (regExp) { return regExp.test(method); });
+	unsecured.forEach(function (publish) {
+		var ex = _.any(WlmSecurity._excludePublish, function (regExp) { return regExp.test(publish); });
 		if (ex)
-			exclude[method] = {
+			exclude[publish] = {
 				authNotRequired: true,
 				roles: 'all'
 			};
 		else
-			log.error('publish', method, 'is not secured with WlmSecurty.addMethods');
+			log.error('publish', publish, 'is not secured with WlmSecurty.addPublish');
 	});
 	WlmSecurity.addPublish(exclude);
 };
+
 Meteor.startup(function () {
-	Meteor.defer(checkPublish);
+	checkPublish();
 });

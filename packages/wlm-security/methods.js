@@ -30,7 +30,7 @@ _.extend(WlmSecurity, {
 });
 
 Meteor.beforeAllMethods(function () {
-	methodName = this._methodName;
+	var methodName = this._methodName;
 	authLog.info('before call method: ' + methodName);
 	checkDefaultOptions(Meteor.userId(), WlmSecurity._methods, methodName);
 });
