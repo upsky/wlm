@@ -1,15 +1,19 @@
-Template.network.rendered = function() {
-  return log.trace('network rendered');
+Template.network.rendered = function () {
+	return log.trace('network rendered');
 };
 
 Template.network.helpers({
-  "iamnetwork": function() {
-    return 'iam network';
-  }
+	"emptyInviteList": function () {
+		return !db.invites.find({
+			status: {
+				$ne: 'qr'
+			}
+		});
+	}
 });
 
 Template.network.events({
-  "click #network": function(event) {
-    return log.trace('click #network');
-  }
+	"click #network": function (event) {
+		return log.trace('click #network');
+	}
 });
