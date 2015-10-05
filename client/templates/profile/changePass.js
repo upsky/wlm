@@ -3,8 +3,14 @@ AutoForm.hooks({
 		onSubmit: function (insertDoc) {
 			console.log(insertDoc);
 
-			Accounts.changePassword(insertDoc.oldPass, insertDoc.newPass, function () {
-				WlmNotify.create({
+			Accounts.changePassword(insertDoc.oldPass, insertDoc.newPass, function (err) {
+				// TODO nice error message
+				if (err) {
+					WlmNotify.create({
+						title: 'messages.passwordNotChanged',
+						type: 'error'
+					});
+				} else WlmNotify.create({
 					title: 'messages.passwordChanged',
 					type: 'success'
 				});

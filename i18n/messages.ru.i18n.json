@@ -13,6 +13,7 @@
     "recoverPass": "Забыли пароль?",
     "emailSend": "Пиьсмо отправлено",
     "passwordChanged": "Пароль изменен",
+    "passwordNotChanged": "Ошибка. Пароль не изменен",
     "emailVerified": "Адрес эл. почты подтвержден",
     "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения."
   },
