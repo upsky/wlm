@@ -1,4 +1,9 @@
-Template.inviteItem.helpers({
+Template.inviteListCopyLink.events({
+	"click [name=copyLink]": function () {
+		Meteor.copyToClipboard(Meteor.getInviteLinks(this._id))
+	}
+});
+Template.inviteListStatus.helpers({
 	statusText: function () {
 		return TAPi18n.__('db.inviteStatus.' + this.status);
 	},
@@ -12,11 +17,5 @@ Template.inviteItem.helpers({
 			result = 'label-success';
 		}
 		return result;
-	},
-	inviteUsed: function () {
-		return this.status === 'used';
-	},
-	inviteLink: function () {
-		return Meteor.getInviteLinks(this._id);
 	}
 });
