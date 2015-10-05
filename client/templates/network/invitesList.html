@@ -1,9 +1,7 @@
 <template name="invitesList">
-  {{#Layout template="panel" data=invitesList}}
-      <ul>
-        {{#each invites}}
-          {{> inviteItem}}
-        {{/each}}
-      </ul>
-  {{/Layout}}
+    {{#Layout template="panel" data=invitesList}}
+        <div class="c-overflow-wrapper">
+            {{> reactiveTable collection=invites settings=settings}}
+        </div>
+    {{/Layout}}
 </template>

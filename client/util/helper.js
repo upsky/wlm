@@ -8,3 +8,7 @@ Template.registerHelper('cordovaDedect', function () {
 Template.registerHelper('showQr', function () {
 	return Meteor.settings.public.showQr || Meteor.isCordova;
 });
+
+Meteor.copyToClipboard = function (text) {
+	window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+};
