@@ -1,0 +1,16 @@
+<template name="videoItem">
+     <li class="list-group-item">
+        <h5>Название: <b>{{title}}</b> <span class="label label-info">ID: {{youtubeId}}</span></h5>
+             <button type="button" class="btn btn-link" name = 'showVideo'>
+                <i class="fa fa-youtube-play">Просмотреть</i>
+            </button>
+            <button type="button" class="btn btn-link" name = 'editVideo'>
+                <a href="{{pathFor 'editVideo'}}">
+                    <i class="fa fa-cog">Изменить</i>
+                </a>
+            </button>
+            <button type="button" class="btn btn-link" name = 'removeVideo'>
+                <i class="fa fa-expeditedssl">Удалить</i>
+            </button>
+    </li>
+</template>

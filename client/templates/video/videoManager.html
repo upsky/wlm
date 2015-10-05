@@ -1,0 +1,12 @@
+<template name = 'videoManager'>
+  {{#Layout template="panel" data=videoManager}}
+    <button type="button" class="btn btn-lg btn-success" name = 'addVideo'>
+        <i class="fa fa-plus">Добавить видео</i>
+    </button>
+    <ul>
+      {{#each videos}}
+        {{> videoItem}}
+      {{/each}}
+    </ul>
+  {{/Layout}}
+</template>

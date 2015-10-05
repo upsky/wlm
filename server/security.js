@@ -112,6 +112,15 @@ methodsSecurity = {
 	},
 	impersonate: {
 		roles: Impersonate.admins
+	},
+	insertVideos: {
+		roles: 'sysadmin'
+	},
+	editVideos: {
+		roles: 'sysadmin'
+	},
+	removeVideo: {
+		roles: 'sysadmin'
 	}
 };
 
@@ -137,4 +146,3 @@ Meteor.beforeAllMethods(function () {
 		}
 	}
 });
-

@@ -1,0 +1,36 @@
+<template name = 'editVideo'>
+  {{#Layout template="panel" data=editVideo}}
+     {{#autoForm id="insertVideoForm" schema="Schemas.videosSchema" type="method" meteormethod="editVideos" resetOnSuccess=false}}
+          <div class="row">
+              <div class="col-lg-6">
+                  <ul class="list-group">
+                      <li class="list-group-item">
+                          <div class="form-group">
+                            {{> afQuickField class="form-control input-lg" name="title" value=videos.title}}
+                          </div>
+                      </li>
+                      <li class="list-group-item">
+                          <div class="form-group">
+                            {{> afQuickField class="form-control input-lg" name="youtubeId" value=videos.youtubeId}}
+                          </div>
+                      </li>
+                      <li class="list-group-item">
+                          <div class="form-group">
+                            {{> afQuickField class="form-control input-lg" name="info" value=videos.info}}
+                          </div>
+                      </li>
+                      <li class="list-group-item">
+                          <div class="form-group">
+                            {{> afQuickField class="form-control input-lg" name="name" value=videos.name}}
+                          </div>
+                      </li>
+                  </ul>
+                  <div class="panel-footer">
+                      <button type="submit" class="btn btn-lg btn-success">{{_ "buttons.update"}}</button>
+                      <button type="" class="btn btn-lg btn-success" name = 'back'>{{_ "buttons.back"}}</button>
+                  </div>
+                </div>
+          </div>
+      {{/autoForm}}
+  {{/Layout}}
+</template>

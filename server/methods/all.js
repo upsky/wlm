@@ -12,6 +12,9 @@ verifyEmail = function (email) {
 	);
 };
 
+Meteor.publish('videos', function () {
+	return db.videos.find();
+});
 
 Meteor.publish('invite', function (_id) {
 	check(_id, Match.Id);
