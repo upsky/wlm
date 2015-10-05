@@ -1,10 +1,10 @@
 Accounts.onLogin(function (res) {
 	var thisUser = res.user;
-	var nowIp = res.connection.clientAddress;
-	var geo = GeoIP.lookup(nowIp);
+	var clientIp = res.connection.httpHeaders['x-forwarded-for'];
+	var geo = GeoIP.lookup(clientIp);
 
 	var geoUpdate = {
-		ip: nowIp,
+		ip: clientIp,
 		createdAt: new Date()
 	};
 	if (geo) {

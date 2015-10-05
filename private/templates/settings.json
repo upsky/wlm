@@ -12,7 +12,9 @@
       "appId": "4477511",
       "groupName": "wlmarket_official"
     },
-    "showQr": false
+    "showQr": false,
+    "recaptchaPublic": "recaptcha-public"
+
   },
   "mandrill": {
     "host": "smtp.mandrillapp.com",
@@ -24,6 +26,9 @@
   "sysadminEmail": "admin@wlm.ru",
   "sysadminPass": "admin",
 
+  "inviteEmail": "invite@wlm.ru",
   "verifyEmail": "admin@wlm.ru",
-  "supportEmail": "admin@wlm.ru"
+  "supportEmail": "admin@wlm.ru",
+
+  "recaptchaPrivate": "recaptcha-secret"
 }

@@ -1,6 +1,6 @@
 <template name="networkInvite">
   {{#Layout template="panel" data=networkInvite}}
-      {{#autoForm id="inviteForm" type="method" schema="Schemas.inviteSchema" meteormethod="insertInvite" resetOnSuccess=true}}
+      {{#autoForm id="inviteForm" type="normal" schema="Schemas.inviteSchema" resetOnSuccess=true}}
           <ul class="list-group">
               <li class="list-group-item">
                   <div class="form-group">
@@ -8,6 +8,9 @@
                   </div>
                   <div class="form-group">
                     {{> afQuickField type="email" class="form-control input-lg" name="email"}}
+                  </div>
+                  <div class="form-group">
+                      {{> reCAPTCHA}}
                   </div>
               </li>
           </ul>

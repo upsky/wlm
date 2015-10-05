@@ -17,8 +17,23 @@ AutoForm.hooks({
 			});
 		},
 		onSuccess: function (type, res) {
-			Meteor.loginWithPassword(email, password);
+			//Meteor.loginWithPassword(email, password);
 			return Router.go('/');
+		},
+
+		onSubmit: function (data) {
+			var self = this;
+			//get the captcha data
+			var captcha = grecaptcha.getResponse();
+
+			Meteor.call("registerPartner", data, captcha, function (err) {
+				grecaptcha.reset();
+				if (err)
+					self.done(err);
+
+				self.done();
+			});
+			return false;
 		}
 	}
 });

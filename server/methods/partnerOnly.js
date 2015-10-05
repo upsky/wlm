@@ -86,13 +86,25 @@ Meteor.publish('activeInvites', function () {
 	});
 });
 
+// TODO move to lib
+verifyCaptcha = function (method, captcha) {
+	var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(method.connection.clientAddress, captcha);
+	if (!verifyCaptchaResponse.success) {
+		console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+		throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
+	} else
+		console.log('reCAPTCHA ok', captcha, verifyCaptchaResponse);
+};
+
 Meteor.methods({
-	insertInvite: function (doc) {
+	insertInvite: function (doc, captcha) {
 		check(this.userId, String);
 		check(doc, {
 			email: String,
 			name: String
 		});
+		verifyCaptcha(this, captcha);
+
 		doc.email = doc.email.toLowerCase();
 		doc.initiator = Meteor.userId();
 		doc.status = 'active';

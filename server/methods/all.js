@@ -43,8 +43,9 @@ registerPartner = function (doc) {
 		email: String,
 		newPass: String,
 		_id: Match.Id,
-		emailHash: String
+		emailHash: Match.Optional(String)
 	});
+
 	invite = db.invites.findOne(doc._id);
 	if (!invite) {
 		throw new Meteor.Error(400, 'Invite not found');
@@ -106,14 +107,15 @@ registerPartner = function (doc) {
 	};
 };
 
-registerPartnerWithVerification = function (doc) {
+registerPartnerWithVerification = function (doc, captcha) {
 	check(doc, {
 		name: String,
 		email: String,
 		newPass: String,
 		_id: Match.Id,
-		emailHash: String
+		emailHash: Match.Optional(String)
 	});
+	verifyCaptcha(this, captcha);
 
 	var res = registerPartner(doc);
 	if (doc.emailHash === res.invite.emailHash && doc.email && res.invite.email) {

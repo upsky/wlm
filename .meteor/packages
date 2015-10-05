@@ -50,3 +50,4 @@ reactive-var
 percolate:migrations
 wlm-core
 meteorhacks:aggregate
+altapp:recaptcha
