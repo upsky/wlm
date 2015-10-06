@@ -4,17 +4,16 @@ Template.youtubeModal.events({
 			Modal.show('youtubeModalItem');
 	},
 	'click [name=changeVideo]': function () {
-			//Session.set('currentVideo', Template.currentData());
-			Router.go('/videoManager');
+			Router.go('/admin/video/videoManager');
 	}
 });
 
 Template.youtubeModal.helpers({
 	videoName: function () {
 		if (db.videos.find({name: Template.currentData()}).count() == 0) {
-			return 'Тут пока ничего нету';
+			return TAPi18n.__('commonText.disabled');
 		} else {
-			return db.videos.find({name: Template.currentData()}).fetch()[0].title;		}
+			return db.videos.findOne({name: Template.currentData()}).title;		}
 	},
 	currentName: function () {
 		return Template.currentData();

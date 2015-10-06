@@ -1,16 +1,16 @@
 <template name="videoItem">
      <li class="list-group-item">
-        <h5>Название: <b>{{title}}</b> <span class="label label-info">ID: {{youtubeId}}</span></h5>
+        <h4>Название: <b>{{title}}</b> Кнопка: <span class="label label-info">{{name}}</span></h4>
              <button type="button" class="btn btn-link" name = 'showVideo'>
-                <i class="fa fa-youtube-play">Просмотреть</i>
+                <i class="fa fa-youtube-play">{{_ "buttons.showVideo"}}</i>
             </button>
             <button type="button" class="btn btn-link" name = 'editVideo'>
                 <a href="{{pathFor 'editVideo'}}">
-                    <i class="fa fa-cog">Изменить</i>
+                    <i class="fa fa-cog">{{_ "buttons.edit"}}</i>
                 </a>
             </button>
             <button type="button" class="btn btn-link" name = 'removeVideo'>
-                <i class="fa fa-expeditedssl">Удалить</i>
+                <i class="fa fa-expeditedssl">{{_ "buttons.delete"}}</i>
             </button>
     </li>
 </template>

@@ -1,5 +1,5 @@
 Template.youtubeModalItem.helpers({
 	videoId: function () {
-		return db.videos.find({name: Session.get('video')}).fetch()[0].videoId;
+		return db.videos.findOne({name: Session.get('video')}).videoId;
 	}
 });

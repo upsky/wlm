@@ -27,7 +27,11 @@ Meteor.methods({
   var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
   var url = doc.youtubeId;
   var match = url.match(regExp);
-  doc.videoId = match[7];
+  if (match[7].length != 11) {
+    throw new Meteor.Error(407, 'Not correct reference');
+  } else {
+    doc.videoId = match[7];
+  }
   return db.videos.insert(doc);
   },
   editVideos: function (doc) {
@@ -42,7 +46,11 @@ Meteor.methods({
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var url = doc.youtubeId;
     var match = url.match(regExp);
-    doc.videoId = match[7];
+    if (match[7].length != 11) {
+      throw new Meteor.Error(407, 'Not correct reference');
+    } else {
+      doc.videoId = match[7];
+    }
     updateObj.title = doc.title;
     updateObj.name = doc.name;
     updateObj.youtubeId = doc.youtubeId;

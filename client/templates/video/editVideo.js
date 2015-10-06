@@ -13,7 +13,7 @@ Template.editVideo.helpers({
 
 Template.editVideo.events({
 	'click [name=back]': function () {
-		Router.go('/videoManager');
+		Router.go('/admin/video/videoManager');
 	}
 });
 
@@ -29,9 +29,19 @@ AutoForm.hooks({
 				return doc;
 			}
 		},
+		onError: function (type, error) {
+			console.log(error);
+			if (error){
+				return new PNotify({
+					title: document.title,
+					type: 'error',
+					text: TAPi18n.__('errors.notCorrect')
+				});
+			}
+		},
 		onSuccess: function (type, result) {
 			if (result) {
-				Router.go('/videoManager');
+				Router.go('/admin/video/videoManager');
 			}
 		}
 	}
