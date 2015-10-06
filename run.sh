@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-HOST=wlm.he24.ru
+if [ "$HOST" == "" ]; then
+    HOST=wlm.he24.ru
+fi
+
 SETTINGS="--settings settings.json"
 
 # check wlm-security is the first package. to init first before other packages

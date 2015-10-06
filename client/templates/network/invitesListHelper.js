@@ -7,15 +7,14 @@ Template.inviteListStatus.helpers({
 	statusText: function () {
 		return TAPi18n.__('db.inviteStatus.' + this.status);
 	},
-	statusColor: function () {
-		var result;
-		result = 'label-default';
-		if (this.status === 'active') {
-			result = 'label-danger';
+	statusType: function () {
+		switch (this.status) {
+			case 'active':
+				return 'label-success';
+			case 'used':
+				return 'label-danger';
+			default:
+				return 'label-default';
 		}
-		if (this.status === 'used') {
-			result = 'label-success';
-		}
-		return result;
 	}
 });

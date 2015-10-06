@@ -3,8 +3,8 @@
 
     {{#Layout template="twoCols"}}
         {{> personalInf}}
-        {{> changePass}}
         {{#contentFor "col2"}}
+            {{> changePass}}
             {{#unless isCordova}}
                 {{#if showQr}}
                     {{> personalQrCode}}

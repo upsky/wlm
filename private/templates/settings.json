@@ -13,7 +13,7 @@
       "groupName": "wlmarket_official"
     },
     "showQr": false,
-    "recaptchaPublic": "recaptcha-public"
+    "recaptchaPublic": "r6LdpHw4TAAAAALynMWuPpw6lhAq7gX0Rzi136lSg"
 
   },
   "mandrill": {
@@ -30,5 +30,5 @@
   "verifyEmail": "admin@wlm.ru",
   "supportEmail": "admin@wlm.ru",
 
-  "recaptchaPrivate": "recaptcha-secret"
+  "recaptchaPrivate": "6LdpHw4TAAAAAIvqE_7HthHylJAP_Q8edi4WK4Vr"
 }
