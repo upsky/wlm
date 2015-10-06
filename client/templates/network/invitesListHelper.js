@@ -10,9 +10,9 @@ Template.inviteListStatus.helpers({
 	statusType: function () {
 		switch (this.status) {
 			case 'active':
-				return 'label-success';
-			case 'used':
 				return 'label-danger';
+			case 'used':
+				return 'label-success';
 			default:
 				return 'label-default';
 		}

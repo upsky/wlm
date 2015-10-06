@@ -37,14 +37,8 @@ Meteor.publish('inviteEmail', function (_id) {
 });
 
 registerPartner = function (doc) {
-	var _id, invite, lastInvite, path, targetPartner, uin, username;
-	check(doc, {
-		name: String,
-		email: String,
-		newPass: String,
-		_id: Match.Id,
-		emailHash: Match.Optional(String)
-	});
+	var newUserId, invite, lastInvite, path, targetPartner, uin, username;
+	check(doc, Schemas.registerPartner);
 
 	invite = db.invites.findOne(doc._id);
 	if (!invite) {
@@ -57,19 +51,18 @@ registerPartner = function (doc) {
 	if (!targetPartner) {
 		throw new Meteor.Error(400, 'Partner not found');
 	}
-	lastInvite = db.users.findOne({}, {
-		sort: {
-			uin: -1
-		}
-	});
+
+	// TODO right uin generation through status table
+	lastInvite = db.users.findOne({}, { sort: { uin: -1 } });
 	if (lastInvite) {
 		uin = uinGen(Math.floor(lastInvite.uin / 10) + 1);
 	}
 	if (_.isNaN(uin)) {
 		uin = uinGen(50);
 	}
+
 	username = '+' + uin.toString();
-	_id = Accounts.createUser({
+	newUserId = Accounts.createUser({
 		username: username,
 		email: doc.email,
 		password: doc.newPass,
@@ -77,44 +70,36 @@ registerPartner = function (doc) {
 			name: doc.name
 		}
 	});
-	path = targetPartner.path;
+
+	path = _.clone(targetPartner.path);
 	path.push(targetPartner._id);
+
 	db.partners.insert({
-		_id: _id,
+		_id: newUserId,
 		level: targetPartner.level + 1,
 		path: path
 	});
-	Roles.addUsersToRoles(_id, 'partner');
+	Roles.addUsersToRoles(newUserId, 'partner');
 
-	db.users.update(_id, {
-		$set: {
-			uin: uin
-		}
-	});
+	db.users.update(newUserId, { $set: { uin: uin } });
 
 	db.invites.update(doc._id, {
 		$set: {
 			status: 'used',
-			userId: _id,
+			userId: newUserId,
 			username: username,
 			used: new Date()
 		}
 	});
 
 	return {
-		userId: _id,
+		userId: newUserId,
 		invite: invite
 	};
 };
 
 registerPartnerWithVerification = function (doc, captcha) {
-	check(doc, {
-		name: String,
-		email: String,
-		newPass: String,
-		_id: Match.Id,
-		emailHash: Match.Optional(String)
-	});
+	check(doc, Schemas.registerPartner);
 	verifyCaptcha(this, captcha);
 
 	var res = registerPartner(doc);
