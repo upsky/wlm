@@ -15,7 +15,8 @@
     "passwordChanged": "Пароль изменен",
     "passwordNotChanged": "Ошибка. Пароль не изменен",
     "emailVerified": "Адрес эл. почты подтвержден",
-    "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения."
+    "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения.",
+    "unknown": "Неизвестно"
   },
 
   "vk": {
@@ -24,7 +25,7 @@
   },
 
   "email": {
-    "support": "support@market.winlevel.ru"
+    "support": "support@wl-market.com"
   },
 
   "connStatus": {
