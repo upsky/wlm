@@ -17,18 +17,16 @@
     "emailVerified": "Адрес эл. почты подтвержден",
     "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения.",
     "copyToClipboard": "Скопировать в буфер обмена: Ctrl + C",
+    "saveChanges": "Изменения сохранены",
     "incorrectDate": "Дата неизвестна"
   },
-
   "vk": {
     "newsHeader": "Новости WL Market",
     "groupLink": "//vk.com/wlmarket_official"
   },
-
   "email": {
     "support": "support@market.winlevel.ru"
   },
-
   "connStatus": {
     "connecting": "Подключаемся к серверу",
     "connected": "Подключение установлено",
