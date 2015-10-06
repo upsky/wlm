@@ -10,7 +10,7 @@ Template.inviteListStatus.helpers({
 	statusText: function () {
 		return TAPi18n.__('db.inviteStatus.' + this.status);
 	},
-	statusType: function () {
+	statusColor: function () {
 		switch (this.status) {
 			case 'active':
 				return 'label-success';
