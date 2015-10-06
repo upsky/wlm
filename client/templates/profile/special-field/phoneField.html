@@ -9,11 +9,11 @@
                 {{/unless}}
                 <input type="text" placeholder="{{_ "formFields.phone.placeholder"}}" class="form-control input-lg"
                        name="phone"
-                       value="{{user.profile.phones.[0].number}}"
+                       value="{{phoneNumber}}"
                        id="phone" required="" data-schema-key="phone" {{disabled}}>
             </div>
 
-            {{#unless user.profile.phones.[0].verified}}
+            {{#unless emailVerified}}
 
                 <div class="form-group" data-required="true">
                     <div class="input-group" style="max-width: 360px">
