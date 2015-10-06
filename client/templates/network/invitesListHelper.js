@@ -1,4 +1,7 @@
 Template.inviteListCopyLink.events({
+	showLink: function () {
+		return (this.status === 'active');
+	},
 	"click [name=copyLink]": function () {
 		Meteor.copyToClipboard(Meteor.getInviteLinks(this._id))
 	}

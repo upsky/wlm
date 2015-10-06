@@ -10,5 +10,5 @@ Template.registerHelper('showQr', function () {
 });
 
 Meteor.copyToClipboard = function (text) {
-	window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+	window.prompt(TAPi18n.__('messages.copyToClipboard'), text);
 };
