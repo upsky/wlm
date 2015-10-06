@@ -19,13 +19,16 @@
     "copyToClipboard": "Скопировать в буфер обмена: Ctrl + C",
     "incorrectDate": "Дата неизвестна"
   },
+
   "vk": {
     "newsHeader": "Новости WL Market",
     "groupLink": "//vk.com/wlmarket_official"
   },
+
   "email": {
     "support": "support@market.winlevel.ru"
   },
+
   "connStatus": {
     "connecting": "Подключаемся к серверу",
     "connected": "Подключение установлено",

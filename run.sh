@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-HOST=wlm.he24.ru
+if [ "$HOST" == "" ]; then
+    HOST=wlm.he24.ru
+fi
+
 SETTINGS="--settings settings.json"
 
 # check wlm-security is the first package. to init first before other packages
@@ -38,6 +41,9 @@ case $1 in
     ;;
     deploy)
         mupx deploy --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json
+    ;;
+    reconfig)
+        mupx reconfig --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json
     ;;
     *)
         echo "usage: $0 [run|ios] params" && exit 1
