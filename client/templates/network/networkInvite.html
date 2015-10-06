@@ -1,6 +1,6 @@
 <template name="networkInvite">
     {{#Layout template="panel" data=networkInvite}}
-        {{#autoForm id="inviteForm" type="method" schema="Schemas.inviteSchema" meteormethod="insertInvite" resetOnSuccess=true}}
+        {{#autoForm id="inviteForm" type="normal" schema="Schemas.inviteSchema" resetOnSuccess=true}}
             <div class="form-group">
                 {{> afQuickField type="text" class="form-control input-lg" name="name"}}
             </div>
