@@ -1,10 +1,746 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<template name="invitePartner">
+    <!DOCTYPE html "-//w3c//dtd xhtml 1.0 transitional //en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd">
+    <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!--[if gte mso 9]><xml>
+     <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+     </o:OfficeDocumentSettings>
+    </xml><![endif]-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 
-</body>
-</html>
+        <title>Template Base</title>
+
+    </head>
+    <body style="width: 100% !important;min-width: 100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100% !important;margin: 0;padding: 0;background-color: #FFFFFF">
+    <style id="media-query">
+        /*  Media Queries */
+        @media only screen and (max-width: 500px) {
+            .prova {
+                width: 500px;
+            }
+
+            table[class="body"] img {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 80% !important;
+            }
+
+            table[class="body"] center {
+                min-width: 0 !important;
+            }
+
+            table[class="body"] .container {
+                width: 95% !important;
+            }
+
+            table[class="body"] .row {
+                width: 100% !important;
+                display: block !important;
+            }
+
+            table[class="body"] .wrapper {
+                display: block !important;
+                padding-right: 0 !important;
+            }
+
+            table[class="body"] .columns, table[class="body"] .column {
+                table-layout: fixed !important;
+                float: none !important;
+                width: 100% !important;
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+                display: block !important;
+            }
+
+            table[class="body"] .wrapper.first .columns, table[class="body"] .wrapper.first .column {
+                display: table !important;
+            }
+
+            table[class="body"] table.columns td, table[class="body"] table.column td {
+                width: 100% !important;
+            }
+
+            table[class="body"] table.columns td.expander {
+                width: 1px !important;
+            }
+
+            table[class="body"] .right-text-pad, table[class="body"] .text-pad-right {
+                padding-left: 10px !important;
+            }
+
+            table[class="body"] .left-text-pad, table[class="body"] .text-pad-left {
+                padding-right: 10px !important;
+            }
+
+            table[class="body"] .hide-for-small, table[class="body"] .show-for-desktop {
+                display: none !important;
+            }
+
+            table[class="body"] .show-for-small, table[class="body"] .hide-for-desktop {
+                display: inherit !important;
+            }
+
+            table[class="icon-table"] {
+                width: 100% !important;
+            }
+
+            table[class="icon-table"] table {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            table[class="icon-table"] table td {
+                padding-bottom: 10px !important;
+            }
+
+            .mixed-two-up .col {
+                width: 100% !important;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            div[class="col"] {
+                width: 100% !important;
+            }
+        }
+
+        @media screen and (min-width: 501px) {
+            table[class="block-grid"] {
+                width: 500px !important;
+            }
+        }
+    </style>
+    <table class="body"
+           style="border-spacing: 0;border-collapse: collapse;vertical-align: top;height: 100%;width: 100%;table-layout: fixed"
+           cellpadding="0" cellspacing="0" width="100%" border="0">
+        <tbody>
+        <tr style="vertical-align: top">
+            <td class="center"
+                style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;text-align: center;background-color: #FFFFFF"
+                align="center" valign="top">
+
+                <!--[if (gte mso 9)|(IE)]>
+          <table width='500' class="ieCell" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                  <td>
+          <![endif]-->
+                <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;background-color: #59C159"
+                       cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
+                    <tbody>
+                    <tr style="vertical-align: top">
+                        <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                            width="100%">
+                            <table class="container"
+                                   style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit"
+                                   cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
+                                <tbody>
+                                <tr style="vertical-align: top">
+                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                                        width="100%">
+                                        <table class="block-grid"
+                                               style="border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 500px;color: #000000;background-color: transparent"
+                                               cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent">
+                                            <tbody>
+                                            <tr style="vertical-align: top">
+                                                <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;text-align: center;font-size: 0">
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                  <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+                                      <tr>
+                                          <td valign="top">
+                                  <![endif]-->
+                                                    <div class="col num12"
+                                                         style="display: inline-block;vertical-align: top;width: 100%">
+                                                        <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                               cellpadding="0" cellspacing="0" align="center"
+                                                               width="100%"
+                                                               border="0">
+                                                            <tbody>
+                                                            <tr style="vertical-align: top">
+                                                                <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent">
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           align="center" width="100%" border="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px"
+                                                                                align="center">
+                                                                                <div style="height: 10px;">
+                                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;border-top: 10px solid transparent;width: 100%"
+                                                                                           align="center" border="0"
+                                                                                           cellspacing="0">
+                                                                                        <tbody>
+                                                                                        <tr style="vertical-align: top">
+                                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                                                                                                align="center"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           cellpadding="0" cellspacing="0" width="100%"
+                                                                           border="0">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;width: 100%;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px"
+                                                                                align="center">
+                                                                                <div align="center">
+
+                                                                                    <img style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: 0;height: auto;line-height: 100%;width: 500px;max-width: 500px"
+                                                                                         align="center" border="0"
+                                                                                         width="500"
+                                                                                         src="http://s3.postimg.org/mp05x3rc3/logo.png"
+                                                                                         alt="WL MARKET ЖИВИ В ПЛЮС!"
+                                                                                         title="WL MARKET ЖИВИ В ПЛЮС!">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;padding-top: 30px;padding-right: 0px;padding-bottom: 30px;padding-left: 0px">
+                                                                                <div style="color:#ffffff;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <div style="font-size:14px;line-height:17px;text-align:center;color:#ffffff;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                        <strong><span
+                                                                                                style="font-size: 28px; line-height: 33px;"
+                                                                                                data-mce-style="font-size: 28px; line-height: 33px;"
+                                                                                                mce-data-marked="1">&#1055;&#1056;&#1048;&#1042;&#1045;&#1058;!</span></strong>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                  </td><td>
+                                  <![endif]-->
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                          </td>
+                                      </tr>
+                                  </table>
+                                  <![endif]-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                     </td>
+              </tr>
+          </table>
+          <![endif]-->
+                <!--[if (gte mso 9)|(IE)]>
+          <table width='500' class="ieCell" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                  <td>
+          <![endif]-->
+                <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;background-color: #648085"
+                       cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
+                    <tbody>
+                    <tr style="vertical-align: top">
+                        <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                            width="100%">
+                            <table class="container"
+                                   style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit"
+                                   cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
+                                <tbody>
+                                <tr style="vertical-align: top">
+                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                                        width="100%">
+                                        <table class="block-grid"
+                                               style="border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 500px;color: #333;background-color: transparent"
+                                               cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent">
+                                            <tbody>
+                                            <tr style="vertical-align: top">
+                                                <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;text-align: center;font-size: 0">
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                  <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+                                      <tr>
+                                          <td valign="top">
+                                  <![endif]-->
+                                                    <div class="col num12"
+                                                         style="display: inline-block;vertical-align: top;width: 100%">
+                                                        <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                               cellpadding="0" cellspacing="0" align="center"
+                                                               width="100%"
+                                                               border="0">
+                                                            <tbody>
+                                                            <tr style="vertical-align: top">
+                                                                <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 30px;padding-right: 0px;padding-bottom: 30px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent">
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;padding-top: 25px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
+                                                                                <div style="color:#ffffff;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <div style="font-size:18px;line-height:22px;text-align:center;color:#ffffff;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <span style="font-size:24px; line-height:29px;"
+                                                                                          mce-data-marked="1"><strong>
+                                                                                        &#1056;&#1072;&#1076;&#1099;
+                                                                                        &#1074;&#1080;&#1076;&#1077;&#1090;&#1100;
+                                                                                        &#1058;&#1077;&#1073;&#1103;
+                                                                                        &#1074; WL
+                                                                                        Market</strong></span></div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;padding-top: 0px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
+                                                                                <div style="color:#B8B8C0;line-height:150%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <div style="text-align:center;font-size:12px;line-height:18px;color:#B8B8C0;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <span style="font-family:verdana, genevapx; font-size:16px; line-height:24px;"><strong>
+                                                                                        &#1054;&#1089;&#1090;&#1072;&#1083;&#1089;&#1103;
+                                                                                        &#1074;&#1089;&#1077;&#1075;&#1086;
+                                                                                        &#1096;&#1072;&#1075; &#1076;&#1083;&#1103;
+                                                                                        &#1079;&#1072;&#1074;&#1077;&#1088;&#1096;&#1077;&#1085;&#1080;&#1103;
+                                                                                        &#1088;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1072;&#1094;&#1080;&#1080;
+                                                                                        &#1085;&#1072; &#1089;&#1072;&#1081;&#1090;&#1077;
+                                                                                        WL Market!</strong></span></div>
+                                                                                    <div style="text-align:center;font-size:12px;line-height:18px;color:#B8B8C0;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <span style="font-family:verdana, genevapx; font-size:16px; line-height:24px;"><strong>
+                                                                                        &#1053;&#1072;&#1078;&#1084;&#1080;
+                                                                                        &#1085;&#1072; &#1082;&#1085;&#1086;&#1087;&#1082;&#1091;
+                                                                                        &#1085;&#1080;&#1078;&#1077;
+                                                                                        &quot;&#1055;&#1086;&#1076;&#1090;&#1074;&#1077;&#1088;&#1076;&#1080;&#1090;&#1100;&quot;
+                                                                                        &#1095;&#1090;&#1086;&#1073;&#1099;
+                                                                                        &#1072;&#1082;&#1090;&#1080;&#1074;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;
+                                                                                        &#1083;&#1080;&#1095;&#1085;&#1099;&#1081;
+                                                                                        &#1082;&#1072;&#1073;&#1080;&#1085;&#1077;&#1090;.</strong></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           width="100%" border="0" cellspacing="0"
+                                                                           cellpadding="0">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td class="center"
+                                                                                style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;text-align: center;padding-top: 15px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px"
+                                                                                align="center">
+
+                                                                                <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                                       width="100%" border="0"
+                                                                                       cellspacing="0" cellpadding="0">
+                                                                                    <tbody>
+                                                                                    <tr style="vertical-align: top">
+                                                                                        <td class="button-container"
+                                                                                            style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                                                                                            align="center">
+                                                                                            <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                                                   width="100%"
+                                                                                                   border="0"
+                                                                                                   cellspacing="0"
+                                                                                                   cellpadding="0"
+                                                                                                   align="center">
+
+                                                                                                <tbody>
+                                                                                                <tr style="vertical-align: top">
+                                                                                                    <td class="button"
+                                                                                                        style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;height: 13px;text-align: center"
+                                                                                                        width="100%"
+                                                                                                        align="center"
+                                                                                                        valign="middle">
+
+                                                                                                        <!--[if mso]>
+                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="*|reglink|*"
+                            style="
+                            height:38px;
+                            v-text-anchor:middle;
+                            width:388px;
+                            arcsize="66%"
+                            strokecolor=""
+                            fillcolor="#2EC762" >
+                        <w:anchorlock/>
+                          <center
+                            style="color:#ffffff;
+                            font-family:Arial, &#39;Helvetica Neue&#39;, Helvetica, sans-serif;
+                            font-size:16px">
+                             ПОДТВЕРДИТЬ РЕГИСТРАЦИЮ
+                            </center>
+                        </v:roundrect>
+                      <![endif]-->
+                                                                                                        <!--[if !mso]><!-->
+
+                                                                                                        <div style="display: inline-block;
+                          max-width: 388px;
+                          width: 100%;">
+                                                                                                            <a style="display: block;                          background-color: #2EC762;                          -webkit-border-radius: 25px;                           -moz-border-radius: 25px;                           border-radius: 25px;                           vertical-align: middle;                           padding-top: 5px;                           padding-right: 20px;                          padding-bottom: 5px;                          padding-left: 20px;                          text-align: center;                          font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent;color: #ffffff;line-height: 13px;mso-hide: all"
+                                                                                                               href="*|reglink|*"
+                                                                                                               target="_blank">
+                                                                                                                <div style="text-align: center !important;font-family: inherit;font-size: 12px;line-height: 24px;color: #ffffff">
+                                                                                                                    <span style="font-size: 14px; line-height: 28px;">&#1055;&#1054;&#1044;&#1058;&#1042;&#1045;&#1056;&#1044;&#1048;&#1058;&#1068; &#1056;&#1045;&#1043;&#1048;&#1057;&#1058;&#1056;&#1040;&#1062;&#1048;&#1070;</span>
+                                                                                                                </div>
+                                                                                                            </a>
+                                                                                                        </div>
+
+                                                                                                        <!--<![endif]-->
+
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                  </td><td>
+                                  <![endif]-->
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                          </td>
+                                      </tr>
+                                  </table>
+                                  <![endif]-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                     </td>
+              </tr>
+          </table>
+          <![endif]-->
+                <!--[if (gte mso 9)|(IE)]>
+          <table width='500' class="ieCell" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                  <td>
+          <![endif]-->
+                <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;background-color: #ffffff"
+                       cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
+                    <tbody>
+                    <tr style="vertical-align: top">
+                        <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                            width="100%">
+                            <table class="container"
+                                   style="border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit"
+                                   cellpadding="0" cellspacing="0" align="center" width="100%" border="0">
+                                <tbody>
+                                <tr style="vertical-align: top">
+                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top"
+                                        width="100%">
+                                        <table class="block-grid"
+                                               style="border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 500px;color: #333;background-color: transparent"
+                                               cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent">
+                                            <tbody>
+                                            <tr style="vertical-align: top">
+                                                <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;text-align: center;font-size: 0">
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                  <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+                                      <tr>
+                                          <td valign="top">
+                                  <![endif]-->
+                                                    <div class="col num12"
+                                                         style="display: inline-block;vertical-align: top;width: 100%">
+                                                        <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                               cellpadding="0" cellspacing="0" align="center"
+                                                               width="100%"
+                                                               border="0">
+                                                            <tbody>
+                                                            <tr style="vertical-align: top">
+                                                                <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 30px;padding-right: 30px;padding-bottom: 30px;padding-left: 30px;border-top: 0px dashed transparent;border-right: 0px dashed transparent;border-bottom: 0px dashed transparent;border-left: 0px dashed transparent">
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
+                                                                                <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <div style="font-size:14px;line-height:17px;text-align:center;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                        &#1055;&#1086;&#1076;&#1087;&#1080;&#1089;&#1099;&#1074;&#1072;&#1081;&#1090;&#1077;&#1089;&#1100;
+                                                                                        &#1085;&#1072; &#1085;&#1072;&#1089;
+                                                                                        &#1074; &#1086;&#1092;&#1080;&#1094;&#1080;&#1072;&#1083;&#1100;&#1085;&#1099;&#1093;
+                                                                                        &#1089;&#1086;&#1086;&#1073;&#1097;&#1077;&#1089;&#1090;&#1074;&#1072;&#1093;.<br>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           border="0" cellspacing="0" cellpadding="0"
+                                                                           width="100%">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;text-align: center;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px"
+                                                                                align="center">
+                                                                                <table class="icon-table"
+                                                                                       style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                                       border="0" cellspacing="0"
+                                                                                       cellpadding="0" width="222"
+                                                                                       align="center">
+                                                                                    <tbody>
+                                                                                    <tr style="vertical-align: top">
+                                                                                        <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+
+
+                                                                                            <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;padding: 0 5px 0 0"
+                                                                                                   align="left"
+                                                                                                   border="0"
+                                                                                                   cellspacing="0"
+                                                                                                   cellpadding="0"
+                                                                                                   width="37">
+                                                                                                <tbody>
+                                                                                                <tr style="vertical-align: top">
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        <a href="https://www.facebook.com/wlmarketofficial"
+                                                                                                           title="Facebook"
+                                                                                                           target="_blank">
+                                                                                                            <img style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;max-width: 32px !important"
+                                                                                                                 alt="Facebook"
+                                                                                                                 title="Facebook"
+                                                                                                                 width="32"
+                                                                                                                 src="http://s28.postimg.org/j8x5jm6qx/facebook.png"/>
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        &nbsp;</td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;padding: 0 5px 0 0"
+                                                                                                   align="left"
+                                                                                                   border="0"
+                                                                                                   cellspacing="0"
+                                                                                                   cellpadding="0"
+                                                                                                   width="37">
+                                                                                                <tbody>
+                                                                                                <tr style="vertical-align: top">
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        <a href="http://twitter.com/WLMarket"
+                                                                                                           title="Twitter"
+                                                                                                           target="_blank">
+                                                                                                            <img src="http://s12.postimg.org/6kw102749/twitter.png"
+                                                                                                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;max-width: 32px !important"
+                                                                                                                 alt="Twitter"
+                                                                                                                 title="Twitter"
+                                                                                                                 width="32">
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        &nbsp;</td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;padding: 0 5px 0 0"
+                                                                                                   align="left"
+                                                                                                   border="0"
+                                                                                                   cellspacing="0"
+                                                                                                   cellpadding="0"
+                                                                                                   width="37">
+                                                                                                <tbody>
+                                                                                                <tr style="vertical-align: top">
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        <a href="http://plus.google.com/+WlMarket"
+                                                                                                           title="Google+"
+                                                                                                           target="_blank">
+                                                                                                            <img style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;max-width: 32px !important"
+                                                                                                                 src="http://s13.postimg.org/c9zd0fgwj/googleplus.png"
+                                                                                                                 alt="Google+"
+                                                                                                                 title="Google+"
+                                                                                                                 width="32">
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        &nbsp;</td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;padding: 0 5px 0 0"
+                                                                                                   align="left"
+                                                                                                   border="0"
+                                                                                                   cellspacing="0"
+                                                                                                   cellpadding="0"
+                                                                                                   width="37">
+                                                                                                <tbody>
+                                                                                                <tr style="vertical-align: top">
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        <a href="http://www.youtube.com/WlMarket"
+                                                                                                           title="YouTube"
+                                                                                                           target="_blank">
+                                                                                                            <img style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;max-width: 32px !important"
+                                                                                                                 src="http://s19.postimg.org/s3tr6hxsf/youtube.png"
+                                                                                                                 alt="YouTube"
+                                                                                                                 title="YouTube"
+                                                                                                                 width="32">
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        &nbsp;</td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;padding: 0 5px 0 0"
+                                                                                                   align="left"
+                                                                                                   border="0"
+                                                                                                   cellspacing="0"
+                                                                                                   cellpadding="0"
+                                                                                                   width="37">
+                                                                                                <tbody>
+                                                                                                <tr style="vertical-align: top">
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        <a href="http://instagram.com/wlmarket"
+                                                                                                           title="Instagram"
+                                                                                                           target="_blank">
+                                                                                                            <img style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;max-width: 32px !important"
+                                                                                                                 src="http://s13.postimg.org/ooqqehxsj/instagram.png"
+                                                                                                                 alt="Instagram"
+                                                                                                                 title="Instagram"
+                                                                                                                 width="32">
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        &nbsp;</td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top;padding: 0 5px 0 0"
+                                                                                                   align="left"
+                                                                                                   border="0"
+                                                                                                   cellspacing="0"
+                                                                                                   cellpadding="0"
+                                                                                                   width="37">
+                                                                                                <tbody>
+                                                                                                <tr style="vertical-align: top">
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        <a href="http://vk.com/wlmarket_official"
+                                                                                                           title="Вконтакте"
+                                                                                                           target="_blank">
+                                                                                                            <img style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;max-width: 32px !important"
+                                                                                                                 src="http://s30.postimg.org/5d1bwmbul/website.png"
+                                                                                                                 alt="Вконтакте"
+                                                                                                                 title="Вконтакте"
+                                                                                                                 width="32">
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                    <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top">
+                                                                                                        &nbsp;</td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <table style="border-spacing: 0;border-collapse: collapse;vertical-align: top"
+                                                                           cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td style="word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px">
+                                                                                <div style="color:#555555;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                    <div style="font-size:14px;line-height:17px;text-align:center;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                                        <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                                                                                            &#1044;&#1072;&#1085;&#1085;&#1086;&#1077;
+                                                                                            &#1087;&#1080;&#1089;&#1100;&#1084;&#1086;
+                                                                                            &#1089;&#1086;&#1079;&#1076;&#1072;&#1085;&#1086;
+                                                                                            &#1072;&#1074;&#1090;&#1086;&#1084;&#1072;&#1090;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;,
+                                                                                            &#1085;&#1072; &#1085;&#1077;&#1075;&#1086;
+                                                                                            &#1085;&#1077; &#1089;&#1083;&#1077;&#1076;&#1091;&#1077;&#1090;
+                                                                                            &#1086;&#1090;&#1074;&#1077;&#1095;&#1072;&#1090;&#1100;
+                                                                                            &#1080; &#1087;&#1086;&#1089;&#1099;&#1083;&#1072;&#1090;&#1100;
+                                                                                            &#1076;&#1072;&#1085;&#1085;&#1099;&#1077;
+                                                                                            &#1074; &#1073;&#1091;&#1076;&#1091;&#1097;&#1077;&#1084;.
+                                                                                            &#1052;&#1099; &#1086;&#1073;&#1103;&#1079;&#1091;&#1077;&#1084;&#1089;&#1103;
+                                                                                            &#1085;&#1077; &#1087;&#1088;&#1080;&#1089;&#1099;&#1083;&#1072;&#1090;&#1100;
+                                                                                            &#1089;&#1087;&#1072;&#1084;&#1084;,
+                                                                                            &#1072; &#1090;&#1072;&#1082;
+                                                                                            &#1078;&#1077; &#1075;&#1072;&#1088;&#1072;&#1085;&#1090;&#1080;&#1088;&#1091;&#1077;&#1084;
+                                                                                            &#1089;&#1086;&#1093;&#1088;&#1072;&#1085;&#1077;&#1085;&#1080;&#1077;
+                                                                                            &#1042;&#1072;&#1096;&#1080;&#1093;
+                                                                                            &#1076;&#1072;&#1085;&#1085;&#1099;&#1093;
+                                                                                            &#1074; &#1089;&#1090;&#1088;&#1086;&#1078;&#1072;&#1081;&#1096;&#1077;&#1081;
+                                                                                            &#1082;&#1086;&#1085;&#1092;&#1080;&#1076;&#1077;&#1085;&#1094;&#1080;&#1072;&#1083;&#1100;&#1085;&#1086;&#1089;&#1090;&#1080;.&nbsp;</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                  </td><td>
+                                  <![endif]-->
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                          </td>
+                                      </tr>
+                                  </table>
+                                  <![endif]-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                     </td>
+              </tr>
+          </table>
+          <![endif]-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    </body>
+    </html>
+</template>

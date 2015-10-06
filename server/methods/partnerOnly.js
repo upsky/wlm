@@ -1,4 +1,4 @@
-var PARTNER = [ 'partner', 'president' ];
+var PARTNER = ['partner', 'president'];
 
 WlmSecurity.addPublish({
 	partnerDoc: {
@@ -49,7 +49,7 @@ Meteor.publish('networkData', function () {
 			$gt: currentPartner.level,
 			$lte: currentPartner.level + 1
 		}
-	}, {limit: 50});
+	}, { limit: 50 });
 	partners.fetch();
 	log.trace('publish partners count: ' + partners.count());
 
@@ -60,8 +60,8 @@ Meteor.publish('networkData', function () {
 	});
 
 	users = db.users.find(
-		{_id: {$in: _ids}},
-		{fields: {profile: 1}}
+		{ _id: { $in: _ids } },
+		{ fields: { profile: 1 } }
 	);
 
 	return [partners, users];
@@ -113,27 +113,30 @@ Meteor.methods({
 
 		try {
 			var inviteId = db.invites.insert(doc);
-
-			if (inviteId) {
+			try {
+				var inviteId = db.invites.insert(doc);
 				Meteor.call('sendEmail',
 					doc.email,
 					Meteor.settings.inviteEmail,
 					'Приглашение от ' + Meteor.user().profile.name,
 					'invitePartner',
-					[
-						{
-							"name": "reglink",
-							"content": Meteor.getInviteLinksEmail(doc.emailHash)
-						}
-					]
-				)
+					{
+						"reglink": Meteor.getInviteLinksEmail(doc.emailHash),
+					}
+				);
+				return { status: 'ok' };
+
+			} catch (err) {
+				log.trace(err);
+				return { error: err }
 			}
 
-			return { status: 'ok' };
 		} catch (err) {
-			log.trace('duplicate email invite ');
-			return { error: 'duplicate' }
+			log.trace(err);
+			return { error: err }
 		}
+
+
 	},
 	networkCounts: function () {
 		check(this.userId, String);

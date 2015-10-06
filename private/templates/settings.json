@@ -16,12 +16,6 @@
     "recaptchaPublic": "r6LdpHw4TAAAAALynMWuPpw6lhAq7gX0Rzi136lSg"
 
   },
-  "mandrill": {
-    "host": "smtp.mandrillapp.com",
-    "port": "587",
-    "username": "admin@wintwin.ru",
-    "key": "tjcWyMN0xGRJrnKk5ZiwVQ"
-  },
 
   "sysadminEmail": "admin@wlm.ru",
   "sysadminPass": "admin",

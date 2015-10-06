@@ -22,6 +22,7 @@ cfs:http-methods@0.0.30
 check@1.0.5
 chhib:morris@0.0.1
 chhib:raphael@0.0.1
+cmather:handlebars-server@2.0.0
 coffeescript@1.0.6
 copleykj:livestamp@1.1.7
 ddp@1.1.0
@@ -116,6 +117,5 @@ webapp@1.2.0
 webapp-hashing@1.0.3
 wlm-core@0.0.1
 wlm-security@0.0.1
-wylio:mandrill@1.0.1
 yogiben:autoform-modals@0.3.6
 zimme:select2-bootstrap3-css@1.4.6

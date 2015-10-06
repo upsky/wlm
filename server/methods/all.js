@@ -7,19 +7,19 @@ verifyEmail = function (email) {
 	check(email, String);
 
 	return db.users.update(
-		{'emails.address': email},
-		{$set: {'emails.$.verified': true}}
+		{ 'emails.address': email },
+		{ $set: { 'emails.$.verified': true } }
 	);
 };
 
 WlmSecurity.addPublish({
 	invite: {
 		authNotRequired: true,
-		roles: [ 'partner', 'president' ]
+		roles: ['partner', 'president']
 	},
 	inviteEmail: {
 		authNotRequired: true,
-		roles: [ 'partner', 'president' ]
+		roles: ['partner', 'president']
 	}
 });
 
@@ -33,7 +33,7 @@ Meteor.publish('invite', function (_id) {
 Meteor.publish('inviteEmail', function (_id) {
 	check(_id, Match.Id);
 	log.trace('publish inviteEmail');
-	return db.invites.find({'emailHash': _id});
+	return db.invites.find({ 'emailHash': _id });
 });
 
 registerPartner = function (doc) {
@@ -113,34 +113,20 @@ registerPartnerWithVerification = function (doc, captcha) {
 Meteor.methods({
 	sendEmail: function (to, from, subject, templateName, data) {
 		check([to, from, subject, templateName], [String]);
-		check(data, Array);
+		check(data, Object);
 
 		this.unblock();
-		try {
-			this.unblock();
-			Mandrill.messages.sendTemplate({
-				template_name: templateName,
-				template_content: [
-					{
-						name: 'body',
-						content: ''
-					}
-				],
-				message: {
-					subject: subject,
-					from_email: from,
-					global_merge_vars: data,
-					"merge_vars": [
-						{}
-					],
-					to: [
-						{email: to}
-					]
-				}
-			});
-		} catch (e) {
-			console.log(e);
-		}
+
+		var html = SSR.render(templateName, data);
+
+		console.log(html);
+
+		Email.send({
+			to: to,
+			from: from,
+			subject: subject,
+			html: html
+		});
 	},
 	checkLogin: function (doc) {
 		var user;
@@ -212,7 +198,7 @@ Meteor.methods({
 			email: String
 		});
 
-		var user = Meteor.users.findOne({emails: {$elemMatch: {address: doc.email}}});
+		var user = Meteor.users.findOne({ emails: { $elemMatch: { address: doc.email } } });
 
 		if (!user) {
 			throw new Meteor.Error(400, 'User not found');
