@@ -1,40 +1,37 @@
-var status;
-var noticeError;
-var connectionnStatus = true;
-var lastConnectionnStatus = false;
-var started = false;
+Meteor.startup(Deps.autorun.bind(Deps, function () {
+	var status = Meteor.status();
+	switch (status.status) {
+		case 'connecting':
+			WlmNotify.create({
+				group: 'connect',
+				title: 'connStatus.connecting',
+				type: 'info'
+			});
+			break;
+		case 'connected':
+			WlmNotify.create({
+				group: 'connect',
+				title: 'connStatus.connected',
+				type: 'success'
+			});
+			break;
+		case 'failed':
+		case 'waiting':
+		case 'offline':
+			WlmNotify.create({
+				group: 'connect',
+				title: 'connStatus.offline',
+				hide: false,
+				type: 'error'
+			});
+			break;
 
-Deps.autorun(function () {
-	status = Meteor.status();
-	if (started)
-		if (status.connected) {
-			connectionnStatus = true;
-			if (!lastConnectionnStatus) {
-				noticeError.remove();
-				new PNotify({
-					title: 'Соединение востановлено.',
-					type: 'success'
-				});
-			}
-		} else {
-			connectionnStatus = false;
+	}
+}));
 
-			if (lastConnectionnStatus) {
-				noticeError = new PNotify({
-					title: 'Отсутсвует соединение с сервером.',
-					type: 'error',
-					hide: false,
-					addclass: "stack-bar-top",
-					width: "100%",
-					nonblock: {
-						nonblock: true
-					}
-				});
-			}
-
-		}
-
-	started = true;
-	lastConnectionnStatus = connectionnStatus;
+Template.lostConnectionNotice.events({
+	'click #reload': function () {
+		location.reload();
+	}
 });
 

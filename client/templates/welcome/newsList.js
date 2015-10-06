@@ -5,6 +5,12 @@ var vkInit = function () {
 		apiId: Meteor.settings.public.vk.appId,
 		onlyWidgets: true
 	});
+	VK.Auth.getLoginStatus(function getStatus (status) {
+		console.log('status', status);
+		if (status.status != 'loaded') {
+			//VK.Auth.getLoginStatus(getStatus);
+		}
+	})
 };
 
 var vkNewsInit = function () {
@@ -22,7 +28,7 @@ var vkNewsInit = function () {
 };
 
 var loadWall = function (wall) {
-	return VK.api(
+	VK.api(
 		"wall.get",
 		{
 			domain: wall,

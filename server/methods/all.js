@@ -12,12 +12,24 @@ verifyEmail = function (email) {
 	);
 };
 
+WlmSecurity.addPublish({
+	invite: {
+		authNotRequired: true,
+		roles: [ 'partner', 'president' ]
+	},
+	inviteEmail: {
+		authNotRequired: true,
+		roles: [ 'partner', 'president' ]
+	}
+});
+
 
 Meteor.publish('invite', function (_id) {
 	check(_id, Match.Id);
 	log.trace('publish invite');
 	return db.invites.find(_id);
 });
+
 Meteor.publish('inviteEmail', function (_id) {
 	check(_id, Match.Id);
 	log.trace('publish inviteEmail');
@@ -25,14 +37,9 @@ Meteor.publish('inviteEmail', function (_id) {
 });
 
 registerPartner = function (doc) {
-	var _id, invite, lastInvite, path, targetPartner, uin, username;
-	check(doc, {
-		name: String,
-		email: String,
-		newPass: String,
-		_id: Match.Id,
-		emailHash: String
-	});
+	var newUserId, invite, lastInvite, path, targetPartner, uin, username;
+	check(doc, Schemas.registerPartner);
+
 	invite = db.invites.findOne(doc._id);
 	if (!invite) {
 		throw new Meteor.Error(400, 'Invite not found');
@@ -44,19 +51,18 @@ registerPartner = function (doc) {
 	if (!targetPartner) {
 		throw new Meteor.Error(400, 'Partner not found');
 	}
-	lastInvite = db.users.findOne({}, {
-		sort: {
-			uin: -1
-		}
-	});
+
+	// TODO right uin generation through status table
+	lastInvite = db.users.findOne({}, { sort: { uin: -1 } });
 	if (lastInvite) {
 		uin = uinGen(Math.floor(lastInvite.uin / 10) + 1);
 	}
 	if (_.isNaN(uin)) {
 		uin = uinGen(50);
 	}
+
 	username = '+' + uin.toString();
-	_id = Accounts.createUser({
+	newUserId = Accounts.createUser({
 		username: username,
 		email: doc.email,
 		password: doc.newPass,
@@ -64,51 +70,41 @@ registerPartner = function (doc) {
 			name: doc.name
 		}
 	});
-	path = targetPartner.path;
+
+	path = _.clone(targetPartner.path);
 	path.push(targetPartner._id);
+
 	db.partners.insert({
-		_id: _id,
+		_id: newUserId,
 		level: targetPartner.level + 1,
 		path: path
 	});
-	Roles.addUsersToRoles(_id, 'partner');
+	Roles.addUsersToRoles(newUserId, 'partner');
 
-	db.users.update(_id, {
-		$set: {
-			uin: uin
-		}
-	});
+	db.users.update(newUserId, { $set: { uin: uin } });
 
 	db.invites.update(doc._id, {
 		$set: {
 			status: 'used',
-			userId: _id,
+			userId: newUserId,
 			username: username,
 			used: new Date()
 		}
 	});
 
 	return {
-		userId: _id,
+		userId: newUserId,
 		invite: invite
 	};
 };
 
-registerPartnerWithVerification = function (doc) {
-	check(doc, {
-		name: String,
-		email: String,
-		newPass: String,
-		_id: Match.Id,
-		emailHash: String
-	});
+registerPartnerWithVerification = function (doc, captcha) {
+	check(doc, Schemas.registerPartner);
+	verifyCaptcha(this, captcha);
 
 	var res = registerPartner(doc);
 	if (doc.emailHash === res.invite.emailHash && doc.email && res.invite.email) {
-		verifyEmail({
-			userId: res.userId,
-			email: doc.email
-		});
+		verifyEmail(doc.email);
 	} else {
 		Accounts.sendVerificationEmail(res.userId, doc.email);
 	}
@@ -183,25 +179,26 @@ Meteor.methods({
 				'profile.passport': doc.passport
 			};
 		}
+
 		if (doc.email != null) {
+			//TODO Accounts.addEmail(this.userId, doc.email);
 			updateObj['$push'] = {
 				emails: {
 					address: doc.email,
 					verified: false
 				}
-			};
+			}
 		}
+
 		if (doc.phone != null) {
-			updateObj['$push'] = {
+			updateObj['$addToSet'] = {
 				'profile.phones': {
 					number: doc.phone,
 					verified: false
 				}
 			};
 		}
-		return db.users.update(Meteor.userId(), updateObj, {
-			multi: true
-		});
+		return db.users.update(this.userId, updateObj);
 	},
 	/**
 	 *
@@ -223,6 +220,7 @@ Meteor.methods({
 
 		return user.emails[0].address;
 	},
+
 	resendVerificationEmail: function () {
 		return Accounts.sendVerificationEmail(Meteor.userId());
 	}

@@ -1,7 +1,7 @@
 <template name="reg">
     {{#unless inviteUsed}}
         <div class="login-page">
-            {{#autoForm id="regForm" type="method" schema="Schemas.regSchema" meteormethod="registerPartner" resetOnSuccess=true}}
+            {{#autoForm id="regForm" type="normal" schema="Schemas.registerPartner" resetOnSuccess=true}}
                 <section class="wrapper scrollable animated fadeInDown">
                     <section class="panel panel-default">
                         <a href="/login" class="btn btn-link">&larr; Назад</a>
@@ -22,6 +22,9 @@
                                 </div>
                                 <div class="form-group">
                                     {{> afQuickField type="password" class="form-control input-lg" name="newPass" placeholder="schemaLabel"}}
+                                </div>
+                                <div class="form-group">
+                                    {{> reCAPTCHA}}
                                 </div>
                                 {{> afQuickField type="hidden" name="_id" value=_id}}
                             </li>

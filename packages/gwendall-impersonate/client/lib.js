@@ -7,8 +7,10 @@ Impersonate.do = function(toUser, cb) {
     params.token = Impersonate._token;
   }
   Meteor.call("impersonate", params, function(err, res) {
-    if (err) console.log("Could not impersonate.", err);
-    if (!err) {
+    if (err) {
+      console.log("Could not impersonate.", err, 'try again.');
+      delete Impersonate._token;
+    } else {
       if (!Impersonate._user) {
         Impersonate._user = res.fromUser; // First impersonation
         Impersonate._token = res.token;
@@ -16,14 +18,14 @@ Impersonate.do = function(toUser, cb) {
       Impersonate._active.set(true);
       Meteor.connection.setUserId(res.toUser);
     }
-    if (!!(cb && cb.constructor && cb.apply)) cb.apply(this, [err, res.toUser]);
+    if (!!(cb && cb.constructor && cb.call)) cb.call(this, err, res && res.toUser);
   });
 }
 
 Impersonate.undo = function(cb) {
   Impersonate.do(Impersonate._user, function(err, res) {
     if (!err) Impersonate._active.set(false);
-    if (!!(cb && cb.constructor && cb.apply)) cb.apply(this, [err, res.toUser]);
+    if (!!(cb && cb.constructor && cb.call)) cb.call(this, err, res && res.toUser);
   });
 }
 

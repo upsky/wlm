@@ -22,7 +22,6 @@
           </indentOptions>
         </codeStyleSettings>
         <codeStyleSettings language="JavaScript">
-          <option name="SPACE_WITHIN_BRACKETS" value="true" />
           <option name="SPACE_BEFORE_METHOD_PARENTHESES" value="true" />
           <indentOptions>
             <option name="USE_TAB_CHARACTER" value="true" />

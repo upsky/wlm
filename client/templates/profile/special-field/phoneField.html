@@ -1,0 +1,38 @@
+<template name="phoneField">
+    <div class="form-group">
+        <div class="c-hover-form-group">
+            <div class="form-group" data-required="true">
+                <label for="phone" class="control-label">{{_ "formFields.phone.label"}}</label>
+                {{#unless user.profile.phones.[0].verified}}
+                    <span class="label label-danger">не подтвержден</span>
+                    <a href="#" id="deleteNumber">Удалить текущий номер?</a>
+                {{/unless}}
+                <input type="text" placeholder="{{_ "formFields.phone.placeholder"}}" class="form-control input-lg"
+                       name="phone"
+                       value="{{phoneNumber}}"
+                       id="phone" required="" data-schema-key="phone" {{disabled}}>
+            </div>
+
+            {{#unless emailVerified}}
+
+                <div class="form-group" data-required="true">
+                    <div class="input-group" style="max-width: 360px">
+                        <input type="text" class="form-control input-lg"
+                               placeholder="{{_ "formFields.phone.helper"}}">
+                         <span class="input-group-btn">
+                            <button class="btn btn-primary input-lg" type="button" id="verifiCode">
+                                Подтвердить код
+                            </button>
+                         </span>
+                    </div>
+
+                <span class="help-block">
+                    На ваш номер был отправлен код подверждения.
+                    Если смс не приходит в течении минуты - проверьте правильность номера или попробуйте
+                    <a href="#" id="sendPhoneVerification">выслать код повторно</a>.
+                </span>
+                </div>
+            {{/unless}}
+        </div>
+    </div>
+</template>

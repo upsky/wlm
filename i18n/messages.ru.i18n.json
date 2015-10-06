@@ -13,11 +13,23 @@
     "recoverPass": "Забыли пароль?",
     "emailSend": "Пиьсмо отправлено",
     "passwordChanged": "Пароль изменен",
-    "emailVerified": "Адрес эл. почты подтвержден"
+    "passwordNotChanged": "Ошибка. Пароль не изменен",
+    "emailVerified": "Адрес эл. почты подтвержден",
+    "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения.",
+    "copyToClipboard": "Скопировать в буфер обмена: Ctrl + C",
+    "changesSaved": "Изменения сохранены",
+    "incorrectDate": "Дата неизвестна"
   },
-
   "vk": {
     "newsHeader": "Новости WL Market",
     "groupLink": "//vk.com/wlmarket_official"
+  },
+  "email": {
+    "support": "support@market.winlevel.ru"
+  },
+  "connStatus": {
+    "connecting": "Подключаемся к серверу",
+    "connected": "Подключение установлено",
+    "offline": "Подключение к серверу отсутствует"
   }
 }
