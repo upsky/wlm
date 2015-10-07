@@ -85,8 +85,8 @@
         </td>
         <td>
             {{#if isImpersonateButt}}
-                {{#if isInRole "whManager"}}
-                    <a href="{{pathFor "wh" _id}}" target="_blank"><button class="btn btn-success btn-sm"><span class="fa fa-eye"></span> {{_ "commonText.see"}}</button></a>
+                {{#if isInRole "impersonateAccess"}}
+                    <a href="{{pathFor "impersonate" _id}}" target="_blank"><button class="btn btn-success btn-sm"><span class="fa fa-eye"></span> {{_ "commonText.see"}}</button></a>
                 {{/if}}
             {{/if}}
         </td>

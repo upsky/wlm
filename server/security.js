@@ -1,4 +1,4 @@
-Impersonate.admins = ['whManager'];
+Impersonate.admins = ['impersonateAccess'];
 
 // configure meteor methods
 WlmSecurity.addMethods({

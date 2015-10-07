@@ -16,8 +16,11 @@
     "passwordNotChanged": "Ошибка. Пароль не изменен",
     "emailVerified": "Адрес эл. почты подтвержден",
     "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения.",
-    "copyToClipboard": "Скопировать в буфер обмена: Ctrl + C",
+    "copyToClipboardMobile": "Нажмите на строке ниже еще раз, чтобы вызвать меню копирования",
+    "copyToClipboard": "Чтобы скопировать, нажмите",
+    "unknown": "Неизвестно",
     "saveChanges": "Изменения сохранены",
+    "copyToClipboard": "Скопировать в буфер обмена: Ctrl + C",
     "incorrectDate": "Дата неизвестна"
   },
   "vk": {

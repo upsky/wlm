@@ -10,7 +10,7 @@ Router.route('/admin/panel/users', {
 	}
 });
 Router.route('/admin/user/impersonate:_id', {
-	name: 'wh',
+	name: 'impersonate',
 	template: 'loading',
 	waitOn: function () {
 		//todo  права что-же с вами делать...
