@@ -1,34 +1,36 @@
 <!-- пагинатор-->
 <template name="cutterPaginator">
     {{#if config.allCount}}
-    <center>
-        {{#if config.isShowInfo}}
-            <div><small>{{_ "commonText.found"}} {{config.allCount}} {{config.canUpdate}} {{_ "commonText.records"}}</small></div>
-        {{/if}}
-        {{#if config.isShow}}
-        <nav>
-            <ul class="pagination">
-                {{#if config.isNoFirst}}
-                    {{#if config.isNowFastJump}}{{> cutterPaginatorButtonEvents name='jumpBegin' text="<<"}}{{/if}}
-                    {{> cutterPaginatorButtonEvents name='Previous' text="<"}}
-                {{else}}
-                    <li class="disabled">
-                    </li>
-                {{/if}}
-                {{#each config.buttons}}
-                    {{> cutterPaginatorButton}}
-                {{/each}}
-                {{#if config.isNoLast}}
-                    {{> cutterPaginatorButtonEvents name='Next' text=">"}}
-                    {{#if config.isNowFastJump}}{{> cutterPaginatorButtonEvents name='jumpEnd' text=">>"}}{{/if}}
-                {{else}}
-                    <li class="disabled">
-                    </li>
-                {{/if}}
-            </ul>
-        </nav>
-        {{/if}}
-    </center>
+        <center>
+            {{#if config.isShowInfo}}
+                <div>
+                    <small>{{_ "commonText.found"}} {{config.allCount}} {{config.canUpdate}} {{_ "commonText.records"}}</small>
+                </div>
+            {{/if}}
+            {{#if config.isShow}}
+                <nav>
+                    <ul class="pagination">
+                        {{#if config.isNoFirst}}
+                            {{#if config.isNowFastJump}}{{> cutterPaginatorButtonEvents name='jumpBegin' text="<<"}}{{/if}}
+                            {{> cutterPaginatorButtonEvents name='Previous' text="<"}}
+                        {{else}}
+                            <li class="disabled">
+                            </li>
+                        {{/if}}
+                        {{#each config.buttons}}
+                            {{> cutterPaginatorButton}}
+                        {{/each}}
+                        {{#if config.isNoLast}}
+                            {{> cutterPaginatorButtonEvents name='Next' text=">"}}
+                            {{#if config.isNowFastJump}}{{> cutterPaginatorButtonEvents name='jumpEnd' text=">>"}}{{/if}}
+                        {{else}}
+                            <li class="disabled">
+                            </li>
+                        {{/if}}
+                    </ul>
+                </nav>
+            {{/if}}
+        </center>
     {{/if}}
 </template>
 

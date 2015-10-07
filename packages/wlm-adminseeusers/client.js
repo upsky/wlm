@@ -1,6 +1,6 @@
 WlmAdminSeeUsers = {
-	check:function(){
-		if (!Roles.userIsInRole(Meteor.user(),['adminPanelUsers']))
+	check: function () {
+		if (!Roles.userIsInRole(Meteor.user(), ['adminPanelUsers']))
 			Router.go('forbidden');
 	},
 	data: {
@@ -79,11 +79,14 @@ Template.adminPanelTableUsers.helpers({
 	}
 });
 Template.adminPanelUserItem.helpers({
-	isImpersonateButt:function(){
-	return this.roles.some(function(item){
+	isImpersonateButt: function () {
+		return this.roles.some(function (item) {
 			if (item == 'partner' ||
-				item == 'client'||
-				item == 'bussines'){return true;};
+				item == 'client' ||
+				item == 'bussines') {
+				return true;
+			}
+			;
 		});
 	}
 });
