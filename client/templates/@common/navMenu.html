@@ -10,7 +10,7 @@
         <ul class="logout">
             {{#if isInRole 'adminPanel'}}{{> navMenuItem name='adminPanel' icon='fa-user-secret'}}{{/if}}
             {{> navMenuItem name='profile' icon='fa-gear'}}
-            {{#if isImpersonate}}
+            {{#if isImpersonating}}
                 {{> navMenuItem name='exit'    icon='fa-eye text-danger' href="#" id="disconnect"}}
             {{else}}
                 {{> navMenuItem name='exit'    icon='fa-power-off fa-power-off' href="#" id="logoutHref"}}

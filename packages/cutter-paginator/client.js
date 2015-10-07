@@ -64,11 +64,11 @@ CutterPaginator ={
         config.isShow = matCountButtons > 1 ? true : false;
         if (config.isShow){
             if (+matCountButtons <  config.nowShowButtons) {config.nowShowButtons =matCountButtons;};
-            var centerPosition =Math.ceil(config.nowShowButtons / 2);
+            var centerPosition = Math.ceil(config.nowShowButtons / 2);
             var correctPosition = config.nowPage - centerPosition;
             if (correctPosition < 0) {correctPosition = 0;};
             if (correctPosition + config.nowShowButtons  > matCountButtons ) {correctPosition = matCountButtons - config.nowShowButtons;};
-            for (var n = 1; n < config.nowShowButtons +1; n++){
+            for (var n = 1; n <= config.nowShowButtons ; n++){
                 var button ={
                     page:n + correctPosition,
                     selected:""

@@ -12,8 +12,8 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.use([
-        "reactive-var@1.0.5",
-        "templating@1.0.11",
+        "reactive-var",
+        "templating",
         "session",
     ], "client");
     //api.versionsFrom('1.1.0.3');

@@ -1,10 +1,10 @@
 Meteor.methods({
-	"adminPanelUsers":function(beginItem,query,adminUserFindItemsPage){
+	adminPanelUsers:function(beginItem,query,adminUserFindItemsPage){
 		check(adminUserFindItemsPage,Number);
 		check(query,String);
 		check(beginItem,Number);
 
-		var configRequest ={
+		var configRequest = {
 			"_id": 1,
 			"createdAt": 1,
 			"username": 1,
@@ -16,7 +16,7 @@ Meteor.methods({
 
 		if (beginItem && +beginItem > 1)
 		{
-			configRequest["skip"]= +(beginItem - 1) * +adminUserFindItemsPage;
+			configRequest["skip"] = +(beginItem - 1) * +adminUserFindItemsPage;
 		}
 		var result = {
 			data:{},
@@ -31,16 +31,22 @@ Meteor.methods({
 			tempRes = db.users.find(findRegExp,configRequest);
 		}else
 		{
-			tempRes=db.users.find({},configRequest);
+			tempRes = db.users.find({},configRequest);
 		}
 		result.data = tempRes.fetch();
 		result.count = tempRes.count();
 		return result;
 	}
 });
-
-
-WlmSecurity._methods.adminPanelUsers= {
+/*  при использовании крашится
+WlmSecurity.addMethods({
+	adminPanelUsers: {
 		authNotRequired:false,
 		roles: 'adminPanelUsers'
+	}
+});*/
+
+WlmSecurity._methods.adminPanelUsers= {
+	authNotRequired:false,
+	roles: 'adminPanelUsers'
 	};

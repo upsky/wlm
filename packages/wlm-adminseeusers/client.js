@@ -74,13 +74,13 @@ Template.adminPanelUsersFind.events({
 	}
 });
 Template.adminPanelTableUsers.helpers({
-	"config": function () {
+	config: function () {
 		WlmAdminSeeUsers.check();
 		return WlmAdminSeeUsers.reactive.findOne();
 	}
 });
 Template.adminPanelUserItem.helpers({
-	"isImpersonateButt":function(){
+	isImpersonateButt:function(){
 	return this.roles.some(function(item){
 			if (item == 'partner' ||
 				item == 'client'||

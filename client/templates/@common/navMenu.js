@@ -25,9 +25,6 @@ Template.navMenu.helpers({
   "iamnavMenu": function() {
     return 'iam navMenu';
   },
-  "isImpersonate":function(){
-    return Impersonate._active.get()
-  },
   "mainMenuStatus": function() {
     if (Session.get('userMenuStatus')) {
       return 'expanded';
