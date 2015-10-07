@@ -3,14 +3,6 @@
  * @param doc
  * @returns {*}
  */
-verifyEmail = function (email) {
-	check(email, String);
-
-	return db.users.update(
-		{ 'emails.address': email },
-		{ $set: { 'emails.$.verified': true } }
-	);
-};
 
 WlmSecurity.addPublish({
 	invite: {
@@ -104,30 +96,13 @@ registerPartnerWithVerification = function (doc, captcha) {
 
 	var res = registerPartner(doc);
 	if (doc.emailHash === res.invite.emailHash && doc.email && res.invite.email) {
-		verifyEmail(doc.email);
+		WlmUtils.verifyEmail(doc.email);
 	} else {
 		Accounts.sendVerificationEmail(res.userId, doc.email);
 	}
 };
 
 Meteor.methods({
-	sendEmail: function (to, from, subject, templateName, data) {
-		check([to, from, subject, templateName], [String]);
-		check(data, Object);
-
-		this.unblock();
-
-		var html = SSR.render(templateName, data);
-
-		console.log(html);
-
-		Email.send({
-			to: to,
-			from: from,
-			subject: subject,
-			html: html
-		});
-	},
 	checkLogin: function (doc) {
 		var user;
 		check(doc, {

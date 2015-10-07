@@ -51,4 +51,4 @@ wlm-core
 meteorhacks:aggregate
 altapp:recaptcha
 aslagle:reactive-table
-cmather:handlebars-server
+meteorhacks:ssr

@@ -10,7 +10,7 @@ Meteor.startup(function () {
 		check(user, Object);
 		check(resetLink, String);
 
-		var html = SSR.render('resetPassword', {
+		var html = SSR.render('resetPasswordEmail', {
 			resetLink: resetLink
 		});
 		return html;
@@ -23,8 +23,8 @@ Meteor.startup(function () {
 		return 'Подтверждение почты WL Market';
 	};
 	Accounts.emailTemplates.verifyEmail.html = function (user, verifyLink) {
-		var html = SSR.render('invitePartner', {
-			reglink: verifyLink
+		var html = SSR.render('invitePartnerEmail', {
+			regLink: verifyLink
 		});
 
 		return html;

@@ -112,17 +112,14 @@ Meteor.methods({
 		doc.created = new Date();
 
 		try {
-			var inviteId = db.invites.insert(doc);
 			try {
 				var inviteId = db.invites.insert(doc);
-				Meteor.call('sendEmail',
+				WlmUtils.sendEmail(
 					doc.email,
-					Meteor.settings.inviteEmail,
-					'Приглашение от ' + Meteor.user().profile.name,
-					'invitePartner',
-					{
-						"reglink": Meteor.getInviteLinksEmail(doc.emailHash),
-					}
+					Meteor.settings.public.email.invite,
+					TAPi18n.__('email.inviteFrom', Meteor.user().profile.name),
+					'invitePartnerEmail',
+					{ regLink: Meteor.getInviteLinksEmail(doc.emailHash) }
 				);
 				return { status: 'ok' };
 
@@ -140,16 +137,17 @@ Meteor.methods({
 	},
 	networkCounts: function () {
 		check(this.userId, String);
-		var currentPartner, currentUser, i, result;
-		result = [];
-		currentUser = this.userId;
-		currentPartner = db.partners.findOne(currentUser);
+
+		var result = [];
+		var currentUser = this.userId;
+		var currentPartner = db.partners.findOne(currentUser);
+
 		if (currentPartner) {
 			var partnerLevel = currentPartner.level;
 			var from = partnerLevel + 1;
 			var to = partnerLevel + Meteor.settings.public.networkDeep;
 
-			for (i = from; i <= to; i++) {
+			for (var i = from; i <= to; i++) {
 				result.push({
 					level: i - partnerLevel,
 					count: db.partners.find({
