@@ -6,7 +6,9 @@ if [ "$HOST" == "" ]; then
     HOST=wlm.he24.ru
 fi
 
+METEOR=/usr/local/bin/meteor
 SETTINGS="--settings settings.json"
+export MAIL_URL=smtp://test%40wl-market.com:123123@smtp.yandex.com
 
 # check wlm-security is the first package. to init first before other packages
 function check() {
@@ -21,19 +23,19 @@ check
 
 case $1 in
     "")
-        meteor run $SETTINGS
+        $METEOR run $SETTINGS
     ;;
     run)
-        meteor run $SETTINGS $2 $3 $4
+        $METEOR run $SETTINGS $2 $3 $4
     ;;
     ios)
-        meteor run ios-device $SETTINGS --mobile-server=$HOST $2 $3 $4
+        $METEOR run ios-device $SETTINGS --mobile-server=$HOST $2 $3 $4
     ;;
     ios-local)
-        meteor run ios-device $SETTINGS $2 $3 $4
+        $METEOR run ios-device $SETTINGS $2 $3 $4
     ;;
     android)
-        meteor run android-device $SETTINGS --mobile-server=$HOST $2 $3 $4
+        $METEOR run android-device $SETTINGS --mobile-server=$HOST $2 $3 $4
     ;;
     android-sign)
         keytool -genkey -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -alias $ANDROID_DIR/rp.key -keypass $ANDROID_KEY_PASS -validity 10000
@@ -44,10 +46,10 @@ case $1 in
 
     ;;
     deploy-meteor)
-        meteor deploy $HOST $SETTINGS
+        $METEOR deploy $HOST $SETTINGS
     ;;
     build)
-        meteor build .out --server=$HOST --mobile-settings settings.json
+        $METEOR build .out --server=$HOST --mobile-settings settings.json
     ;;
     deploy)
         mupx deploy --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json

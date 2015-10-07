@@ -18,7 +18,9 @@
     "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения.",
     "copyToClipboardMobile": "Нажмите на строке ниже еще раз, чтобы вызвать меню копирования",
     "copyToClipboard": "Чтобы скопировать, нажмите",
-    "unknown": "Неизвестно"
+    "unknown": "Неизвестно",
+    "changesSaved": "Изменения сохранены",
+    "incorrectDate": "Дата неизвестна"
   },
 
   "vk": {
@@ -27,7 +29,7 @@
   },
 
   "email": {
-    "support": "support@wl-market.com"
+    "inviteFrom": "Приглашение от %s"
   },
 
   "connStatus": {

@@ -3,23 +3,15 @@
  * @param doc
  * @returns {*}
  */
-verifyEmail = function (email) {
-	check(email, String);
-
-	return db.users.update(
-		{'emails.address': email},
-		{$set: {'emails.$.verified': true}}
-	);
-};
 
 WlmSecurity.addPublish({
 	invite: {
 		authNotRequired: true,
-		roles: [ 'partner', 'president' ]
+		roles: ['partner', 'president']
 	},
 	inviteEmail: {
 		authNotRequired: true,
-		roles: [ 'partner', 'president' ]
+		roles: ['partner', 'president']
 	}
 });
 
@@ -33,7 +25,7 @@ Meteor.publish('invite', function (_id) {
 Meteor.publish('inviteEmail', function (_id) {
 	check(_id, Match.Id);
 	log.trace('publish inviteEmail');
-	return db.invites.find({'emailHash': _id});
+	return db.invites.find({ 'emailHash': _id });
 });
 
 registerPartner = function (doc) {
@@ -104,44 +96,13 @@ registerPartnerWithVerification = function (doc, captcha) {
 
 	var res = registerPartner(doc);
 	if (doc.emailHash === res.invite.emailHash && doc.email && res.invite.email) {
-		verifyEmail(doc.email);
+		WlmUtils.verifyEmail(doc.email);
 	} else {
 		Accounts.sendVerificationEmail(res.userId, doc.email);
 	}
 };
 
 Meteor.methods({
-	sendEmail: function (to, from, subject, templateName, data) {
-		check([to, from, subject, templateName], [String]);
-		check(data, Array);
-
-		this.unblock();
-		try {
-			this.unblock();
-			Mandrill.messages.sendTemplate({
-				template_name: templateName,
-				template_content: [
-					{
-						name: 'body',
-						content: ''
-					}
-				],
-				message: {
-					subject: subject,
-					from_email: from,
-					global_merge_vars: data,
-					"merge_vars": [
-						{}
-					],
-					to: [
-						{email: to}
-					]
-				}
-			});
-		} catch (e) {
-			console.log(e);
-		}
-	},
 	checkLogin: function (doc) {
 		var user;
 		check(doc, {
@@ -212,7 +173,7 @@ Meteor.methods({
 			email: String
 		});
 
-		var user = Meteor.users.findOne({emails: {$elemMatch: {address: doc.email}}});
+		var user = Meteor.users.findOne({ emails: { $elemMatch: { address: doc.email } } });
 
 		if (!user) {
 			throw new Meteor.Error(400, 'User not found');

@@ -1,8 +1,10 @@
 <template name="inviteListCopyLink">
-    <button type="button" class="btn btn-link" title="{{inviteLink}}" name="copyLink">
-        Скопировать
-    </button>
+    {{#if showLink}}
+        <button type="button" class="btn btn-link" title="{{inviteLink}}" name="copyLink">
+            Скопировать
+        </button>
+    {{/if}}
 </template>
 <template name="inviteListStatus">
-    <span class="label {{statusType}}">{{statusText}}</span>
+    <div class="label {{statusColor}}">{{statusText}}</div>
 </template>

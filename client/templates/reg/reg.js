@@ -17,7 +17,7 @@ AutoForm.hooks({
 			});
 		},
 		onSuccess: function (type, res) {
-			//Meteor.loginWithPassword(email, password);
+			Meteor.loginWithPassword(email, password);
 			return Router.go('/');
 		},
 

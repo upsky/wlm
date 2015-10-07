@@ -18,15 +18,9 @@
     "email": {
       "sysadmin": "admin@wl-market.com",
       "invite": "invite@wl-market.com",
-      "verify": "admin@wl-market.com",
-      "support": "admin@wl-market.com"
+      "verify": "verify@wl-market.com",
+      "support": "support@wl-market.com"
     }
-  },
-  "mandrill": {
-    "host": "smtp.mandrillapp.com",
-    "port": "587",
-    "username": "admin@wintwin.ru",
-    "key": "tjcWyMN0xGRJrnKk5ZiwVQ"
   },
 
   "sysadminPass": "admin",
