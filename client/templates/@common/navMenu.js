@@ -25,6 +25,9 @@ Template.navMenu.helpers({
   "iamnavMenu": function() {
     return 'iam navMenu';
   },
+  "isImpersonate":function(){
+    return Impersonate._active.get()
+  },
   "mainMenuStatus": function() {
     if (Session.get('userMenuStatus')) {
       return 'expanded';
@@ -40,6 +43,9 @@ Template.navMenu.events({
   },
   "click #logoutHref": function(event) {
     Meteor.defer(function () { Router.go('logout') });
+  },
+  "click #disconnect": function(event) {
+    Impersonate.undo();
   },
   "click": function(event) {
     return Session.set('userMenuStatus', false);

@@ -79,3 +79,12 @@ Template.adminPanelTableUsers.helpers({
 		return WlmAdminSeeUsers.reactive.findOne();
 	}
 });
+Template.adminPanelUserItem.helpers({
+	"isImpersonateButt":function(){
+	return this.roles.some(function(item){
+			if (item == 'partner' ||
+				item == 'client'||
+				item == 'bussines'){return true;};
+		});
+	}
+});
