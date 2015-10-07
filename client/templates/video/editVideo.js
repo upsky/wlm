@@ -13,7 +13,7 @@ Template.editVideo.helpers({
 
 Template.editVideo.events({
 	'click [name=back]': function () {
-		Router.go('/admin/video/videoManager');
+		Router.go('/admin/videoManager');
 	}
 });
 
@@ -30,8 +30,13 @@ AutoForm.hooks({
 			}
 		},
 		onError: function (type, error) {
-			console.log(error);
-			if (error){
+			if (error.error === 407) {
+				return new PNotify({
+					title: document.title,
+					type: 'error',
+					text: TAPi18n.__('errors.checkLink')
+				});
+			} else{
 				return new PNotify({
 					title: document.title,
 					type: 'error',
@@ -41,7 +46,11 @@ AutoForm.hooks({
 		},
 		onSuccess: function (type, result) {
 			if (result) {
-				Router.go('/admin/video/videoManager');
+				Router.go('/admin/videoManager');
+				new PNotify({
+					type: 'success',
+					text: TAPi18n.__('messages.addVideo')
+				});
 			}
 		}
 	}

@@ -13,7 +13,9 @@
     "recoverPass": "Забыли пароль?",
     "emailSend": "Пиьсмо отправлено",
     "passwordChanged": "Пароль изменен",
-    "emailVerified": "Адрес эл. почты подтвержден"
+    "emailVerified": "Адрес эл. почты подтвержден",
+    "videoNotfound": "Такого видео пока нет.",
+    "addVideo": "Видео добавленно"
   },
 
   "vk": {

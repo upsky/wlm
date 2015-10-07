@@ -7,6 +7,6 @@ Template.videoManager.helpers({
 
 Template.videoManager.events({
 	'click [name=addVideo]': function () {
-		Router.go('/admin/video/addVideo');
+		Router.go('/admin/video/add');
 	}
 });

@@ -17,24 +17,24 @@ Meteor.methods({
     return Roles.addUsersToRoles(_id, role);
   },
   insertVideos: function (doc) {
+    var videoId, regExp, match;
     check(doc, {
       name: String,
       youtubeId: String,
       title: String,
       info: String
     });
-  var videoId;
-  var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-  var url = doc.youtubeId;
-  var match = url.match(regExp);
-  if (match[7].length != 11) {
+  regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+  match = doc.youtubeId.match(regExp)[7];
+  if (match.length != 11) {
     throw new Meteor.Error(407, 'Not correct reference');
   } else {
-    doc.videoId = match[7];
+    doc.videoId = match;
   }
   return db.videos.insert(doc);
   },
   editVideos: function (doc) {
+    var videoId, regExp, match, updateObj = {};
     check(doc, {
       _id: String,
       name: String,
@@ -42,14 +42,12 @@ Meteor.methods({
       title: String,
       info: String
     });
-    var videoId, updateObj = {};
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    var url = doc.youtubeId;
-    var match = url.match(regExp);
-    if (match[7].length != 11) {
+    regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    match = doc.youtubeId.match(regExp)[7];
+    if (match.length != 11) {
       throw new Meteor.Error(407, 'Not correct reference');
     } else {
-      doc.videoId = match[7];
+      doc.videoId = match;
     }
     updateObj.title = doc.title;
     updateObj.name = doc.name;
