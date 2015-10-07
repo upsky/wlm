@@ -48,7 +48,7 @@ Meteor.methods({
 			return db.invites.insert({
 				status: 'qr',
 				initiator: this.userId,
-				email: '',
+				email: Random.id(),
 				name: ''
 			});
 		}

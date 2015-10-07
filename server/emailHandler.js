@@ -26,7 +26,7 @@ Meteor.startup(function () {
 	Mandrill.config(Meteor.settings.mandrill);
 
 	Accounts.emailTemplates.resetPassword.from = function () {
-		return Meteor.settings.supportEmail;
+		return Meteor.pubSettings('email', 'support');
 	};
 	Accounts.emailTemplates.resetPassword.subject = function () {
 		return 'Восстановление пароля WL Market';
@@ -44,7 +44,7 @@ Meteor.startup(function () {
 	};
 
 	Accounts.emailTemplates.verifyEmail.from = function () {
-		return Meteor.settings.verifyEmail;
+		return Meteor.pubSettings('email', 'verify');
 	};
 	Accounts.emailTemplates.verifyEmail.subject = function () {
 		return 'Подтверждение почты WL Market';

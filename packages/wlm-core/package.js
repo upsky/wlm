@@ -15,10 +15,15 @@ Package.onUse(function (api) {
 	api.imply('wlm-security');
 	api.use('underscore');
 	api.use('wlm-security');
+
 	api.addFiles([
 		'wlm-core.js',
 		'collections.js'
 	]);
+
+	api.addFiles([
+		'client-utils.js'
+	], 'client');
 
 	api.export('db');
 });

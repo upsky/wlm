@@ -7,6 +7,10 @@ template.helpers({
 	},
 	emailSended: function () {
 		return emailSended.get();
+	},
+
+	supportEmail: function () {
+		return Meteor.pubSettings('email', 'support');
 	}
 });
 

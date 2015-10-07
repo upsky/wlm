@@ -13,8 +13,14 @@
       "groupName": "wlmarket_official"
     },
     "showQr": false,
-    "recaptchaPublic": "r6LdpHw4TAAAAALynMWuPpw6lhAq7gX0Rzi136lSg"
+    "recaptchaPublic": "r6LdpHw4TAAAAALynMWuPpw6lhAq7gX0Rzi136lSg",
 
+    "email": {
+      "sysadmin": "admin@wl-market.com",
+      "invite": "invite@wl-market.com",
+      "verify": "admin@wl-market.com",
+      "support": "admin@wl-market.com"
+    }
   },
   "mandrill": {
     "host": "smtp.mandrillapp.com",
@@ -23,12 +29,7 @@
     "key": "tjcWyMN0xGRJrnKk5ZiwVQ"
   },
 
-  "sysadminEmail": "admin@wlm.ru",
   "sysadminPass": "admin",
-
-  "inviteEmail": "invite@wlm.ru",
-  "verifyEmail": "admin@wlm.ru",
-  "supportEmail": "admin@wlm.ru",
 
   "recaptchaPrivate": "6LdpHw4TAAAAAIvqE_7HthHylJAP_Q8edi4WK4Vr"
 }

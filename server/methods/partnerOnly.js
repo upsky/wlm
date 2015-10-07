@@ -117,7 +117,7 @@ Meteor.methods({
 			if (inviteId) {
 				Meteor.call('sendEmail',
 					doc.email,
-					Meteor.settings.inviteEmail,
+					Meteor.pubSettings('email', 'invite'),
 					'Приглашение от ' + Meteor.user().profile.name,
 					'invitePartner',
 					[
@@ -144,7 +144,7 @@ Meteor.methods({
 		if (currentPartner) {
 			var partnerLevel = currentPartner.level;
 			var from = partnerLevel + 1;
-			var to = partnerLevel + Meteor.settings.public.networkDeep;
+			var to = partnerLevel + Meteor.pubSettings('networkDeep');
 
 			for (i = from; i <= to; i++) {
 				result.push({

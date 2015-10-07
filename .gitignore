@@ -97,4 +97,5 @@ public/i18n/*
 
 #ignore build directory
 /.out
+/.run-config.sh
 /private/deploy
