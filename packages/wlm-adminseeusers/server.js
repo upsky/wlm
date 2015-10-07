@@ -40,15 +40,8 @@ Meteor.methods({
 		return result;
 	}
 });
-/*  при использовании крашится
 WlmSecurity.addMethods({
 	adminPanelUsers: {
-		authNotRequired:false,
 		roles: 'adminPanelUsers'
 	}
-});*/
-
-WlmSecurity._methods.adminPanelUsers= {
-	authNotRequired:false,
-	roles: 'adminPanelUsers'
-	};
+});
