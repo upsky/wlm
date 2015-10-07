@@ -1,11 +1,15 @@
 Template.inviteListCopyLink.events({
-	showLink: function () {
-		return (this.status === 'active');
-	},
 	"click [name=copyLink]": function () {
 		Meteor.copyToClipboard(Meteor.getInviteLinks(this._id))
 	}
 });
+Template.inviteListCopyLink.helpers({
+	showLink: function () {
+		return (this.status === 'active');
+	}
+});
+
+
 Template.inviteListStatus.helpers({
 	statusText: function () {
 		return TAPi18n.__('db.inviteStatus.' + this.status);

@@ -1,6 +1,6 @@
 Meteor.startup(function () {
 	Accounts.emailTemplates.resetPassword.from = function () {
-		return Meteor.pubSettings('email', 'support');
+		return Meteor.pubSettings('email', 'verify');
 	};
 	Accounts.emailTemplates.resetPassword.subject = function () {
 		return 'Восстановление пароля WL Market';

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-. .run-config.sh
 
 if [ "$HOST" == "" ]; then
     HOST=wlm.he24.ru
@@ -9,6 +8,8 @@ fi
 METEOR=/usr/local/bin/meteor
 SETTINGS="--settings settings.json"
 export MAIL_URL=smtp://test%40wl-market.com:123123@smtp.yandex.com
+
+. .run-config.sh
 
 # check wlm-security is the first package. to init first before other packages
 function check() {
@@ -52,10 +53,14 @@ case $1 in
         $METEOR build .out --server=$HOST --mobile-settings settings.json
     ;;
     deploy)
+        rm -rf public/i18n/*.json
         mupx deploy --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json
     ;;
     reconfig)
         mupx reconfig --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json
+    ;;
+    logs)
+        mupx logs --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json $3 $4
     ;;
     *)
     echo "usage: $0 [run|ios] params" && exit 1

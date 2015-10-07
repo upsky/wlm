@@ -117,7 +117,8 @@ Meteor.methods({
 				WlmUtils.sendEmail(
 					doc.email,
 					Meteor.settings.public.email.invite,
-					TAPi18n.__('email.inviteFrom', Meteor.user().profile.name),
+					// TODO original user language
+					TAPi18n.__('email.inviteFrom', Meteor.user().profile.name, 'ru'),
 					'invitePartnerEmail',
 					{ regLink: Meteor.getInviteLinksEmail(doc.emailHash) }
 				);
