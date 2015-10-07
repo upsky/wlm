@@ -6,8 +6,12 @@ WlmSecurity.addMethods({
 		authNotRequired: true,
 		roles: 'all'
 	},
-	logout: { roles: 'all' },
-	logoutOtherClients: { roles: 'all' },
+	logout: {
+		roles: 'all'
+	},
+	logoutOtherClients: {
+		roles: 'all'
+	},
 	getNewToken: {
 		authNotRequired: true,
 		roles: 'all'

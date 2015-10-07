@@ -23,15 +23,23 @@ CutterPaginator ={
         return CutterPaginator.reactive.findOne();
     },
     "update":function (){
-        CutterPaginator.reactive.remove({});
-        CutterPaginator.reactive.insert(CutterPaginator.config);
-        CutterPaginator.onSetPage({
-            page:CutterPaginator.config.nowPage,
-            skip:(CutterPaginator.config.nowPage - 1) * CutterPaginator.config.itemsPage}
-        );
+        var config=CutterPaginator.config;
+        var collect=CutterPaginator.reactive;
+        if (collect.find().count() !== 1)
+        {
+            collect.remove({});
+            collect.insert(config);
+        }else{
+            var id = collect.findOne()._id;
+            collect.update({_id:id},config);
+        }
     },
     "genUpd":function(){
-        config = CutterPaginator.config;
+        var config=CutterPaginator.config;
+        CutterPaginator.onSetPage({
+                page:config.nowPage,
+                skip:(config.nowPage - 1) * config.itemsPage}
+        );
         CutterPaginator.generate(config.allCount,config.itemsPage,config.nowPage);
     },
     /**
@@ -74,9 +82,7 @@ CutterPaginator ={
         CutterPaginator.update();
     }
 };
-
 CutterPaginator.update();
-
 Template.cutterPaginator.helpers({
     "config": function () {
         return CutterPaginator.get();
@@ -84,7 +90,6 @@ Template.cutterPaginator.helpers({
 });
 
 Template.cutterPaginator.events({
-
     "click li[name=Previous]":function(e){
         e.preventDefault();
         CutterPaginator.config.nowPage = CutterPaginator.config.nowPage - 1;
@@ -92,7 +97,6 @@ Template.cutterPaginator.events({
     },
     "click li[name=Next]":function(e){
         e.preventDefault();
-        console.log('>');
         CutterPaginator.config.nowPage=CutterPaginator.config.nowPage + 1;
         CutterPaginator.genUpd();
     },
