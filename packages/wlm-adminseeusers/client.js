@@ -1,8 +1,7 @@
 WlmAdminSeeUsers = {
 	check:function(){
-		if (!Roles.userIsInRole(Meteor.user(),['adminPanelUsers'])) {
-				Router.go('forbidden');
-		}
+		if (!Roles.userIsInRole(Meteor.user(),['adminPanelUsers']))
+			Router.go('forbidden');
 	},
 	data: {
 		list: [],
@@ -50,7 +49,7 @@ WlmAdminSeeUsers = {
 };
 
 Template.adminPanelUsersFind.helpers({
-	adminPanelUsersFind: {
+	blockInfo: {
 		blockId: "findUsers"
 	}
 });
@@ -62,7 +61,7 @@ Template.adminPanelListItemRole.helpers({
 });
 
 Template.adminPanelUsersFind.events({
-	"submit form[name=adminPanelUsersFind]": function (e) {
+	"submit form#adminPanelUsersFind": function (e) {
 		WlmAdminSeeUsers.check();
 		CutterPaginator.onSetPage = function (input) {
 			WlmAdminSeeUsers.find(undefined, input.page);

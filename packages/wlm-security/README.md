@@ -1,7 +1,7 @@
 для регламинтирования прав на метод необходиом запустить команду
 
-//WlmSecurity.addMethods({
-WlmSecurity._methods({  //данная строка может быть некорректна!,  найдено опытным путём
+
+WlmSecurity.addMethods({
 	имяМетода: {
 		roles: "имя роли"
 	},
@@ -12,4 +12,11 @@ WlmSecurity._methods({  //данная строка может быть неко
     		authNotRequired: true,
     		roles: 'all'
     },
+});
+
+если приер выше не работает тогда попробовать
+
+WlmSecurity._methods.имяМетода({
+	authNotRequired: true,
+	roles: 'имя роли1'
 });

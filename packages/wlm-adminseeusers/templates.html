@@ -13,8 +13,8 @@
 <!-- поиск пользователей -->
 <template name="adminPanelUsersFind">
 {{#if isInRole 'adminPanelUsers'}}
-    {{#Layout template="panel" data=adminPanelUsersFind}}
-        <form name="adminPanelUsersFind" >
+    {{#Layout template="panel" data=blockInfo}}
+        <form id="adminPanelUsersFind" >
             <div class="input-group">
                 <span class="input-group-addon fa fa-user" id="basic-addon1" > </span>
                 <input name="searchString" type="text" class="form-control" placeholder="{{_ "formFields.findUsers.placeholder"}}" aria-describedby="basic-addon1">

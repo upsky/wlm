@@ -16,19 +16,11 @@ Package.onUse(function (api) {
         "templating",
         "session",
     ], "client");
-    //api.versionsFrom('1.1.0.3');
-    //api.use('templating');
-    //api.use('session');
-
 
     api.addFiles([
         'templates.html',
         'client.js',
     ], 'client');
-/*
-    api.addFiles([
-        'templates.html'
-    ], 'web.browser');
-*/
+
     api.export('CutterPaginator');
 });

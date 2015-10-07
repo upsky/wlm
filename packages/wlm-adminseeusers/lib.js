@@ -3,15 +3,21 @@ Router.route('/admin/panel/users', {
 	template: 'adminPanelUsers',
 	name: 'adminPanelUsers',
 	onBeforeAction:function(){
-		return (Roles.userIsInRole(Meteor.user(),['adminPanelUsers'])) ? this.next() : Router.go('forbidden');
+		if (Roles.userIsInRole(Meteor.user(),['adminPanelUsers']))
+			this.next();
+		else
+			Router.go('forbidden');
 	}
 });
-Router.route('/wh/:_id', {
+Router.route('/admin/user/impersonate:_id', {
 	name: 'wh',
 	template: 'loading',
 	waitOn: function () {
 		//todo  права что-же с вами делать...
-		//return (Roles.userIsInRole(Meteor.user(),['adminPanelUsers'])) ? this.next() : Router.go('forbidden');
+		//if (Roles.userIsInRole(Meteor.user(),['adminPanelUsers']))
+		//	this.next();
+		//else
+		// 	Router.go('forbidden');
 		if (this.params._id) {
 			Impersonate.do(this.params._id);
 			Router.go('index');
