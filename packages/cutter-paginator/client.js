@@ -20,10 +20,10 @@ CutterPaginator = {
 		isNoLast: true,      //маркер (не последняя страница)
 	},
 	"reactive": new Meteor.Collection(null),
-	"get": function () {
+	"get": function (name) {
 		return CutterPaginator.reactive.findOne();
 	},
-	"update": function () {
+	"update": function (name) {
 		var config = CutterPaginator.config;
 		var collect = CutterPaginator.reactive;
 		if (collect.find().count() !== 1) {
@@ -34,7 +34,7 @@ CutterPaginator = {
 			collect.update({ _id: id }, config);
 		}
 	},
-	"genUpd": function () {
+	"genUpd": function (name) {
 		var config = CutterPaginator.config;
 		CutterPaginator.onSetPage({
 				page: config.nowPage,
@@ -49,7 +49,7 @@ CutterPaginator = {
 	 * @param itemsPage Number данных на странице
 	 * @param nowPage   Number текущая страница
 	 */
-	"generate": function (inputData, itemsPage, nowPage) {
+	"generate": function (name, inputData, itemsPage, nowPage) {
 		config = CutterPaginator.config;
 		config.itemsPage = itemsPage;
 		config.isNowFastJump = config.isFastJump;
@@ -67,17 +67,14 @@ CutterPaginator = {
 			if (+matCountButtons < config.nowShowButtons) {
 				config.nowShowButtons = matCountButtons;
 			}
-			;
 			var centerPosition = Math.ceil(config.nowShowButtons / 2);
 			var correctPosition = config.nowPage - centerPosition;
 			if (correctPosition < 0) {
 				correctPosition = 0;
 			}
-			;
 			if (correctPosition + config.nowShowButtons > matCountButtons) {
 				correctPosition = matCountButtons - config.nowShowButtons;
 			}
-			;
 			for (var n = 1; n <= config.nowShowButtons; n++) {
 				var button = {
 					page: n + correctPosition,
@@ -86,12 +83,9 @@ CutterPaginator = {
 				if (config.nowPage == n + correctPosition) {
 					button.selected = "active";
 				}
-				;
 				config.buttons.push(button);
 			}
-			;
 		}
-		;
 		CutterPaginator.update();
 	}
 };
