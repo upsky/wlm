@@ -9,7 +9,7 @@ AutoForm.hooks({
 		onSuccess: function (type, res) {
 			WlmNotify.create({
 				type: 'success',
-				text: TAPi18n.__('messages.saveChanges')
+				text: TAPi18n.__('messages.changesSaved')
 			});
 
 		}

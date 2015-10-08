@@ -15,6 +15,7 @@ Package.onUse(function (api) {
 	api.imply('alanning:roles');
 	api.imply('gwendall:impersonate');
 	api.use('underscore');
+	api.use('check');
 	api.use('session');
 	api.use('alanning:roles');
 	api.use('seba:method-hooks');

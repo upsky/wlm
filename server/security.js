@@ -21,6 +21,13 @@ WlmSecurity.addMethods({
 		roles: 'all'
 	}
 });
+//WlmSecurity.addPublish({
+//	_roles: {
+//		authNotRequired: true,
+//		roles: 'all'
+//	}
+//});
+
 
 WlmSecurity.addMethods({
 	createUser: {
