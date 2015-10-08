@@ -56,7 +56,7 @@ Template.adminPanelListItemRole.helpers({
 Template.adminPanelUsersFind.events({
 	"submit form#adminPanelUsersFind": function (e) {
 		WlmAdminSeeUsers.check();
-		CutterPaginator.get('adminPanelUsers').onSetPage = function (input) {
+		CutterPaginator.onSetPage = function (input) {
 			WlmAdminSeeUsers.find(undefined, input.page);
 		};
 		e.preventDefault();
