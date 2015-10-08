@@ -15,7 +15,7 @@ Meteor.methods({
 		};
 
 		if (nowPage && +nowPage > 1) {
-			configRequest["skip"] = (nowPage - 1) * itemsPage;
+			configRequest.skip = (nowPage - 1) * itemsPage;
 		}
 
 		var result = {
