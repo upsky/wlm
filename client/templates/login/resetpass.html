@@ -1,42 +1,19 @@
 <template name="resetpass">
     {{#autoForm id="resetPassForm" type="normal" schema="Schemas.resetPass" resetOnSuccess=false}}
-        <section class="wrapper scrollable animated fadeInDown">
-            <section class="panel panel-default">
-                <a href="/login" class="btn btn-link">&larr; Назад</a>
+        <section class="login-form">
+            <div class="form-group">
+                <p>
+                    <!--TODO TRANSLITE MAX-->
+                    Введите новый пароль для пользователя {{username}}
+                </p>
+            </div>
 
-                <div class="panel-heading">
-                    <img src="/logo.png" style="max-width: 60%" alt=""/>
-                </div>
-
-                <section class="login-form">
-                    <div class="form-group">
-                        <p>
-                            Введите новый пароль для пользователя {{username}}
-                        </p>
-                    </div>
-
-                    {{> afQuickField type="password" class="form-control input-lg" name="newPass" placeholder="schemaLabel"}}
-                    {{> afQuickField type="password" class="form-control input-lg" name="repeatPass" placeholder="schemaLabel"}}
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-lg btn-success btn-block"
-                               value="{{_ "buttons.save"}}"/>
-                    </div>
-                </section>
-
-                <div class="panel-footer">
-                    <div class="clearfix">
-                        <a href="#" class=""
-                           onclick="window.open('https://vk.com/winlevel_ts', '_system');">
-                            <i class="fa fa-vk"></i>
-                            {{_ 'messages.technicalSupport'}}
-                        </a>
-                        <button type="button" class="btn btn-link" name="loginInstructionsShow">
-                            <i class="fa fa-youtube-play"></i>
-                            {{_ 'messages.videoTutorial'}}
-                        </button>
-                    </div>
-                </div>
-            </section>
+            {{> afQuickField type="password" class="form-control input-lg" name="newPass" placeholder="schemaLabel"}}
+            {{> afQuickField type="password" class="form-control input-lg" name="repeatPass" placeholder="schemaLabel"}}
+            <div class="form-group">
+                <input type="submit" class="btn btn-lg btn-success btn-block"
+                       value="{{_ "buttons.save"}}"/>
+            </div>
         </section>
     {{/autoForm}}
 </template>
