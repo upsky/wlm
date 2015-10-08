@@ -11,14 +11,10 @@
         {{/unless}}
 
         {{#if resetPass}}
-            <!--TODO TRANSLITE MAX-->
-            <p>
-            <h4>Пиьсмо отправлено</h4>
-            </p>
-            <p>На вашу почту {{currentEmail}} отправлено письмо с инструкцией по востановлению пароля!</p>
+            <h4><p>{{_ 'messages.emailSend'}}</p></h4>
+            <p>{{_ 'messages.youEmail'}} {{currentEmail}} {{_ 'messages.sendEmailWithInstructions'}}</p>
 
-            <p>Если письмо не пришло в течении пары минут, попробуйте поискать его в папке Спам вашего почтового
-                клиента.</p>
+            <p>{{_ 'messages.verifiEmailText'}}</p>
         {{/if}}
     {{/autoForm}}
 </template>
