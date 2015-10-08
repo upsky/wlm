@@ -1,25 +1,27 @@
-WlmAdminSeeUsers = {
-	check: function () {
-		if (!Roles.userIsInRole(Meteor.user(), ['adminPanelUsers']))
-			Router.go('forbidden');
-	},
-	data: {
+WlmAdminUsers = {
+	reactive: new ReactiveVar({
 		list: [],
 		allCount: 0,
 		nowPage: 1,
 		itemsPage: 10,
 		queryString: ""
+	}),
+	check: function () {
+		if (!Roles.userIsInRole(Meteor.user(), ['adminPanelUsers']))
+			Router.go('forbidden');
 	},
-	reactive: new ReactiveVar({}),
 	get: function () {
-		return WlmAdminSeeUsers.reactive.get();
+		return this.reactive.get();
+	},
+	set:function(data){
+		this.reactive.set(data);
 	},
 	update: function () {
-		WlmAdminSeeUsers.reactive.set(WlmAdminSeeUsers.data);
+		this.reactive.dep.changed();
 	},
 	find: function (query, page) {
-		WlmAdminSeeUsers.check();
-		var config = WlmAdminSeeUsers.data;
+		this.check();
+		var config = this.get();
 		if (query !== undefined) {
 			config.queryString = query;
 		}
@@ -32,10 +34,13 @@ WlmAdminSeeUsers = {
 			config.queryString,
 			config.itemsPage,
 			function (error, result) {
-				config.list = result.data;
-				config.allCount = result.count;
-				CutterPaginator.generate('adminPanelUsers',config.allCount, config.itemsPage, config.nowPage);
-				WlmAdminSeeUsers.update();
+				if (!error) {
+					var config = WlmAdminUsers.get();
+					config.list = result.data;
+					config.allCount = result.count;
+					CutterPaginator.generate('adminPanelUsers', config.allCount, config.itemsPage, config.nowPage);
+					WlmAdminUsers.update();
+				}
 			}
 		);
 	}
@@ -55,26 +60,26 @@ Template.adminPanelListItemRole.helpers({
 
 Template.adminPanelUsersFind.events({
 	"submit form#adminPanelUsersFind": function (e) {
-		WlmAdminSeeUsers.check();
+		WlmAdminUsers.check();
 		CutterPaginator.get('adminPanelUsers').onSetPage = function (input) {
-			WlmAdminSeeUsers.find(undefined, input.page);
+			WlmAdminUsers.find(undefined, input.page);
 		};
 		e.preventDefault();
 		var templateData = Template.instance();
 		var searchString = templateData.$("[name=searchString]").val();
-		WlmAdminSeeUsers.find(searchString, 1);
+		WlmAdminUsers.find(searchString, 1);
 	}
 });
 
 Template.adminPanelTableUsers.helpers({
 	config: function () {
-		WlmAdminSeeUsers.check();
-		return WlmAdminSeeUsers.get();
+		WlmAdminUsers.check();
+		return WlmAdminUsers.get();
 	}
 });
 
 Template.adminPanelUserItem.helpers({
-	isImpersonateButt: function () {
+	isImpersonateButton: function () {
 		return this.roles.some(function (item) {
 			if (item == 'partner' ||
 				item == 'client' ||

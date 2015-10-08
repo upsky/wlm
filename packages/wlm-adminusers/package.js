@@ -1,5 +1,5 @@
 Package.describe({
-	name: 'wlm-adminseeusers',
+	name: 'wlm-adminusers',
 	version: '0.0.1',
 	summary: 'Панель поиска и управления пользователями',
 	git: '',
@@ -34,5 +34,5 @@ Package.onUse(function (api) {
 		'server.js'
 	], server);
 
-	api.export('WlmAdminSeeUsers');
+	api.export('WlmAdminUsers');
 });
