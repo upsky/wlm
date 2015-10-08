@@ -6,7 +6,7 @@ CutterPaginator = {
 		}
 		var reactive = CutterPaginator.reactive;
 		var create=new ReactiveVar({
-			"onSetPage": function () {
+			onSetPage: function () {
 			},
 			name: name,
 			//конфигурации
@@ -40,12 +40,17 @@ CutterPaginator = {
 		}
 	},
 	set:function(name,data){
-		CutterPaginator.checkIsset(name);
-		return CutterPaginator.reactive[name].set(data);
+		if (name) {
+			CutterPaginator.checkIsset(name);
+			return CutterPaginator.reactive[name].set(data);
+		}
 	},
 	update: function (name) {
-		/*var config = CutterPaginator.cache;
-		CutterPaginator.reactive.set(config);*/
+		if (name) {
+			CutterPaginator.checkIsset(name);
+			var config = CutterPaginator.reactive[name];
+			config.dep.changed();
+		}
 	},
 	genUpd: function (name) {
 		if (name){
@@ -55,7 +60,7 @@ CutterPaginator = {
 					skip: (nowconfig.nowPage - 1) * nowconfig.itemsPage
 				}
 			);
-			CutterPaginator.generate(nowconfig.allCount, nowconfig.itemsPage, nowconfig.nowPage);
+			CutterPaginator.generate(name, nowconfig.allCount, nowconfig.itemsPage, nowconfig.nowPage);
 		}
 	},
 	/**
@@ -67,7 +72,7 @@ CutterPaginator = {
 	generate: function (name, inputData, itemsPage, nowPage) {
 		if (name)
 		{
-			config = CutterPaginator.get(name);
+			var config = CutterPaginator.get(name);
 			config.itemsPage = itemsPage;
 			config.isNowFastJump = config.isFastJump;
 			config.nowShowButtons = config.showButtons;
@@ -76,7 +81,9 @@ CutterPaginator = {
 			config.allCount = inputData;
 			//колчество страниц
 			var matCountButtons = Math.ceil(+config.allCount / +config.itemsPage);
-			config.isNowFastJump = config.autoFastJump !== 0 && config.autoFastJump < matCountButtons;
+			if (!config.isNowFastJump) {
+				config.isNowFastJump = config.autoFastJump !== 0 && config.autoFastJump < matCountButtons;
+			}
 			config.isNoFirst = config.nowPage !== 1;
 			config.isNoLast = config.nowPage !== matCountButtons;
 			config.isShow = matCountButtons > 1 ? true : false;
@@ -95,7 +102,8 @@ CutterPaginator = {
 				for (var n = 1; n <= config.nowShowButtons; n++) {
 					var button = {
 						page: n + correctPosition,
-						selected: ""
+						selected: "",
+						nameConfig: config.name
 					};
 					if (config.nowPage == n + correctPosition) {
 						button.selected = "active";
@@ -103,12 +111,11 @@ CutterPaginator = {
 					config.buttons.push(button);
 				}
 			}
-			//CutterPaginator.update();
+			CutterPaginator.update(name);
 		}
 	}
 };
-//CutterPaginator.init();
-CutterPaginator.update();
+
 Template.cutterPaginator.helpers({
 	"config": function () {
 		return CutterPaginator.get(this.name);
@@ -118,32 +125,36 @@ Template.cutterPaginator.helpers({
 Template.cutterPaginator.events({
 	"click li[name = Previous]": function (e) {
 		e.preventDefault();
-		CutterPaginator.config.nowPage = CutterPaginator.config.nowPage - 1;
-		CutterPaginator.genUpd();
+		var name = Template.instance().data.name;
+		CutterPaginator.get(name).nowPage--;
+		CutterPaginator.genUpd(name);
 	},
 	"click li[name = Next]": function (e) {
 		e.preventDefault();
-		CutterPaginator.config.nowPage = CutterPaginator.config.nowPage + 1;
-		CutterPaginator.genUpd();
+		var name = Template.instance().data.name;
+		CutterPaginator.get(name).nowPage++;
+		CutterPaginator.genUpd(name);
 	},
 	"click li[name = jumpBegin]": function (e) {
 		e.preventDefault();
-		CutterPaginator.config.nowPage = 1;
-		CutterPaginator.genUpd();
+		var name = Template.instance().data.name;
+		CutterPaginator.get(name).nowPage = 1;
+		CutterPaginator.genUpd(name);
 	},
 	"click li[name = jumpEnd]": function (e) {
 		e.preventDefault();
-		config = CutterPaginator.config;
+		var name = Template.instance().data.name;
+		var config = CutterPaginator.get(name);
 		config.nowPage = Math.ceil(config.allCount / config.itemsPage);
-		CutterPaginator.genUpd();
-	}
+		CutterPaginator.genUpd(name);
+	},
 });
 
 Template.cutterPaginatorButton.events({
 	"click li[name = paginatorButton]": function (e) {
 		e.preventDefault();
 		var templateData = Template.instance().data;
-		CutterPaginator.config.nowPage = templateData.page;
-		CutterPaginator.genUpd();
+		CutterPaginator.get(templateData.nameConfig).nowPage = templateData.page;
+		CutterPaginator.genUpd(templateData.nameConfig);
 	}
 });

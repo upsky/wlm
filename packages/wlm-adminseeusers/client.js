@@ -65,12 +65,14 @@ Template.adminPanelUsersFind.events({
 		WlmAdminSeeUsers.find(searchString, 1);
 	}
 });
+
 Template.adminPanelTableUsers.helpers({
 	config: function () {
 		WlmAdminSeeUsers.check();
 		return WlmAdminSeeUsers.get();
 	}
 });
+
 Template.adminPanelUserItem.helpers({
 	isImpersonateButt: function () {
 		return this.roles.some(function (item) {
