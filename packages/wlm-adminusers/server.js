@@ -5,14 +5,12 @@ Meteor.methods({
 		check(nowPage, Number);
 
 		var configRequest = {
-			fields: {
-				_id: 1,
-				createdAt: 1,
-				username: 1,
-				emails: 1,
-				roles: 1,
-				uin: 1,
-			},
+			_id: 1,
+			createdAt: 1,
+			username: 1,
+			emails: 1,
+			roles: 1,
+			uin: 1,
 			limit: itemsPage
 		};
 
