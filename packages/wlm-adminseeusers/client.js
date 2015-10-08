@@ -12,13 +12,13 @@ WlmAdminSeeUsers = {
 	},
 	reactive: new ReactiveVar({}),
 	get: function () {
-		tmpconfig = WlmAdminSeeUsers.reactive.get();
-		return
+		return WlmAdminSeeUsers.reactive.get();
 	},
 	update: function () {
 		WlmAdminSeeUsers.reactive.set(WlmAdminSeeUsers.data);
 	},
 	find: function (query, page) {
+		WlmAdminSeeUsers.check();
 		var config = WlmAdminSeeUsers.data;
 		if (query !== undefined) {
 			config.queryString = query;
@@ -56,7 +56,7 @@ Template.adminPanelListItemRole.helpers({
 Template.adminPanelUsersFind.events({
 	"submit form#adminPanelUsersFind": function (e) {
 		WlmAdminSeeUsers.check();
-		CutterPaginator.onSetPage = function (input) {
+		CutterPaginator.get('adminPanelUsers').onSetPage = function (input) {
 			WlmAdminSeeUsers.find(undefined, input.page);
 		};
 		e.preventDefault();
@@ -68,7 +68,7 @@ Template.adminPanelUsersFind.events({
 Template.adminPanelTableUsers.helpers({
 	config: function () {
 		WlmAdminSeeUsers.check();
-		return WlmAdminSeeUsers.reactive.get();
+		return WlmAdminSeeUsers.get();
 	}
 });
 Template.adminPanelUserItem.helpers({

@@ -3,7 +3,7 @@
 <template name="adminPanelUsers">
 {{#if isInRole 'adminPanelUsers'}}
     {{> adminPanelUsersFind}}
-    {{> cutterPaginator}}
+    {{> cutterPaginator name="adminPanelUsers"}}
     {{> adminPanelTableUsers}}
 {{else}}
     {{> forbidden }}
