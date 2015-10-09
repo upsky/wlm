@@ -2,12 +2,33 @@
     <div class="panel panel-default panel-block">
         <div class="list-group">
             <div class="list-group-item" id="{{blockId}}-panel">
+                {{#if showToggleBoxBtn}}
+                    {{> toggleBoxBtn hideBox=hideBox}}
+                {{/if}}
+
                 <h4 class="section-title">
                     {{_ blockTitle}}
                     {{{videoInstruction blockId}}}
                 </h4>
-                {{> yield}}
+
+                {{#unless hideBox}}
+                    {{> yield}}
+                {{else}}
+                    <p class="text-muted">Для того, чтобы увидеть содержимое блока, разверните его.</p>
+                {{/unless}}
             </div>
         </div>
+    </div>
+</template>
+
+<template name="toggleBoxBtn">
+    <div class="c-panel-toggle">
+        <button type="button" class="btn btn-link btn-sm" name="toggleBox">
+            {{#if hideBox}}
+                {{_ 'buttons.open'}}
+            {{else}}
+                {{_ 'buttons.close'}}
+            {{/if}}
+        </button>
     </div>
 </template>

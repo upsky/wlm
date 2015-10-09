@@ -1,6 +1,7 @@
 Template.invitesList.helpers({
 	invitesList: {
-		blockId: "invitesList"
+		blockId: "invitesList",
+		hideBox: true
 	},
 	settings: function () {
 		return {

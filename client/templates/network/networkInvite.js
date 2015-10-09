@@ -3,7 +3,7 @@ Session.set('resetCaptcha', false);
 Template.networkInvite.helpers({
 	networkInvite: {
 		blockId: "networkInvite"
-	},
+	}
 });
 
 AutoForm.hooks({
