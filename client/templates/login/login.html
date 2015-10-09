@@ -1,10 +1,7 @@
 <template name="login">
-    {{> loginInstructionsModal}}
-    <div class="c-login-page login-page">
         {{#if resetToken}}
             {{>resetpass}}
         {{else}}
             {{>auth}}
         {{/if}}
-    </div>
 </template>
