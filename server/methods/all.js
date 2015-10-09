@@ -39,6 +39,17 @@ registerPartner = function (doc) {
 	if (invite.status === 'used') {
 		throw new Meteor.Error(400, 'Invite used');
 	}
+
+	// update invite
+	db.invites.update({ _id: doc._id }, {
+		$set: {
+			status: 'used',
+			email: doc.email,
+			name: doc.name
+		}
+	});
+
+	// TODO right invite invalidation
 	targetPartner = db.partners.findOne(invite.initiator);
 	if (!targetPartner) {
 		throw new Meteor.Error(400, 'Partner not found');

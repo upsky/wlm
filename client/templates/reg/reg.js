@@ -1,12 +1,10 @@
-var email, password;
+
 AutoForm.hooks({
 	regForm: {
 		before: {
 			method: function (doc) {
 				doc.email = doc.email.toLowerCase();
 				doc.emailHash = Router.current().params._id;
-				email = doc.email;
-				password = doc.newPass;
 				return doc;
 			}
 		},
@@ -17,12 +15,16 @@ AutoForm.hooks({
 			});
 		},
 		onSuccess: function (type, res) {
-			Meteor.loginWithPassword(email, password);
-			return Router.go('/');
+			var loginData = this.insertDoc;
+
+			Meteor.loginWithPassword(loginData.email, loginData.newPass, function (err) {
+				return Router.go('/');
+			});
 		},
 
 		onSubmit: function (data) {
 			var self = this;
+
 			//get the captcha data
 			var captcha = grecaptcha.getResponse();
 

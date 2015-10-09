@@ -2,7 +2,7 @@
 
 DEFAULT_HOST=wlm.he24.ru
 METEOR=/usr/local/bin/meteor
-SETTINGS="--settings settings.json"
+SETTINGS="--settings=settings.json"
 BUILD_DIR=../wlmbuild
 export MAIL_URL=smtp://postmaster%40sandboxfbc452b570544a5d9420aa783c0fda38.mailgun.org:d529975e91ce74e534b19a3ebc6b3d4f@smtp.mailgun.org
 export ANDROID_HOME=~/.meteor/android_bundle/android-sdk
@@ -52,7 +52,7 @@ case $1 in
         keytool -genkey -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -alias $ANDROID_DIR/rp.key -keypass $ANDROID_KEY_PASS -validity 10000
         jarsigner -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -keypass $ANDROID_KEY_PASS $ANDROID_DIR/unaligned.apk $ANDROID_DIR/rp.key
 
-        ZIPALIGN=~/.meteor/android_bundle/android-sdk/build-tools/20.0.0/zipalign
+        ZIPALIGN=~/.meteor/android_bundle/android-sdk/build-tools/23.0.0/zipalign
         $ZIPALIGN -f -v 4 $ANDROID_DIR/$UNSIGNED_APK $ANDROID_DIR/wlmarket.apk
         ;;
     deploy-meteor)
