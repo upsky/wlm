@@ -1,7 +1,3 @@
-Template.editVideo.onCreated(function () {
-	console.log(Template.instance());
-});
-
 Template.editVideo.helpers({
 	editVideo:{
 		blockId:'settings'
@@ -13,7 +9,7 @@ Template.editVideo.helpers({
 
 Template.editVideo.events({
 	'click [name=back]': function () {
-		Router.go('/admin/videoManager');
+		Router.go('videoManager');
 	}
 });
 
@@ -21,11 +17,7 @@ AutoForm.hooks({
 	insertVideoForm: {
 		before: {
 			method: function (doc) {
-				doc.title = doc.title;
-				doc.youtubeId = doc.youtubeId;
 				doc._id = Router.current().params._id;
-				doc.info = doc.info;
-				doc.name = doc.name;
 				return doc;
 			}
 		},
@@ -46,7 +38,7 @@ AutoForm.hooks({
 		},
 		onSuccess: function (type, result) {
 			if (result) {
-				Router.go('/admin/videoManager');
+				Router.go('videoManager');
 				new PNotify({
 					type: 'success',
 					text: TAPi18n.__('messages.addVideo')

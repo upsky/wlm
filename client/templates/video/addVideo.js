@@ -5,8 +5,8 @@ Template.addVideo.helpers({
 });
 
 Template.addVideo.onRendered(function (argument) {
-	if(Session.get('editVideo') != '' && Session.get('editVideo') != undefined) {
-		document.querySelector('[name=name]').value = Session.get('editVideo');
+	if(!_.isEmpty(Session.get('editVideo'))) {
+		$('[name=name]').val(Session.get('editVideo'));
 		new PNotify({
 							title: document.title,
 							type: 'success',
@@ -17,8 +17,8 @@ Template.addVideo.onRendered(function (argument) {
 
 Template.addVideo.events({
 	'click [name=back]': function () {
-		Session.set('editVideo', '');
-		Router.go('/admin/videoManager');
+		Session.set('editVideo', undefined);
+		Router.go('videoManager');
 	}
 });
 
@@ -41,7 +41,7 @@ AutoForm.hooks({
 		},
 		onSuccess: function (type, result) {
 			if (result) {
-				Router.go('/admin/videoManager');
+				Router.go('videoManager');
 				new PNotify({
 					type: 'success',
 					text: TAPi18n.__('messages.addVideo')

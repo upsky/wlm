@@ -8,7 +8,7 @@ Template.youtubeModal.events({
 	'click [name=changeVideo]': function () {
 			Session.set('editVideo', currentData());
 			if(db.videos.find({name: currentData()}).count() == 0 ) {
-				Router.go('/admin/video/add');
+				Router.go('addVideo');
 			} else {
 				var id = db.videos.findOne({name: currentData()})._id;
 				Router.go('editVideo', {_id: id});
