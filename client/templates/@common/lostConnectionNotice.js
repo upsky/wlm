@@ -1,6 +1,10 @@
-Meteor.startup(Deps.autorun.bind(Deps, function () {
-	var status = Meteor.status();
-	switch (status.status) {
+/**
+ *
+ * @param status
+ * @returns {*}
+ */
+var setStatus = function (status) {
+	switch (status) {
 		case 'connecting':
 			WlmNotify.create({
 				group: 'connect',
@@ -27,11 +31,28 @@ Meteor.startup(Deps.autorun.bind(Deps, function () {
 			break;
 
 	}
-}));
+	return status
+};
+Meteor.startup(function () {
+	var lastStatus = null;
+
+	Deps.autorun(function () {
+		var status = Meteor.status().status;
+
+		if (lastStatus && status === 'connected')
+			return;
+
+		if (lastStatus === status)
+			return;
+
+		lastStatus = setStatus(status);
+	})
+});
 
 Template.lostConnectionNotice.events({
 	'click #reload': function () {
 		location.reload();
 	}
 });
+
 
