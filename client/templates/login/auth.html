@@ -1,8 +1,12 @@
 <template name="auth">
 
-    {{#if isCordova}}
-        <h4 class="text-center">{{_ 'messages.selectAuthenticationMethod'}}</h4>
-    {{/if}}
+    <h4 class="text-center">
+        {{_ 'messages.welcome'}}
+        {{#if isCordova}}
+            <br/>
+            <small>{{_ 'messages.selectAuthenticationMethod'}}</small>
+        {{/if}}
+    </h4>
 
     {{#autoForm id="loginForm" type="method" schema="Schemas.loginSchema" meteormethod="checkLogin" resetOnSuccess=false}}
         <section class="login-form">

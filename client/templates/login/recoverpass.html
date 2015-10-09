@@ -1,5 +1,8 @@
 <template name="recoverpass">
     {{#autoForm id="recoverPassForm" type="method" schema="Schemas.recoverPass" meteormethod="recoverPass" resetOnSuccess=false}}
+        <h4 class="text-center">
+            {{_ 'messages.recoverpass'}}
+        </h4>
         {{#unless resetPass}}
             <section class="login-form">
                 {{> afQuickField type="email" class="form-control input-lg" name="email" placeholder="schemaLabel"}}
