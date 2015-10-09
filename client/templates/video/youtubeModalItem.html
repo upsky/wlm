@@ -3,13 +3,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{_ 'pageTitles.videoManager'}}</h4>
+                    <h4 class="modal-title">{{_ 'pageTitles.videoManager'}}{{#if isEdit}} <a
+                            href="{{pathFor 'editVideo' name=videoData.findName}}"> ИЗМЕНИТЬ!!!</a>{{/if}}</h4>
                 </div>
                 <div class="">
                     <div class="c-related-block">
                         <div class="p-prop m-75"></div>
                         <div class="p-fill">
-                            <iframe width="100%" height="360px" src="//www.youtube.com/embed/{{videoId}}"
+                            <iframe width="100%" height="360px" src="//www.youtube.com/embed/{{videoData.videoId}}"
                                     frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>

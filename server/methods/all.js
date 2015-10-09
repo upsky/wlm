@@ -16,6 +16,9 @@ Meteor.publish('videos', function () {
 	return db.videos.find();
 });
 WlmSecurity.addPublish({
+	videos: {
+		roles: 'videoManager'
+	},
 	invite: {
 		authNotRequired: true,
 		roles: [ 'partner', 'president' ]

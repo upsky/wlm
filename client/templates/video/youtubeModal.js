@@ -19,6 +19,14 @@ Template.youtubeModal.events({
 });
 
 Template.youtubeModal.helpers({
+	isShow: function () {
+		if (Roles.userIsInRole(Meteor.user(), 'videoManager')) {
+			return true;
+		} else {
+			return (db.videos.find({ name: currentData() }).count() != 0);
+		}
+		return false;
+	},
 	videoName: function () {
 		if (db.videos.find({name: currentData()}).count() == 0) {
 			return TAPi18n.__('commonText.disabled');
