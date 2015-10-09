@@ -24,7 +24,7 @@ template.helpers({
 });
 
 template.events({
-	'click [name="toggleBox"]': function () {
+	'click .toggle-box': function () {
 		var hideBox = Template.instance()._hideBox;
 
 		if (hideBox.get())
