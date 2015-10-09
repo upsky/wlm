@@ -10,11 +10,11 @@ nav.user-menu {
   z-index: 1009;
 }
 
-.user-menu-height-emulator {
-  height: 60px;
-}
-
 @media (max-width: 479px) {
+  .user-menu-height-emulator {
+    height: 60px;
+  }
+
   nav.main-menu {
     position: fixed;
     width: 100%;
@@ -30,4 +30,16 @@ nav.user-menu {
     z-index: 1010;
   }
 
+}
+
+div.user-title {
+  position: static;
+}
+
+.breadcrumb.breadcrumb-nav {
+  position: static;
+}
+
+div.user-title + .breadcrumb.breadcrumb-nav {
+  padding-top: 0;
 }
