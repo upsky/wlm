@@ -10,3 +10,7 @@ Template.videoManager.events({
 		Router.go('addVideo');
 	}
 });
+
+Template.videoManager.onRendered(function () {
+	Session.set('route', undefined);
+})

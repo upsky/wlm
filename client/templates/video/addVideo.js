@@ -18,7 +18,12 @@ Template.addVideo.onRendered(function (argument) {
 Template.addVideo.events({
 	'click [name=back]': function () {
 		Session.set('editVideo', undefined);
-		Router.go('videoManager');
+		if (!_.isEmpty(Session.get('route'))) {
+			Router.go(Session.get('route'));
+			//Session.set('route', undefined);
+		} else {
+			Router.go('videoManager');
+		}
 	}
 });
 
@@ -41,7 +46,12 @@ AutoForm.hooks({
 		},
 		onSuccess: function (type, result) {
 			if (result) {
-				Router.go('videoManager');
+				if (!_.isEmpty(Session.get('route'))) {
+					Router.go(Session.get('route'));
+					//Session.set('route', undefined);
+				} else {
+					Router.go('videoManager');
+				}
 				new PNotify({
 					type: 'success',
 					text: TAPi18n.__('messages.addVideo')

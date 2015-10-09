@@ -9,7 +9,11 @@ Template.editVideo.helpers({
 
 Template.editVideo.events({
 	'click [name=back]': function () {
-		Router.go('videoManager');
+		if (!_.isEmpty(Session.get('route'))) {
+			Router.go(Session.get('route'));
+		} else {
+			Router.go('videoManager');
+		}
 	}
 });
 
@@ -38,7 +42,11 @@ AutoForm.hooks({
 		},
 		onSuccess: function (type, result) {
 			if (result) {
-				Router.go('videoManager');
+				if (!_.isEmpty(Session.get('route'))) {
+					Router.go(Session.get('route'));
+				} else {
+					Router.go('videoManager');
+				}
 				new PNotify({
 					type: 'success',
 					text: TAPi18n.__('messages.addVideo')

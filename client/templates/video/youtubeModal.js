@@ -8,9 +8,11 @@ Template.youtubeModal.events({
 	'click [name=changeVideo]': function () {
 			Session.set('editVideo', currentData());
 			if(db.videos.find({name: currentData()}).count() == 0 ) {
+				Session.set('route', Router.current().route.getName());
 				Router.go('addVideo');
 			} else {
 				var id = db.videos.findOne({name: currentData()})._id;
+				Session.set('route', Router.current().route.getName());
 				Router.go('editVideo', {_id: id});
 			}
 	}
