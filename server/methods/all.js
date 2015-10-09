@@ -141,17 +141,24 @@ Meteor.methods({
 			};
 		}
 
-		if (doc.email != null) {
-			//TODO Accounts.addEmail(this.userId, doc.email);
-			updateObj['$push'] = {
-				emails: {
-					address: doc.email,
-					verified: false
-				}
-			}
+		if (doc.email) {
+			var user = Meteor.user();
+			// add another email
+			if (!_.where(user.emails, { address: doc.email }))
+				Accounts.addEmail(this.userId, doc.email);
+			// check email not exists before add
+			//var user = Meteor.user();
+			//if (!_.where(user.emails, { address: doc.email })) {
+			//	_.extend(updateObj['$addToSet'], {
+			//		emails: {
+			//			address: doc.email,
+			//			verified: false
+			//		}
+			//	});
+			//}
 		}
 
-		if (doc.phone != null) {
+		if (doc.phone) {
 			updateObj['$addToSet'] = {
 				'profile.phones': {
 					number: doc.phone,
