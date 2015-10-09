@@ -1,9 +1,9 @@
 var template = Template.verifyEmail;
-var emailNotVerified = new ReactiveVar(true);
+var emailVerified = new ReactiveVar(true);
 var emailSended = new ReactiveVar(false);
 template.helpers({
-	emailNotVerified: function () {
-		return emailNotVerified.get();
+	emailVerified: function () {
+		return emailVerified.get();
 	},
 	emailSended: function () {
 		return emailSended.get();
@@ -13,20 +13,25 @@ template.helpers({
 
 template.events({
 	"click [name='resendEmailVerified']": function () {
-		if (!emailSended.get())
-			Meteor.call('resendVerificationEmail', function () {
-				emailSended.set(true);
-				new PNotify({
-					type: 'success',
-					text: TAPi18n.__('messages.emailSend')
-				});
+		if (!emailSended.get()) {
+			Meteor.call('resendVerificationEmail');
+			emailSended.set(true);
+			WlmNotify.create({
+				type: 'success',
+				text: 'messages.emailSend'
 			});
+		}
 	}
 });
 template.onRendered(function () {
 	Meteor.autorun(function () {
-		Meteor.user().emails.forEach(function (item) {
-			if (item.verified === true)emailNotVerified.set(false);
+		var user = Meteor.user();
+		if (!user)
+			return;
+
+		var verified = _.any(user.emails, function (item) {
+			return item.verified;
 		});
+		emailVerified.set(verified);
 	})
 });

@@ -6,5 +6,9 @@ Template.registerHelper('cordovaDedect', function () {
 	return (!Meteor.isCordova ? 'c-cordova' : '');
 });
 Template.registerHelper('showQr', function () {
-	return Meteor.settings.public.showQr;
+	return Meteor.settings.public.showQr || Meteor.isCordova;
 });
+
+Meteor.copyToClipboard = function (text) {
+	window.prompt(TAPi18n.__('messages.copyToClipboard'), text);
+};

@@ -7,6 +7,9 @@
     "passwordMismatch": "Пароли не совпадают",
     "loginOrPasswordIncorrect": "Логин или пароль неверный",
     "notCorrect": "Проверьте правильность ввода.",
-    "checkLink": "Проверте ссылку."
+    "checkLink": "Проверьте ссылку.",
+    "loginOrPasswordIncorrect": "Логин или пароль неверный",
+    "loginErrorTitle": "Ошибка входа в систему",
+    "forbidden":"Доступ к данному <br> сервису сайта закрыт"
   }
 }

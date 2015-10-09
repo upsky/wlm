@@ -446,16 +446,6 @@ fieldset[disabled] .btn {
     box-shadow: none;
 }
 
-.input-group-btn .btn {
-    background-color: #f4f4f4;
-    border-color: #e3e3e3;
-}
-
-.input-group-btn .btn:hover,
-.input-group-btn .btn:focus {
-    border-color: #e3e3e3;
-}
-
 .button-demo .btn,
 .button-demo .make-switch {
     margin-top: 5px;
@@ -1472,7 +1462,7 @@ nav.user-menu .menu-counter {
 
 nav.user-menu .main-menu-access {
     position: relative;
-    float: right;
+    float: left;
     padding: 15px 17px;
     color: #666666;
     -webkit-transition: all 0.1s;
@@ -4313,7 +4303,7 @@ div.checker {
 
 .jstree.jstree-proton li,
 .jstree.jstree-proton ins {
-    background-image: url("../styles/vendor/jstree-theme/proton/d.png");
+    background-image: url("../vendor/jstree-theme/proton/d.png");
     background-repeat: no-repeat;
     background-color: transparent;
     background-size: 108px 96px;
@@ -4321,7 +4311,7 @@ div.checker {
 
 .lt-ie9 .jstree.jstree-proton li,
 .lt-ie9 .jstree.jstree-proton ins {
-    background-image: url("../styles/vendor/jstree-theme/proton/d-ie8.png");
+    background-image: url("../vendor/jstree-theme/proton/d-ie8.png");
     background-size: auto auto;
 }
 
@@ -4464,13 +4454,13 @@ div.checker {
 }
 
 .jstree.jstree-proton.jstree li[rel="file"] > a > ins.jstree-icon {
-    background-image: url("../styles/vendor/jstree-theme/proton/file.png");
+    background-image: url("../vendor/jstree-theme/proton/file.png");
     background-position: 0 0;
     background-size: 18px 16px;
 }
 
 .lt-ie9 .jstree.jstree-proton.jstree li[rel="file"] > a > ins.jstree-icon {
-    background-image: url("../styles/vendor/jstree-theme/proton/file-ie8.png");
+    background-image: url("../vendor/jstree-theme/proton/file-ie8.png");
     background-size: auto auto;
 }
 
@@ -4485,33 +4475,33 @@ div.checker {
 }
 
 .jstree.jstree-proton #vakata-dragged.jstree-proton .jstree-ok {
-    background: url("../styles/vendor/jstree-theme/proton/d.png") -1px -54px no-repeat !important;
+    background: url("../vendor/jstree-theme/proton/d.png") -1px -54px no-repeat !important;
     background-size: 108px 96px !important;
 }
 
 .lt-ie9 .jstree.jstree-proton #vakata-dragged.jstree-proton .jstree-ok {
-    background: url("../styles/vendor/jstree-theme/proton/d-ie8.png") -1px -54px no-repeat !important;
+    background: url("../vendor/jstree-theme/proton/d-ie8.png") -1px -54px no-repeat !important;
     background-size: auto auto;
 }
 
 .jstree.jstree-proton #vakata-dragged.jstree-proton .jstree-invalid {
-    background: url("../styles/vendor/jstree-theme/proton/d.png") -18px -54px no-repeat !important;
+    background: url("../vendor/jstree-theme/proton/d.png") -18px -54px no-repeat !important;
     background-size: 108px 96px !important;
 }
 
 .lt-ie9 .jstree.jstree-proton #vakata-dragged.jstree-proton .jstree-invalid {
-    background: url("../styles/vendor/jstree-theme/proton/d-ie8.png") -18px -54px no-repeat !important;
+    background: url("../vendor/jstree-theme/proton/d-ie8.png") -18px -54px no-repeat !important;
     background-size: auto auto;
 }
 
 .jstree.jstree-proton #jstree-marker.jstree-proton {
-    background: url("../styles/vendor/jstree-theme/proton/d.png") -40px -56px no-repeat !important;
+    background: url("../vendor/jstree-theme/proton/d.png") -40px -56px no-repeat !important;
     background-size: 108px 96px !important;
     text-indent: -100px;
 }
 
 .lt-ie9 .jstree.jstree-proton #jstree-marker.jstree-proton {
-    background: url("../styles/vendor/jstree-theme/proton/d-ie8.png") -40px -56px no-repeat !important;
+    background: url("../vendor/jstree-theme/proton/d-ie8.png") -40px -56px no-repeat !important;
     background-size: auto auto;
 }
 

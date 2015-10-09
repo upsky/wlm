@@ -3,7 +3,7 @@ Template.networkLevels.onCreated(function () {
 		Session.set('levelsCounts', result);
 		return log.trace(result);
 	});
-	if (Roles.userIsInRole(Meteor.userId(), [ 'president' ])) {
+	if (Roles.userIsInRole(Meteor.userId(), 'president')) {
 		Meteor.call('totalRegs', function (error, result) {
 			return Session.set('totalRegs', result);
 		});

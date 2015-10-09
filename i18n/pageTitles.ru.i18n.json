@@ -11,11 +11,12 @@
     "exit": "Выход",
     "support": "Тех. поддержка",
     "down": "Технические работы",
-    "qrcode": "QR код",
+    "qrcode": "QR код",   
     "recoverpass": "Восстановление пароля",
     "adminPanel":"Администрирование",
     "videoManager": "Видео",
     "editVideo": "Изменить видео",
-    "addVideo": "Добавить видео"
+    "addVideo": "Добавить видео",
+    "adminPanelUsers":"Поиск пользователей"
   }
 }

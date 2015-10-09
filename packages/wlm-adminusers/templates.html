@@ -1,0 +1,134 @@
+
+<!-- общий блок работы с пльзователями -->
+<template name="adminPanelUsers">
+{{#if isInRole 'adminPanelUsers'}}
+    {{> adminPanelUsersFind}}
+    {{> cutterPaginator name="adminPanelUsers"}}
+    {{> adminPanelTableUsers}}
+{{else}}
+    {{> forbidden }}
+{{/if}}
+</template>
+
+<!-- поиск пользователей -->
+<template name="adminPanelUsersFind">
+{{#if isInRole 'adminPanelUsers'}}
+    {{#Layout template="panel" data=blockInfo}}
+        <form id="adminPanelUsersFind" >
+            <div class="input-group">
+                <span class="input-group-addon fa fa-user" id="basic-addon1" > </span>
+                <input name="searchString" type="text" class="form-control" placeholder="{{_ "formFields.findUsers.placeholder"}}" aria-describedby="basic-addon1">
+                <span class="input-group-btn" >
+                    <button class="btn btn-default btn-info" type="submit"><span class="fa fa-search"></span> {{_ "buttons.search"}}</button>
+                </span>
+            </div>
+        </form>
+    {{/Layout}}
+{{else}}
+    {{> forbidden }}
+{{/if}}
+</template>
+
+<!-- таблица результатов поиска по пользователям-->
+<template name="adminPanelTableUsers">
+{{#if isInRole 'adminPanelUsers'}}
+        <table class="table table-striped">
+        <thead class="">
+        <tr>
+            <th>{{_ "commonText.id"}}</th>
+            <th>{{_ "commonText.name"}}</th>
+            <th>{{_ "commonText.userData"}}</th>
+            <th>{{_ "commonText.role"}}</th>
+            <th>{{_ "commonText.actions"}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each config.list}}
+            {{> adminPanelUserItem}}
+        {{else}}
+            <tr>
+                <td colspan="3">Нет данных для отображения</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    {{> forbidden }}
+{{/if}}
+</template>
+
+<!-- описание строки в таблице-->
+<template name="adminPanelUserItem">
+{{#if isInRole 'adminPanelUsers'}}
+    <tr>
+        <td title="{{_id}}">{{#if uin}}{{uin}}{{else}}{{username}}{{/if}}</td>
+        <td>{{profile.name}}</td>
+        <td>
+            {{>adminPanelListing list=emails text='commonText.email'}}
+            {{#if profile}}
+                {{>adminPanelListing list=profile.phones text='commonText.phoneNumber'}}
+                {{>adminPanelOneItem item=profile.passport text='commonText.pasportSN'}}
+                {{>adminPanelOneItem item=profile.vk text='commonText.pageVK'}}
+                {{>adminPanelOneItem item=profile.skype text='commonText.skype'}}
+            {{/if}}
+            {{#if status}}
+                {{>adminPanelOneItem item=status.geo.ip text='commonText.ip'}}
+                {{>adminPanelOneItem item=status.geo.country text='commonText.country'}}
+                {{>adminPanelOneItem item=status.geo.region text='commonText.region'}}
+                {{>adminPanelOneItem item=status.geo.city text='commonText.city'}}
+            {{/if}}
+        </td>
+        <td>
+            {{#each roles}}
+                {{>adminPanelListItemRole}}
+            {{/each}}
+        </td>
+        <td>
+            {{#if isImpersonateButton}}
+                {{#if isInRole "impersonateAccess"}}
+                    <a href="{{pathFor "impersonate" _id}}" target="_blank"><button class="btn btn-success btn-sm"><span class="fa fa-eye"></span> {{_ "commonText.see"}}</button></a>
+                {{/if}}
+            {{/if}}
+        </td>
+    </tr>
+{{else}}
+{{> forbidden }}
+{{/if}}
+</template>
+
+<!-- еденичный элемент в списке даных пользователя-->
+<template name="adminPanelOneItem">
+    {{#if item}}
+        <div>
+            <small>{{_ text}}:</small>
+            {{item}}
+        </div>
+    {{/if}}
+</template>
+<!-- групповой элемент в списке данных пользователя-->
+<template name="adminPanelListing">
+    {{#if list}}
+        <small>{{_ text}}</small>
+        <ul>
+            {{#each list}}
+                {{> adminPanelListItem}}
+            {{/each}}
+        </ul>
+    {{/if}}
+</template>
+
+<!-- блок отрисовки групп -->
+<template name="adminPanelListItemGroup">
+    <li>{{_ groupName}}</li>
+</template>
+
+
+<!-- блок отрисовки ролей -->
+<template name="adminPanelListItemRole">
+    <li>{{_ roleName}}</li>
+</template>
+
+<!-- строка в групповом элементе списка данных пользователя (описан вариант с почтой и телефоном + статус верификации) -->
+<template name="adminPanelListItem">
+    <li>{{>verifiedIcon}}{{#if number}}{{number}}{{else}}{{address}}{{/if}}</li>
+</template>

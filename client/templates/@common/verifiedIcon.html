@@ -1,0 +1,7 @@
+<template name="verifiedIcon">
+    {{#if verified}}
+        <span class="fa fa-check-square text-success" title="{{_ "commonText.verified"}}"></span>
+    {{else}}
+        <span class="fa fa-warning text-warning" title="{{_ "commonText.noVerified"}}"></span>
+    {{/if}}
+</template>
