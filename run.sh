@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-
-
-
 DEFAULT_HOST=wlm.he24.ru
 METEOR=/usr/local/bin/meteor
 SETTINGS="--settings settings.json"
-export MAIL_URL=smtp://test%40wl-market.com:123123@smtp.yandex.com
+BUILD_DIR=../wlmbuild
+export MAIL_URL=smtp://postmaster%40sandboxfbc452b570544a5d9420aa783c0fda38.mailgun.org:d529975e91ce74e534b19a3ebc6b3d4f@smtp.mailgun.org
 export ANDROID_HOME=~/.meteor/android_bundle/android-sdk
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
 
@@ -16,12 +14,15 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
 case $HOST in
     "")
         MOBILE_SERVER=--mobile-server=$DEFAULT_HOST
+        SERVER=--server=$DEFAULT_HOST
     ;;
     "localhost")
         MOBILE_SERVER=""
+        SERVER=""
     ;;
     *)
         MOBILE_SERVER=--mobile-server=$HOST
+        SERVER=--server=$HOST
     ;;
 esac
 
@@ -52,14 +53,16 @@ case $1 in
         jarsigner -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -keypass $ANDROID_KEY_PASS $ANDROID_DIR/unaligned.apk $ANDROID_DIR/rp.key
 
         ZIPALIGN=~/.meteor/android_bundle/android-sdk/build-tools/20.0.0/zipalign
-        $ZIPALIGN -f -v 4 $ANDROID_DIR/unaligned.apk $ANDROID_DIR/wlmarket.apk
+        $ZIPALIGN -f -v 4 $ANDROID_DIR/$UNSIGNED_APK $ANDROID_DIR/wlmarket.apk
         ;;
     deploy-meteor)
         $METEOR deploy $HOST $SETTINGS ;;
     build)
-        $METEOR build .out --server=$HOST --mobile-settings settings.json ;;
+        $METEOR build $BUILD_DIR $SERVER --mobile-settings private/deploy/$2-settings.json
+         $0 android-sign
+        ;;
     deploy)
-        rm -rf public/i18n/*.json
+        #rm -rf public/i18n/*.json
         mupx deploy --config=private/deploy/$2-mup.json --settings=private/deploy/$2-settings.json
         ;;
     reconfig|logs)

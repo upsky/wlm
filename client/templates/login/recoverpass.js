@@ -32,7 +32,7 @@ AutoForm.hooks({
 
 			WlmNotify.create({
 				type: 'success',
-				text: 'messages.emailSend'
+				text: 'messages.emailSent'
 			});
 		}
 	}
@@ -56,7 +56,4 @@ template.events({
 	"click #login": function () {
 		return log.trace('click #login');
 	},
-	"click [name=loginInstructionsShow]": function () {
-		Modal.show('loginInstructionsModal');
-	}
 });
