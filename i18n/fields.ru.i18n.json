@@ -53,6 +53,10 @@
     },
     "regLink": {
       "label": "Ссылка регистрации"
+    },
+    "findUsers":{
+      "label": "Поиск пользователей",
+      "placeholder":"ID"
     }
   }
 }
