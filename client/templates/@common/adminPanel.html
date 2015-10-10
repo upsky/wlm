@@ -1,0 +1,20 @@
+<!-- Панель для администрирующих* будет содержать функции необходимые для админов-->
+<!-- кнопки добавлены на существующие механизмы-->
+<template name="adminPanel">
+{{#if isInRole 'adminPanel'}}
+    {{#Layout template="twoCols"}}
+        {{#Layout template="panel" data=adminPanel}}
+
+            {{>adminPanelButton role="adminPanel" router="adminPanelUsers" text="usersList"}}
+            {{>adminPanelButton role="videoManager" router="videoManager" text="videoManager"}}
+
+        {{/Layout}}
+    {{/Layout}}
+{{else}}
+    {{> forbidden }}
+{{/if}}
+</template>
+
+<template name="adminPanelButton">
+    {{#if isInRole role}}<a href="{{pathFor router}}"><button class="btn btn-small btn-success">{{_ buttonText}}</button></a> <br/><br/>{{/if}}
+</template>
