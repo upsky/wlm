@@ -49,7 +49,7 @@ Meteor.publish('networkData', function () {
 			$gt: currentPartner.level,
 			$lte: currentPartner.level + 1
 		}
-	}, {limit: 50});
+	}, { limit: 50 });
 	partners.fetch();
 	log.trace('publish partners count: ' + partners.count());
 
@@ -60,8 +60,8 @@ Meteor.publish('networkData', function () {
 	});
 
 	users = db.users.find(
-		{_id: {$in: _ids}},
-		{fields: {profile: 1}}
+		{ _id: { $in: _ids } },
+		{ fields: { profile: 1 } }
 	);
 
 	return [partners, users];
@@ -112,41 +112,43 @@ Meteor.methods({
 		doc.created = new Date();
 
 		try {
-			var inviteId = db.invites.insert(doc);
-
-			if (inviteId) {
-				Meteor.call('sendEmail',
+			try {
+				var inviteId = db.invites.insert(doc);
+				WlmUtils.sendEmail(
 					doc.email,
-					Meteor.settings.inviteEmail,
-					'Приглашение от ' + Meteor.user().profile.name,
-					'invitePartner',
-					[
-						{
-							"name": "reglink",
-							"content": Meteor.getInviteLinksEmail(doc.emailHash)
-						}
-					]
-				)
+					Meteor.settings.public.email.invite,
+					// TODO original user language
+					TAPi18n.__('email.inviteFrom', Meteor.user().profile.name, 'ru'),
+					'invitePartnerEmail',
+					{ regLink: Meteor.getInviteLinksEmail(doc.emailHash) }
+				);
+				return { status: 'ok' };
+
+			} catch (err) {
+				log.trace(err);
+				return { error: err }
 			}
 
-			return { status: 'ok' };
 		} catch (err) {
-			log.trace('duplicate email invite ');
-			return { error: 'duplicate' }
+			log.trace(err);
+			return { error: err }
 		}
+
+
 	},
 	networkCounts: function () {
 		check(this.userId, String);
-		var currentPartner, currentUser, i, result;
-		result = [];
-		currentUser = this.userId;
-		currentPartner = db.partners.findOne(currentUser);
+
+		var result = [];
+		var currentUser = this.userId;
+		var currentPartner = db.partners.findOne(currentUser);
+
 		if (currentPartner) {
 			var partnerLevel = currentPartner.level;
 			var from = partnerLevel + 1;
-			var to = partnerLevel + Meteor.settings.public.networkDeep;
+			var to = partnerLevel + Meteor.pubSettings('networkDeep');
 
-			for (i = from; i <= to; i++) {
+			for (var i = from; i <= to; i++) {
 				result.push({
 					level: i - partnerLevel,
 					count: db.partners.find({

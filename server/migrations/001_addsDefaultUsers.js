@@ -22,7 +22,7 @@ Migrations.add({
 		///////////////
 		var adminId = Accounts.createUser({
 			username: 'sysadmin',
-			email: Meteor.settings.sysadminEmail,
+			email: Meteor.pubSettings('email', 'sysadmin'),
 			password: Meteor.settings.sysadminPass
 		});
 		Roles.addUsersToRoles(adminId, 'sysadmin');

@@ -6,9 +6,13 @@ Template.registerHelper('cordovaDedect', function () {
 	return (!Meteor.isCordova ? 'c-cordova' : '');
 });
 Template.registerHelper('showQr', function () {
-	return Meteor.settings.public.showQr || Meteor.isCordova;
+	return Meteor.pubSettings('showQr') || Meteor.isCordova;
 });
 
 Meteor.copyToClipboard = function (text) {
-	window.prompt(TAPi18n.__('messages.copyToClipboard'), text);
+	var prompt = Meteor.isCordova ?
+		TAPi18n.__('messages.copyToClipboardMobile') :
+		TAPi18n.__('messages.copyToClipboard') + ": Ctrl+C, Enter";
+
+	window.prompt(prompt, text);
 };

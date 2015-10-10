@@ -71,10 +71,6 @@ WlmSecurity.addMethods({
 		authNotRequired: false,
 		roles: 'all'
 	},
-	sendEmail: {
-		authNotRequired: true,
-		roles: 'all'
-	},
 	resendVerificationEmail: {
 		roles: 'all'
 	},

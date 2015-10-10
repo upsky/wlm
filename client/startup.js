@@ -7,7 +7,7 @@ recaptchaOnload = function (arg) {
 Meteor.startup(function () {
 	var LANG = 'ru';
 	reCAPTCHA.config({
-		publickey: Meteor.settings.public.recaptchaPublic,
+		publickey: Meteor.pubSettings('recaptchaPublic'),
 		hl: LANG,
 		http: true
 	});

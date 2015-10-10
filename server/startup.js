@@ -6,6 +6,9 @@ Meteor.startup(function () {
 			privatekey: Meteor.settings.recaptchaPrivate
 		});
 	});
+
+	// TODO change buggy tap to something NOT BUGGY!!!
+	TAPi18next.setLng('ru');
 });
 
 

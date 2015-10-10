@@ -3,7 +3,7 @@ Migrations.add({
 	name: 'update Default Users Email Status',
 	up: function () {
 		verifyEmail('root@wlm.ru');
-		verifyEmail(Meteor.settings.sysadminEmail);
+		verifyEmail(Meteor.pubSettings('email', 'sysadmin'));
 		verifyEmail('partner@wlm.ru');
 	}
 });

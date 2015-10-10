@@ -18,8 +18,11 @@ Accounts.onLogin(function (res) {
 		geoUpdate.geo = 'no data';
 	}
 
-	if (thisUser.status == undefined ||
-		thisUser.status.firstLogin == undefined) {
+	var noGeodata = thisUser.status == undefined ||
+		thisUser.status.firstLogin == undefined ||
+		typeof thisUser.status.geo === 'String';
+
+	if (noGeodata) {
 		db.users.update(
 			{ _id: thisUser._id },
 			{
