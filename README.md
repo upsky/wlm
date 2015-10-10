@@ -26,11 +26,4 @@
   $(BUILT_PRODUCTS_DIR)/../emulator/include
   
 ## Упаковка Android
-1. Так генерирую ключ:
-keytool -genkey -keystore rp.keystore -storepass Fd34eg -alias rp.key -keypass sdva345FGF -validity 10000
-
-1. Подписываю: 
-jarsigner -keystore rp.keystore -storepass Gdft56gdfDSF -keypass dfgdfg4FFDf rp.apk rp.key
-
-1. Проверка файла:
-zipalign -f -v 4 rp.apk rp2.apk
+./run.sh android-sign

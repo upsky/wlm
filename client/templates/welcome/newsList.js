@@ -2,7 +2,7 @@ var BR = '<br>';
 
 var vkInit = function () {
 	VK.init({
-		apiId: Meteor.settings.public.vk.appId,
+		apiId: Meteor.pubSettings('vk', 'appId'),
 		onlyWidgets: true
 	});
 	VK.Auth.getLoginStatus(function getStatus (status) {
@@ -72,7 +72,7 @@ var loadWall = function (wall) {
 };
 
 var getNews = function () {
-	return loadWall(Meteor.settings.public.vk.groupName);
+	return loadWall(Meteor.pubSettings('vk', 'groupName'));
 };
 
 Template.newsList.onRendered(function () {
