@@ -1,9 +1,9 @@
 
 <!-- общий блок работы с пльзователями -->
-<template name="adminPanelUsers">
-{{#if isInRole 'adminPanelUsers'}}
-    {{> adminPanelUsersFind}}
-    {{> cutterPaginator name="adminPanelUsers"}}
+<template name="adminUsers">
+    {{#if isInRole 'adminUsers'}}
+        {{> adminUsersFind}}
+        {{> cutterPaginator name="adminUsers"}}
     {{> adminPanelTableUsers}}
 {{else}}
     {{> forbidden }}
@@ -11,10 +11,10 @@
 </template>
 
 <!-- поиск пользователей -->
-<template name="adminPanelUsersFind">
-{{#if isInRole 'adminPanelUsers'}}
+<template name="adminUsersFind">
+    {{#if isInRole 'adminUsers'}}
     {{#Layout template="panel" data=blockInfo}}
-        <form id="adminPanelUsersFind" >
+        <form id="adminUsersFind">
             <div class="input-group">
                 <span class="input-group-addon fa fa-user" id="basic-addon1" > </span>
                 <input name="searchString" type="text" class="form-control" placeholder="{{_ "formFields.findUsers.placeholder"}}" aria-describedby="basic-addon1">
@@ -31,7 +31,7 @@
 
 <!-- таблица результатов поиска по пользователям-->
 <template name="adminPanelTableUsers">
-{{#if isInRole 'adminPanelUsers'}}
+    {{#if isInRole 'adminUsers'}}
         <table class="table table-striped">
         <thead class="">
         <tr>
@@ -59,7 +59,7 @@
 
 <!-- описание строки в таблице-->
 <template name="adminPanelUserItem">
-{{#if isInRole 'adminPanelUsers'}}
+    {{#if isInRole 'adminUsers'}}
     <tr>
         <td title="{{_id}}">{{#if uin}}{{uin}}{{else}}{{username}}{{/if}}</td>
         <td>{{profile.name}}</td>

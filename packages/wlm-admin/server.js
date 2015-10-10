@@ -1,5 +1,5 @@
 Meteor.methods({
-	adminPanelUsers: function (nowPage, query, itemsPage) {
+	adminUsers: function (nowPage, query, itemsPage) {
 		check(itemsPage, Number);
 		check(query, String);
 		check(nowPage, Number);
@@ -39,7 +39,7 @@ Meteor.methods({
 	}
 });
 WlmSecurity.addMethods({
-	adminPanelUsers: {
-		roles: 'adminPanelUsers'
+	adminUsers: {
+		roles: 'adminUsers'
 	}
 });
