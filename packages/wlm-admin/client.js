@@ -1,4 +1,4 @@
-WlmAdminUsers = {
+WlmAdmin = {
 	reactive: new ReactiveVar({
 		list: [],
 		allCount: 0,
@@ -35,11 +35,11 @@ WlmAdminUsers = {
 			config.itemsPage,
 			function (error, result) {
 				if (!error) {
-					var config = WlmAdminUsers.get();
+					var config = WlmAdmin.get();
 					config.list = result.data;
 					config.allCount = result.count;
 					CutterPaginator.generate('adminPanelUsers', config.allCount, config.itemsPage, config.nowPage);
-					WlmAdminUsers.update();
+					WlmAdmin.update();
 				}
 			}
 		);
@@ -60,21 +60,21 @@ Template.adminPanelListItemRole.helpers({
 
 Template.adminPanelUsersFind.events({
 	"submit form#adminPanelUsersFind": function (e) {
-		WlmAdminUsers.check();
+		WlmAdmin.check();
 		CutterPaginator.get('adminPanelUsers').onSetPage = function (input) {
-			WlmAdminUsers.find(undefined, input.page);
+			WlmAdmin.find(undefined, input.page);
 		};
 		e.preventDefault();
 		var templateData = Template.instance();
 		var searchString = templateData.$("[name=searchString]").val();
-		WlmAdminUsers.find(searchString, 1);
+		WlmAdmin.find(searchString, 1);
 	}
 });
 
 Template.adminPanelTableUsers.helpers({
 	config: function () {
-		WlmAdminUsers.check();
-		return WlmAdminUsers.get();
+		WlmAdmin.check();
+		return WlmAdmin.get();
 	}
 });
 

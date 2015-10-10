@@ -116,7 +116,7 @@ underscore@1.0.3
 url@1.0.4
 webapp@1.2.0
 webapp-hashing@1.0.3
-wlm-adminusers@0.0.1
+wlm-admin@0.0.1
 wlm-core@0.0.1
 wlm-security@0.0.1
 wylio:mandrill@1.0.1
