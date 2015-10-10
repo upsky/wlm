@@ -1,4 +1,4 @@
-Impersonate.admins = ['sysadmin', 'support'];
+Impersonate.admins = ['impersonateAccess'];
 
 // configure meteor methods
 WlmSecurity.addMethods({
@@ -50,7 +50,7 @@ WlmSecurity.addMethods({
 		roles: 'all'
 	},
 	impersonate: {
-		roles: ['sysadmin', 'support']
+		roles: 'all'
 	},
 	insertInvite: {
 		roles: 'partner'
@@ -91,8 +91,5 @@ WlmSecurity.addMethods({
 	},
 	totalRegs: {
 		roles: ['president', 'sysadmin']
-	},
-	impersonate: {
-		roles: 'all'
 	}
 });

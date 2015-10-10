@@ -4,7 +4,7 @@ Template.adminPanel.rendered = function() {
 
 Template.adminPanel.helpers({
 	adminPanel: {
-		blockId: "adminFunctions"
+		blockId: "commonFunctions"
 	}
 });
 

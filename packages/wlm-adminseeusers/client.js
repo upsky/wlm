@@ -1,8 +1,7 @@
 WlmAdminSeeUsers = {
-	check:function(){
-		if (!Roles.userIsInRole(Meteor.user(),['adminPanelUsers'])) {
-				Router.go('forbidden');
-		}
+	check: function () {
+		if (!Roles.userIsInRole(Meteor.user(), ['adminPanelUsers']))
+			Router.go('forbidden');
 	},
 	data: {
 		list: [],
@@ -11,20 +10,13 @@ WlmAdminSeeUsers = {
 		itemsPage: 10,
 		queryString: ""
 	},
-	reactive: new Meteor.Collection(null),
+	reactive: new ReactiveVar({}),
 	get: function () {
-		return WlmAdminSeeUsers.reactive.findOne();
+		tmpconfig = WlmAdminSeeUsers.reactive.get();
+		return
 	},
 	update: function () {
-		var config = WlmAdminSeeUsers.data;
-		var collect = WlmAdminSeeUsers.reactive;
-		if (collect.find().count() !== 1) {
-			collect.remove({});
-			collect.insert(this.data);
-		} else {
-			var id = collect.findOne()._id;
-			collect.update({ _id: id }, this.data);
-		}
+		WlmAdminSeeUsers.reactive.set(WlmAdminSeeUsers.data);
 	},
 	find: function (query, page) {
 		var config = WlmAdminSeeUsers.data;
@@ -42,7 +34,7 @@ WlmAdminSeeUsers = {
 			function (error, result) {
 				config.list = result.data;
 				config.allCount = result.count;
-				CutterPaginator.generate(config.allCount, config.itemsPage, config.nowPage);
+				CutterPaginator.generate('adminPanelUsers',config.allCount, config.itemsPage, config.nowPage);
 				WlmAdminSeeUsers.update();
 			}
 		);
@@ -50,7 +42,7 @@ WlmAdminSeeUsers = {
 };
 
 Template.adminPanelUsersFind.helpers({
-	adminPanelUsersFind: {
+	blockInfo: {
 		blockId: "findUsers"
 	}
 });
@@ -62,7 +54,7 @@ Template.adminPanelListItemRole.helpers({
 });
 
 Template.adminPanelUsersFind.events({
-	"submit form[name=adminPanelUsersFind]": function (e) {
+	"submit form#adminPanelUsersFind": function (e) {
 		WlmAdminSeeUsers.check();
 		CutterPaginator.onSetPage = function (input) {
 			WlmAdminSeeUsers.find(undefined, input.page);
@@ -74,8 +66,19 @@ Template.adminPanelUsersFind.events({
 	}
 });
 Template.adminPanelTableUsers.helpers({
-	"config": function () {
+	config: function () {
 		WlmAdminSeeUsers.check();
-		return WlmAdminSeeUsers.reactive.findOne();
+		return WlmAdminSeeUsers.reactive.get();
+	}
+});
+Template.adminPanelUserItem.helpers({
+	isImpersonateButt: function () {
+		return this.roles.some(function (item) {
+			if (item == 'partner' ||
+				item == 'client' ||
+				item == 'bussines') {
+				return true;
+			}
+		});
 	}
 });

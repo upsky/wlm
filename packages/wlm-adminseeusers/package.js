@@ -19,6 +19,7 @@ Package.onUse(function (api) {
 	api.use('templating', client);
 	api.use('wlm-security');
 	api.use('session');
+	api.use('reactive-var',client);
 
 	api.addFiles([
 		'lib.js'
