@@ -16,6 +16,7 @@ Package.onUse(function (api) {
 		"reactive-var",
 		"templating",
 		"session",
+
 	], "client");
 
 	api.addFiles([

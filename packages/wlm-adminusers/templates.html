@@ -3,7 +3,7 @@
 <template name="adminPanelUsers">
 {{#if isInRole 'adminPanelUsers'}}
     {{> adminPanelUsersFind}}
-    {{> cutterPaginator}}
+    {{> cutterPaginator name="adminPanelUsers"}}
     {{> adminPanelTableUsers}}
 {{else}}
     {{> forbidden }}
@@ -84,7 +84,7 @@
             {{/each}}
         </td>
         <td>
-            {{#if isImpersonateButt}}
+            {{#if isImpersonateButton}}
                 {{#if isInRole "impersonateAccess"}}
                     <a href="{{pathFor "impersonate" _id}}" target="_blank"><button class="btn btn-success btn-sm"><span class="fa fa-eye"></span> {{_ "commonText.see"}}</button></a>
                 {{/if}}

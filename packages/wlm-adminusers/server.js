@@ -1,23 +1,21 @@
 Meteor.methods({
-	adminPanelUsers: function (beginItem, query, itemsPage) {
+	adminPanelUsers: function (nowPage, query, itemsPage) {
 		check(itemsPage, Number);
 		check(query, String);
-		check(beginItem, Number);
+		check(nowPage, Number);
 
 		var configRequest = {
-			fields: {
-				"_id": 1,
-				"createdAt": 1,
-				"username": 1,
-				"emails": 1,
-				"roles": 1,
-				"uin": 1,
-			},
-			"limit": itemsPage
+			_id: 1,
+			createdAt: 1,
+			username: 1,
+			emails: 1,
+			roles: 1,
+			uin: 1,
+			limit: itemsPage
 		};
 
-		if (beginItem && +beginItem > 1) {
-			configRequest["skip"] = (beginItem - 1) * itemsPage;
+		if (nowPage && +nowPage > 1) {
+			configRequest.skip = (nowPage - 1) * itemsPage;
 		}
 
 		var result = {
@@ -28,7 +26,7 @@ Meteor.methods({
 		var tempRes = {};
 		if (query) {
 			var findRegExp = {
-				"username": new RegExp(query)
+				username: new RegExp(query)
 			};
 			tempRes = db.users.find(findRegExp, configRequest);
 		} else {
@@ -37,7 +35,7 @@ Meteor.methods({
 
 		result.data = tempRes.fetch();
 		result.count = tempRes.count();
-		return result;
+		return result
 	}
 });
 WlmSecurity.addMethods({
