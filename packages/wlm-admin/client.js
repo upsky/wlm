@@ -7,7 +7,7 @@ WlmAdmin = {
 		queryString: ""
 	}),
 	check: function () {
-		if (!Roles.userIsInRole(Meteor.user(), ['adminPanelUsers']))
+		if (!Roles.userIsInRole(Meteor.user(), ['adminUsers']))
 			Router.go('forbidden');
 	},
 	get: function () {
@@ -29,7 +29,7 @@ WlmAdmin = {
 			config.nowPage = page;
 		}
 		Meteor.call(
-			'adminPanelUsers',
+			'adminUsers',
 			config.nowPage,
 			config.queryString,
 			config.itemsPage,
@@ -38,7 +38,7 @@ WlmAdmin = {
 					var config = WlmAdmin.get();
 					config.list = result.data;
 					config.allCount = result.count;
-					CutterPaginator.generate('adminPanelUsers', config.allCount, config.itemsPage, config.nowPage);
+					CutterPaginator.generate('adminUsers', config.allCount, config.itemsPage, config.nowPage);
 					WlmAdmin.update();
 				}
 			}
@@ -46,7 +46,7 @@ WlmAdmin = {
 	}
 };
 
-Template.adminPanelUsersFind.helpers({
+Template.adminUsersFind.helpers({
 	blockInfo: {
 		blockId: "findUsers"
 	}
@@ -58,10 +58,10 @@ Template.adminPanelListItemRole.helpers({
 	}
 });
 
-Template.adminPanelUsersFind.events({
-	"submit form#adminPanelUsersFind": function (e) {
+Template.adminUsersFind.events({
+	"submit form#adminUsersFind": function (e) {
 		WlmAdmin.check();
-		CutterPaginator.get('adminPanelUsers').onSetPage = function (input) {
+		CutterPaginator.get('adminUsers').onSetPage = function (input) {
 			WlmAdmin.find(undefined, input.page);
 		};
 		e.preventDefault();
