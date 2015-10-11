@@ -1,46 +1,23 @@
 <template name="recoverpass">
-    <div class="login-page">
-        {{#autoForm id="recoverPassForm" type="method" schema="Schemas.recoverPass" meteormethod="recoverPass" resetOnSuccess=false}}
-            <section class="wrapper scrollable animated fadeInDown">
-                <section class="panel panel-default">
-                    <a href="/login" class="btn btn-link">&larr; Назад</a>
-
-                    <div class="panel-heading">
-                        <img src="/logo.png" style="max-width: 60%" alt=""/>
-                    </div>
-                    {{#unless resetPass}}
-                        <section class="login-form">
-                            {{> afQuickField type="email" class="form-control input-lg" name="email" placeholder="schemaLabel"}}
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-lg btn-success btn-block"
-                                       value="{{_ "buttons.recoverPass"}}"/>
-                            </div>
-                        </section>
-                    {{/unless}}
-
-                    {{#if resetPass}}
-                        <p>
-                        <h4>Пиьсмо отправлено</h4>
-                        </p>
-                        <p>На вашу почту {{currentEmail}} отправлено письмо с инструкцией по востановлению пароля!</p>
-
-                        <p>Если письмо не пришло в течении пары минут, попробуйте поискать его в папке Спам вашего почтового клиента.</p>
-                    {{/if}}
-                    <div class="panel-footer">
-                        <div class="clearfix">
-                            <a href="#" class=""
-                               onclick="window.open('https://vk.com/winlevel_ts', '_system');">
-                                <i class="fa fa-vk"></i>
-                                {{_ 'messages.technicalSupport'}}
-                            </a>
-                            <button type="button" class="btn btn-link" name="loginInstructionsShow">
-                                <i class="fa fa-youtube-play"></i>
-                                {{_ 'messages.videoTutorial'}}
-                            </button>
-                        </div>
-                    </div>
-                </section>
+    {{#autoForm id="recoverPassForm" type="method" schema="Schemas.recoverPass" meteormethod="recoverPass" resetOnSuccess=false}}
+        <h4 class="text-center">
+            {{_ 'messages.recoverpass'}}
+        </h4>
+        {{#unless resetPass}}
+            <section class="login-form">
+                {{> afQuickField type="email" class="form-control input-lg" name="email" placeholder="schemaLabel"}}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-lg btn-success btn-block"
+                           value="{{_ "buttons.recoverPass"}}"/>
+                </div>
             </section>
-        {{/autoForm}}
-    </div>
+        {{/unless}}
+
+        {{#if resetPass}}
+            <h4><p>{{_ 'messages.emailSent'}}</p></h4>
+            <p>{{_ 'messages.yourEmail'}} {{currentEmail}} {{_ 'messages.sendEmailWithInstructions'}}</p>
+
+            <p>{{_ 'messages.verifyEmailText'}}</p>
+        {{/if}}
+    {{/autoForm}}
 </template>

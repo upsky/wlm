@@ -1,12 +1,12 @@
 var template = Template.verifyEmail;
 var emailVerified = new ReactiveVar(true);
-var emailSended = new ReactiveVar(false);
+var emailSent = new ReactiveVar(false);
 template.helpers({
 	emailVerified: function () {
 		return emailVerified.get();
 	},
-	emailSended: function () {
-		return emailSended.get();
+	emailSent: function () {
+		return emailSent.get();
 	},
 
 	supportEmail: function () {
@@ -17,12 +17,12 @@ template.helpers({
 
 template.events({
 	"click [name='resendEmailVerified']": function () {
-		if (!emailSended.get()) {
+		if (!emailSent.get()) {
 			Meteor.call('resendVerificationEmail');
-			emailSended.set(true);
+			emailSent.set(true);
 			WlmNotify.create({
 				type: 'success',
-				text: 'messages.emailSend'
+				text: 'messages.emailSent'
 			});
 		}
 	}

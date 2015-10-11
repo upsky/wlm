@@ -12,7 +12,8 @@ Template.networkLevels.onCreated(function () {
 
 Template.networkLevels.helpers({
 	networkLevels: {
-		blockId: "networkLevels"
+		blockId: "networkLevels",
+		hideBox: true
 	},
 
 	totalRegs: function () {
@@ -34,7 +35,7 @@ Template.networkLevels.helpers({
 		partners = _.groupBy(partners, 'level');
 
 		return _.map(levelsCount, function (netLevel) {
-			netLevel.partners = partners[ netLevel.level + currentLevel ];
+			netLevel.partners = partners[netLevel.level + currentLevel];
 			return netLevel;
 		});
 	}

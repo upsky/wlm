@@ -41,6 +41,9 @@ Template.navMenu.events({
   "click #logoutHref": function(event) {
     Meteor.defer(function () { Router.go('logout') });
   },
+  "click #disconnect": function(event) {
+    Impersonate.undo();
+  },
   "click": function(event) {
     return Session.set('userMenuStatus', false);
   }

@@ -1,12 +1,10 @@
 <template name="network">
-    {{#Layout template="twoCols"}}
+    {{#Layout template="oneCol"}}
         {{> networkInvite}}
 
         {{#unless emptyInviteList}}
             {{> invitesList}}
-            {{#contentFor "col2"}}
-                {{> networkLevels}}
-            {{/contentFor}}
+            {{> networkLevels}}
         {{/unless}}
     {{/Layout}}
 </template>

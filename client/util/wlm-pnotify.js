@@ -4,7 +4,7 @@
 
 var Notify = function (id) {
 	this.id = id;
-}
+};
 _.extend(Notify.prototype, {
 	close: function () {
 		WlmNotify.close(this.id);
@@ -49,5 +49,21 @@ WlmNotify = {
 			this._notify[id].remove();
 			delete this._notify[id];
 		}
+	},
+
+	closeAll: function () {
+		var self = this;
+		_.each(this._notify, function (notify, id) {
+			self.close(id);
+		});
+		this._notify = {};
 	}
-}
+};
+
+// close all notifications on user change
+Meteor.startup(function () {
+	Meteor.autorun(function () {
+		Meteor.userId(); // make it reactive on user change/login
+		WlmNotify.closeAll();
+	});
+});

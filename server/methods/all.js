@@ -39,6 +39,17 @@ registerPartner = function (doc) {
 	if (invite.status === 'used') {
 		throw new Meteor.Error(400, 'Invite used');
 	}
+
+	// update invite
+	db.invites.update({ _id: doc._id }, {
+		$set: {
+			status: 'used',
+			email: doc.email,
+			name: doc.name
+		}
+	});
+
+	// TODO right invite invalidation
 	targetPartner = db.partners.findOne(invite.initiator);
 	if (!targetPartner) {
 		throw new Meteor.Error(400, 'Partner not found');
@@ -141,17 +152,24 @@ Meteor.methods({
 			};
 		}
 
-		if (doc.email != null) {
-			//TODO Accounts.addEmail(this.userId, doc.email);
-			updateObj['$push'] = {
-				emails: {
-					address: doc.email,
-					verified: false
-				}
-			}
+		if (doc.email) {
+			var user = Meteor.user();
+			// add another email
+			if (!_.where(user.emails, { address: doc.email }))
+				Accounts.addEmail(this.userId, doc.email);
+			// check email not exists before add
+			//var user = Meteor.user();
+			//if (!_.where(user.emails, { address: doc.email })) {
+			//	_.extend(updateObj['$addToSet'], {
+			//		emails: {
+			//			address: doc.email,
+			//			verified: false
+			//		}
+			//	});
+			//}
 		}
 
-		if (doc.phone != null) {
+		if (doc.phone) {
 			updateObj['$addToSet'] = {
 				'profile.phones': {
 					number: doc.phone,

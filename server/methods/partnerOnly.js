@@ -61,7 +61,7 @@ Meteor.publish('networkData', function () {
 
 	users = db.users.find(
 		{ _id: { $in: _ids } },
-		{ fields: { profile: 1 } }
+		{ fields: { profile: 1, username: 1 } }
 	);
 
 	return [partners, users];

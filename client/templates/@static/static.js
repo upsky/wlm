@@ -12,6 +12,9 @@ fadeIn = function() {
 Template.blocked.rendered = function() {
   return fadeIn();
 };
+Template.forbidden.rendered = function() {
+  return fadeIn();
+};
 
 Template.down.rendered = function() {
   return fadeIn();

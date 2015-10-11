@@ -1,19 +1,36 @@
-Template.panel.rendered = function() {
-  return log.trace('panel rendered');
-};
+var template = Template.panel;
 
-Template.panel.helpers({
-  iampanel: function() {
-    return log.trace(this);
-  },
-  blockTitle: function() {
-    log.trace(this);
-    return "blockTitles." + this.blockId;
-  }
+template.onCreated(function () {
+	if (!this.data.hideBox) {
+		this._hideBox = new ReactiveVar(false);
+	} else {
+		this._hideBox = new ReactiveVar(this.data.hideBox);
+	}
+
+	this._showToggleBoxBtn = (!this._hideBox.get() ? false : true);
 });
 
-Template.panel.events({
-  "click #panel": function(event) {
-    return log.trace('click #panel');
-  }
+template.helpers({
+	blockTitle: function () {
+		log.trace(this);
+		return "blockTitles." + this.blockId;
+	},
+	showToggleBoxBtn: function () {
+		return Template.instance()._showToggleBoxBtn;
+	},
+	hideBox: function () {
+		return Template.instance()._hideBox.get();
+	}
 });
+
+template.events({
+	'click .toggle-box': function () {
+		var hideBox = Template.instance()._hideBox;
+
+		if (hideBox.get())
+			hideBox.set(false);
+		else
+			hideBox.set(true);
+	}
+});
+

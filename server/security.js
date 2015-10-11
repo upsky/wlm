@@ -1,4 +1,4 @@
-Impersonate.admins = ['sysadmin', 'support'];
+Impersonate.admins = ['impersonateAccess'];
 
 // configure meteor methods
 WlmSecurity.addMethods({
@@ -6,8 +6,12 @@ WlmSecurity.addMethods({
 		authNotRequired: true,
 		roles: 'all'
 	},
-	logout: { roles: 'all' },
-	logoutOtherClients: { roles: 'all' },
+	logout: {
+		roles: 'all'
+	},
+	logoutOtherClients: {
+		roles: 'all'
+	},
 	getNewToken: {
 		authNotRequired: true,
 		roles: 'all'
@@ -21,6 +25,13 @@ WlmSecurity.addMethods({
 		roles: 'all'
 	}
 });
+//WlmSecurity.addPublish({
+//	_roles: {
+//		authNotRequired: true,
+//		roles: 'all'
+//	}
+//});
+
 
 WlmSecurity.addMethods({
 	createUser: {
@@ -46,7 +57,7 @@ WlmSecurity.addMethods({
 		roles: 'all'
 	},
 	impersonate: {
-		roles: ['sysadmin', 'support']
+		roles: 'all'
 	},
 	insertInvite: {
 		roles: 'partner'
@@ -83,8 +94,5 @@ WlmSecurity.addMethods({
 	},
 	totalRegs: {
 		roles: ['president', 'sysadmin']
-	},
-	impersonate: {
-		roles: 'all'
 	}
 });

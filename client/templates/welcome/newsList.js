@@ -38,6 +38,9 @@ var loadWall = function (wall) {
 			v: "5.24"
 		},
 		function (data) {
+			if (!data.response)
+				return;
+
 			var items = _.map(data.response.items, function (item) {
 				item.jsDate = new Date(item.date * 1000);
 				if (item.copy_history) {
