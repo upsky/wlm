@@ -52,3 +52,5 @@ meteorhacks:aggregate
 altapp:recaptcha
 aslagle:reactive-table
 meteorhacks:ssr
+cutter-paginator
+wlm-admin

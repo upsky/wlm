@@ -22,11 +22,11 @@
     "changesSaved": "Изменения сохранены",
     "incorrectDate": "Дата неизвестна"
   },
-
+  
   "vk": {
     "newsHeader": "Новости WL Market",
     "groupLink": "//vk.com/wlmarket_official"
-  },
+  },  
 
   "email": {
     "inviteFrom": "Приглашение от %s"
