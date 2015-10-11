@@ -53,8 +53,5 @@ Template.auth.onRendered(function () {
 Template.auth.events({
 	"click #login": function () {
 		return log.trace('click #login');
-	},
-	"click [name=loginInstructionsShow]": function () {
-		Modal.show('loginInstructionsModal');
 	}
 });

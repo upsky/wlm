@@ -1,103 +1,116 @@
-::-webkit-input-placeholder {color:red;}
-::-moz-placeholder          {color:#666;}/* Firefox 19+ */
-:-moz-placeholder           {color:#666;}/* Firefox 18- */
-:-ms-input-placeholder      {color:#666;}
+::-webkit-input-placeholder {
+	color: red;
+}
+
+::-moz-placeholder {
+	color: #666;
+}
+
+/* Firefox 19+ */
+:-moz-placeholder {
+	color: #666;
+}
+
+/* Firefox 18- */
+:-ms-input-placeholder {
+	color: #666;
+}
 
 .ui-pnotify .alert-danger {
-    background-color: #e77755;
-    border-color: transparent;
-    color: #fff;
+	background-color: #e77755;
+	border-color: transparent;
+	color: #fff;
 }
 
 .no-touch .ui-pnotify .alert:hover {
-    background-color: #bc401a;
+	background-color: #bc401a;
 }
 
 .default-page .quick-launch-bar {
-    position: relative;
-    display: block;
-    background-color: white;
-    -webkit-box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
+	position: relative;
+	display: block;
+	background-color: white;
+	-webkit-box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.05);
+	margin-bottom: 30px;
 }
 
 .default-page .quick-launch-bar ul {
-    display: block;
-    min-height: 80px;
-    margin: 0 auto;
-    padding: 0 20px;
-    text-align: center;
-    font-size: 0;
+	display: block;
+	min-height: 80px;
+	margin: 0 auto;
+	padding: 0 20px;
+	text-align: center;
+	font-size: 0;
 }
 
 @media (min-width: 480px) {
-    .default-page .quick-launch-bar ul {
-        padding: 0 60px;
-    }
+	.default-page .quick-launch-bar ul {
+		padding: 0 60px;
+	}
 }
 
 .default-page .quick-launch-bar li {
-    display: inline-block;
-    width: 120px;
-    height: 80px;
-    font-size: 14px;
-    text-align: center;
+	display: inline-block;
+	width: 120px;
+	height: 80px;
+	font-size: 14px;
+	text-align: center;
 }
 
 .default-page .quick-launch-bar li a {
-    display: table-cell;
-    vertical-align: middle;
-    color: #999999;
-    height: 80px;
-    width: 120px;
-    padding-top: 6px;
+	display: table-cell;
+	vertical-align: middle;
+	color: #999999;
+	height: 80px;
+	width: 120px;
+	padding-top: 6px;
 }
 
 .no-touch .default-page .quick-launch-bar li:hover a, .default-page .quick-launch-bar li.active a {
-    color: #333333;
+	color: #333333;
 }
 
 .default-page .quick-launch-bar li i {
-    font-size: 25px;
+	font-size: 25px;
 }
 
 .default-page .quick-launch-bar li span {
-    display: block;
-    margin-top: 4px;
+	display: block;
+	margin-top: 4px;
 }
 
 .user-title {
-    position: relative;
-    left: 11px;
-    padding: 14px 0;
-    margin: 0;
-    background-color: transparent;
-    text-align: center;
+	position: relative;
+	left: 11px;
+	padding: 14px 0;
+	margin: 0;
+	background-color: transparent;
+	text-align: center;
 }
 
 @media (min-width: 480px) {
-    .user-title {
-        position: absolute;
-        top: 0;
-        left: 0px;
-        right: 0px;
-        padding: 24px 0;
-    }
+	.user-title {
+		position: absolute;
+		top: 0;
+		left: 0px;
+		right: 0px;
+		padding: 24px 0;
+	}
 }
 
 .user-title h3 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    color: #666666;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #666666;
 }
 
 .login-page .wrapper .panel-heading > div img {
-    position: relative;
-    display: block;
-    float: left;
-    top: 5px;
-    width: 368px;
-    height: auto;
-    margin: 0;
+	position: relative;
+	display: block;
+	float: left;
+	top: 5px;
+	width: 368px;
+	height: auto;
+	margin: 0;
 }

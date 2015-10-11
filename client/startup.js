@@ -14,7 +14,13 @@ Meteor.startup(function () {
 
 	moment.locale(LANG);
 
-	return TAPi18n.setLanguage(LANG)
+	// in 1.2 it stop loading project-tap.i18n
+	_.extend(TAPi18n.conf, {
+		cdn_path: '/i18n',
+		"supported_languages": ["ru"],
+		"i18n_files_route": "/i18n"
+	});
+	TAPi18n.setLanguage(LANG)
 		.done(function () {
 			return _.each(Schemas, function (schema) {
 				schema.i18n('formFields');

@@ -1,4 +1,50 @@
 <template name="defaultLayout">
     {{> lostConnectionNotice}}
-    {{> yield}}
+    {{> loginInstructionsModal}}
+    <div class="c-login-page login-page">
+        <section class="wrapper scrollable animated fadeInDown">
+            <section class="panel panel-default">
+                <div class="panel-heading container-fluid visible-xs">
+                    <div style="display:inline-block;margin: 0 auto">
+                        <a href="/" class="vcenter">
+                            <img src="/logo.png" style="width: 100px;max-width: 100%!important;min-width: 80px" alt=""/>
+                        </a>
+
+                        <div class="vcenter" style="padding-top: 10px">
+                            <button class="btn btn-link pull-left"
+                                    onclick="window.open('https://vk.com/winlevel_ts', '_system');">
+                                <i class="fa fa-vk"></i>
+                                {{_ 'messages.technicalSupport'}}
+                            </button>
+                            <button type="button" class="btn btn-link pull-left" name="loginInstructionsShow">
+                                <i class="fa fa-youtube-play"></i>
+                                {{_ 'messages.videoTutorial'}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-heading hidden-xs">
+                    <a href="/">
+                        <img src="/logo.png" style="max-width: 60%" alt="Home"/>
+                    </a>
+                </div>
+
+                {{> yield}}
+
+                <div class="panel-footer hidden-xs">
+                    <div class="clearfix">
+                        <a href="#" class=""
+                           onclick="window.open('https://vk.com/winlevel_ts', '_system');">
+                            <i class="fa fa-vk"></i>
+                            {{_ 'messages.technicalSupport'}}
+                        </a>
+                        <button type="button" class="btn btn-link" name="loginInstructionsShow">
+                            <i class="fa fa-youtube-play"></i>
+                            {{_ 'messages.videoTutorial'}}
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
 </template>

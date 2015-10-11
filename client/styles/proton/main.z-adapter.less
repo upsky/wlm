@@ -1,0 +1,45 @@
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 0;
+  }
+
+}
+
+nav.user-menu {
+  position: fixed;
+  z-index: 1009;
+}
+
+@media (max-width: 479px) {
+  .user-menu-height-emulator {
+    height: 60px;
+  }
+
+  nav.main-menu {
+    position: fixed;
+    width: 100%;
+    top: 60px;
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.2s linear;
+    transition: max-height 0.2s linear;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    background: #333333;
+    z-index: 1010;
+  }
+
+}
+
+div.user-title {
+  position: static;
+}
+
+.breadcrumb.breadcrumb-nav {
+  position: static;
+}
+
+div.user-title + .breadcrumb.breadcrumb-nav {
+  padding-top: 0;
+}
