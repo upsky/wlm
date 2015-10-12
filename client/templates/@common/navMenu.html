@@ -19,7 +19,7 @@
     </nav>
 </template>
 <template name="navMenuItem">
-    <li>
+    <li class="{{#if isCurrentRoute link}}active{{/if}}">
         <a href="{{#if isRouterLink}}{{pathFor link}}{{else}}{{link}}{{/if}}" id="{{id_data}}">
             <i class="fa {{icon}} nav-icon"></i>
                 <span class="nav-text">
