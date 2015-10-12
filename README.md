@@ -26,4 +26,6 @@
   $(BUILT_PRODUCTS_DIR)/../emulator/include
   
 ## Упаковка Android
-./run.sh android-sign
+ Перед этим необходимо удалить все из /public/i18n и запустить проект один раз для генерации файлов.
+ ./run.sh build wlm
+-- ./run.sh android-sign
