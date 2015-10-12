@@ -24,7 +24,7 @@ Meteor.methods({
 		};
 
 		var tempRes = {};
-		query = query.trim().replace(/[\+]/g, '\\+');
+		query = query.trim().replace(/[\/\\|\^|\$|\*|\?|\.|\(|\)|\|]/gi, '').replace(/[\+]/g, '\\+');
 		if (query) {
 			var regExpQuery = new RegExp(query, 'ig');
 			var findRegExp = {
