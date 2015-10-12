@@ -1,13 +1,12 @@
 var template = Template.panel;
 
 template.onCreated(function () {
-	if (!this.data.hideBox) {
-		this._hideBox = new ReactiveVar(false);
+	if (this.data.hideBox) {
+		this._hideBox = new ReactiveVar(Meteor.isCordova ? true : false);
+		this._showToggleBoxBtn = true;
 	} else {
-		this._hideBox = new ReactiveVar(this.data.hideBox);
+		this._showToggleBoxBtn = false;
 	}
-
-	this._showToggleBoxBtn = (!this._hideBox.get() ? false : true);
 });
 
 template.helpers({
