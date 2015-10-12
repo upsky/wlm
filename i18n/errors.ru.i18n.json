@@ -7,5 +7,7 @@
     "passwordMismatch": "Пароли не совпадают",
     "loginOrPasswordIncorrect": "Логин или пароль неверный",
     "loginErrorTitle": "Ошибка входа в систему"
+    "loginErrorTitle": "Ошибка входа в систему",
+    "forbidden":"Доступ к данному <br> сервису сайта закрыт"
   }
 }

@@ -49,10 +49,11 @@ case $1 in
     android)
         $METEOR run android-device $SETTINGS $MOBILE_SERVER $2 $3 $4 ;;
     android-sign)
-        keytool -genkey -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -alias $ANDROID_DIR/rp.key -keypass $ANDROID_KEY_PASS -validity 10000
-        jarsigner -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -keypass $ANDROID_KEY_PASS $ANDROID_DIR/unaligned.apk $ANDROID_DIR/rp.key
+        rm -f $ANDROID_DIR/wlmarket.apk
+        #keytool -genkey -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -alias $ANDROID_DIR/rp.key -keypass $ANDROID_KEY_PASS -validity 10000
+        jarsigner -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -keypass $ANDROID_KEY_PASS $ANDROID_DIR/$UNSIGNED_APK $ANDROID_DIR/rp.key
 
-        ZIPALIGN=~/.meteor/android_bundle/android-sdk/build-tools/23.0.0/zipalign
+        ZIPALIGN=~/.meteor/android_bundle/android-sdk/build-tools/23.0.1/zipalign
         $ZIPALIGN -f -v 4 $ANDROID_DIR/$UNSIGNED_APK $ANDROID_DIR/wlmarket.apk
         ;;
     deploy-meteor)

@@ -1,5 +1,5 @@
 App.info({
-	id: 'ru.winlevel.market',
+	id: 'com.wl-market.mobile',
 	name: 'WL Market',
 	description: 'WL Market Mobile App',
 	author: 'WinTwin Group',
