@@ -24,6 +24,7 @@ Meteor.methods({
 		};
 
 		var tempRes = {};
+		query = query.trim().replace(/[\+]/g, '\\+');
 		if (query) {
 			var findRegExp = {
 				username: new RegExp(query)

@@ -23,7 +23,7 @@ WlmAdmin = {
 		this.check();
 		var config = this.get();
 		if (query !== undefined) {
-			config.queryString = query;
+			config.queryString = query.trim();
 		}
 		if (page) {
 			config.nowPage = page;
@@ -80,12 +80,14 @@ Template.adminPanelTableUsers.helpers({
 
 Template.adminPanelUserItem.helpers({
 	isImpersonateButton: function () {
-		return this.roles.some(function (item) {
-			if (item == 'partner' ||
-				item == 'client' ||
-				item == 'bussines') {
-				return true;
-			}
-		});
+		if (this.roles && this.roles.length > 0) {
+			return this.roles.some(function (item) {
+				if (item == 'partner' ||
+					item == 'client' ||
+					item == 'bussines') {
+					return true;
+				}
+			});
+		}
 	}
 });
