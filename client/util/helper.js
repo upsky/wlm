@@ -8,7 +8,9 @@ Template.registerHelper('cordovaDedect', function () {
 Template.registerHelper('showQr', function () {
 	return Meteor.pubSettings('showQr') || Meteor.isCordova;
 });
-
+Template.registerHelper('isCurrentRoute', function (route) {
+	return Router.current().route.getName() === route;
+});
 Meteor.copyToClipboard = function (text) {
 	var prompt = Meteor.isCordova ?
 		TAPi18n.__('messages.copyToClipboardMobile') :

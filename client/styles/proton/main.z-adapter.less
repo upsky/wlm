@@ -23,11 +23,22 @@ nav.user-menu {
     right: 0;
     max-height: 0;
     overflow: hidden;
-    -webkit-transition: max-height 0.2s linear;
-    transition: max-height 0.2s linear;
-    -webkit-transform: translateZ(0) scale(1, 1);
+    //-webkit-transition: max-height 0.2s linear;
+    //transition: max-height 0.2s linear;
+    //-webkit-transform: translateZ(0) scale(1, 1);
     background: #333333;
     z-index: 1010;
+    transition: none !important;
+    * {
+      transform: none !important;
+    }
+  }
+
+  .main-menu-access {
+    transition: none !important;
+    * {
+      transform: none !important;
+    }
   }
 
 }
