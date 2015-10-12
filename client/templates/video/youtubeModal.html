@@ -1,16 +1,23 @@
 <template name = 'youtubeModal'>
-    {{#if isShow}}
-        <button type="button" class="pull-right btn btn-link" name='showVideo'>
+    {{#if isInRole 'videoManager'}}
+        <div class="dropdown pull-right">
+            <a href="#" data-toggle="dropdown"><i class="fa fa-youtube-play"></i></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <button type="button" class="btn btn-link" name='showVideo' {{disabled}}>
+                        <i class="fa fa-youtube-play">{{_ "buttons.show"}}</i>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-link" name='changeVideo'>
+                        <i class="fa fa-expeditedssl">{{_ "buttons.edit"}}</i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    {{else}}
+        <button type="button" class="btn btn-link pull-right" name='showVideo' {{disabled}}>
             <i class="fa fa-youtube-play"></i>
         </button>
     {{/if}}
-    <!--     <div class="dropdown">
-                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Выпадающий список
-                </button>
-                <ul class="dropdown-menu">
-                         <li><a href="#">HTML</a></li>
-                         <li><a href="#">CSS</a></li>
-                         <li><a href="#">JavaScript</a></li>
-                </ul>
-          </div> -->
 </template>

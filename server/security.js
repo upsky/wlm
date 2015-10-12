@@ -100,5 +100,8 @@ WlmSecurity.addMethods({
 	},
 	removeVideo: {
 		roles: 'videoManager'
-	}	
+	},
+	checkVideo: {
+		roles: 'videoManager'
+	}
 });

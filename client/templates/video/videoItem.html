@@ -1,11 +1,12 @@
 <template name="videoItem">
     <tr>
           <td>{{title}}</td>
+        <td>{{_id}}</td>
           <td>{{info}}</td>
-          <td><a href="{{youtubeId}}">{{youtubeId}}</a></td>
+        <td><a href="{{youtubeId}}" target="_blank">{{youtubeId}}</a></td>
           <td>
               <button type="button" class="btn btn-link" name = 'showVideo'>
-                  <i class="fa fa-youtube-play">{{_ "buttons.showVideo"}}</i>
+                  <i class="fa fa-youtube-play">{{_ "buttons.show"}}</i>
               </button>
               <button type="button" class="btn btn-link" name = 'editVideo'>
                   <a href="{{pathFor 'editVideo'}}">

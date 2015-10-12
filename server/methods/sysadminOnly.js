@@ -2,13 +2,13 @@ WlmSecurity.addPublish({
 	usersList: {
 		roles: 'president'
 	}
-})
+});
 
 WlmSecurity.addMethods({
 	setRole: {
 		roles: [ 'sysadmin', 'president' ]
 	}
-})
+});
 
 Meteor.publish('usersList', function (params) {
 	check(params, Object);
@@ -29,40 +29,25 @@ Meteor.methods({
     return Roles.addUsersToRoles(_id, role);
   },
   insertVideos: function (doc) {
-    var videoId, regExp, match;
-    check(doc, {
-      name: String,
-      youtubeId: String,
-      title: String,
-      info: String
-    });
-  regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-  match = doc.youtubeId.match(regExp)[7];
-  if (match.length != 11) {
-    throw new Meteor.Error(407, 'Not correct reference');
-  } else {
-    doc.videoId = match;
-  }
-  return db.videos.insert(doc);
-  },
-  editVideos: function (doc) {
-    var videoId, regExp, match, updateObj = {};
     check(doc, {
       _id: String,
-      name: String,
       youtubeId: String,
       title: String,
-      info: String
+      info: String,
+      videoId: String
     });
-    regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    match = doc.youtubeId.match(regExp)[7];
-    if (match.length != 11) {
-      throw new Meteor.Error(407, 'Not correct reference');
-    } else {
-      doc.videoId = match;
-    }
+    return db.videos.insert(doc);
+  },
+  editVideos: function (doc) {
+    var updateObj = {};
+    check(doc, {
+      _id: String,
+      youtubeId: String,
+      title: String,
+      info: String,
+      videoId: String
+    });
     updateObj.title = doc.title;
-    updateObj.name = doc.name;
     updateObj.youtubeId = doc.youtubeId;
     updateObj.info = doc.info;
     updateObj.videoId = doc.videoId;
@@ -71,5 +56,32 @@ Meteor.methods({
   removeVideo: function (id) {
     check(id, String);
     db.videos.remove(id);
+  },
+  checkVideo: function (doc) {
+    var match, video, regExp;
+    check(doc, {
+      _id: String,
+      youtubeId: String,
+      title: String,
+      info: String
+    });
+    regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    video = db.videos.findOne({ _id: doc._id, title: doc.title });
+    if (video) {
+      doc.find = true;
+    } else {
+      if (db.videos.findOne({ _id: doc._id })) {
+        throw new Meteor.Error(500);
+      } else {
+        doc.find = false;
+      }
+    }
+    match = doc.youtubeId.match(regExp)[7];
+    if (match.length != 11) {
+      throw new Meteor.Error(407, 'Not correct reference');
+    } else {
+      doc.videoId = match;
+      return doc;
+    }
   }
 });

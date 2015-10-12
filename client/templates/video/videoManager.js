@@ -12,5 +12,6 @@ Template.videoManager.events({
 });
 
 Template.videoManager.onRendered(function () {
+	Session.set('editVideo', undefined);
 	Session.set('route', undefined);
-})
+});
