@@ -5,7 +5,7 @@ Accounts.onLogin(function (res) {
 
 	var geoUpdate = {
 		ip: clientIp,
-		createdAt: new Date()
+		date: new Date()
 	};
 	if (geo) {
 		_.extend(geoUpdate, {
@@ -18,16 +18,17 @@ Accounts.onLogin(function (res) {
 		geoUpdate.geo = 'no data';
 	}
 
-	if (thisUser.status == undefined ||
-		thisUser.status.firstLogin == undefined) {
+	var noGeodata = thisUser.geo == undefined ||
+		thisUser.geo.date == undefined ||
+		typeof thisUser.geo === 'String';
+
+	if (noGeodata) {
 		db.users.update(
 			{ _id: thisUser._id },
 			{
 				$set: {
-					status: {
-						geo: geoUpdate,
-						firstLogin: new Date()
-					}
+					geo: geoUpdate
+
 				}
 			}
 		);

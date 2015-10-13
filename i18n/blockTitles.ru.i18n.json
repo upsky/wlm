@@ -8,6 +8,9 @@
     "networkInvite": "Форма приглашения",
     "invitesList": "Активные приглашения",
     "networkLevels": "Уровни структуры",
-    "qrCode": "QR код"
+    "qrCode": "QR код",
+    "commonFunctions": "Обычные функции",
+    "findUsers": "Поиск пользователей",
+    "statisticFilters": "Фильтры статистики"
   }
 }

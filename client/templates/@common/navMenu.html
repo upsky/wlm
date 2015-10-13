@@ -3,13 +3,19 @@
         <ul>
             {{> navMenuItem name='index'   icon='fa-home'}}
             {{> navMenuItem name='network' icon='fa-sitemap'}}
+            {{#if isInRole 'statistic'}}{{> navMenuItem name='highcharts' icon='fa-area-chart'}}{{/if}}
             {{#if showQr}}
                 {{> navMenuItem name='qrcode'  icon='fa-qrcode'}}
             {{/if}}
         </ul>
         <ul class="logout">
+            {{#if isInRole 'adminPanel'}}{{> navMenuItem name='adminPanel' icon='fa-user-secret'}}{{/if}}
             {{> navMenuItem name='profile' icon='fa-gear'}}
-            {{> navMenuItem name='exit'    icon='fa-power-off' href="#" id="logoutHref"}}
+            {{#if isImpersonating}}
+                {{> navMenuItem name='exit'    icon='fa-eye text-danger' href="#" id="disconnect"}}
+            {{else}}
+                {{> navMenuItem name='exit'    icon='fa-power-off fa-power-off' href="#" id="logoutHref"}}
+            {{/if}}
         </ul>
     </nav>
 </template>

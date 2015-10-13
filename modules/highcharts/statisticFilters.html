@@ -1,0 +1,19 @@
+<template name="statisticFilters">
+    {{#Layout template="panel" data=statisticFilters}}
+        {{#autoForm id="statisticFilter" type="method" schema="Schemas.statisticFilter" meteormethod="null" resetOnSuccess=false}}
+            <div class="form-group">
+                {{> afFormGroup type="select-radio-inline" name="showCharts"}}
+            </div>
+            <div class="form-group">
+                {{> afQuickField type="bootstrap-datepicker" name="dateBegin"}}
+            </div>
+            <div class="form-group">
+                {{> afQuickField type="bootstrap-datepicker" name="dateEnd"}}
+            </div>
+            <div class="form-group">
+                {{> afFormGroup type="select-checkbox-inline" name="roles"}}
+            </div>
+            <button type="submit" class="btn btn-lg btn-success">{{_ "buttons.update"}}</button>
+        {{/autoForm}}
+    {{/Layout}}
+</template>
