@@ -3,13 +3,14 @@
 DEFAULT_HOST=wlm.he24.ru
 METEOR=/usr/local/bin/meteor
 SETTINGS="--settings=settings.json"
-BUILD_DIR=../wlmbuild
+BUILD_DIR=`pwd`/wlmbuild
 export MAIL_URL=smtp://postmaster%40sandboxfbc452b570544a5d9420aa783c0fda38.mailgun.org:d529975e91ce74e534b19a3ebc6b3d4f@smtp.mailgun.org
 export ANDROID_HOME=~/.meteor/android_bundle/android-sdk
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
 
-. .run-config.sh
+. frontend/.run-config.sh
 
+cd frontend
 
 case $HOST in
     "")

@@ -92,10 +92,9 @@ public/i18n/*
 
 #ignore configs with passwords
 /mup.json
-/mobile-config.js
-/settings.json
+*/mobile-config.js
+*/settings.json
 
 #ignore build directory
-/.out
-/.run-config.sh
-/private/deploy
+*/.run-config.sh
+*/private/deploy
