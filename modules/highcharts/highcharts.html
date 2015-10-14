@@ -1,6 +1,8 @@
 <template name="highcharts">
-    <button name="chart" class="btn btn-primary">Go</button>
-
-
-    {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
+    {{#Layout template="twoCols"}}
+        {{> statisticFilters}}
+        {{#contentFor "col2"}}
+            {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
+        {{/contentFor}}
+    {{/Layout}}
 </template>

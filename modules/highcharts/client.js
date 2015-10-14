@@ -1,9 +1,8 @@
-/*if (Meteor.isClient) {
+if (Meteor.isClient) {
 
-			Meteor.call('getCountryChartData' ,function (error, res) {
-				console.log([res, error]);
-				Session.set('chartData', res);
-			});
+	Meteor.call('getCountryChartData', function (error, res) {
+		Session.set('chartData', res);
+	});
 
 	Template.highcharts.topGenresChart = function () {
 		return {
@@ -14,7 +13,7 @@
 				type: 'pie'
 			},
 			title: {
-				text: 'Browser market shares January, 2015 to May, 2015'
+				text: 'Статистика пользователей по странам'
 			},
 			tooltip: {
 				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -25,7 +24,7 @@
 					cursor: 'pointer',
 					dataLabels: {
 						enabled: true,
-						format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+						format: '<b>{point.name}</b>: {point.y} ',
 						style: {
 							color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 						}
@@ -33,10 +32,12 @@
 				}
 			},
 			series: [{
-				name: "Brands",
+				name: "Всего",
 				colorByPoint: true,
 				data: Session.get('chartData')
 			}]
 		};
-	};
-}*/
+	}
+
+
+}

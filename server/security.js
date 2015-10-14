@@ -25,13 +25,6 @@ WlmSecurity.addMethods({
 		roles: 'all'
 	}
 });
-//WlmSecurity.addPublish({
-//	_roles: {
-//		authNotRequired: true,
-//		roles: 'all'
-//	}
-//});
-
 
 WlmSecurity.addMethods({
 	createUser: {
@@ -57,7 +50,7 @@ WlmSecurity.addMethods({
 		roles: 'all'
 	},
 	impersonate: {
-		roles: 'all'
+		roles: 'impersonateAccess'
 	},
 	insertInvite: {
 		roles: 'partner'
@@ -95,6 +88,7 @@ WlmSecurity.addMethods({
 	totalRegs: {
 		roles: ['president', 'sysadmin']
 	},
+
 	insertVideos: {
 		roles: 'videoManager'
 	},
@@ -106,5 +100,9 @@ WlmSecurity.addMethods({
 	},
 	checkVideo: {
 		roles: 'videoManager'
+	},
+	getCountryChartData: {
+		roles: 'statistic'
 	}
+
 });

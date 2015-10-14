@@ -54,9 +54,22 @@
     "regLink": {
       "label": "Ссылка регистрации"
     },
-    "findUsers":{
+    "findUsers": {
       "label": "Поиск пользователей",
-      "placeholder":"ID"
+      "placeholder": "ID"
+    },
+    "dateEnd": {
+      "label": "Конец периода"
+    },
+    "dateBegin": {
+      "label": "Начало периода"
+    },
+    "showCharts": {
+      "label": "Показать статистику"
+    },
+    "roles": {
+      "label": "Роли"
+
     }
   }
 }

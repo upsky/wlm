@@ -9,8 +9,9 @@
     "invitesList": "Активные приглашения",
     "networkLevels": "Уровни структуры",
     "qrCode": "QR код",
+    "findUsers": "Поиск пользователей",
+    "statisticFilters": "Фильтры статистики",
     "commonFunctions":"Обычные функции",
-    "findUsers":"Поиск пользователей",
     "videoManager":"Список видео"
   }
 }

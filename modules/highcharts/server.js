@@ -1,32 +1,16 @@
-/*if (Meteor.isServer) {
+if (Meteor.isServer) {
 	Meteor.methods({
 		getCountryChartData: function () {
-
-			var res = [];
-			var users = db.users.find().fetch();
-			for(var user in users){
-				if (user == undefined ||
-					users[user].status == undefined ||
-					users[user].status.geo == undefined){
-					continue;
-
-				}
-				var cunt = users[user].status.geo.country;
-				var found = false;
-				for (var result in res)
+			return db.users.aggregate([
+				//возвращаем массив в том виде данных, в каком его обрабатывает график.В name хранится наименование страны, в Y-количество.
 				{
-					if (res[result].name == cunt) {
-						found = true;
-						res[result].y+=1;
-						break;
+					$group: {
+						_id: "$geo.country",
+						name: { $first: { $ifNull: ["$geo.country", "Не указано"] } },
+						y: { $sum: 1 }
 					}
 				}
-				if (!found) {
-					res.push({name:cunt, y:1})
-				}
-			}
-			return res;
+			]);
 		}
 	});
 }
-*/
