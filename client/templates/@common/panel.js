@@ -6,12 +6,9 @@ template.onCreated(function () {
 	this._blockId = this.data.blockId;
 	this._hideBox = new ReactiveVar(Meteor.isCordova ? true : false);
 
-	console.log('wwwww', Session.get(panelName));
-
 	if (typeof Session.get(panelName) !== "undefined") {
 		this._hideBox.set(Session.get(panelName));
 	}
-
 
 	if (this.data.hideBox) {
 		this._showToggleBoxBtn = true;
@@ -24,7 +21,6 @@ template.onCreated(function () {
 
 template.helpers({
 	blockTitle: function () {
-		log.trace(this);
 		return "blockTitles." + this.blockId;
 	},
 	showToggleBoxBtn: function () {
