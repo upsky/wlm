@@ -10,6 +10,7 @@
     "networkLevels": "Уровни структуры",
     "qrCode": "QR код",
     "commonFunctions":"Обычные функции",
-    "findUsers":"Поиск пользователей"
+    "findUsers":"Поиск пользователей",
+    "videoManager":"Список видео"
   }
 }

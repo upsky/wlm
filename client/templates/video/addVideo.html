@@ -1,0 +1,41 @@
+<template name = 'addVideo'>
+    {{#if isInRole 'videoManager'}}
+        {{#Layout template="panel" data=addVideo}}
+            {{#autoForm id="insertVideoForm" schema="Schemas.videosSchema" type="method" meteormethod="checkVideo" resetOnSuccess=false}}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="title" placeholder="schemaLabel" value=videos.title}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="youtubeId" placeholder="schemaLabel" value=videos.youtubeId}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="info" placeholder="schemaLabel" value=videos.info}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="_id" placeholder="schemaLabel" value=videos._id}}
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-lg btn-success">{{buttonName}}</button>
+                            <button type="button" class="btn btn-lg btn-success"
+                                    name='back'>{{_ "buttons.back"}}</button>
+                        </div>
+                    </div>
+                </div>
+            {{/autoForm}}
+        {{/Layout}}
+    {{else}}
+        {{> forbidden }}
+    {{/if}}
+</template>

@@ -1,0 +1,30 @@
+<template name = 'videoManager'>
+    {{#if isInRole 'videoManager'}}
+        {{#Layout template="panel" data=videoManager}}
+            <button type="button" class="btn btn-lg btn-success" name='addVideo'>
+                <i class="fa fa-plus">{{_ "buttons.add"}}</i>
+            </button>
+            <button type="button" class="btn btn-lg btn-success" name='back'>
+                <i class="fa fa-power-off">{{_ "buttons.back"}}</i>
+            </button>
+            <table class="table table-striped">
+                <thead class="">
+                <tr>
+                    <th>{{_ "commonText.name"}}</th>
+                    <th>{{_ "commonText.blockId"}}</th>
+                    <th>{{_ "commonText.info"}}</th>
+                    <th>{{_ "commonText.link"}}</th>
+                    <th>{{_ "commonText.actions"}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each videos}}
+                    {{> videoItem}}
+                {{/each}}
+                </tbody>
+            </table>
+        {{/Layout}}
+    {{else}}
+        {{> forbidden }}
+    {{/if}}
+</template>

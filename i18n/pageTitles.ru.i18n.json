@@ -14,6 +14,9 @@
     "qrcode": "QR код",
     "recoverpass": "Восстановление пароля",
     "adminPanel":"Администрирование",
-    "adminUsers": "Поиск пользователей"
+    "videoManager": "Видео",
+    "editVideo": "Изменить видео",
+    "addVideo": "Добавить видео",
+    "adminPanelUsers":"Поиск пользователей"
   }
 }

@@ -4,7 +4,13 @@
  * @returns {*}
  */
 
+Meteor.publish('videos', function () {
+	return db.videos.find();
+});
 WlmSecurity.addPublish({
+	videos: {
+		roles: 'all'
+	},
 	invite: {
 		authNotRequired: true,
 		roles: ['partner', 'president']

@@ -1,0 +1,21 @@
+<template name="videoItem">
+    <tr>
+        <td>{{title}}</td>
+        <td>{{_id}}</td>
+        <td>{{info}}</td>
+        <td><a href="{{youtubeId}}" target="_blank">{{youtubeId}}</a></td>
+        <td>
+            <button type="button" class="btn btn-link" name='showVideo'>
+                <i class="fa fa-youtube-play">{{_ "buttons.show"}}</i>
+            </button>
+            <button type="button" class="btn btn-link" name='editVideo'>
+                <a href="{{pathFor 'editVideo'}}">
+                    <i class="fa fa-cog">{{_ "buttons.edit"}}</i>
+                </a>
+            </button>
+            <button type="button" class="btn btn-link" name='removeVideo'>
+                <i class="fa fa-expeditedssl">{{_ "buttons.delete"}}</i>
+            </button>
+        </td>
+    </tr>
+</template>

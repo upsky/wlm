@@ -94,5 +94,17 @@ WlmSecurity.addMethods({
 	},
 	totalRegs: {
 		roles: ['president', 'sysadmin']
+	},
+	insertVideos: {
+		roles: 'videoManager'
+	},
+	editVideos: {
+		roles: 'videoManager'
+	},
+	removeVideo: {
+		roles: 'videoManager'
+	},
+	checkVideo: {
+		roles: 'videoManager'
 	}
 });
