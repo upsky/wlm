@@ -1,0 +1,68 @@
+@startuml
+
+package from {
+    object RawRequest {
+        id
+        user_id
+        hash :string
+        raw_data :text
+    }
+}
+
+package result {
+    object Currency {
+        id
+        code
+    }
+
+    object Account {
+        id
+        abstract_id
+        currency_id
+        amount
+    }
+
+    object Transaction {
+        id
+        account_id
+        created_at :datetime
+        amount :numeric
+        currency_id
+        transaction_group_id
+        user_data :text
+    }
+
+    object Invoice {
+        id
+        account_id
+        created_at :datetime
+        modify_at :datetime
+        amount :numeric
+        currency_id
+        transaction_group_id
+        user_data :text
+    }
+
+    object ExchangeRate {
+        currency_id
+        date :date
+    }
+
+    object TransactionGroup {
+        id
+        transaction_id
+    }
+}
+
+from -right-> result
+
+Account -left-> Currency:c_id
+Transaction -down-> Account:a_id
+Transaction -down-> Currency:c_id
+Invoice -down-> Currency:c_id
+Invoice -down-> Account:a_id
+ExchangeRate -up-> Currency:c_id
+Transaction -up-> TransactionGroup:tg_id
+Invoice -up-> TransactionGroup:tg_id
+
+@enduml
