@@ -71,14 +71,14 @@ Meteor.methods({
       doc.find = true;
     } else {
       if (db.videos.findOne({ _id: doc._id })) {
-        throw new Meteor.Error(500);
+        throw new Meteor.Error(501, 'errors.videoUsed');
       } else {
         doc.find = false;
       }
     }
     match = doc.youtubeId.match(regExp)[7];
     if (match.length != 11) {
-      throw new Meteor.Error(407, 'Not correct reference');
+      throw new Meteor.Error(407, 'errors.checkLink');
     } else {
       doc.videoId = match;
       return doc;

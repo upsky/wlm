@@ -7,19 +7,17 @@ Template.youtubeModal.events({
 	},
 	'click [name=changeVideo]': function () {
 		Session.set('editVideo', currentData());
-		Session.set('route', Router.current().route.getName());
-		if (db.videos.find({ _id: currentData() }).count() == 0) {
+		if (!db.videos.findOne({ _id: currentData() })) {
 			Router.go('addVideo');
 		} else {
-			var blockName = db.videos.findOne({ _id: currentData() })._id;
-			Router.go('editVideo', { _id: blockName });
+			Router.go('editVideo', { _id: currentData() });
 		}
 	}
 });
 
 Template.youtubeModal.helpers({
 	disabled: function () {
-		if (db.videos.find({ _id: currentData() }).count() == 0) {
+		if (!db.videos.findOne({ _id: currentData() })) {
 			return 'disabled';
 		} else {
 			return '';

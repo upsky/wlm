@@ -7,22 +7,22 @@
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <div class="form-group">
-                                    {{> afQuickField class="form-control input-lg" name="title" placeholder="schemaLabel"}}
+                                    {{> afQuickField class="form-control input-lg" name="title" placeholder="schemaLabel" value=videos.title}}
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="form-group">
-                                    {{> afQuickField class="form-control input-lg" name="youtubeId" placeholder="schemaLabel"}}
+                                    {{> afQuickField class="form-control input-lg" name="youtubeId" placeholder="schemaLabel" value=videos.youtubeId}}
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="form-group">
-                                    {{> afQuickField class="form-control input-lg" name="info" placeholder="schemaLabel"}}
+                                    {{> afQuickField class="form-control input-lg" name="info" placeholder="schemaLabel" value=videos.info}}
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="form-group">
-                                    {{> afQuickField class="form-control input-lg" name="_id" placeholder="schemaLabel"}}
+                                    {{> afQuickField class="form-control input-lg" name="_id" placeholder="schemaLabel" value=videos._id}}
                                 </div>
                             </li>
                         </ul>
@@ -31,7 +31,7 @@
                             <button type="button" class="btn btn-lg btn-success"
                                     name='back'>{{_ "buttons.back"}}</button>
                         </div>
-                  </div>
+                    </div>
                 </div>
             {{/autoForm}}
         {{/Layout}}
