@@ -56,7 +56,7 @@
     },
     "findUsers":{
       "label": "Поиск пользователей",
-      "placeholder":"ID"
+      "placeholder": "ID, email, Имя"
     }
   }
 }
