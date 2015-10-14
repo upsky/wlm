@@ -17,7 +17,7 @@ CutterPaginator.generate(name, allCount, itemsPage, nowPage));
 **itemsPage**:количество данных на страницу
 **nowPage**:  текущая страница
 
-Для корректного обратного взаимодействия (при нажатии на какую либо кнопку пагинатора, ваш код узнал о событии используйте:
+Для корректного обратного взаимодействия (чтобы при нажатии на какую либо кнопку пагинатора ваш код узнал о событии, используйте:
 ```js
 CutterPaginator.get(name).onSetPage=function(inputData){
         console.log(inputData.page + ' выбранная старница пагинатора');
@@ -63,8 +63,8 @@ CutterPaginator.set('name',config); // реактивно
 ```js
 var config = CutterPaginator.get('name');
 config.isShowInfo=false;
-isFastJump=true;
-isNowFastJump=true;
+config.isFastJump=true;
+config.isNowFastJump=true;
 ```
 это всё изменит данные но не запустит процесс обновления. Реактивность не сработает, иногда это полезно: например конфигурирование перед тем как появятся данные.
 На случай если данные были изменены ранее(как например выше) и требуется обновление пагинатора, запустите

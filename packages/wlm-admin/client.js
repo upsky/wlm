@@ -7,7 +7,7 @@ WlmAdmin = {
 		queryString: ""
 	}),
 	check: function () {
-		if (!Roles.userIsInRole(Meteor.user(), ['adminUsers']))
+		if (!Roles.userIsInRole(Meteor.user(), 'adminUsers'))
 			Router.go('forbidden');
 	},
 	get: function () {
@@ -23,7 +23,7 @@ WlmAdmin = {
 		this.check();
 		var config = this.get();
 		if (query !== undefined) {
-			config.queryString = query;
+			config.queryString = query.trim();
 		}
 		if (page) {
 			config.nowPage = page;
@@ -80,12 +80,11 @@ Template.adminPanelTableUsers.helpers({
 
 Template.adminPanelUserItem.helpers({
 	isImpersonateButton: function () {
-		return this.roles.some(function (item) {
-			if (item == 'partner' ||
-				item == 'client' ||
-				item == 'bussines') {
-				return true;
-			}
-		});
+		if (!Roles.userIsInRole(Meteor.user(), 'impersonateAccess')) return;
+		if (this.roles && this.roles.length > 0) {
+			return this.roles.some(function (item) {
+				return _.contains(['partner', 'client', 'bussines'], item);
+			});
+		}
 	}
 });

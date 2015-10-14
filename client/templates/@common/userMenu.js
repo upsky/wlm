@@ -97,7 +97,8 @@ Template.userMenu.events({
   "click #userMenu": function(event) {
     return 'click #userMenu';
   },
-  "click .toggle-main-menu": function(event) {
+  "click .toggle-main-menu": function (event) {
+    event.stopPropagation();
     return Session.set('userMenuStatus', !Session.get('userMenuStatus'));
   }
 });

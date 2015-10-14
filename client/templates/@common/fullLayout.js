@@ -190,6 +190,9 @@ Template.fullLayout.rendered = function () {
 Template.fullLayout.events({
 	"click #fullLayout": function (event) {
 		return "click #fullLayout";
+	},
+	"click": function () {
+		return Session.set('userMenuStatus', false);
 	}
 });
 

@@ -24,9 +24,29 @@ Meteor.methods({
 		};
 
 		var tempRes = {};
+		query = query.trim().replace(/[\/\\|\^|\$|\*|\?|\.|\(|\)|\|]/gi, '').replace(/[\+]/g, '\\+');
 		if (query) {
+			var regExpQuery = new RegExp(query, 'ig');
 			var findRegExp = {
-				username: new RegExp(query)
+				"$or": [
+					{
+						"profile.name": regExpQuery
+					},
+					{
+						username: regExpQuery
+					},
+					{
+						emails: {
+							$all: [
+								{
+									$elemMatch: {
+										address: regExpQuery
+									}
+								}
+							]
+						}
+					}
+				]
 			};
 			tempRes = db.users.find(findRegExp, configRequest);
 		} else {
@@ -35,7 +55,7 @@ Meteor.methods({
 
 		result.data = tempRes.fetch();
 		result.count = tempRes.count();
-		return result
+		return result;
 	}
 });
 WlmSecurity.addMethods({
