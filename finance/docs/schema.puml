@@ -4,8 +4,9 @@ package from {
     object RawRequest {
         id
         user_id
-        hash :string
-        raw_data :text
+        hash :string[32]
+        raw_data :json
+        created_at :dateTime
     }
 }
 
@@ -17,7 +18,7 @@ package result {
 
     object Account {
         id
-        abstract_id
+        owner_id
         currency_id
         amount
     }
@@ -28,7 +29,6 @@ package result {
         created_at :datetime
         amount :numeric
         currency_id
-        transaction_group_id
         user_data :text
     }
 
@@ -39,7 +39,6 @@ package result {
         modify_at :datetime
         amount :numeric
         currency_id
-        transaction_group_id
         user_data :text
     }
 
@@ -48,10 +47,6 @@ package result {
         date :date
     }
 
-    object TransactionGroup {
-        id
-        transaction_id
-    }
 }
 
 from -right-> result
@@ -62,7 +57,6 @@ Transaction -down-> Currency:c_id
 Invoice -down-> Currency:c_id
 Invoice -down-> Account:a_id
 ExchangeRate -up-> Currency:c_id
-Transaction -up-> TransactionGroup:tg_id
-Invoice -up-> TransactionGroup:tg_id
+Transaction -left-> Invoice:i_id
 
 @enduml
