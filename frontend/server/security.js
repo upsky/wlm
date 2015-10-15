@@ -101,7 +101,7 @@ WlmSecurity.addMethods({
 	checkVideo: {
 		roles: 'videoManager'
 	},
-	getCountryChartData: {
+	getChartData: {
 		roles: 'statistic'
 	}
 

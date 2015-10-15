@@ -120,19 +120,20 @@ Schemas.resetPass = new SimpleSchema({
 Schemas.statisticFilter = new SimpleSchema({
 	dateBegin: {
 		type: Date,
+		optional: true,
 		autoform: {
 			type: "bootstrap-datepicker"
 		}
 	},
 	dateEnd: {
 		type: Date,
+		optional: true,
 		autoform: {
 			type: "bootstrap-datepicker"
 		}
 	},
 	showCharts: {
 		type: String,
-		optional: true,
 		autoform: {
 			type: "select-radio-inline",
 			options: function () {
