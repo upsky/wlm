@@ -1,9 +1,4 @@
 if (Meteor.isClient) {
-
-	Meteor.call('getCountryChartData', function (error, res) {
-		Session.set('chartData', res);
-	});
-
 	Template.highcharts.topGenresChart = function () {
 		return {
 			chart: {
@@ -38,6 +33,4 @@ if (Meteor.isClient) {
 			}]
 		};
 	}
-
-
 }

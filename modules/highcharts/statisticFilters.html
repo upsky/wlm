@@ -1,6 +1,6 @@
 <template name="statisticFilters">
     {{#Layout template="panel" data=statisticFilters}}
-        {{#autoForm id="statisticFilter" type="method" schema="Schemas.statisticFilter" meteormethod="null" resetOnSuccess=false}}
+        {{#autoForm id="statisticFilter" type="method" schema="Schemas.statisticFilter" meteormethod="getChartData" resetOnSuccess=false}}
             <div class="form-group">
                 {{> afFormGroup type="select-radio-inline" name="showCharts"}}
             </div>
