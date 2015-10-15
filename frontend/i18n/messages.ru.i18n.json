@@ -1,0 +1,45 @@
+{
+  "messages": {
+    "welcome": "Добро пожаловать!",
+    "recoverpass": "Восстановление пароля",
+    "scanQr": "Скачайте приложение и отсканируйте QR код для входа в свой кабинет",
+    "inviteQrCode": "Откройте AppStore на iPhone или Play Market на Android и найдите приложение WL Market. Установите его и сканируйте код для подключения в вашу структуру",
+    "inviteLink": "Ссылка для активации",
+    "scanQr": "Сканировать QR код",
+    "technicalSupport": "Техническая поддержка",
+    "videoTutorial": "Видеоинструкция",
+    "selectAuthenticationMethod": "Выберете способ входа",
+    "loginUsingQrCode": "Войти с помощью QR кода",
+    "loginUsingQrLogin": "Войти с помощью логина и пароля",
+    "recoverPass": "Забыли пароль?",
+    "emailSent": "Пиьсмо отправлено",
+    "yourEmail": "На вашу почту",
+    "sendEmailWithInstructions": "отправлено письмо с инструкцией по востановлению пароля!",
+    "verifyEmailText": "Если письмо не пришло в течение пары минут, попробуйте поискать его в папке Спам Вашего почтового клиента.",
+    "enterNewPassForUser": "Введите новый пароль для пользователя",
+    "passwordChanged": "Пароль изменен",
+    "emailVerified": "Адрес эл. почты подтвержден",
+    "videoNotFound": "Видео отсутствует.",
+    "addVideo": "Видео добавленно",
+    "passwordNotChanged": "Ошибка. Пароль не изменен",
+    "emailVerified": "Адрес электронной почты подтвержден",
+    "emailNotVerified": "Email не подтвержден, перейдите в <a href=\"/profile\">профиль</a> для подтверждения.",
+    "copyToClipboardMobile": "Нажмите на строке ниже еще раз, чтобы вызвать меню копирования",
+    "copyToClipboard": "Чтобы скопировать, нажмите",
+    "unknown": "Неизвестно",
+    "changesSaved": "Изменения сохранены",
+    "incorrectDate": "Дата неизвестна"
+  },
+  "vk": {
+    "newsHeader": "Новости WL Market",
+    "groupLink": "//vk.com/wlmarket_official"
+  },
+  "email": {
+    "inviteFrom": "Приглашение от %s"
+  },
+  "connStatus": {
+    "connecting": "Подключаемся к серверу",
+    "connected": "Подключение установлено",
+    "offline": "Подключение к серверу отсутствует"
+  }
+}

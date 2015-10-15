@@ -1,0 +1,30 @@
+{
+  "commonText": {
+    "verified": "Подтверждено",
+    "noVerified": "Не подтверждено",
+    "phoneNumber":"Номер телефона",
+    "email":"Email",
+    "id":"ID",
+    "role":"Роль/Права",
+    "userData":"Данные пользователя",
+    "actions":"Действия",
+    "name":"Имя",
+    "see":"Просмотр",
+    "pasportSN":"Паспорт",
+    "pasport":"Паспорт",
+    "pageVK":"страница ВК",
+    "skype":"Skype",
+    "ip":"IP",
+    "country":"Страна",
+    "region":"Регион",
+    "city":"Город",
+    "name": "Имя",
+    "label": "Название",
+    "info": "Описание",
+    "link": "Ссылка",
+    "searching": "Производится поиск",
+    "found":"Найдено",
+    "records": "Записей",
+    "blockId": "Название блока"
+  }
+}

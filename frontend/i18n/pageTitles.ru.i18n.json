@@ -1,0 +1,23 @@
+{
+  "pageTitles": {
+    "topTitle": "Winlevel Market",
+    "index": "Привет",
+    "loading": "Загрузка...",
+    "login": "Авторизация",
+    "blocked": "Аккаунт заблокирован",
+    "welcome": "Привет",
+    "network": "Структура",
+    "profile": "Профиль",
+    "exit": "Выход",
+    "support": "Тех. поддержка",
+    "down": "Технические работы",
+    "qrcode": "QR код",
+    "recoverpass": "Восстановление пароля",
+    "adminPanel": "Администрирование",
+    "adminUsers": "Поиск пользователей",
+    "videoManager": "Видео",
+    "editVideo": "Изменить видео",
+    "addVideo": "Добавить видео",
+    "highcharts": "Статистика"
+  }
+}

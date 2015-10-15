@@ -1,0 +1,17 @@
+{
+  "blockTitles": {
+    "personalInf": "Персональная информация",
+    "changePass": "Смена пароля",
+    "settings": "Настройки",
+    "newsList": "Новости",
+    "usersList": "Пользователи",
+    "networkInvite": "Форма приглашения",
+    "invitesList": "Активные приглашения",
+    "networkLevels": "Уровни структуры",
+    "qrCode": "QR код",
+    "findUsers": "Поиск пользователей",
+    "statisticFilters": "Фильтры статистики",
+    "commonFunctions":"Обычные функции",
+    "videoManager": "Список видео"
+  }
+}
