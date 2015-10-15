@@ -1,0 +1,29 @@
+{
+  "public": {
+    "version": "0.1",
+    "isDebug": true,
+    "isLocal": false,
+    "isDown": false,
+    "networkDeep": 10,
+    "dadata": {
+      "token": "291fd8d034539e4bc0322a72fd27bc58fbe6d8d8"
+    },
+    "vk": {
+      "appId": "4477511",
+      "groupName": "wlmarket_official"
+    },
+    "showQr": false,
+    "recaptchaPublic": "6LfcFA4TAAAAAMvkEJaI4PYGYArwgTyUo4RRHWKu",
+
+    "email": {
+      "sysadmin": "admin@wl-market.com",
+      "invite": "noreply@wl-market.com",
+      "verify": "noreply@wl-market.com",
+      "support": "support@wl-market.com"
+    }
+  },
+
+  "sysadminPass": "obsIrjavOvtiOcsO",
+
+  "recaptchaPrivate": "6LfcFA4TAAAAAH3LN_csIFbW-sIREKnFBoaRLV4H"
+}
