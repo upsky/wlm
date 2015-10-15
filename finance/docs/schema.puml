@@ -2,48 +2,59 @@
 
 package from {
     object RawRequest {
-        id
-        user_id
-        hash :string[32]
-        raw_data :json
-        created_at :dateTime
+        id :int:pk
+        userId :string
+        hash :string(32)
+        rawData :json
+        createdAt :dateTime
     }
 }
 
 package result {
     object Currency {
-        id
-        code
+        id :int:pk
+        code :int(3)
+        userData :json
     }
 
     object Account {
-        id
-        owner_id
-        currency_id
+        id :int:pk
+        ownerId :string
+        currencyId :int:fk
         amount
+        userData :json
     }
 
     object Transaction {
-        id
-        account_id
-        created_at :datetime
+        id :int:pk
+        accountId :int:fk
+        createdAt :dateTime
         amount :numeric
-        currency_id
-        user_data :text
+        currencyId :int:fk
+        userData :json
     }
 
     object Invoice {
-        id
-        account_id
-        created_at :datetime
-        modify_at :datetime
+        id :int:pk
+        ownerId :string
+        createdAt :dateTime
+        modifyAt :dateTime
         amount :numeric
-        currency_id
-        user_data :text
+        currencyId :int:fk
+        userData :json
     }
 
     object ExchangeRate {
-        currency_id
+        fromCurrencyId :int:fk
+        toCurrencyId :int:fk
+        rate
+        date :date
+    }
+
+    object ExchangeRateHistory {
+        fromCurrency :string(3)
+        toCurrency :string(3)
+        rate
         date :date
     }
 
@@ -56,7 +67,14 @@ Transaction -down-> Account:a_id
 Transaction -down-> Currency:c_id
 Invoice -down-> Currency:c_id
 Invoice -down-> Account:a_id
-ExchangeRate -up-> Currency:c_id
+ExchangeRate -up-> Currency:fc_id
+ExchangeRate -up-> Currency:tc_id
 Transaction -left-> Invoice:i_id
+ExchangeRateHistory -up- ExchangeRate
+
+legend right
+  <b>:pk</b> primary key
+  <b>:fk</b> foreign key
+endlegend
 
 @enduml
