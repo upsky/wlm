@@ -14,17 +14,15 @@ WlmSecurity.addPublish({
 });
 
 Meteor.publish('eventsList', function () {
-	//console.log(db.invites.find().fetch());
 	return db.events.find();
 });
-
 
 Meteor.methods({
 	createEvent: function (doc) {
 		check(doc, {
-			eventName: String,
+			name: String,
 			start: Date,
-			end: Date,
+			end: Date
 		});
 
 		return WlmEvent.create(doc);
@@ -32,9 +30,9 @@ Meteor.methods({
 	updateEvent: function (doc) {
 		check(doc, {
 			_id: String,
-			eventName: String,
+			name: String,
 			start: Date,
-			end: Date,
+			end: Date
 		});
 
 		return WlmEvent.update(doc);

@@ -27,8 +27,9 @@ Package.onUse(function (api) {
 	]);
 
 	api.addFiles([
-		'template/events.html',
-		'template/events.js',
+		'fullcalendar-adapter.js',
+		'template/cFullcalendar.html',
+		'template/cFullcalendar.js',
 		'template/eventModal.html',
 		'template/eventModal.js',
 	], 'client');

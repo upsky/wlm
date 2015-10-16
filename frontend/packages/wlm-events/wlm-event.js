@@ -6,15 +6,13 @@ var Event = function () {
 			return db.events.insert(doc);
 		},
 		update: function (doc) {
-			return {};
-		},
-		/**
-		 *
-		 * @param businessId
-		 * @returns {Array}
-		 */
-		list: function (businessId) {
-			return [];
+			return db.events.update(doc._id, {
+				$set: {
+					name: doc.name,
+					start: doc.start,
+					end: doc.end
+				}
+			});
 		}
 	}
 };
