@@ -27,7 +27,13 @@ template.helpers({
 			eventLimit: true,
 			defaultView: Session.get('fc.currentView'),
 			defaultDate: moment().add(1, 'days'),
-			height: 650,
+			//height: 650,
+			contentHeight: 600,
+			slotEventOverlap: false,
+			scrollTime: '09:00',
+			slotDuration: '00:05',
+			minTime: '08:00',
+			maxTime: '19:00',
 			businessHours: {
 				start: '09:00', // a start time (10am in this example)
 				end: '18:00', // an end time (6pm in this example)
