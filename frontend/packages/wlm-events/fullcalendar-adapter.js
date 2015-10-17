@@ -83,8 +83,15 @@ var FullcalendarAdapter = function () {
 		}
 	}
 
-	function eventClick () {
-		alert('eventClick');
+	function eventClick (event) {
+		var start = event.start.unix() * 1000;
+		var end = event.end.unix() * 1000;
+		Modal.show('eventModal', {
+			_id: event.id,
+			name: event.title,
+			start: new Date(start),
+			end: new Date(end)
+		});
 	}
 
 	function dayClick (date) {

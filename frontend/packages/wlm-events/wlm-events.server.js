@@ -1,5 +1,5 @@
 WlmSecurity.addMethods({
-	createEvent: {
+	upsertEvent: {
 		roles: 'all'
 	},
 	updateEvent: {
@@ -18,24 +18,15 @@ Meteor.publish('eventsList', function () {
 });
 
 Meteor.methods({
-	createEvent: function (doc) {
+	upsertEvent: function (doc) {
 		check(doc, {
+			_id: Match.Optional(String),
 			name: String,
 			start: Date,
 			end: Date
 		});
 
-		return WlmEvent.create(doc);
-	},
-	updateEvent: function (doc) {
-		check(doc, {
-			_id: String,
-			name: String,
-			start: Date,
-			end: Date
-		});
-
-		return WlmEvent.update(doc);
+		return WlmEvent.upsert(doc);
 	}
 });
 

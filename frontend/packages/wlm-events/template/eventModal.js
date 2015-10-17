@@ -2,7 +2,7 @@ var template = Template.eventModal;
 //var template = Template.eventModal;
 //
 AutoForm.hooks({
-	regForm: {
+	eventForm: {
 		before: {
 			method: function (doc) {
 				console.log('before', doc);

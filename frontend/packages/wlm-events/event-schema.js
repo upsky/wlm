@@ -4,6 +4,10 @@ SimpleSchema.messages({
 });
 
 this.eventSchema = new SimpleSchema({
+	_id: {
+		type: String,
+		optional: true
+	},
 	name: {
 		type: String,
 		min: 3
