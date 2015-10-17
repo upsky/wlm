@@ -16,6 +16,7 @@ Package.onUse(function (api) {
 	api.use('tsega:bootstrap3-datetimepicker@=3.1.3_3', 'client');
 	api.use('aldeed:autoform', 'client');
 	api.use('aldeed:autoform-bs-datetimepicker', 'client');
+	api.use('aldeed:template-extension', 'client');
 
 
 	api.use('wlm-security', 'server');

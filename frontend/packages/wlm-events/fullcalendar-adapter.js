@@ -41,7 +41,7 @@ var FullcalendarAdapter = function () {
 				title: event.name,
 				start: event.start,
 				end: event.end,
-				allDay: true,
+				allDay: false,
 				editable: true,
 				startEditable: true,
 				durationEditable: true
@@ -58,6 +58,8 @@ var FullcalendarAdapter = function () {
 	 * @param revertFunc
 	 */
 	function eventDrop (event, delta, revertFunc) {
+		update(event);
+		return;
 		if (confirmUpdate(event)) {
 			update(event);
 		} else {
@@ -72,6 +74,8 @@ var FullcalendarAdapter = function () {
 	 * @param revertFunc
 	 */
 	function eventResize (event, delta, revertFunc) {
+		update(event);
+		return;
 		if (confirmUpdate(event)) {
 			update(event);
 		} else {
@@ -83,11 +87,22 @@ var FullcalendarAdapter = function () {
 		alert('eventClick');
 	}
 
+	function dayClick (date) {
+		var start = date.unix() * 1000;
+		var end = start + (5 * 60 * 1000);
+		Modal.show('eventModal', {
+			name: 'new event',
+			start: new Date(start),
+			end: new Date(end)
+		});
+	}
+
 
 	return {
 		prepareArray: prepareArray,
 		eventDrop: eventDrop,
 		eventResize: eventResize,
+		dayClick: dayClick,
 		eventClick: eventClick
 	}
 };

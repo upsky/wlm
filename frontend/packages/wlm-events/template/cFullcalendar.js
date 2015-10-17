@@ -2,7 +2,7 @@ var template = Template.cFullcalendar;
 
 template.onCreated(function () {
 	this.subscribe("eventsList");
-	Session.set('fc.currentView', 'month');
+	Session.set('fc.currentView', 'agendaWeek');
 });
 template.onRendered(function () {
 	this.$fc = this.$('.fc');
@@ -23,13 +23,22 @@ template.helpers({
 				right: ''
 			},
 			lang: 'ru',
+			timezone: 'local',
 			eventLimit: true,
-			defaultDate: moment().add(50, 'days'),
+			defaultView: Session.get('fc.currentView'),
+			defaultDate: moment().add(1, 'days'),
+			height: 650,
+			businessHours: {
+				start: '09:00', // a start time (10am in this example)
+				end: '18:00', // an end time (6pm in this example)
+				dow: [1, 2, 3, 4, 5]
+			},
 			views: {
 				agenda: {
 					eventLimit: 6
 				}
 			},
+			dayClick: FCAdapter.dayClick,
 			eventDrop: FCAdapter.eventDrop,
 			eventResize: FCAdapter.eventResize,
 			eventClick: FCAdapter.eventClick,

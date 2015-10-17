@@ -7,16 +7,17 @@
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">{{_ 'messages.videoTutorial'}}</h4>
                 </div>
+                <!--<input type="text" value=""/>-->
                 {{#autoForm id="eventForm" type="method" schema="eventSchema" meteormethod="createEvent" resetOnSuccess=true}}
                     <div class="modal-body">
-                        {{> afQuickField type="text" class="form-control input-lg" name="name"}}
+                        {{> afQuickField type="text" class="form-control input-lg" name="name" value=name}}
 
                         <div class="row">
                             <div class="col-md-6">
-                                {{> afQuickField name="start" type="bootstrap-datetimepicker" }}
+                                {{> afQuickField name="start" type="bootstrap-datetimepicker" value=start }}
                             </div>
                             <div class="col-md-6">
-                                {{> afQuickField name="end" type="bootstrap-datetimepicker" }}
+                                {{> afQuickField name="end" type="bootstrap-datetimepicker" value=end }}
                             </div>
                         </div>
                     </div>
