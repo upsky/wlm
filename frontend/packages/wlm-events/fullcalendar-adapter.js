@@ -44,7 +44,8 @@ var FullcalendarAdapter = function () {
 				allDay: false,
 				editable: true,
 				startEditable: true,
-				durationEditable: true
+				durationEditable: true,
+				status: event.status
 			});
 		});
 
@@ -83,17 +84,27 @@ var FullcalendarAdapter = function () {
 		}
 	}
 
+	/**
+	 *
+	 * @param event
+	 */
 	function eventClick (event) {
 		var start = event.start.unix() * 1000;
 		var end = event.end.unix() * 1000;
+		console.log('event.status', event.status);
 		Modal.show('eventModal', {
 			_id: event.id,
 			name: event.title,
 			start: new Date(start),
-			end: new Date(end)
+			end: new Date(end),
+			status: event.status
 		});
 	}
 
+	/**
+	 *
+	 * @param date
+	 */
 	function dayClick (date) {
 		var start = date.unix() * 1000;
 		var end = start + (5 * 60 * 1000);

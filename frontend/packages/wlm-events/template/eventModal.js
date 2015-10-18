@@ -1,6 +1,15 @@
 var template = Template.eventModal;
-//var template = Template.eventModal;
-//
+
+template.helpers({
+	options: function () {
+		return [
+			{ label: "EVENT_STATUS.NEW", value: EVENT_STATUS.NEW },
+			{ label: "EVENT_STATUS.CONFIRMED", value: EVENT_STATUS.CONFIRMED },
+			{ label: "EVENT_STATUS.WAITING", value: EVENT_STATUS.WAITING },
+			{ label: "EVENT_STATUS.NOT_CONFIRMED", value: EVENT_STATUS.NOT_CONFIRMED }
+		]
+	}
+});
 AutoForm.hooks({
 	eventForm: {
 		before: {

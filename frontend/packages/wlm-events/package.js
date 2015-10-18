@@ -18,7 +18,6 @@ Package.onUse(function (api) {
 	api.use('aldeed:autoform-bs-datetimepicker', 'client');
 	api.use('aldeed:template-extension', 'client');
 
-
 	api.use('wlm-security', 'server');
 
 	api.use('gwendall:simple-schema-i18n');
@@ -41,7 +40,8 @@ Package.onUse(function (api) {
 	], 'server');
 
 	api.addFiles([
-		'event-schema.js'
+		'lib/constants.js',
+		'lib/event-schema.js',
 	]);
 
 

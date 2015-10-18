@@ -40,5 +40,8 @@ this.eventSchema = new SimpleSchema({
 			if (deltaTime < (5 * 60))
 				return "minimalTime";
 		}
+	},
+	status: {
+		type: Number
 	}
 });

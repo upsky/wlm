@@ -1,9 +1,6 @@
 WlmSecurity.addMethods({
 	upsertEvent: {
 		roles: 'all'
-	},
-	updateEvent: {
-		roles: 'all'
 	}
 });
 WlmSecurity.addPublish({
@@ -23,7 +20,8 @@ Meteor.methods({
 			_id: Match.Optional(String),
 			name: String,
 			start: Date,
-			end: Date
+			end: Date,
+			status: Number
 		});
 
 		return WlmEvent.upsert(doc);
