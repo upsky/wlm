@@ -19,14 +19,10 @@ AutoForm.hooks({
 			}
 		},
 		onError: function (type, error) {
-			//WlmNotify.create({
-			//	type: 'error',
-			//	text: error
-			//});
 			console.log('error', arguments);
 		},
 		onSuccess: function (type, res) {
-			console.log('onSuccess', arguments)
+			Modal.hide('eventModal');
 		},
 		onSubmit: function (data) {
 			console.log('onSubmit', arguments)

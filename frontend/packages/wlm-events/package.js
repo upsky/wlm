@@ -12,6 +12,7 @@ Package.onUse(function (api) {
 
 	api.use('rzymek:fullcalendar@2.4.0', 'client');
 
+	api.use('less@=2.5.0_3', 'client', { isImport: true });
 	api.use('twbs:bootstrap', 'client');
 	api.use('tsega:bootstrap3-datetimepicker@=3.1.3_3', 'client');
 	api.use('aldeed:autoform', 'client');
@@ -32,6 +33,7 @@ Package.onUse(function (api) {
 		'template/cFullcalendar.js',
 		'template/eventModal.html',
 		'template/eventModal.js',
+		'c-fullcalendar.less',
 	], 'client');
 
 	api.addFiles([

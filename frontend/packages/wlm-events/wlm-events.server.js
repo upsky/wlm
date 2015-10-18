@@ -23,7 +23,6 @@ Meteor.methods({
 			end: Date,
 			status: Number
 		});
-
 		return WlmEvent.upsert(doc);
 	}
 });

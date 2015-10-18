@@ -45,7 +45,8 @@ var FullcalendarAdapter = function () {
 				editable: true,
 				startEditable: true,
 				durationEditable: true,
-				status: event.status
+				status: event.status,
+				className: 'm-events-status-' + event.status,
 			});
 		});
 
