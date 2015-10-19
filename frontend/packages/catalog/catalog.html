@@ -1,0 +1,74 @@
+
+<template name="catalog">
+	{{#with catalog}}
+		{{#if ready}}
+			<div class="catalog">
+				<div class="actions-panel">
+					<a class="add {{#unless can 'add'}}disabled{{/unless}}"><span class="fa fa-plus"></span></a>
+					<a class="edit {{#unless can 'edit'}}disabled{{/unless}}"><span class="fa fa-pencil"></span></a>
+					<a class="remove {{#unless can 'remove'}}disabled{{/unless}}"><span class="fa fa-remove"></span></a>
+				</div>
+				{{> catalogRoot}}
+			</div>
+		{{/if}}
+	{{/with}}
+</template>
+
+<template name="catalogRoot">
+	<ul class="root">
+		{{#each getChildren}}
+			{{> catalogCategory}}
+		{{/each}}
+		<div class="selector"></div>
+	</ul>
+</template>
+
+<template name="catalogCategory">
+	<li class="node {{#if hasChildren}}branch{{/if}}">
+		{{#if hasChildren}}
+			<i class="toggle {{#if opened}}opened{{/if}}"></i>
+		{{/if}}
+		<div class="node-inner {{#if selected}}selected{{/if}}">
+			<span class="name">{{title}}</span>
+		</div>
+		{{#if opened}}
+			<ul class="branch-nodes">
+				{{#each getChildren}}
+					{{> catalogCategory}}
+				{{/each}}
+			</ul>
+		{{/if}}
+		{{#if edited}}
+			{{> editor}}
+		{{/if}}
+	</li>
+</template>
+
+<template name="editor">
+	<div class="editor modal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="exampleModalLabel">{{title}}</h4>
+				</div>
+				<form>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="editor__title" class="control-label">Название:</label>
+							<input id="editor__title" type="text" name="title" value="{{title}}" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="editor__description" class="control-label">Описание:</label>
+							<textarea id="editor__description" name="description" class="form-control">{{description}}</textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="editor__cancel" type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+						<button type="submit" class="btn btn-primary">Сохранить</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</template>
