@@ -28,7 +28,8 @@
     "copyToClipboard": "Чтобы скопировать, нажмите",
     "unknown": "Неизвестно",
     "changesSaved": "Изменения сохранены",
-    "incorrectDate": "Дата неизвестна"
+    "incorrectDate": "Дата неизвестна",
+    "preEntry": "Предварительная запись"
   },
   "vk": {
     "newsHeader": "Новости WL Market",

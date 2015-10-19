@@ -5,14 +5,12 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{{_ 'messages.videoTutorial'}}</h4>
+                    <h4 class="modal-title">{{modalTitle}}</h4>
                 </div>
                 {{#autoForm id="eventForm" type="method" schema="eventSchema" meteormethod="upsertEvent" resetOnSuccess=true}}
                     <input type="hidden" name="_id" data-schema-key="_id" value="{{_id}}">
 
                     <div class="modal-body">
-                        {{> afQuickField type="text" class="form-control input-lg" name="name" value=name}}
-
                         <div class="row">
                             <div class="col-md-6">
                                 {{> afQuickField name="start" type="bootstrap-datetimepicker" value=start }}
@@ -22,11 +20,14 @@
                             </div>
                         </div>
 
+                        {{> afQuickField type="textarea" class="form-control" name="comment" value=comment rows=6}}
+
                         {{> afFormGroup name="status" options=options value=status}}
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button class="btn btn-primary" type="submit">{{_    'buttons.save'}}</button>
+                        <button class="btn btn-default" data-dismiss="modal"
+                                aria-label="Close">{{_ 'buttons.cancel'}}</button>
 
                     </div>
                 {{/autoForm}}

@@ -7,6 +7,7 @@ var Event = function () {
 	 */
 	function create (doc) {
 		doc.userId = Meteor.userId();
+		doc.created = new Date();
 
 		return db.events.insert(doc);
 	};
@@ -19,7 +20,7 @@ var Event = function () {
 	function update (doc) {
 		return db.events.update(doc._id, {
 			$set: {
-				name: doc.name,
+				comment: doc.comment,
 				start: doc.start,
 				end: doc.end,
 				status: doc.status

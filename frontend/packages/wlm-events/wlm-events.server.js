@@ -18,7 +18,7 @@ Meteor.methods({
 	upsertEvent: function (doc) {
 		check(doc, {
 			_id: Match.Optional(String),
-			name: String,
+			comment: Match.Optional(String),
 			start: Date,
 			end: Date,
 			status: Number

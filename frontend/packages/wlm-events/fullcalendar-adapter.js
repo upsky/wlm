@@ -5,12 +5,13 @@ var FullcalendarAdapter = function () {
 	 * @returns {any}
 	 */
 	function update (newEvent) {
-		return Meteor.call('updateEvent',
+		return Meteor.call('upsertEvent',
 			{
 				_id: newEvent.id,
-				name: newEvent.title,
+				comment: newEvent.comment,
 				start: newEvent.start.toDate(),
-				end: newEvent.end.toDate()
+				end: newEvent.end.toDate(),
+				status: newEvent.status
 			}
 		);
 	}
@@ -38,7 +39,6 @@ var FullcalendarAdapter = function () {
 		events.forEach(function (event) {
 			res.push({
 				id: event._id,
-				title: event.name,
 				start: event.start,
 				end: event.end,
 				allDay: false,
@@ -46,6 +46,7 @@ var FullcalendarAdapter = function () {
 				startEditable: true,
 				durationEditable: true,
 				status: event.status,
+				comment: event.comment,
 				className: 'm-events-status-' + event.status,
 			});
 		});
@@ -92,10 +93,9 @@ var FullcalendarAdapter = function () {
 	function eventClick (event) {
 		var start = event.start.unix() * 1000;
 		var end = event.end.unix() * 1000;
-		console.log('event.status', event.status);
 		Modal.show('eventModal', {
 			_id: event.id,
-			name: event.title,
+			comment: event.comment,
 			start: new Date(start),
 			end: new Date(end),
 			status: event.status
@@ -108,9 +108,8 @@ var FullcalendarAdapter = function () {
 	 */
 	function dayClick (date) {
 		var start = date.unix() * 1000;
-		var end = start + (5 * 60 * 1000);
+		var end = start + (10 * 60 * 1000);
 		Modal.show('eventModal', {
-			name: 'new event',
 			start: new Date(start),
 			end: new Date(end)
 		});

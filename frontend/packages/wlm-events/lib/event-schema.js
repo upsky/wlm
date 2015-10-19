@@ -8,9 +8,16 @@ this.eventSchema = new SimpleSchema({
 		type: String,
 		optional: true
 	},
-	name: {
+	comment: {
 		type: String,
-		min: 3
+		optional: true,
+		max: 1000,
+		autoform: {
+			afFieldInput: {
+				type: "textarea",
+				rows: 10,
+			}
+		}
 	},
 	start: {
 		type: Date,
