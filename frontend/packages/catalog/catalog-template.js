@@ -62,17 +62,18 @@ var startEvent = function(data) {
 		}
 
 		var currentNode = selectedNode.length ? selectedNode[0] : Catalog;
-		var newCategory = currentNode.createChild(newCategoryTitle);
 
-		var needAction = Catalog.__needAction.get();
+		currentNode.createChild(newCategoryTitle, function(newCategory) {
+			var needAction = Catalog.__needAction.get();
 
-		needAction[newCategory.id()] = [{ type: 'selected', value: true }, { type: 'edit', value: true }];
+			needAction[newCategory.id()] = [{ type: 'selected', value: true }, { type: 'edit', value: true }];
 
-		Catalog.__needAction.set(needAction);
+			Catalog.__needAction.set(needAction);
 
-		if (currentNode.type() == 'category') {
-			startEvent.call(currentNode, { type: 'opened', value: true });
-		}
+			if (currentNode.type() == 'category') {
+				startEvent.call(currentNode, { type: 'opened', value: true });
+			}
+		});
 	} else if (data.type == 'edit') {
 		if (selectedNode.length != 1) {
 			return;
@@ -101,8 +102,8 @@ var startEvent = function(data) {
 		var targetCategory = Blaze.getData(data.event.toElement);
 
 		if (targetCategory) {
-			this.moveTo(targetCategory.id(), function(error, result) {
-				if (!error) {
+			this.moveTo(targetCategory.id(), function(result) {
+				if (result && targetCategory.type() == 'category') {
 					startEvent.call(targetCategory, { type: 'opened', value: true });
 				}
 			});
@@ -116,7 +117,7 @@ var startEvent = function(data) {
 template.onCreated(function() {
 	window.Catalog = Catalog = new CatalogConstructor('main');
 	Catalog.__selectedNode = new ReactiveVar([]);
-	Catalog.__needAction = new ReactiveVar([]);
+	Catalog.__needAction = new ReactiveVar({});
 });
 
 template.helpers({

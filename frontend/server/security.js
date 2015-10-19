@@ -106,3 +106,10 @@ WlmSecurity.addMethods({
 	}
 
 });
+
+WlmSecurity.addPublish({
+	catalog: {
+		authNotRequired: true,
+		roles: 'all'
+	}
+});

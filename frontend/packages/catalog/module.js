@@ -30,7 +30,7 @@ CatalogConstructor = (function() {
 					}
 				});
 			} else {
-				coll.insert({ title: catName, type: 'catalog' }, function(error, result) {
+				Meteor.call('createCatalog', catName, function(error, result) {
 					if (error) {
 						self.logError(error);
 					} else {
@@ -125,25 +125,13 @@ CatalogConstructor = (function() {
 				};
 				// Метод создаёт категорию
 				this.createChild = function(data, cb) {
-					check(data, Match.OneOf(String, Match.ObjectIncluding({ title: String })));
-
-					if (_.isString(data)) {
-						data = { title: data };
-					} else {
-						data = {
-							title: data.title
-						};
-					}
-
-					data.type = 'category';
-					data.parentId = this.id();
-					data.catalogId = self.data()._id;
-
-					check(data, Schemas.Catalog);
-
-					var id = coll.insert(data, cb || this.logError);
-
-					return makeCategory(coll.findOne(id));
+					Meteor.apply('createCategory', [data, this.id(), self.id()], function(error, result) {
+						if (error) {
+							self.logError(error);
+						} else if (cb) {
+							cb(makeCategory(coll.findOne(result)));
+						}
+					});
 				};
 				// Метод возвращает непосредственного потомка
 				this.childById = function(id) {
@@ -193,8 +181,14 @@ CatalogConstructor = (function() {
 					return getChildrenIds([this.id()]);
 				};
 				// Метод сохраняет данные
-				this.save = function() {
-					coll.update(this.id(), { $set: this.data() });
+				this.save = function(cb) {
+					Meteor.apply('updateCategory', [this.id(), this.data()], function(error, result) {
+						if (error) {
+							self.logError(error);
+						} else if (cb) {
+							cb(result);
+						}
+					});
 				};
 				// Метод логирует ошибки
 				this.logError = function(error) {
@@ -225,18 +219,24 @@ CatalogConstructor = (function() {
 				};
 				// Метод меняет родителя
 				this.moveTo = function(parentId, cb) {
-					check(parentId, String);
-
-					if (this.data().parentId != parentId && this.id() != parentId && coll.findOne(parentId)) {
-						coll.update(this.id(), { $set: { parentId: parentId } }, cb || this.logError);
-					}
+					Meteor.apply('moveCategory', [this.id(), parentId], function(error, result) {
+						if (error) {
+							self.logError(error);
+						} else if (cb) {
+							cb(result);
+						}
+					});
 				};
 				// Метод удаляет категорию
 				this.remove = function(cb) {
-					var id = this.id();
-
-					coll.remove(id, cb || this.logError);
-					delete categories[id];
+					Meteor.call('removeCategory', this.id(), function(error, result) {
+						if (error) {
+							self.logError(error);
+						} else if (cb) {
+							delete categories[id];
+							cb(result);
+						}
+					});
 				};
 			}
 
