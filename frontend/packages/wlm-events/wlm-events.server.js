@@ -16,13 +16,7 @@ Meteor.publish('eventsList', function () {
 
 Meteor.methods({
 	upsertEvent: function (doc) {
-		check(doc, {
-			_id: Match.Optional(String),
-			comment: Match.Optional(String),
-			start: Date,
-			end: Date,
-			status: Number
-		});
+		check(doc, eventSchema);
 		return WlmEvent.upsert(doc);
 	}
 });

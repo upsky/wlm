@@ -30,10 +30,10 @@ template.helpers({
 			//height: 650,
 			contentHeight: 600,
 			slotEventOverlap: false,
-			scrollTime: '09:00',
-			slotDuration: '00:05',
-			minTime: '08:00',
-			maxTime: '19:00',
+			scrollTime: moment().format('HH:mm'),
+			slotDuration: '00:15',
+			minTime: '08:30',
+			maxTime: '18:30',
 			businessHours: {
 				start: '09:00', // a start time (10am in this example)
 				end: '18:00', // an end time (6pm in this example)
@@ -46,8 +46,10 @@ template.helpers({
 			},
 			dayClick: FCAdapter.dayClick,
 			eventDrop: FCAdapter.eventDrop,
-			eventResize: FCAdapter.eventResize,
 			eventClick: FCAdapter.eventClick,
+			eventResize: FCAdapter.eventResize,
+			eventDragStart: FCAdapter.eventDragStart,
+			eventResizeStart: FCAdapter.eventResizeStart,
 			events: function (start, end, timezone, callback) {
 				var events = FCAdapter.prepareArray(db.events.find().fetch());
 				callback(events);

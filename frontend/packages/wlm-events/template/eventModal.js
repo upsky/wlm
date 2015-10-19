@@ -1,12 +1,8 @@
 var template = Template.eventModal;
 
 template.helpers({
-	modalTitle: function () {
-		if (!this.hasOwnProperty('_id')) {
-			return TAPi18n.__('messages.preEntry');
-		} else {
-			return TAPi18n.__('messages.preEntry');
-		}
+	secondaryTitle: function () {
+		return moment(this.start).calendar();
 	},
 	options: function () {
 		return [

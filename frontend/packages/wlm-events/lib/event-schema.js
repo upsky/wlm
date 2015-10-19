@@ -1,6 +1,7 @@
 SimpleSchema.messages({
 	"sameTime": 'Дата конца не может быть раньше начала.',
-	"minimalTime": 'Событие не может быть меньше 5 минут.',
+	"minTime": 'Событие не может быть меньше 5 минут.',
+	"maxTime": 'Событие не может быть больше 8 часов.'
 });
 
 this.eventSchema = new SimpleSchema({
@@ -45,7 +46,11 @@ this.eventSchema = new SimpleSchema({
 				return 'sameTime';
 
 			if (deltaTime < (5 * 60))
-				return "minimalTime";
+				return "minTime";
+
+			if (deltaTime > (8 * 60 * 60)) {
+				return "maxTime";
+			}
 		}
 	},
 	status: {

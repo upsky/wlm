@@ -2,18 +2,27 @@ var FullcalendarAdapter = function () {
 	/**
 	 *
 	 * @param newEvent
+	 * @param callback
 	 * @returns {any}
 	 */
-	function update (newEvent) {
-		return Meteor.call('upsertEvent',
-			{
-				_id: newEvent.id,
-				comment: newEvent.comment,
-				start: newEvent.start.toDate(),
-				end: newEvent.end.toDate(),
-				status: newEvent.status
+	function update (newEvent, callback) {
+		var event = {
+			_id: newEvent.id,
+			comment: (newEvent.comment === null ? '' : newEvent.comment),
+			start: newEvent.start.toDate(),
+			end: newEvent.end.toDate(),
+			status: newEvent.status
+		};
+
+		Meteor.call('upsertEvent', event, function (res) {
+			if (res instanceof Error) {
+				if (typeof callback !== "undefined") {
+					callback();
+				}
+			} else {
+				//success
 			}
-		);
+		});
 	}
 
 	/**
@@ -61,10 +70,10 @@ var FullcalendarAdapter = function () {
 	 * @param revertFunc
 	 */
 	function eventDrop (event, delta, revertFunc) {
-		update(event);
+		update(event, revertFunc);
 		return;
 		if (confirmUpdate(event)) {
-			update(event);
+			update(event, revertFunc);
 		} else {
 			revertFunc();
 		}
@@ -77,10 +86,10 @@ var FullcalendarAdapter = function () {
 	 * @param revertFunc
 	 */
 	function eventResize (event, delta, revertFunc) {
-		update(event);
+		update(event, revertFunc);
 		return;
 		if (confirmUpdate(event)) {
-			update(event);
+			update(event, revertFunc);
 		} else {
 			revertFunc();
 		}
@@ -108,11 +117,15 @@ var FullcalendarAdapter = function () {
 	 */
 	function dayClick (date) {
 		var start = date.unix() * 1000;
-		var end = start + (10 * 60 * 1000);
+		var end = start + (15 * 60 * 1000);
 		Modal.show('eventModal', {
 			start: new Date(start),
 			end: new Date(end)
 		});
+	}
+
+	function checkTimePosition (event) {
+		console.log(event);
 	}
 
 
