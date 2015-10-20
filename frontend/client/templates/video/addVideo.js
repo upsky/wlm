@@ -1,6 +1,6 @@
 Template.addVideo.helpers({
-	addVideo:{
-		blockId:'settings'
+	addVideo: {
+		blockId: 'settings'
 	},
 	videos: function () {
 		if (!!Template.instance().data) {

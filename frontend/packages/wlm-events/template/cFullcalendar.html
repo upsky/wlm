@@ -1,0 +1,29 @@
+<template name="cFullcalendar">
+    <section class="c-fullcalendar">
+        <div class="btn-group" role="group">
+            <button type="button" name="doStep" value="prev" class="btn btn-default">Назад</button>
+            <button type="button" name="doStep" value="today" class="btn btn-default">сегодня</button>
+            <button type="button" name="doStep" value="next" class="btn btn-default">Вперед</button>
+        </div>
+
+
+        <div class="btn-group" role="group">
+            <button type="button" name="changeView" class="btn btn-default {{isCurrentView "agendaDay"}}"
+                    value="agendaDay">
+                День
+            </button>
+            <button type="button" name="changeView" class="btn btn-default {{isCurrentView "agendaWeek"}}"
+                    value="agendaWeek">
+                Неделя
+            </button>
+            <button type="button" name="changeView" class="btn btn-default {{isCurrentView "month"}}" value="month">
+                Месяц
+            </button>
+        </div>
+
+        <button class="btn btn-default" name="createEvent">+ Добавить событие</button>
+
+
+        {{> fullcalendar  options}}
+    </section>
+</template>

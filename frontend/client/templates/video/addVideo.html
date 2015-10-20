@@ -1,4 +1,4 @@
-<template name = 'addVideo'>
+<template name='addVideo'>
     {{#if isInRole 'videoManager'}}
         {{#Layout template="panel" data=addVideo}}
             {{#autoForm id="insertVideoForm" schema="Schemas.videosSchema" type="method" meteormethod="checkVideo" resetOnSuccess=false}}

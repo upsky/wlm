@@ -5,8 +5,8 @@ Router.configure({
 	loadingTemplate: 'loading',
 	template: 'error',
 	progressDebug: true,
-	waitOn: function() {
-			return Meteor.subscribe('videos');
+	waitOn: function () {
+		return Meteor.subscribe('videos');
 	}
 });
 
@@ -117,6 +117,11 @@ if (Meteor.pubSettings('isDown')) {
 		layoutTemplate: 'fullLayout',
 		name: 'profile',
 		template: 'profile'
+	});
+	Router.route('/events', {
+		layoutTemplate: 'fullLayout',
+		name: 'events',
+		template: 'events'
 	});
 	Router.route('/qrcode', {
 		layoutTemplate: 'fullLayout',

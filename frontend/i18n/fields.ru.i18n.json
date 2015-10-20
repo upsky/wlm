@@ -69,7 +69,21 @@
     },
     "roles": {
       "label": "Роли"
-
+    },
+    "comment": {
+      "label": "Комментарий"
+    },
+    "start": {
+      "label": "Начало"
+    },
+    "end": {
+      "label": "Конец"
+    },
+    "eventStatus": {
+      "new": "Новый",
+      "confirmed": "Подтвержденный",
+      "waiting": "В ожидании подтверждения",
+      "notConfirmed": "Не подтвержденный"
     }
   }
 }

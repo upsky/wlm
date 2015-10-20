@@ -1,6 +1,6 @@
 Template.videoManager.helpers({
-	videoManager:{
-		blockId:'videoManager'
+	videoManager: {
+		blockId: 'videoManager'
 	},
 	videos: db.videos.find({})
 });

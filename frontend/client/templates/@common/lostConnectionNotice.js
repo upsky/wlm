@@ -7,15 +7,15 @@ var setStatus = function (status) {
 	switch (status) {
 		case 'connecting':
 			WlmNotify.create({
-				group: 'connect',
-				title: 'connStatus.connecting',
+				group: 'connect-info',
+				text: 'connStatus.connecting',
 				type: 'info'
 			});
 			break;
 		case 'connected':
 			WlmNotify.create({
-				group: 'connect',
-				title: 'connStatus.connected',
+				group: 'connect-success',
+				text: 'connStatus.connected',
 				type: 'success'
 			});
 			break;
@@ -23,8 +23,8 @@ var setStatus = function (status) {
 		case 'waiting':
 		case 'offline':
 			WlmNotify.create({
-				group: 'connect',
-				title: 'connStatus.offline',
+				group: 'connect-error',
+				text: 'connStatus.offline',
 				hide: false,
 				type: 'error'
 			});

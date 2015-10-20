@@ -563,7 +563,7 @@ fieldset[disabled] .btn {
 	}
 }
 
-.dropdown-menu {
+.dropdown-menu:not(.bootstrap-datetimepicker-widget) {
 	background: #333333;
 	min-width: 165px;
 	margin: 0;
@@ -573,7 +573,7 @@ fieldset[disabled] .btn {
 	display: none;
 }
 
-.opacity .dropdown-menu {
+.opacity .dropdown-menu:not(.bootstrap-datetimepicker-widget) {
 	display: block;
 	max-height: 0;
 	overflow: hidden;

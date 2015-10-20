@@ -14,17 +14,13 @@
     },
     "showQr": true,
     "recaptchaPublic": "6LfcFA4TAAAAAMvkEJaI4PYGYArwgTyUo4RRHWKu",
-
     "email": {
       "sysadmin": "admin@market.winlevel.ru",
       "verify": "test@wl-market.com",
       "invite": "test@wl-market.com",
       "support": "support@wl-market.com"
     }
-
   },
-
   "sysadminPass": "obsIrjavOvtiOcsO",
-
   "recaptchaPrivate": "6LfcFA4TAAAAAH3LN_csIFbW-sIREKnFBoaRLV4H"
 }

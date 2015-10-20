@@ -14,7 +14,6 @@
     },
     "showQr": false,
     "recaptchaPublic": "6LfcFA4TAAAAAMvkEJaI4PYGYArwgTyUo4RRHWKu",
-
     "email": {
       "sysadmin": "admin@wl-market.com",
       "invite": "noreply@wl-market.com",
@@ -22,8 +21,6 @@
       "support": "support@wl-market.com"
     }
   },
-
   "sysadminPass": "obsIrjavOvtiOcsO",
-
   "recaptchaPrivate": "6LfcFA4TAAAAAH3LN_csIFbW-sIREKnFBoaRLV4H"
 }

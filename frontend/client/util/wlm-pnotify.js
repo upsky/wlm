@@ -36,8 +36,8 @@ WlmNotify = {
 
 		if (opt.group) {
 			if (this._groups[opt.group])
-				this._groups[opt.group].close()
-
+				this._groups[opt.group].close();
+			
 			this._groups[opt.group] = notify;
 		}
 

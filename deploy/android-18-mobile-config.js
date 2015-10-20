@@ -40,7 +40,7 @@ App.setPreference('Orientation', 'portrait');
 App.setPreference('android-maxSdkVersion', '18');
 
 App.accessRule("https://vk.com/*");
-App.accessRule("https://m.vk.com/*", {launchExternal: true});
+App.accessRule("https://m.vk.com/*", { launchExternal: true });
 App.accessRule("https://s.ytimg.com/yts/*");
 App.accessRule("https://www.youtube.com/embed/*");
 App.accessRule("http://wlmarket.meteor.com/*");

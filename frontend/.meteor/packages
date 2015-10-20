@@ -19,7 +19,6 @@ joshowens:timeago
 brentjanderson:buzz.js
 jrudio:youtubejs
 percolatestudio:synced-cron
-zimme:select2-bootstrap3-css
 aldeed:autoform-select2
 iron:layout
 less
@@ -71,3 +70,4 @@ u2622:persistent-session
 rajit:bootstrap3-datepicker
 aldeed:autoform-bs-datepicker
 wlm-messaging
+wlm-events
