@@ -1,0 +1,58 @@
+<template name = "businessFirstForm">
+	<div class="modal fade c-login-instructions-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Заполните следующие поля</h4>
+                </div>
+                <div class="">
+                    <div class="c-related-block">
+                        <div class="p-fill">
+                            	   {{#autoForm id="insertBusinessForm" schema="Schemas.businessSchema" type="method" meteormethod="insertBusiness" resetOnSuccess=true}}
+                            	      <div class="row">
+                            	         <div class="col-lg-12">
+                            	   	      <ul class="list-group">
+                                              <li class="list-group-item">
+                                                 <div class="form-group">
+                                                    {{> afQuickField class="form-control input-lg" name="label" placeholder="schemaLabel"}}
+                                                 </div>
+                                              </li>
+                                              <li class="list-group-item">
+                                                 <div class="form-group">
+                                                     {{> afQuickField class="form-control input-lg" name="actionSphere" placeholder="schemaLabel"}}
+                                                 </div>
+                                              </li>
+                                              <li class="list-group-item">
+                                                 <div class="form-group">
+                                                     {{> afQuickField class="form-control input-lg" name="info" placeholder="schemaLabel" rows=10}}
+                                                 </div>
+                                              </li>
+                                              <li class="list-group-item">
+                                                 <div class="form-group">
+                                                    {{> afQuickField class="form-control input-lg" name="inn" placeholder="schemaLabel"}}
+                                                 </div>
+                                              </li>
+                                              <li class="list-group-item">
+                                                 <div class="form-group">
+                                                    {{> afQuickField class="form-control input-lg" name="ogrn" placeholder="schemaLabel"}}
+                                                 </div>
+                                              </li>
+                                           </ul>
+                                           <div class="panel-footer">
+                                             <button type="submit" class="btn btn-lg btn-success">{{_ "buttons.add"}}</button>
+                                             <button type="button" class="btn btn-lg btn-success"
+                                                     name='back'>{{_ "buttons.back"}}</button>
+                                           </div>
+                            	         </div>
+                            	      </div>
+                            	   {{/autoForm}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</template>

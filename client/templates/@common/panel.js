@@ -1,7 +1,7 @@
 var template = Template.panel;
 
 template.onCreated(function () {
-	var panelName = 'pnael-' + this.data.blockId;
+	var panelName = 'panel-' + this.data.blockId;
 
 	this._blockId = this.data.blockId;
 	this._hideBox = new ReactiveVar(Meteor.isCordova ? true : false);
