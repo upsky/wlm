@@ -8,7 +8,7 @@
     "scanQr": "Сканировать QR код",
     "technicalSupport": "Техническая поддержка",
     "videoTutorial": "Видеоинструкция",
-    "selectAuthenticationMethod": "Выберете способ входа",
+    "selectAuthenticationMethod": "Выбирете способ входа",
     "loginUsingQrCode": "Войти с помощью QR кода",
     "loginUsingQrLogin": "Войти с помощью логина и пароля",
     "recoverPass": "Забыли пароль?",
@@ -28,7 +28,8 @@
     "copyToClipboard": "Чтобы скопировать, нажмите",
     "unknown": "Неизвестно",
     "changesSaved": "Изменения сохранены",
-    "incorrectDate": "Дата неизвестна"
+    "incorrectDate": "Дата неизвестна",
+    "typeHere": "Введите сообщение..."
   },
   "vk": {
     "newsHeader": "Новости WL Market",
