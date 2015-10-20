@@ -213,6 +213,19 @@ CatalogConstructor = (function() {
 
 					return doc.type == 'catalog' ? self : makeCategory(doc);
 				};
+				// Метод возвращает путь до категории
+				this.path = function() {
+					var path = [this];
+					var parent = this.parent();
+
+					while(parent.type() != 'catalog') {
+						path.push(parent);
+
+						parent = parent.parent();
+					}
+
+					return path;
+				};
 				// Метод возвращает каталог
 				this.catalog = function() {
 					return self;

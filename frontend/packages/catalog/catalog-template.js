@@ -3,17 +3,19 @@ var template = Template.catalog;
 var templateRoot = Template.catalogRoot;
 var templateCategory = Template.catalogCategory;
 var templateEditor = Template.editor;
+var templateEditorForm = Template.editorForm;
 var Catalog;
 var newCategoryTitle = 'Новая категория';
 
 var selectText = function (element) {
+	var range;
 	if (document.body.createTextRange) { // ms
-		var range = document.body.createTextRange();
+		range = document.body.createTextRange();
 		range.moveToElementText(element);
 		range.select();
 	} else if (window.getSelection) {
 		var selection = window.getSelection();
-		var range = document.createRange();
+		range = document.createRange();
 		range.selectNodeContents(element);
 		selection.removeAllRanges();
 		selection.addRange(range);
@@ -28,19 +30,9 @@ var startEvent = function(data) {
 	var setValue;
 
 	if (data.type == 'selected') {
-		if (this.__edited.get()) {
-			return;
-		}
-
 		setValue = !_.isUndefined(data.value) ? data.value : !this.__selected.get();
 
-		if (data.event && data.event.shiftKey) {
-
-		} else if (data.event && data.event.ctrlKey) {
-			if (!setValue) {
-				Catalog.__selectedNode.set(selectedNode = _.without(selectedNode, this));
-			}
-		} else {
+		function clearSelected() {
 			if (selectedNode.length) {
 				_.each(selectedNode, function (val) {
 					val.__selected.set(false);
@@ -48,11 +40,86 @@ var startEvent = function(data) {
 				Catalog.__selectedNode.set(selectedNode = []);
 			}
 		}
+		function select(arr) {
+			_.each(arr, function(val) {
+				val.__selected.set(true);
+				selectedNode.push(val);
+			});
+		}
 
-		this.__selected.set(setValue);
+		if (data.event && data.event.shiftKey) {
+			var firstSelected = selectedNode[0];
+			var firstData = firstSelected.data();
+			var currData = this.data();
+			var firstIndex;
+			var currIndex;
+			var parentChildren;
+			var minIndex;
+			var maxIndex;
 
-		if (setValue) {
-			Catalog.__selectedNode.set(_.union(selectedNode, [this]));
+			clearSelected();
+
+			if (firstData.parentId == currData.parentId) {
+				parentChildren = this.parent().getChildren();
+				firstIndex = parentChildren.indexOf(firstSelected);
+				currIndex = parentChildren.indexOf(this);
+				minIndex = _.min([firstIndex, currIndex]);
+				maxIndex = _.max([firstIndex, currIndex]);
+
+				var toSlice = parentChildren.slice(minIndex, maxIndex + 1);
+
+				if (firstIndex > currIndex) {
+					toSlice.reverse();
+				}
+
+				select(toSlice);
+			} else {
+				var firstPath = firstSelected.path();
+				var currPath;
+
+				currIndex = firstPath.indexOf(this);
+
+				if (currIndex != -1) {
+					select(firstPath.slice(0, currIndex + 1));
+				} else {
+					currPath = this.path();
+
+					var firstRootParent = firstPath[firstPath.length - 1];
+					var currRootParent = currPath[currPath.length - 1];
+
+					parentChildren = firstRootParent.parent().getChildren();
+					firstIndex = parentChildren.indexOf(firstRootParent);
+					currIndex = parentChildren.indexOf(currRootParent);
+					minIndex = _.min([firstIndex, currIndex]);
+					maxIndex = _.max([firstIndex, currIndex]);
+
+					var rootSlice = parentChildren.slice(minIndex, maxIndex + 1);
+
+					if (firstIndex > currIndex) {
+						rootSlice.reverse();
+					}
+
+					currPath.reverse();
+
+					select(_.union(firstPath, rootSlice, currPath));
+				}
+			}
+
+			setValue = undefined;
+		} else if (data.event && data.event.ctrlKey) {
+			if (!setValue) {
+				Catalog.__selectedNode.set(selectedNode = _.without(selectedNode, this));
+			}
+		} else {
+			clearSelected();
+		}
+
+		if (!_.isUndefined(setValue)) {
+			this.__selected.set(setValue);
+
+			if (setValue) {
+				Catalog.__selectedNode.set(_.union(selectedNode, [this]));
+			}
 		}
 	} else if (data.type == 'opened') {
 		this.__opened.set(!_.isUndefined(data.value) ? data.value : !this.__opened.get());
@@ -66,7 +133,7 @@ var startEvent = function(data) {
 		currentNode.createChild(newCategoryTitle, function(newCategory) {
 			var needAction = Catalog.__needAction.get();
 
-			needAction[newCategory.id()] = [{ type: 'selected', value: true }, { type: 'edit', value: true }];
+			needAction[newCategory.id()] = [{ type: 'selected', value: true }, { type: 'selectTitle', value: true }];
 
 			Catalog.__needAction.set(needAction);
 
@@ -74,20 +141,6 @@ var startEvent = function(data) {
 				startEvent.call(currentNode, { type: 'opened', value: true });
 			}
 		});
-	} else if (data.type == 'edit') {
-		if (selectedNode.length != 1) {
-			return;
-		}
-
-		var currValue = selectedNode[0].__edited.get();
-
-		setValue = !_.isUndefined(data.value) ? data.value : !currValue;
-
-		if (setValue == currValue) {
-			return;
-		}
-
-		selectedNode[0].__edited.set(setValue);
 	} else if (data.type == 'remove') {
 		_.each(selectedNode, function (val) {
 			val.remove();
@@ -108,6 +161,8 @@ var startEvent = function(data) {
 				}
 			});
 		}
+	} else if (data.type == 'selectTitle') {
+		this.__selectTitle.set(true);
 	}
 
 	console.log(data);
@@ -133,9 +188,6 @@ template.helpers({
 		if (type == 'add') {
 			return selectedNode.length <= 1;
 		}
-		if (type == 'edit') {
-			return selectedNode.length == 1;
-		}
 		if (type == 'remove') {
 			return selectedNode.length;
 		}
@@ -143,8 +195,8 @@ template.helpers({
 });
 
 template.events({
-	'click .add, click .remove, click .edit': function(e) {
-		var action = _.find(['add', 'edit', 'remove'], function(val) {
+	'click .add, click .remove': function(e) {
+		var action = _.find(['add', 'remove'], function(val) {
 			return e.currentTarget.classList.contains(val);
 		});
 
@@ -154,7 +206,7 @@ template.events({
 
 
 templateRoot.onRendered(function() {
-	this.$('.selector').droppable({
+	this.$('.catalog-selector').droppable({
 		hoverClass: 'drag-hover',
 		tolerance: 'pointer'
 	});
@@ -162,36 +214,30 @@ templateRoot.onRendered(function() {
 
 
 templateCategory.onCreated(function() {
-	var self = this;
 	var category = this.data;
 
 	category.__opened = new ReactiveVar(false);
 	category.__selected = new ReactiveVar(false);
-	category.__edited = new ReactiveVar(false);
-	category.__selectText = new ReactiveVar(false);
-
-	this.autorun(function() {
-		if (category.__selectText.get()) {
-			selectText(self.$('.name').focus()[0]);
-			category.__selectText.set(false);
-		}
-	});
+	category.__selectTitle = new ReactiveVar(false);
 });
 
 templateCategory.onRendered(function() {
 	var category = this.data;
 	var id = category.id();
-	var needAction = Catalog.__needAction.get();
 
-	if (needAction[id]) {
-		_.each(needAction[id], function(val) {
-			startEvent.call(category, val);
-		});
+	this.autorun(function() {
+		var needAction = Catalog.__needAction.get();
 
-		delete needAction[id];
+		if (needAction[id]) {
+			_.each(needAction[id], function(val) {
+				startEvent.call(category, val);
+			});
 
-		Catalog.__needAction.set(needAction);
-	}
+			delete needAction[id];
+
+			Catalog.__needAction.set(needAction);
+		}
+	});
 
 	this.$('.node-inner').draggable({
 		helper: 'clone',
@@ -209,9 +255,6 @@ templateCategory.helpers({
 	},
 	selected: function() {
 		return this.__selected.get();
-	},
-	edited: function() {
-		return this.__edited.get();
 	}
 });
 
@@ -231,26 +274,56 @@ templateCategory.events({
 });
 
 
-templateEditor.onRendered(function() {
-	var self = this;
+templateEditor.helpers({
+	selected: function() {
+		var selected = Catalog.__selectedNode.get();
 
-	this._dataBackup = {};
-
-	this.$('.editor').modal().one('hidden.bs.modal', function(e) {
-		startEvent.call(self.data, { type: 'edit', value: false, event: e });
-	});
+		return selected.length == 1 ? selected[0] : selected;
+	},
+	singleSelect: function() {
+		return Catalog.__selectedNode.get().length == 1;
+	}
 });
 
-templateEditor.events({
+
+templateEditorForm.onCreated(function() {
+	this._dataBackup = new ReactiveVar({});
+});
+
+templateEditorForm.helpers({
+	select: function() {
+		var ti = Template.instance();
+		if (this.__selectTitle.get()) {
+			this.__selectTitle.set(false);
+			setTimeout(function () {
+				ti.$('#editor__title').focus()[0].select();
+			}, 100);
+		}
+	},
+	disabledClass: function() {
+		var data = this.data();
+		var backup = Template.instance()._dataBackup.get();
+
+		return (!_.isEmpty(backup) && _.some(backup, function(val, key) { return val != data[key]; })) ? '' : 'disabled';
+	}
+});
+
+templateEditorForm.events({
 	'keyup input, keyup textarea': function(e, ti) {
-		ti._dataBackup[e.target.name] = e.target.value;
+		var backup = ti._dataBackup.get();
+
+		backup[e.target.name] = e.target.value;
+
+		ti._dataBackup.set(backup);
 	},
 	'submit form': function(e, ti) {
 		e.preventDefault();
 
-		this.data(ti._dataBackup);
-		this.save();
+		this.data(ti._dataBackup.get() || {});
+		this.save(function() {
+			ti._dataBackup.set({});
+		});
 
-		ti.$('.editor').modal('hide');
+		ti.$('#editor__title').blur();
 	}
 });

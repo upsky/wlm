@@ -113,3 +113,21 @@ WlmSecurity.addPublish({
 		roles: 'all'
 	}
 });
+
+WlmSecurity.addMethods({
+	createCatalog: {
+		roles: 'all'
+	},
+	createCategory: {
+		roles: 'all'
+	},
+	updateCategory: {
+		roles: 'all'
+	},
+	moveCategory: {
+		roles: 'all'
+	},
+	removeCategory: {
+		roles: 'all'
+	}
+});

@@ -14,6 +14,7 @@ Package.onUse(function(api) {
 	api.use('aldeed:simple-schema');
 	api.use('wlm:jquery-ui-drag-drop-resize');
 	api.use('twbs:bootstrap');
+	api.use('iron:router');
 
 	api.addFiles([
 		'collections.js',
@@ -24,7 +25,8 @@ Package.onUse(function(api) {
 		'catalog.html',
 		'catalog-template.js',
 		'catalog.less',
-		'module.js'
+		'module.js',
+		'route.js' // TODO: remove after test
 	], 'client');
 
 	api.addFiles([
