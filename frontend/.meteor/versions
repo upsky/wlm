@@ -11,7 +11,7 @@ aldeed:template-extension@3.4.3
 altapp:recaptcha@2.0.0
 amplify@1.0.0
 anti:i18n@0.4.3
-aslagle:reactive-table@0.8.15
+aslagle:reactive-table@0.8.16
 autoupdate@1.2.3
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -50,7 +50,7 @@ geojson-utils@1.0.4
 gwendall:autoform-i18n@0.1.9_1
 gwendall:body-events@0.1.6
 gwendall:impersonate@0.2.1
-gwendall:simple-schema-i18n@0.1.9
+gwendall:simple-schema-i18n@0.2.0
 handlebars@1.0.4
 hot-code-push@1.0.0
 html-tools@1.0.5
@@ -123,6 +123,7 @@ servicelocale:geoip@0.1.3
 session@1.1.1
 settinghead:auto-nprogress@1.0.0
 sha@1.0.4
+simison:bootstrap3-less@0.0.2
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4
@@ -147,4 +148,3 @@ wlm-core@0.0.1
 wlm-events@0.0.1
 wlm-security@0.0.1
 yogiben:autoform-modals@0.3.8
-zimme:select2-bootstrap3-css@1.4.6
