@@ -1,7 +1,7 @@
 ## Тестовый запуск
 1. Установите метеор (http://meteor.com)
 1. Если метеор уже был установлен - сбросить базу: meteor reset
-1. Скопируйте private/templates/settings.json в корень проекта
+1. Скопируйте docs/config-templates/settings.json в корень проекта
 1. Запустите meteor --settings settings.json
 1. Вход под админом: admin@wlm.ru / admin и под портнером: partner@wlm.ru / partner
 
