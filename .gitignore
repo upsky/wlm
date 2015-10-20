@@ -22,7 +22,7 @@
 
 # Gradle:
 # .idea/gradle.xml
-# .idea/libraries
+.idea/libraries/*
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
@@ -97,4 +97,4 @@ public/i18n/*
 
 #ignore build directory
 */.run-config.sh
-*/private/deploy
+/deploy/*

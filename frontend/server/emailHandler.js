@@ -11,7 +11,8 @@ Meteor.startup(function () {
 		check(resetLink, String);
 
 		var html = SSR.render('resetPasswordEmail', {
-			resetLink: resetLink
+			resetLink: resetLink,
+			rootUrl: Meteor.absoluteUrl()
 		});
 		return html;
 	};
@@ -24,7 +25,8 @@ Meteor.startup(function () {
 	};
 	Accounts.emailTemplates.verifyEmail.html = function (user, verifyLink) {
 		var html = SSR.render('invitePartnerEmail', {
-			regLink: verifyLink
+			regLink: verifyLink,
+			rootUrl: Meteor.absoluteUrl()
 		});
 
 		return html;
