@@ -1,6 +1,6 @@
 App.info({
 	id: 'com.wl-market.android',
-	version: '0.0.2',
+	version: '0.1.1',
 	name: 'WL Market',
 	description: 'WL Market Mobile App',
 	author: 'WinTwin Group',
@@ -37,7 +37,7 @@ App.setPreference('StatusBarStyle', 'black');
 App.setPreference('Orientation', 'portrait');
 
 //App.setPreference('minSdkVersion', 14);
-//App.setPreference('maxSdkVersion', 18);
+App.setPreference('android-maxSdkVersion', '18');
 
 App.accessRule("https://vk.com/*");
 App.accessRule("https://m.vk.com/*", { launchExternal: true });

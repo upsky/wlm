@@ -1,0 +1,68 @@
+<template name="chatPage">
+    {{>chatClient toId=toId}}
+</template>
+
+<template name="chatClient">
+    <div class="panel panel-primary" style="width: 300px;">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-comment"></span> {{chatName}}
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <ul class="dropdown-menu slidedown">
+                    <li>
+                        <a id="chat-do-smth" href="#">
+                            <span class="glyphicon glyphicon-refresh"></span>Do Something
+                        </a>
+                    </li>
+                    <li>
+                        <a id="chat-sign-out" href="#">
+                            <span class="glyphicon glyphicon-off"></span>Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body" style="height: 300px;">
+            <ul class="chat">
+                {{#each messages}}
+                    {{> chatMessage}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="panel-footer">
+            <form id="send-chat-message">
+                <div class="input-group">
+                    <input id="chat-message" type="text" class="form-control input-sm"
+                           placeholder="{{_ 'messages.typeHere'}}" autocomplete="off"/>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-warning btn-sm" id="send-chat-message">{{_ 'buttons.send'}}</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
+
+<template name="chatMessage">
+    <li class="{{isMine 'left' 'right'}} clearfix">
+        {{#if userAvatar}}
+            <span class="chat-img {{isMine 'pull-left' 'pull-right'}}">
+                <img src="{{userAvatar}}" alt="{{userName}}" class="img-circle"/>
+            </span>
+        {{/if}}
+
+        <div class="chat-body clearfix">
+            <div class="header">
+                <strong class="primary-font">{{userName}}</strong>
+                <small class="{{isMine 'pull-right' ''}} text-muted">
+                    <span class="glyphicon glyphicon-time"></span>{{timeAgo}}
+                </small>
+            </div>
+            <p>
+                {{text}}
+            </p>
+        </div>
+    </li>
+</template>
