@@ -1,7 +1,7 @@
 var template = Template.panel;
 
 template.onCreated(function () {
-	var panelName = 'pnael-' + this.data.blockId;
+	var panelName = 'panel-' + this.data.blockId;
 
 	this._blockId = this.data.blockId;
 	this._hideBox = new ReactiveVar(Meteor.isCordova ? true : false);
@@ -34,7 +34,7 @@ template.helpers({
 template.events({
 	'click .toggle-box': function () {
 		var hideBox = Template.instance()._hideBox;
-		var panelName = 'pnael-' + Template.instance()._blockId;
+		var panelName = 'panel-' + Template.instance()._blockId;
 
 		if (hideBox.get())
 			hideBox.set(false);
