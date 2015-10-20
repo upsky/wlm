@@ -4,7 +4,7 @@ template.onCreated(function () {
 	var panelName = 'pnael-' + this.data.blockId;
 
 	this._blockId = this.data.blockId;
-	this._hideBox = new ReactiveVar(Meteor.isCordova ? true : false);
+	this._hideBox = new ReactiveVar(Meteor.isCordova && this.data.hideBox);
 
 	if (typeof Session.get(panelName) !== "undefined") {
 		this._hideBox.set(Session.get(panelName));

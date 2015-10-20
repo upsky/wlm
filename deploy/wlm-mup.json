@@ -32,7 +32,7 @@
   "appName": "wlm",
 
   // Location of app (local directory)
-  "app": "../..",
+  "app": "../frontend",
 
   // Configure environment
   "env": {

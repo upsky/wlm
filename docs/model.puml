@@ -1,0 +1,109 @@
+@startuml
+
+package "Business" {
+
+object Business {
+    id
+    ownerId: userId
+    name: String,
+    businessInfo: BusinessInfo
+}
+
+object BusinessInfo {
+    name: String
+    inn: number(13)
+    ogrn: number
+    okpo: number
+    kpp: number
+    bik: number
+}
+BusinessInfo -> Business
+
+object Good {
+    id
+    businessId
+    catId: CatalogItem.id
+    price: Price
+    name: String
+    description: String
+}
+Good -> Business
+
+object Price {
+    currencyId
+    amount: number
+}
+Price -> Good
+
+object BusinessPage {
+    id
+    template: String
+    domain: String
+}
+BusinessPage -> Business
+
+
+}
+
+
+package Common {
+
+object Image {
+    id
+    thumbId
+    picId
+    resolution: [w, h]
+}
+Image -> Good
+Image -> Catalog:CatalogItem
+
+object User {
+    userId
+}
+
+object ModuleInfo {
+    name: String
+    paidTill: Date
+    config: ModuleConfiguration
+}
+
+}
+
+package Catalog {
+    object CatalogItem {
+        id
+        parentId
+        name: String,
+        description: String
+        keywords: String
+    }
+}
+
+package ModuleAgent {
+}
+
+package ModuleSchedule {
+    object ScheduleEvent {
+        fromId
+        toId
+        subject: String
+        description: String
+        created: Date
+        start: Date
+        duration: Period
+        status: String
+    }
+}
+
+package ModuleMessages {
+    object Message {
+        fromId
+        toId
+        subject: String
+        text: String
+        created: Date
+    }
+}
+
+
+@enduml
