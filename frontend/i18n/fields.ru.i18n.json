@@ -69,7 +69,33 @@
     },
     "roles": {
       "label": "Роли"
-
+    },
+    "monday": {
+      "label": "Понедельник"
+    },
+    "tuesday": {
+      "label": "Вторник"
+    },
+    "wednesday": {
+      "label": "Среда"
+    },
+    "thursday": {
+      "label": "Четверг"
+    },
+    "friday": {
+      "label": "Пятница"
+    },
+    "saturday": {
+      "label": "Суббота"
+    },
+    "sunday": {
+      "label": "Воскресенье"
+    },
+    "info": {
+      "label": "Информация"
+    },
+    "inn": {
+      "label": "ИНН"
     }
   }
 }

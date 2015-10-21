@@ -8,7 +8,7 @@ if (Meteor.isClient) {
 				type: 'pie'
 			},
 			title: {
-				text: 'Статистика пользователей по странам'
+				text: 'Статистика'
 			},
 			tooltip: {
 				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

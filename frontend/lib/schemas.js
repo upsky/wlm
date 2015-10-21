@@ -181,3 +181,66 @@ Schemas.videosSchema = new SimpleSchema({
 	  label: "Название блока"
   }
 });
+Schemas.businessSchema = new SimpleSchema({
+	label: {
+		type: String,
+		label: "Название компании",
+		max: 200
+	},
+	actionSphere: {
+		type: String,
+		label: "Сфера деятельности"
+	},
+	info: {
+		type: String,
+		label: "Информация о компании"
+	},
+	inn: {
+		type: Number,
+		label: "ИНН"
+	},
+	ogrn: {
+		type: Number,
+		label: "ОГРН"
+	}
+});
+Schemas.businessColection = new SimpleSchema({
+	'inn': {
+		type: Number,
+		optional: true
+	},
+	'info': {
+		type: String
+	}
+
+});
+Schemas.schedule = new SimpleSchema({
+	'monday': {
+		type: String,
+		optional: true
+	},
+	'tuesday': {
+		type: String,
+		optional: true
+	},
+	'wednesday': {
+		type: String,
+		optional: true
+	},
+	'thursday': {
+		type: String,
+		optional: true
+	},
+	'friday': {
+		type: String,
+		optional: true
+	},
+	'saturday': {
+		type: String,
+		optional: true
+	},
+	'sunday': {
+		type: String,
+		optional: true
+	}
+});

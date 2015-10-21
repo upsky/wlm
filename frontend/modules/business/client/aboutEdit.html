@@ -1,0 +1,31 @@
+<template name = "aboutEdit">
+    <div class="modal fade c-login-instructions-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Редактирование</h4>
+                </div>
+                <div class="c-related-block">
+                    <div class="p-fill">
+                        {{#autoForm id="aboutEdit" schema="Schemas.businessColection" type="method" meteormethod="aboutEdit" resetOnSuccess=true}}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            {{> afQuickField name="info" type="textarea" value=business.info rows=10}}
+                                            {{> afQuickField name="inn" value=business.inn}}
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="button" class="btn btn-lg btn-success" name='back'>{{_ "buttons.back"}}</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {{/autoForm}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

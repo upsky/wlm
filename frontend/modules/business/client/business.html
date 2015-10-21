@@ -1,0 +1,90 @@
+<template name="business">
+    {{#Layout template="businessCols"}}
+        <div class="panel-heading">
+            <li class="list-group-item">
+                <img src={{business.image}} width="150" height="150" alt="LOGO">
+                <input type="file" name="" class="myFileInput">
+                <span class="title"><h3>{{business.label}}</h3></span><br>
+                <b class="text-bold">Президент компании:</b>{{business.owner}}<br>
+                <b class="text-bold">Сфера деятельности:</b>{{business.actionSphere}}<br>
+            </li>
+        </div>
+        {{#contentFor "col2"}}
+            <div class="panel-heading">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h4>
+                            ИНН
+                        </h4>
+                        <p>
+                            {{business.inn}}
+                        </p>
+                    </li>
+                    <li class="list-group-item">
+                        <h4>
+                            ОГРН
+                        </h4>
+                        <p>
+                            {{business.ogrn}}
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        {{/contentFor}}
+        {{#contentFor "col3"}}
+            <div class="panel-heading">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h4>
+                            О нас
+                        </h4>
+                        <p>
+                            {{business.info}}
+                        </p>
+                        <button type="button" class="btn btn-default" name="edit">Изменить</button>
+                    </li>
+                </ul>
+            </div>
+        {{/contentFor}}
+        {{#contentFor "col4"}}
+            <table class="table table-striped">
+                <thead class="">
+                <tr>
+                    <td>График работы</td>
+                    <td><button type="button" class="btn btn-default" name="editSchedule">Изменить</button></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Пн</td>
+                    <td>{{business.schedule.mon}}</td>
+                </tr>
+                <tr>
+                    <td>Вт</td>
+                    <td>{{business.schedule.tue}}</td>
+                </tr>
+                <tr>
+                    <td>Ср</td>
+                    <td>{{business.schedule.wed}}</td>
+                </tr>
+                <tr>
+                    <td>Чт</td>
+                    <td>{{business.schedule.thu}}</td>
+                </tr>
+                <tr>
+                    <td>Пт</td>
+                    <td>{{business.schedule.fri}}</td>
+                </tr>
+                <tr>
+                    <td>Сб</td>
+                    <td>{{business.schedule.sat}}</td>
+                </tr>
+                <tr>
+                    <td>Вс</td>
+                    <td>{{business.schedule.sun}}</td>
+                </tr>
+                </tbody>
+            </table>
+        {{/contentFor}}
+    {{/Layout}}
+</template>
