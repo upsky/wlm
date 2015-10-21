@@ -8,10 +8,13 @@ function convert_() {
     FROM=$1
     SIZE=$2
     OUT=$3
-    OPT=$4
-    echo making $FROM "->" $SIZE "->" $OUT
+    if [ "$4" == "" ];
+        then OPT="-alpha on";
+        else OPT=$4; fi
 
-    convert -density 144x144 $LOGO_DIR/$FROM -resize $SIZE^ -gravity Center -crop $SIZE+0+0 +profile "*" -units PixelsPerInch $OPT -alpha on $OUT_DIR/$OUT
+    echo making $FROM "->" $SIZE "->" $OUT $OPT
+
+    convert -density 144x144 $LOGO_DIR/$FROM -resize $SIZE^ -gravity Center -crop $SIZE+0+0 +profile "*" -units PixelsPerInch $OPT $OUT_DIR/$OUT
     # -background white -alpha off
 }
 
@@ -26,7 +29,7 @@ convert_ $L 16x16 public/favicon-16x16.png
 convert_ $L 32x32 public/favicon-32x32.png
 convert_ $L 96x96 public/favicon-96x96.png
 
-convert_ $LTEXT 1024x1024 mobile/market/default-icon.png
+convert_ $L 1024x1024 mobile/market/default-icon.png -flatten
 convert_ $L 1024x500 mobile/market/marketplace-recommend.png
 convert_ $L 320x180 mobile/market/marketplace-tv.png
 convert_ $LWL 180x120 mobile/market/marketplace-ad.png
@@ -38,6 +41,7 @@ convert_ $L 48x48 mobile/icons/android-chrome-48x48.png
 convert_ $L 72x72 mobile/icons/android-chrome-72x72.png
 convert_ $L 96x96 mobile/icons/android-chrome-96x96.png
 
+convert_ $L 80x80 mobile/icons/apple-touch-icon-80x80.png
 convert_ $L 120x120 mobile/icons/apple-touch-icon-120x120.png
 convert_ $L 180x180 mobile/icons/apple-touch-icon-180x180.png
 

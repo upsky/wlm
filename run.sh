@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-DEFAULT_HOST=wlm.he24.ru
+DEFAULT_HOST=market.winlevel.ru
 METEOR=/usr/local/bin/meteor
 SETTINGS="--settings=settings.json"
 CWD=`pwd`
 BUILD_DIR=$CWD/../wlmbuild
 CROSSWALK_COPY_DIR=$CWD/../wlmbuild-18-copy
 CROSSWALK_BUILD_DIR=$CWD/../wlmbuild-18
+DEPLOY_CONF_DIR=$CWD/xdeploy
 
 export MAIL_URL=smtp://postmaster%40sandboxfbc452b570544a5d9420aa783c0fda38.mailgun.org:d529975e91ce74e534b19a3ebc6b3d4f@smtp.mailgun.org
 export ANDROID_HOME=~/.meteor/android_bundle/android-sdk
@@ -39,15 +40,14 @@ function check() {
 }
 
 function sign-android() {
-    AD=$1
-    APK=$2
-    OUT=$3
-    rm -f $AD/wlmarket.apk
-#        keytool -genkey -keystore $ANDROID_DIR/rp.keystore -storepass $ANDROID_STORE_PASS -alias $ANDROID_DIR/rp.key -keypass $ANDROID_KEY_PASS -validity 10000
-    jarsigner -keystore $ANDROID_KEYSTORE -storepass $ANDROID_STORE_PASS -keypass $ANDROID_KEY_PASS $AD/$APK ../wlmbuild/android/rp.key
+    IN=$1
+    OUT=$2
+
+    rm -f $OUT
+    jarsigner -keystore $ANDROID_KEYSTORE -storepass $ANDROID_STORE_PASS -keypass $ANDROID_KEY_PASS $IN ../wlmbuild/android/rp.key
 
     ZIPALIGN=~/.meteor/android_bundle/android-sdk/build-tools/23.0.1/zipalign
-    $ZIPALIGN -f -v 4 $AD/$APK $AD/$OUT  | grep -v "(OK"
+    $ZIPALIGN -f -v 4 $IN $OUT | grep -v "(OK"
 }
 
 
@@ -72,10 +72,10 @@ case $1 in
         pushd frontend
         $METEOR run android-device $SETTINGS $MOBILE_SERVER $2 $3 $4 ;;
     android-sign)
-        sign-android $ANDROID_DIR $UNSIGNED_APK wlmarket.apk
+        sign-android $ANDROID_DIR/$UNSIGNED_APK $ANDROID_DIR/wlmarket-19.apk
         ;;
     android-sign-crosswalk)
-        sign-android $CROSSWALK_BUILD_DIR android/project/build/outputs/apk/android-$2-release-unsigned.apk wlmarket-$2.apk
+        sign-android $CROSSWALK_BUILD_DIR/android/project/build/outputs/apk/android-$2-release-unsigned.apk $ANDROID_DIR/wlmarket-18-$2.apk
         ;;
     deploy-meteor)
         pushd frontend
@@ -87,7 +87,7 @@ case $1 in
     build)
         pushd frontend
         meteor reset
-        $METEOR build $BUILD_DIR $SERVER --mobile-settings $CWD/deploy/wlm-settings.json || exit 1
+        $METEOR build $BUILD_DIR $SERVER --mobile-settings $DEPLOY_CONF_DIR/wlm-settings.json || exit 1
         popd
         $0 android-sign
         ;;
@@ -105,7 +105,7 @@ case $1 in
             mv -f ${MC}_ $MC
             echo "App.setPreference('android-maxSdkVersion', '18');" >> $MC
             echo "crosswalk" >> .meteor/packages
-            $METEOR build $CROSSWALK_BUILD_DIR $SERVER --mobile-settings $CWD/deploy/wlm-settings.json || exit 1
+            $METEOR build $CROSSWALK_BUILD_DIR $SERVER --mobile-settings $DEPLOY_CONF_DIR/wlm-settings.json || exit 1
         popd
         $0 android-sign-crosswalk armv7
         $0 android-sign-crosswalk x86
@@ -113,11 +113,11 @@ case $1 in
     deploy)
         #rm -rf public/i18n/*.json
         #pushd frontend
-        mupx deploy --config=$CWD/deploy/$2-mup.json --settings=$CWD/deploy/$2-settings.json
+        mupx deploy --config=$CWD/deploy/$2-mup.json --settings=$DEPLOY_CONF_DIR/$2-settings.json
         ;;
     reconfig|logs)
         pushd frontend
-        mupx $1 --config=$CWD/deploy/$2-mup.json --settings=$CWD/deploy/$2-settings.json $3 $5
+        mupx $1 --config=$CWD/deploy/$2-mup.json --settings=$DEPLOY_CONF_DIR/$2-settings.json $3 $5
         ;;
     *)
         echo "usage: $0 [run|ios] params" && exit 1
