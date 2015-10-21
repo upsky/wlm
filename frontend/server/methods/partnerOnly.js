@@ -86,18 +86,8 @@ Meteor.publish('activeInvites', function () {
 	});
 });
 
-// TODO move to lib
-verifyCaptcha = function (method, captcha) {
-	var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(method.connection.clientAddress, captcha);
-	if (!verifyCaptchaResponse.success) {
-		console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
-		throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
-	} else
-		console.log('reCAPTCHA ok', captcha, verifyCaptchaResponse);
-};
-
 Meteor.methods({
-	insertInvite: function (doc, captcha) {
+	createInvite: function (doc, captcha) {
 		check(this.userId, String);
 		check(doc, {
 			email: String,
@@ -112,22 +102,17 @@ Meteor.methods({
 		doc.created = new Date();
 
 		try {
-			try {
-				var inviteId = db.invites.insert(doc);
-				WlmUtils.sendEmail(
-					doc.email,
-					Meteor.settings.public.email.invite,
-					// TODO original user language
-					TAPi18n.__('email.inviteFrom', Meteor.user().profile.name, 'ru'),
-					'invitePartnerEmail',
-					{ regLink: Meteor.getInviteLinksEmail(doc.emailHash) }
-				);
-				return { status: 'ok' };
+			db.invites.insert(doc);
 
-			} catch (err) {
-				log.trace(err);
-				return { error: err }
-			}
+			WlmUtils.sendEmail(
+				doc.email,
+				Meteor.settings.public.email.invite,
+				// TODO original user language
+				TAPi18n.__('email.inviteFrom', Meteor.user().profile.name, 'ru'),
+				'invitePartnerEmail',
+				{ regLink: Meteor.getInviteLinksEmail(doc.emailHash) }
+			);
+			return { status: 'ok' };
 
 		} catch (err) {
 			log.trace(err);
@@ -136,6 +121,7 @@ Meteor.methods({
 
 
 	},
+
 	networkCounts: function () {
 		check(this.userId, String);
 

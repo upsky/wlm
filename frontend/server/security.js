@@ -52,7 +52,7 @@ WlmSecurity.addMethods({
 	impersonate: {
 		roles: 'impersonateAccess'
 	},
-	insertInvite: {
+	createInvite: {
 		roles: 'partner'
 	},
 	invalidateQr: {
@@ -101,6 +101,7 @@ WlmSecurity.addMethods({
 	checkVideo: {
 		roles: 'videoManager'
 	},
+
 	getChartData: {
 		roles: 'statistic'
 	}

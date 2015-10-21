@@ -13,7 +13,7 @@ AutoForm.hooks({
 			//get the captcha data
 			var captcha = grecaptcha.getResponse();
 
-			Meteor.call("insertInvite", data, captcha, function (err) {
+			Meteor.call("createInvite", data, captcha, function (err) {
 				grecaptcha.reset();
 				if (err)
 					self.done(err);

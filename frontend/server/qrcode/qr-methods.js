@@ -1,9 +1,8 @@
-
 Meteor.methods({
 	qrApplyCode: function (qrCode) {
 		check(qrCode, String);
 
-		var invite = db.invites.findOne({_id: qrCode, status: 'qr'});
+		var invite = db.invites.findOne({ _id: qrCode, status: 'qr' });
 		if (!invite)
 			throw new Meteor.Error(403, 'invite not found');
 
@@ -25,19 +24,19 @@ Meteor.methods({
 	invalidateQr: function (_id) {
 		check(_id, Match.Id);
 
-		var updCount = db.invites.update({
-			_id: _id,
-			status: 'qr'
-		}, {
-			$set: {
-				status: 'active'
-			}
-		});
+		var updCount = db.invites.update(
+			{
+				_id: _id,
+				status: 'qr'
+			},
+			{ $set: { status: 'active' } }
+		);
 
 		if (updCount) {
 			return Meteor.call('checkQr');
 		}
 	},
+
 	checkQr: function () {
 		var qr = db.invites.findOne({
 			initiator: this.userId,

@@ -1,31 +1,13 @@
 /**
- * Created by kriz on 06/10/15.
+ * Created by kriz on 21/10/15.
  */
 
-WlmUtils = {};
-
-WlmUtils.sendEmail = function (to, from, subject, templateName, data) {
-	check([to, from, subject, templateName], [String]);
-	check(data, Object);
-
-	var html = SSR.render(templateName, data);
-
-	//console.log(html);
-
-	Email.send({
-		to: to,
-		from: from,
-		subject: subject,
-		html: html
-	});
+// TODO move to lib
+verifyCaptcha = function (method, captcha) {
+	var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(method.connection.clientAddress, captcha);
+	if (!verifyCaptchaResponse.success) {
+		console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+		throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
+	} else
+		console.log('reCAPTCHA ok', captcha, verifyCaptchaResponse);
 };
-
-WlmUtils.verifyEmail = function (email) {
-	check(email, String);
-
-	return db.users.update(
-		{ 'emails.address': email },
-		{ $set: { 'emails.$.verified': true } }
-	);
-};
-
