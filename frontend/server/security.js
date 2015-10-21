@@ -111,6 +111,10 @@ WlmSecurity.addPublish({
 	catalog: {
 		authNotRequired: true,
 		roles: 'all'
+	},
+	goods: {
+		authNotRequired: true,
+		roles: 'all'
 	}
 });
 
@@ -128,6 +132,13 @@ WlmSecurity.addMethods({
 		roles: 'all'
 	},
 	removeCategory: {
+		roles: 'all'
+	},
+
+	createProduct: {
+		roles: 'all'
+	},
+	updateProduct: {
 		roles: 'all'
 	}
 });

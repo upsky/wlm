@@ -12,11 +12,10 @@ Meteor.methods({
 
 		if (_.isString(data)) {
 			data = { title: data };
-		} else {
-			data = {
-				title: data.title
-			};
 		}
+
+		data.title = data.title.trim();
+		data.description = data.description ? data.description.trim() : '';
 
 		data.type = 'category';
 		data.parentId = parentId;
@@ -34,9 +33,10 @@ Meteor.methods({
 		return id;
 	},
 	// Метод обновления категории
-	updateCategory: function(id, data) {
-		check(id, String);
+	updateCategory: function(data) {
 		check(data, Object);
+
+		var id = data._id;
 
 		delete data._id;
 
@@ -110,5 +110,42 @@ Meteor.methods({
 		}
 
 		return !!removedCnt;
+	},
+
+	// Метод создания продукта
+	createProduct: function(data, categoryId) {
+		check(data, Match.OneOf(String, Match.ObjectIncluding({ title: String })));
+		check(categoryId, String);
+
+		var category = CatalogCollection.findOne(categoryId);
+
+		if (!category) {
+			throw new Meteor.Error(400, 'Category not found');
+		}
+
+		if (_.isString(data)) {
+			data = { title: data };
+		}
+
+		data.title = data.title.trim();
+		data.description = data.description ? data.description.trim() : '';
+
+		data.categories = [categoryId];
+
+		check(data, Schemas.Goods);
+
+		return GoodsCollection.insert(data);
+	},
+	// Метод обновления продукта
+	updateProduct: function(data) {
+		check(data, Object);
+
+		var id = data._id;
+
+		delete data._id;
+
+		check(data, Schemas.Goods);
+
+		return !!GoodsCollection.update(id, { $set: data });
 	}
 });

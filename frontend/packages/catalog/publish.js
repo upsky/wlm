@@ -4,3 +4,7 @@ Meteor.publish('catalog', function(catalogId) {
 
 	return CatalogCollection.find(query);
 });
+
+Meteor.publish('goods', function() {
+	return GoodsCollection.find();
+});

@@ -57,7 +57,11 @@ CatalogConstructor = (function() {
 
 				return categories[data._id];
 			} else {
-				return categories[data._id] = _.extend(new CategoryConstructor(data), new CommonConstructor());
+				var category = categories[data._id] = _.extend(new CategoryConstructor(data), new CommonConstructor());
+
+				category.goods = new GoodsConstructor(category.id());
+
+				return category;
 			}
 		};
 
@@ -182,7 +186,7 @@ CatalogConstructor = (function() {
 				};
 				// Метод сохраняет данные
 				this.save = function(cb) {
-					Meteor.apply('updateCategory', [this.id(), this.data()], function(error, result) {
+					Meteor.call('updateCategory', this.data(), function(error, result) {
 						if (error) {
 							self.logError(error);
 						} else if (cb) {
@@ -261,6 +265,126 @@ CatalogConstructor = (function() {
 		};
 
 		_.extend(this.constructor.prototype, new CommonConstructor());
+
+
+
+
+
+		var GoodsConstructor = (function() {
+			function goods(categoryId) {
+				var goods = {};
+				var ready = new ReactiveVar(false);
+				var goodsColl = GoodsCollection;
+				var sub = Meteor.subscribe('goods', function() {
+					ready.set(true);
+				});
+
+				// Функция создаёт класс продукта
+				var makeProduct = function(data) {
+					if (goods[data._id]) {
+						_.extend(goods[data._id]._data, data);
+
+						return goods[data._id];
+					} else {
+						return goods[data._id] = new ProductConstructor(data);
+					}
+				};
+
+				// Метод возвращает непосредственного потомка
+				this.childById = function(id) {
+					check(id, String);
+
+					return goodsColl.find({ _id: id, limit: 1 }).map(function(doc) {
+						return makeProduct(doc);
+					});
+				};
+				// Метод возвращает количество товаров в категории
+				this.childCount = function() {
+					return goodsColl.find({ categories: { $all: [categoryId] } }).count();
+				};
+				// Метод возвращает товары из категории
+				this.getChildren = function() {
+					return goodsColl.find({ categories: { $all: [categoryId] } }).map(function(doc) {
+						return makeProduct(doc);
+					});
+				};
+				// Метод создаёт товар
+				this.createChild = function(data, cb) {
+					Meteor.apply('createProduct', [data, categoryId], function(error, result) {
+						if (error) {
+							self.logError(error);
+						} else if (cb) {
+							cb(makeProduct(goodsColl.findOne(result)));
+						}
+					});
+				};
+
+				this.ready = function() {
+					return ready.get();
+				};
+			}
+
+			return goods;
+		}());
+
+		var ProductConstructor = (function() {
+			function product(data) {
+				check(data, Object);
+
+				this._data = data;
+
+				// Метод возвращает ID
+				this.id = function() {
+					return this.data()._id;
+				};
+				// Метод возвращает данные
+				this.data = function(data) {
+					check(data, Match.Optional(Object));
+
+					if (data && !_.isEmpty(data)) {
+						_.extend(this._data, data);
+					}
+
+					return this._data;
+				};
+				// Метод возвращает заголовок
+				this.title = function(title) {
+					check(title, Match.Optional(String));
+
+					var data = title ? { title: title } : {};
+
+					return this.data(data).title;
+				};
+				// Метод возвращает описание
+				this.description = function(description) {
+					check(description, Match.Optional(String));
+
+					var data = description ? { description: description } : {};
+
+					return this.data(data).description || '';
+				};
+				// Метод возвращает адрес картинки
+				this.imageUrl = function(imageUrl) {
+					check(imageUrl, Match.Optional(String));
+
+					var data = imageUrl ? { imageUrl: imageUrl } : {};
+
+					return this.data(data).imageUrl || '';
+				};
+				// Метод сохраняет данные
+				this.save = function(cb) {
+					Meteor.call('updateProduct', this.data(), function(error, result) {
+						if (error) {
+							self.logError(error);
+						} else if (cb) {
+							cb(result);
+						}
+					});
+				};
+			}
+
+			return product;
+		}());
 	}
 
 	return catalog;

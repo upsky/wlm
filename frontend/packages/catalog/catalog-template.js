@@ -4,6 +4,9 @@ var templateRoot = Template.catalogRoot;
 var templateCategory = Template.catalogCategory;
 var templateEditor = Template.editor;
 var templateEditorForm = Template.editorForm;
+var templateProductForm = Template.productForm;
+var templateGoods = Template.goods;
+var templateProduct = Template.product;
 var Catalog;
 var newCategoryTitle = 'Новая категория';
 
@@ -219,6 +222,7 @@ templateCategory.onCreated(function() {
 	category.__opened = new ReactiveVar(false);
 	category.__selected = new ReactiveVar(false);
 	category.__selectTitle = new ReactiveVar(false);
+	category.goods.__selectedNode = new ReactiveVar([]);
 });
 
 templateCategory.onRendered(function() {
@@ -287,10 +291,23 @@ templateEditor.helpers({
 
 
 templateEditorForm.onCreated(function() {
-	this._dataBackup = new ReactiveVar({});
+	var self = this;
+	var lastCategory;
+
+	this.autorun(function () {
+		var category = self.view.lookup('category')();
+
+		if (category != lastCategory) {
+			self._dataBackup = new ReactiveVar({});
+			lastCategory = category;
+		}
+	});
 });
 
 templateEditorForm.helpers({
+	category: function () {
+		return this;
+	},
 	select: function() {
 		var ti = Template.instance();
 		if (this.__selectTitle.get()) {
@@ -325,5 +342,108 @@ templateEditorForm.events({
 		});
 
 		ti.$('#editor__title').blur();
+	}
+});
+
+
+templateProductForm.onCreated(function () {
+	var self = this;
+	var lastSelected;
+
+	this.autorun(function () {
+		var selected = self.view.lookup('selected')();
+
+		if (selected != lastSelected) {
+			self._dataBackup = new ReactiveVar({});
+			lastSelected = selected;
+		}
+	});
+});
+
+templateProductForm.helpers({
+	selected: function () {
+		var selected = this.goods.__selectedNode.get();
+
+		selected = selected.length ? selected : [{}];
+
+		return selected.length == 1 ? selected[0] : selected;
+	},
+	singleSelect: function() {
+		return !this.goods || this.goods.__selectedNode.get().length == 1;
+	},
+	select: function() {
+		var ti = Template.instance();
+		if (this.__selectTitle && this.__selectTitle.get()) {
+			this.__selectTitle.set(false);
+			setTimeout(function () {
+				ti.$('#editor__product__title').focus()[0].select();
+			}, 100);
+		}
+	},
+	disabledClass: function() {
+		var backup = Template.instance()._dataBackup.get();
+
+		if (!this._data) {
+			return _.isEmpty(backup) ? 'disabled' : '';
+		}
+
+		var data = this.data();
+
+		return (!_.isEmpty(backup) && _.some(backup, function(val, key) { return val != data[key]; })) ? '' : 'disabled';
+	}
+});
+
+templateProductForm.events({
+	'keyup input, keyup textarea': function(e, ti) {
+		var backup = ti._dataBackup.get();
+
+		backup[e.target.name] = e.target.value;
+
+		ti._dataBackup.set(backup);
+	},
+	'submit form': function(e, ti) {
+		e.preventDefault();
+
+		if (!this._data) {
+			ti.data.goods.createChild(ti._dataBackup.get() || {});
+		} else {
+			this.data(ti._dataBackup.get() || {});
+			this.save(function () {
+				ti._dataBackup.set({});
+			});
+		}
+		ti.$('#editor__product__title').blur();
+	}
+});
+
+
+templateGoods.helpers({
+	singleSelect: function() {
+		return Catalog.__selectedNode.get().length == 1;
+	},
+	category: function () {
+		return Catalog.__selectedNode.get()[0];
+	}
+});
+
+
+templateProduct.helpers({
+	isSelected: function () {
+		return Catalog.__selectedNode.get()[0].goods.__selectedNode.get().indexOf(this) != -1;
+	}
+});
+
+templateProduct.events({
+	'click': function (e, ti) {
+		var selected = Catalog.__selectedNode.get()[0].goods.__selectedNode.get();
+		var product = ti.data;
+
+		if (selected.indexOf(product) != -1) {
+			selected = _.without(selected, product);
+		} else {
+			selected = [product];
+		}
+
+		Catalog.__selectedNode.get()[0].goods.__selectedNode.set(selected);
 	}
 });

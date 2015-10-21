@@ -1,5 +1,6 @@
 
 CatalogCollection = new Mongo.Collection('catalog');
+GoodsCollection = new Mongo.Collection('goods');
 
 Schemas = {};
 
@@ -72,3 +73,30 @@ Schemas.Catalog.messages({
 });
 
 CatalogCollection.attachSchema(Schemas.Catalog);
+
+
+Schemas.Goods = new SimpleSchema({
+	title: {
+		type: String,
+		label: '"Title"',
+		max: 100
+	},
+	description: {
+		type: String,
+		label: '"Description"',
+		max: 200,
+		optional: true
+	},
+	imageUrl: {
+		type: String,
+		label: '"Image url"',
+		regEx: SimpleSchema.RegEx.Url,
+		max: 1000
+	},
+	categories: {
+		type: [String],
+		label: '"Categories ID"'
+	}
+});
+
+GoodsCollection.attachSchema(Schemas.Goods);
