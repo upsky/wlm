@@ -4,6 +4,7 @@
             {{> navMenuItem name='index'   icon='fa-home'}}
             {{> navMenuItem name='network' icon='fa-sitemap'}}
             {{#if isInRole 'statistic'}}{{> navMenuItem name='highcharts' icon='fa-area-chart'}}{{/if}}
+            {{#if isInRole 'catalogAdmin'}}{{> navMenuItem name='catalogAdmin' icon='fa-folder-open-o'}}{{/if}}
             {{#if showQr}}
                 {{> navMenuItem name='qrcode'  icon='fa-qrcode'}}
             {{/if}}

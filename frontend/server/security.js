@@ -110,35 +110,35 @@ WlmSecurity.addMethods({
 WlmSecurity.addPublish({
 	catalog: {
 		authNotRequired: true,
-		roles: 'all'
+		roles: 'catalogAdmin'
 	},
 	goods: {
 		authNotRequired: true,
-		roles: 'all'
+		roles: 'catalogAdmin'
 	}
 });
 
 WlmSecurity.addMethods({
 	createCatalog: {
-		roles: 'all'
+		roles: 'catalogAdmin'
 	},
 	createCategory: {
-		roles: 'all'
+		roles: 'catalogAdmin'
 	},
 	updateCategory: {
-		roles: 'all'
+		roles: 'catalogAdmin'
 	},
 	moveCategory: {
-		roles: 'all'
+		roles: 'catalogAdmin'
 	},
 	removeCategory: {
-		roles: 'all'
+		roles: 'catalogAdmin'
 	},
 
 	createProduct: {
-		roles: 'all'
+		roles: 'catalogAdmin'
 	},
 	updateProduct: {
-		roles: 'all'
+		roles: 'catalogAdmin'
 	}
 });

@@ -131,10 +131,20 @@ if (Meteor.pubSettings('isDown')) {
 		template: 'support',
 		name: 'support'
 	});
+	Router.route('/main', {
+		layoutTemplate: 'defaultLayout',
+		template: 'main',
+		name: 'main'
+	});
 	Router.route('/admin/video', {
 		layoutTemplate: 'fullLayout',
 		template: 'videoManager',
 		name: 'videoManager'
+	});
+	Router.route('/admin/catalog', {
+		layoutTemplate: 'fullLayout',
+		template: 'catalogAdmin',
+		name: 'catalogAdmin'
 	});
 	Router.route('/admin/video/edit/:_id', {
 		layoutTemplate: 'fullLayout',
@@ -195,7 +205,7 @@ var checkVerify = function () {
 	}
 };
 
-var openUrls = ['login', 'error', 'forbidden', 'down', 'loading', 'blocked', 'reg', 'qr', 'recoverpass', 'regemail', 'logout'];
+var openUrls = ['main', 'login', 'error', 'forbidden', 'down', 'loading', 'blocked', 'reg', 'qr', 'recoverpass', 'regemail', 'logout'];
 Router.onBeforeAction(
 	function (location) {
 		console.log('onBeforeAction ' + location.url, Meteor.userId());
