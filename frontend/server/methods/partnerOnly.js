@@ -90,10 +90,11 @@ Meteor.publish('activeInvites', function () {
 verifyCaptcha = function (method, captcha) {
 	var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(method.connection.clientAddress, captcha);
 	if (!verifyCaptchaResponse.success) {
-		console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+		//console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
 		throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
-	} else
-		console.log('reCAPTCHA ok', captcha, verifyCaptchaResponse);
+	}
+	//else
+	//console.log('reCAPTCHA ok', captcha, verifyCaptchaResponse);
 };
 
 Meteor.methods({
