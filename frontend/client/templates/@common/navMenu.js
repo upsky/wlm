@@ -1,31 +1,21 @@
-Template.navMenu.rendered = function () {
-	return log.trace('navMenu rendered');
-};
-
 Template.navMenuItem.helpers({
-	"id_data": function () {
-		var templateData = Template.instance().data;
-		return templateData.id != undefined ? templateData.id : '';
+	link: function () {
+		return this.href ? this.href : this.name;
 	},
-	"link": function () {
-		var templateData = Template.instance().data;
-		return templateData.href != undefined ? templateData.href : templateData.name;
+	isRouterLink: function () {
+		return this.href !== '#';
 	},
-	"isRouterLink": function () {
-		var templateData = Template.instance().data;
-		return templateData.href != '#';
+	title: function () {
+		return 'pageTitles.' + this.name;
 	},
-	"textClass": function () {
-		var templateData = Template.instance().data;
-		return "pageTitles." + templateData.name;
+	
+	rolePresent: function () {
+		return this.role ? Roles.userIsInRole(Meteor.userId(), this.role) : true;
 	}
 });
 
 Template.navMenu.helpers({
-	"iamnavMenu": function () {
-		return 'iam navMenu';
-	},
-	"mainMenuStatus": function () {
+	mainMenuStatus: function () {
 		if (Session.get('userMenuStatus')) {
 			return 'expanded';
 		} else {
