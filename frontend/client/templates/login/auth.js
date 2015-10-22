@@ -20,7 +20,7 @@ AutoForm.hooks({
 			method: function (doc) {
 				currentPassword = doc.password;
 				doc.password = 'fakePass';
-				return doc
+				return doc;
 			}
 		},
 		onError: function (type, error) {

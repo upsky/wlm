@@ -38,7 +38,6 @@ tap:i18n-bundler
 sacha:spin
 peppelg:bootstrap-3-modal
 twbs:bootstrap
-kidovate:pnotify
 settinghead:auto-nprogress
 email
 servicelocale:geoip
@@ -73,3 +72,4 @@ aldeed:autoform-bs-datepicker
 wlm:catalog
 wlm-messaging
 autoupdate
+wlm-notify

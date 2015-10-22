@@ -143,6 +143,7 @@ wlm-admin@0.0.1
 wlm-core@0.0.1
 wlm-messaging@0.0.1
 wlm-module@0.0.1
+wlm-notify@0.0.1
 wlm-security@0.0.1
 wlm:catalog@0.0.1
 wlm:jquery-ui-drag-drop-resize@0.0.1
