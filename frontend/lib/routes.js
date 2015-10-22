@@ -5,8 +5,8 @@ Router.configure({
 	loadingTemplate: 'loading',
 	template: 'error',
 	progressDebug: true,
-	waitOn: function() {
-			return Meteor.subscribe('videos');
+	waitOn: function () {
+		return Meteor.subscribe('videos');
 	}
 });
 
@@ -159,7 +159,7 @@ if (Meteor.pubSettings('isDown')) {
 		template: 'addVideo',
 		name: 'addVideo'
 	});
-	Router.route('/forbidden',{
+	Router.route('/forbidden', {
 		layoutTemplate: 'defaultLayout',
 		template: 'forbidden',
 		name: 'forbidden'
@@ -173,8 +173,8 @@ if (Meteor.pubSettings('isDown')) {
 		layoutTemplate: 'fullLayout',
 		template: 'adminPanel',
 		name: 'adminPanel',
-		onBeforeAction:function(){
-			if (Roles.userIsInRole(Meteor.user(),'adminPanel'))
+		onBeforeAction: function () {
+			if (Roles.userIsInRole(Meteor.user(), 'adminPanel'))
 				this.next();
 			else
 				Router.go('forbidden');
@@ -184,13 +184,13 @@ if (Meteor.pubSettings('isDown')) {
 
 var errorNotice;
 var checkVerify = function () {
-	var flag = false;
 	if (Meteor.user()) {
-		Meteor.user().emails.forEach(function (item) {
-			if (item.verified === true)flag = true;
-		});
-		if (!flag)
-			if (Router.current().route.getName() !== 'profile') {
+		var emailVerified = !!_.findWhere(Meteor.user().emails, { verified: true });
+		if (!emailVerified) {
+			if (Router.current().route.getName() === 'profile') {
+				errorNotice && errorNotice.close();
+				errorNotice = undefined;
+			} else {
 				errorNotice = errorNotice || WlmNotify.create({
 						group: 'emailVerify',
 						text: 'messages.emailNotVerified',
@@ -198,10 +198,8 @@ var checkVerify = function () {
 						hide: false,
 						addclass: "stack-bar-top"
 					});
-			} else {
-				errorNotice && errorNotice.close();
-				errorNotice = undefined;
 			}
+		}
 	}
 };
 

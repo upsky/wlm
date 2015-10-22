@@ -1,21 +1,21 @@
 Template.qrGenerate.onRendered(function () {
-  this.autorun(function () {
-    var qrCode = Template.currentData().code;
-    var $qr = function () {
-      return self.$('.qr-code');
-    };
+	var self = this;
+	this.autorun(function () {
+		// currentData used here for reactivity
+		var qrCode = Template.currentData().code;
 
-    $qr().html('');
-    if (!qrCode)
-      return;
+		var $qr = self.$('.qr-code');
+		$qr.html('');
 
-    $qr().qrcode({
-      render: 'image',
-      color: "#000",
-      text: qrCode
-    });
-    /**
-     * TODO errors handlers
-     */
-  });
+		if (!qrCode) return;
+
+		$qr.qrcode({
+			render: 'image',
+			color: "#000",
+			text: qrCode
+		});
+		/**
+		 * TODO errors handlers
+		 */
+	});
 });

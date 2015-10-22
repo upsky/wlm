@@ -4,7 +4,8 @@ SimpleSchema.debug = true;
 SimpleSchema.RegEx.Id = /^[2-9A-Za-z]{13,32}$/
 
 SimpleSchema.messages({
-	"passwordMismatch": TAPi18n.__('messages.passwordMismatch')
+	//"passwordMismatch": TAPi18n.__('messages.passwordMismatch', 'ru') // TODO default language
+	"passwordMismatch": "Пароли не совпадают"
 });
 
 

@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+ABSPATH=$( cd $(dirname $0); pwd)
+SCRIPTPATH=$ABSPATH/$(basename $0)
+
+cd $ABSPATH
+
 DEFAULT_HOST=market.winlevel.ru
 METEOR=/usr/local/bin/meteor
 SETTINGS="--settings=settings.json"
@@ -57,7 +62,7 @@ check frontend
 
 case $1 in
     "")
-        $0 run ;;
+        $SCRIPTPATH run ;;
     run|debug)
         pushd frontend
         rm -f public/i18n/*.json
@@ -81,15 +86,15 @@ case $1 in
         pushd frontend
         $METEOR deploy $HOST $SETTINGS ;;
     build-all)
-        $0 build > build.log &
-        $0 build-crosswalk > build-crosswalk.log
+        $SCRIPTPATH build > build.log &
+        $SCRIPTPATH build-crosswalk > build-crosswalk.log
         ;;
     build)
         pushd frontend
         meteor reset
         $METEOR build $BUILD_DIR $SERVER --mobile-settings $DEPLOY_CONF_DIR/wlm-settings.json || exit 1
         popd
-        $0 android-sign
+        $SCRIPTPATH android-sign
         ;;
     build-crosswalk)
         rm -rf $CROSSWALK_COPY_DIR
@@ -107,8 +112,8 @@ case $1 in
             echo "crosswalk" >> .meteor/packages
             $METEOR build $CROSSWALK_BUILD_DIR $SERVER --mobile-settings $DEPLOY_CONF_DIR/wlm-settings.json || exit 1
         popd
-        $0 android-sign-crosswalk armv7
-        $0 android-sign-crosswalk x86
+        $SCRIPTPATH android-sign-crosswalk armv7
+        $SCRIPTPATH android-sign-crosswalk x86
         ;;
     deploy)
         #rm -rf public/i18n/*.json

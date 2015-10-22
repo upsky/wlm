@@ -33,8 +33,9 @@ AutoForm.hooks({
 		},
 
 		onSuccess: function (type, result) {
-			if (!result)
+			if (!result) {
 				return;
+			}
 
 			var password = currentPassword;
 			currentPassword = undefined;
