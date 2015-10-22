@@ -2,7 +2,7 @@ Router.route('/admin/panel/users', {
 	layoutTemplate: 'fullLayout',
 	template: 'adminUsers',
 	name: 'adminUsers',
-	onBeforeAction:function(){
+	onBeforeAction: function () {
 		if (Roles.userIsInRole(Meteor.user(), 'adminUsers'))
 			this.next();
 		else

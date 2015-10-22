@@ -110,9 +110,6 @@ Meteor.publish('inviteEmail', function (_id) {
 });
 
 WlmSecurity.addPublish({
-	videos: {
-		roles: 'all'
-	},
 	invite: {
 		authNotRequired: true,
 		roles: ['partner', 'president']

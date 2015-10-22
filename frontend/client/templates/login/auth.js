@@ -1,10 +1,26 @@
+var currentPassword = undefined;
+
+WlmNotify.define('LOGIN_ERROR', {
+	group: 'login',
+	type: 'error',
+	title: 'errors.loginErrorTitle',
+	text: 'errors.unknownError'
+});
+
+WlmNotify.define('PASSWORD_INCORRECT', {
+	group: 'login',
+	type: 'error',
+	title: 'errors.loginErrorTitle',
+	text: 'errors.loginOrPasswordIncorrect'
+});
+
 AutoForm.hooks({
 	loginForm: {
 		before: {
 			method: function (doc) {
-				Session.set('LoginAttempt', doc.password);
+				currentPassword = doc.password;
 				doc.password = 'fakePass';
-				return doc;
+				return doc
 			}
 		},
 		onError: function (type, error) {
@@ -12,32 +28,23 @@ AutoForm.hooks({
 			if (error.error === 490) {
 				return Router.go('blocked');
 			} else {
-				return WlmNotify.create({
-					group: 'login',
-					type: 'error',
-					title: 'errors.loginErrorTitle',
-					text: 'errors.unknownError'
-				});
+				return WlmNotify.create('LOGIN_ERROR');
 			}
 		},
+
 		onSuccess: function (type, result) {
-			var password;
-			if (result) {
-				password = Session.get('LoginAttempt');
-				Session.set('LoginAttempt', void 0);
-				return Meteor.loginWithPassword(result, password, function (error) {
-					if (error) {
-						return WlmNotify.create({
-							group: 'login',
-							type: 'error',
-							title: 'errors.loginErrorTitle',
-							text: 'errors.loginOrPasswordIncorrect'
-						});
-					} else {
-						return Router.go('/');
-					}
-				});
-			}
+			if (!result)
+				return;
+
+			var password = currentPassword;
+			currentPassword = undefined;
+			return Meteor.loginWithPassword(result, password, function (error) {
+				if (error) {
+					return WlmNotify.create('PASSWORD_INCORRECT');
+				} else {
+					return Router.go('/');
+				}
+			});
 		}
 	}
 });

@@ -3,19 +3,15 @@ var template = Template.panel;
 template.onCreated(function () {
 	var panelName = 'panel-' + this.data.blockId;
 
+	var hideBox = Meteor.isCordova && this.data.hideBox;
+
 	this._blockId = this.data.blockId;
-	this._hideBox = new ReactiveVar(Meteor.isCordova && this.data.hideBox);
+	this._hideBox = new ReactiveVar(hideBox);
+	this._showToggleBoxBtn = hideBox;
 
 	if (typeof Session.get(panelName) !== "undefined") {
 		this._hideBox.set(Session.get(panelName));
 	}
-
-	if (this.data.hideBox) {
-		this._showToggleBoxBtn = true;
-	} else {
-		this._showToggleBoxBtn = false;
-	}
-
 
 });
 

@@ -3,11 +3,8 @@ this.Schemas = {};
 SimpleSchema.debug = true;
 SimpleSchema.RegEx.Id = /^[2-9A-Za-z]{13,32}$/
 
-/**
- * TODO translate this
- */
 SimpleSchema.messages({
-	"passwordMismatch": 'Пароли не совпадают'
+	"passwordMismatch": TAPi18n.__('messages.passwordMismatch')
 });
 
 
@@ -163,21 +160,21 @@ Schemas.statisticFilter = new SimpleSchema({
 
 
 Schemas.videosSchema = new SimpleSchema({
-  title: {
-    type: String,
-    label: "Название",
-    max: 200
-  },
-  youtubeId: {
-  	type: String,
-  	label: "Ссылка на youtube"
-  },
-  info: {
-    type: String,
-    label: "Инфо о видео"
-  },
-  _id: {
-  	type: String,
-	  label: "Название блока"
-  }
+	title: {
+		type: String,
+		label: "Название",
+		max: 200
+	},
+	youtubeId: {
+		type: String,
+		label: "Ссылка на youtube"
+	},
+	info: {
+		type: String,
+		label: "Инфо о видео"
+	},
+	_id: {
+		type: String,
+		label: "Название блока"
+	}
 });

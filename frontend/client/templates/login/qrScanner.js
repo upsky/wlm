@@ -21,16 +21,11 @@ setError = function (error) {
 	//alert(error);
 };
 
-
-template.helpers({
-	isCordova: Meteor.isCordova
-});
-
 template.events({
 	"click #qr-scanner": function (event) {
 		var params = {
-			text_title: "Сканируйте QR-код",
-			text_instructions: "Сканируйте код",
+			text_title: TAPi18n.__('messages.scanQrDo'),
+			text_instructions: TAPi18n.__('messages.scanQrInstructions'),
 			camera: "back",
 			flash: "auto",
 			drawSight: false

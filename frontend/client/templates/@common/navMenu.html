@@ -3,30 +3,32 @@
         <ul>
             {{> navMenuItem name='index'   icon='fa-home'}}
             {{> navMenuItem name='network' icon='fa-sitemap'}}
-            {{#if isInRole 'statistic'}}{{> navMenuItem name='highcharts' icon='fa-area-chart'}}{{/if}}
-            {{#if isInRole 'catalogAdmin'}}{{> navMenuItem name='catalogAdmin' icon='fa-folder-open-o'}}{{/if}}
+            {{> navMenuItem name='highcharts' role='statistic' icon='fa-area-chart'}}
+            {{> navMenuItem name='catalogAdmin' role='catalogAdmin' icon='fa-folder-open-o'}}{{/if}}
             {{#if showQr}}
                 {{> navMenuItem name='qrcode'  icon='fa-qrcode'}}
             {{/if}}
         </ul>
         <ul class="logout">
-            {{#if isInRole 'adminPanel'}}{{> navMenuItem name='adminPanel' icon='fa-user-secret'}}{{/if}}
+            {{> navMenuItem name='adminPanel' role='adminPanel' icon='fa-user-secret'}}
             {{> navMenuItem name='profile' icon='fa-gear'}}
             {{#if isImpersonating}}
-                {{> navMenuItem name='exit'    icon='fa-eye text-danger' href="#" id="disconnect"}}
+                {{> navMenuItem name='exit' icon='fa-eye text-danger' href="#" id="disconnect"}}
             {{else}}
-                {{> navMenuItem name='exit'    icon='fa-power-off fa-power-off' href="#" id="logoutHref"}}
+                {{> navMenuItem name='exit' icon='fa-power-off fa-power-off' href="#" id="logoutHref"}}
             {{/if}}
         </ul>
     </nav>
 </template>
 <template name="navMenuItem">
+    {{#if rolePresent}}
     <li class="{{#if isCurrentRoute link}}active{{/if}}">
-        <a href="{{#if isRouterLink}}{{pathFor link}}{{else}}{{link}}{{/if}}" id="{{id_data}}">
+        <a href="{{#if isRouterLink}}{{pathFor link}}{{else}}{{link}}{{/if}}">
             <i class="fa {{icon}} nav-icon"></i>
                 <span class="nav-text">
-                    {{_ textClass}}
+                    {{_ title}}
                 </span>
         </a>
     </li>
+    {{/if}}
 </template>

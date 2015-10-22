@@ -14,7 +14,20 @@ _.extend(Notify.prototype, {
 WlmNotify = {
 	_groups: {},
 	_notify: {},
+	_defined: {},
+	define: function (name, opt) {
+		this._defined[name] = opt;
+	},
+
 	create: function (opt) {
+		if (typeof opt === 'string') {
+			var name = opt;
+			opt = this._defined[name];
+			if (!opt) {
+				console.error('WlmNotify', name, 'not defined');
+			}
+		}
+
 		// translate
 		if (opt.title) {
 			var tapParams = opt.titleParams || [];

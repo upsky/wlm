@@ -22,19 +22,21 @@ Template.fullLayout.rendered = function () {
 			}), 50);
 		},
 		events: function () {
+			var $body = $("body");
+
 			$(document).on("touchmove", function (event) {
 				return event.preventDefault();
 			});
-			$("body").on("touchmove", ".scrollable, nav", function (event) {
+			$body.on("touchmove", ".scrollable, nav", function (event) {
 				return event.stopPropagation();
 			});
-			return $("body").on("touchstart", ".scrollable", function (event) {
-				if (event.currentTarget.scrollTop === 0) {
-					return event.currentTarget.scrollTop = 1;
-				} else {
-					if (event.currentTarget.scrollHeight === event.currentTarget.scrollTop + event.currentTarget.offsetHeight) {
-						return event.currentTarget.scrollTop -= 1;
-					}
+
+			$body.on("touchstart", ".scrollable", function (event) {
+				var target = event.currentTarget;
+				if (target.scrollTop === 0) {
+					return target.scrollTop = 1;
+				} else if (target.scrollHeight === target.scrollTop + target.offsetHeight) {
+					return target.scrollTop -= 1;
 				}
 			});
 		},
@@ -54,7 +56,9 @@ Template.fullLayout.rendered = function () {
 			});
 			return $(".progress-bar").each(function (index, el) {
 				var progress;
-				progress = Math.round(parseInt($(this).css("width")) / parseInt($(this).parent().css("width")) * 100) + "%";
+				var width = parseInt($(this).css("width"));
+				var parentWidth = parseInt($(this).parent().css("width"));
+				progress = Math.round(width / parentWidth * 100) + "%";
 				return $(this).tooltip({
 					container: "#body",
 					title: progress
