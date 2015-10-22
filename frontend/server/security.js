@@ -107,3 +107,39 @@ WlmSecurity.addMethods({
 	}
 
 });
+
+WlmSecurity.addPublish({
+	catalog: {
+		authNotRequired: true,
+		roles: 'catalogAdmin'
+	},
+	goods: {
+		authNotRequired: true,
+		roles: 'catalogAdmin'
+	}
+});
+
+WlmSecurity.addMethods({
+	createCatalog: {
+		roles: 'catalogAdmin'
+	},
+	createCategory: {
+		roles: 'catalogAdmin'
+	},
+	updateCategory: {
+		roles: 'catalogAdmin'
+	},
+	moveCategory: {
+		roles: 'catalogAdmin'
+	},
+	removeCategory: {
+		roles: 'catalogAdmin'
+	},
+
+	createProduct: {
+		roles: 'catalogAdmin'
+	},
+	updateProduct: {
+		roles: 'catalogAdmin'
+	}
+});

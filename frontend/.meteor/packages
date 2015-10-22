@@ -70,5 +70,6 @@ wlm-admin
 u2622:persistent-session
 rajit:bootstrap3-datepicker
 aldeed:autoform-bs-datepicker
+wlm:catalog
 wlm-messaging
 autoupdate

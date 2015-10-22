@@ -1,0 +1,64 @@
+
+.main-page {
+    position: relative;
+    min-height: 100%;
+    .header, .footer {
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        a {
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+    .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        .nav-link {
+            margin: 0 10px;
+        }
+    }
+    .content {
+        padding-top: 40px;
+        .search-block {
+            padding: 35px 0 0;
+            a {
+                color: #525252;
+                cursor: pointer;
+            }
+            .wl-tour {
+                display: inline-block;
+                font-size: 18px;
+                .small-text {
+                    display: block;
+                    font-size: 12px;
+                }
+            }
+            .input-group {
+                margin-top: 3px;
+            }
+            .btn {
+                padding: 6px 30px;
+            }
+            .example {
+                padding: 5px 0 10px;
+                display: block;
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        .center-link {
+            display: inline-block;
+            margin-top: 10px;
+        }
+    }
+}
