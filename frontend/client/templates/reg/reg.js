@@ -1,4 +1,3 @@
-
 AutoForm.hooks({
 	regForm: {
 		before: {
