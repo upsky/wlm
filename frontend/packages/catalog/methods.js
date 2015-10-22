@@ -1,13 +1,12 @@
-
 Meteor.methods({
 	// Метод создания каталога
-	createCatalog: function(name) {
+	createCatalog: function (name) {
 		check(name, String);
 
 		return CatalogCollection.insert({ title: name, type: 'catalog' });
 	},
 	// Метод создания категории
-	createCategory: function(data, parentId, catalogId) {
+	createCategory: function (data, parentId, catalogId) {
 		check(data, Match.OneOf(String, Match.ObjectIncluding({ title: String })));
 
 		if (_.isString(data)) {
@@ -33,7 +32,7 @@ Meteor.methods({
 		return id;
 	},
 	// Метод обновления категории
-	updateCategory: function(data) {
+	updateCategory: function (data) {
 		check(data, Object);
 
 		var id = data._id;
@@ -45,7 +44,7 @@ Meteor.methods({
 		return !!CatalogCollection.update(id, { $set: data });
 	},
 	// Метод перемещения (смены родителя) категории
-	moveCategory: function(id, newParentId) {
+	moveCategory: function (id, newParentId) {
 		check(id, String);
 		check(newParentId, String);
 
@@ -71,7 +70,7 @@ Meteor.methods({
 		}
 	},
 	// Метод удаления категории
-	removeCategory: function(id) {
+	removeCategory: function (id) {
 		check(id, String);
 
 		var doc = CatalogCollection.findOne(id);
@@ -89,8 +88,8 @@ Meteor.methods({
 			}
 
 			// Функция находит всех потомков
-			function getChildrenIds(ids) {
-				var arrIds = CatalogCollection.find({ parentId: { $in: ids } }, { fields: { _id: 1 } }).map(function(doc) {
+			function getChildrenIds (ids) {
+				var arrIds = CatalogCollection.find({ parentId: { $in: ids } }, { fields: { _id: 1 } }).map(function (doc) {
 					return doc._id;
 				});
 
@@ -105,7 +104,8 @@ Meteor.methods({
 
 			// Удаляем всех потомков
 			if (needRemove.length) {
-				CatalogCollection.remove({ _id: { $in: needRemove } }, function(error, result) {});
+				CatalogCollection.remove({ _id: { $in: needRemove } }, function (error, result) {
+				});
 			}
 		}
 
@@ -113,7 +113,7 @@ Meteor.methods({
 	},
 
 	// Метод создания продукта
-	createProduct: function(data, categoryId) {
+	createProduct: function (data, categoryId) {
 		check(data, Match.OneOf(String, Match.ObjectIncluding({ title: String })));
 		check(categoryId, String);
 
@@ -132,17 +132,20 @@ Meteor.methods({
 
 		data.categories = [categoryId];
 
+		data._created = new Date();
+
 		check(data, Schemas.Goods);
 
 		return GoodsCollection.insert(data);
 	},
 	// Метод обновления продукта
-	updateProduct: function(data) {
+	updateProduct: function (data) {
 		check(data, Object);
 
 		var id = data._id;
 
 		delete data._id;
+		data._updated = new Date();
 
 		check(data, Schemas.Goods);
 

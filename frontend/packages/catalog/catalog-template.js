@@ -1,4 +1,3 @@
-
 var template = Template.catalog;
 var templateRoot = Template.catalogRoot;
 var templateCategory = Template.catalogCategory;
@@ -176,6 +175,10 @@ template.onCreated(function() {
 	window.Catalog = Catalog = new CatalogConstructor('main');
 	Catalog.__selectedNode = new ReactiveVar([]);
 	Catalog.__needAction = new ReactiveVar({});
+	this.__state = {
+		search: new Elastic.Search('catalog'),
+		mode: new ReactiveVar('default')
+	};
 });
 
 template.helpers({
@@ -194,6 +197,12 @@ template.helpers({
 		if (type == 'remove') {
 			return selectedNode.length;
 		}
+	},
+	mode: function () {
+		return Template.instance().__state.mode.get();
+	},
+	results: function () {
+		return Template.instance().__state.search.results();
 	}
 });
 
@@ -204,6 +213,21 @@ template.events({
 		});
 
 		startEvent.call(null, { type: action, event: e });
+	},
+
+	'submit .catalog-search-form form': function (e) {
+		e.preventDefault();
+		var query = $(e.target).find('input[type=search]').val().trim();
+		if (query === '')
+			return;
+		var state = Template.instance().__state;
+		state.search.query(query);
+		state.mode.set('search');
+	},
+
+	'click a[data-mode-default]': function (e) {
+		e.preventDefault();
+		Template.instance().__state.mode.set('default');
 	}
 });
 

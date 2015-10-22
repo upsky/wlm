@@ -9,12 +9,16 @@ Package.onUse(function(api) {
 
 	api.use('templating');
 	api.use('mongo');
+	api.use('reactive-var');
 	api.use('less');
 	api.use('accounts-password');
 	api.use('aldeed:simple-schema');
 	api.use('wlm:jquery-ui-drag-drop-resize');
+	api.use('raix:handlebar-helpers');
 	api.use('twbs:bootstrap');
 	api.use('iron:router');
+	api.use('wlm-security');
+	api.use('wlm:elastic');
 
 	api.addFiles([
 		'collections.js',

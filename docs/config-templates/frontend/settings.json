@@ -23,6 +23,10 @@
     }
   },
 
+  "elasticsearch": {
+    "host": "localhost:9200"
+  },
+
   "sysadminPass": "admin",
 
   "recaptchaPrivate": "6LdpHw4TAAAAAIvqE_7HthHylJAP_Q8edi4WK4Vr"

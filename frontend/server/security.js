@@ -27,6 +27,13 @@ WlmSecurity.addMethods({
 });
 
 WlmSecurity.addMethods({
+	'search/catalog': {
+		authNotRequired: true,
+		roles: 'all'
+	}
+});
+
+WlmSecurity.addMethods({
 	createUser: {
 		roles: 'sysadmin'
 	},

@@ -15,6 +15,7 @@ if (Meteor.isServer) {
 				'profile.isAdmin': true
 			}
 		});
+		Roles.addUsersToRoles(userId, 'catalogAdmin');
 	}
 }
 

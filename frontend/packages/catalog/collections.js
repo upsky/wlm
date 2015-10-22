@@ -1,6 +1,6 @@
-
 CatalogCollection = new Mongo.Collection('catalog');
 GoodsCollection = new Mongo.Collection('goods');
+SyncCollection = new Mongo.Collection('sync');
 
 Schemas = {};
 
@@ -96,6 +96,20 @@ Schemas.Goods = new SimpleSchema({
 	categories: {
 		type: [String],
 		label: '"Categories ID"'
+	},
+	_created: {
+		type: Date,
+		label: "Creation date"
+	},
+	_updated: {
+		type: Date,
+		label: "Update date",
+		optional: true
+	},
+	_removed: {
+		type: Boolean,
+		label: "",
+		optional: true
 	}
 });
 
