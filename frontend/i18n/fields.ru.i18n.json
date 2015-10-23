@@ -69,7 +69,9 @@
     },
     "roles": {
       "label": "Роли"
-
+    },
+    "verificationCode": {
+      "label": "Проверочный код"
     }
   }
 }

@@ -182,6 +182,10 @@ Meteor.methods({
 					verified: false
 				}
 			};
+
+
+			var verificationCode = WLmVerificationCode.check(doc.phone);
+
 		}
 		return db.users.update(this.userId, updateObj);
 	},
@@ -208,5 +212,29 @@ Meteor.methods({
 
 	resendVerificationEmail: function () {
 		return Accounts.sendVerificationEmail(Meteor.userId());
-	}
+	},
+	removeMyPhone: function () {
+		return db.users.update(Meteor.userId(), { $unset: { 'profile.phones': '' } });
+	},
+	sendVerifyCodePhone: function (doc) {
+		check(doc, Schemas.verifyPhone);
+		this.unblock();
+
+		WLmVerificationCode.check('7777777');
+
+		//if (true) {
+		//	throw new Meteor.Error(400, 'code.invalid');
+		//}
+		//
+		//if (true) {
+		//	throw new Meteor.Error(400, 'code.overdue');
+		//}
+		//
+		//if (true) {
+		//	throw new Meteor.Error(400, 'code.overdue');
+		//}
+
+
+		return true;
+	},
 });

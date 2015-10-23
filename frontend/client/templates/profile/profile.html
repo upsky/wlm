@@ -1,15 +1,16 @@
 <template name="profile">
     {{> verifyEmail }}
 
-    {{#Layout template="twoCols"}}
-        {{> personalInf}}
-        {{#contentFor "col2"}}
-            {{> changePass}}
-            {{#unless isCordova}}
-                {{#if showQr}}
-                    {{> personalQrCode}}
-                {{/if}}
-            {{/unless}}
-        {{/contentFor}}
-    {{/Layout}}
+    {{> phoneField }}
+
+    {{> personalInf}}
+
+    {{> changePass}}
+
+
+    {{#unless isCordova}}
+        {{#if showQr}}
+            {{> personalQrCode}}
+        {{/if}}
+    {{/unless}}
 </template>

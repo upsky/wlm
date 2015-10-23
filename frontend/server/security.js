@@ -103,6 +103,14 @@ WlmSecurity.addMethods({
 	},
 	getChartData: {
 		roles: 'statistic'
+	},
+	removeMyPhone: {
+		authNotRequired: false,
+		roles: 'all'
+	},
+	sendVerifyCodePhone: {
+		authNotRequired: false,
+		roles: 'all'
 	}
 
 });
