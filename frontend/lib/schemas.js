@@ -255,7 +255,7 @@ Schemas.businessEdit = new SimpleSchema({
 	}
 });
 Schemas.schedule = new SimpleSchema({
-	schedule: {
+	'schedule': {
 		type: Object,
 		optional: true,
 		label: "Дни недели"

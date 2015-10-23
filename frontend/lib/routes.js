@@ -157,11 +157,6 @@ if (Meteor.pubSettings('isDown')) {
 		template: 'forbidden',
 		name: 'forbidden'
 	});
-	Router.route('/statistic', {
-		layoutTemplate: 'fullLayout',
-		template: 'highcharts',
-		name: 'highcharts'
-	});
 	Router.route('/admin/panel', {
 		layoutTemplate: 'fullLayout',
 		template: 'adminPanel',

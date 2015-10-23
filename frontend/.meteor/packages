@@ -74,3 +74,4 @@ wlm-messaging
 cfs:standard-packages
 cfs:filesystem
 cfs:gridfs
+overtonik:statistic
