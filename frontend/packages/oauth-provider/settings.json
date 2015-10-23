@@ -1,0 +1,14 @@
+{
+  "loginServices": {
+    "support": {
+      "redirect_uri":"http://support.winlevel.ru/_oauth/pt",
+      "client_id": "secret-id",
+      "client_secret": "secret"
+    },
+    "trainer": {
+      "redirect_uri": "http://couch.winlevel.ru/_oauth/wl",
+      "client_id": "secret-id",
+      "client_secret": "secret"
+    }
+  }
+}
