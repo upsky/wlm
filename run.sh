@@ -12,7 +12,7 @@ CWD=`pwd`
 BUILD_DIR=$CWD/../wlmbuild
 CROSSWALK_COPY_DIR=$CWD/../wlmbuild-18-copy
 CROSSWALK_BUILD_DIR=$CWD/../wlmbuild-18
-DEPLOY_CONF_DIR=$CWD/xdeploy
+DEPLOY_CONF_DIR=$CWD/deploy
 
 export MAIL_URL=smtp://postmaster%40sandboxfbc452b570544a5d9420aa783c0fda38.mailgun.org:d529975e91ce74e534b19a3ebc6b3d4f@smtp.mailgun.org
 export ANDROID_HOME=~/.meteor/android_bundle/android-sdk
