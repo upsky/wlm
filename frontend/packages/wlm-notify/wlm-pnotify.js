@@ -75,6 +75,8 @@ WlmNotify = {
 
 // close all notifications on user change
 Meteor.startup(function () {
+	PNotify.prototype.options.styling = 'fontawesome';
+
 	Meteor.autorun(function () {
 		Meteor.userId(); // make it reactive on user change/login
 		WlmNotify.closeAll();

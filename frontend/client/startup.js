@@ -1,4 +1,3 @@
-PNotify.prototype.options.styling = 'fontawesome';
 
 recaptchaOnload = function (arg) {
 	console.log('recaptcha', arg);
