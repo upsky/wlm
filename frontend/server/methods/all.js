@@ -25,7 +25,7 @@ WlmSecurity.addPublish({
 Meteor.publish('invite', function (_id) {
 	check(_id, Match.Id);
 	log.trace('publish invite');
-	return db.invites.find(_id);
+	return db.invites.find(_id, { fields: { emailHash: 0 } });
 });
 
 Meteor.publish('inviteEmail', function (_id) {
