@@ -11,7 +11,8 @@
     "qrCode": "QR код",
     "findUsers": "Поиск пользователей",
     "statisticFilters": "Фильтры статистики",
-    "commonFunctions":"Обычные функции",
-    "videoManager":"Список видео"
+    "commonFunctions": "Обычные функции",
+    "phoneField": "Номер Вашего телефона",
+    "videoManager": "Список видео"
   }
 }
