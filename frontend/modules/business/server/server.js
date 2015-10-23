@@ -1,13 +1,9 @@
 Meteor.publish('business', function () {
-	//log.trace('publish activeInvites for', this.userId);
-	// return db.business.find({owner: this.userId})
-	return db.business.find({});
+	return db.business.find({ownerId: this.userId});
 });
 
 Meteor.publish('images', function () {
-	//log.trace('publish activeInvites for', this.userId);
-	// return db.business.find({owner: this.userId})
-	return db.images.find({});
+	return db.images.find({ownerId: this.userId});
 });
 
 WlmSecurity.addPublish({
@@ -20,11 +16,6 @@ WlmSecurity.addPublish({
 		roles: 'all'
 	}
 });
-// db.images.allow({
-// 	'insert': function () {
-// 		return true;
-// 	}
-// });
 
 Meteor.methods({
 	insertBusiness: function (doc) {
@@ -37,56 +28,49 @@ Meteor.methods({
 		});
 		doc.ownerId = Meteor.user()._id;
 		doc.owner = Meteor.user().username;
+		doc.createDate = new Date();
 		if( !_.contains(Meteor.user().roles, "businessMan")) {
-			db.users.update({ _id: doc.ownerId }, {
-				$push: {
-					roles: 'businessMan'
-				}
-			});
+			Roles.addUsersToRoles(doc.ownerId, 'businessMan');
 		}
 		return db.business.insert(doc);
 	},
 	logo: function (doc) {
-		console.log('begin');
-      db.business.update({_id: doc.id}, { $set: {image: doc.imagesURL}},
-      	function (error) {
-   			if(error) {
-   				console.log(error);
-   			}
-   		});
-	},
-	aboutEdit: function (doc) {
 		check(doc, {
-			info: String,
-			inn: Number
+			imagesURL: String,
+			id: String
 		});
-		doc.businessId = db.business.findOne({ownerId:Meteor.userId()})._id;
-			db.business.update({ _id: doc.businessId }, {
-				$set: {
-					info: doc.info,
-					inn: doc.inn
+		db.business.update({_id: doc.id}, { $set: {image: doc.imagesURL}},
+			function (error) {
+				if(error) {
+					console.log(error);
 				}
 			});
 	},
+	businessEdit: function (doc) {
+		var obj, updateObj = {};
+		check(doc, Schemas.businessEdit);
+		_.extend(updateObj, doc);
+		updateObj.ownerId = Meteor.userId();
+		updateObj.owner = Meteor.user().username;
+		obj = db.business.findOne({ownerId:Meteor.userId()});
+		doc.businessId = obj._id;
+		if (obj.image) {
+			updateObj.image = obj.image;
+		};
+		db.business.update(doc.businessId, updateObj);
+		return updateObj;
+	},
 	scheduleEdit: function (doc) {
 		var editObject = {};
-		check(doc, {
-			monday: String,
-			tuesday: String,
-			wednesday: String,
-			thursday: String,
-			friday: String,
-			saturday: String,
-			sunday: String
-		});
+		check(doc, Schemas.schedule);
 		_.extend(editObject, {
-			mon: doc.monday,
-			tue: doc.tuesday,
-			wed: doc.wednesday,
-			thu: doc.thursday,
-			fri: doc.friday,
-			sat: doc.saturday,
-			sun: doc.sunday
+			mon: doc.schedule.mon,
+			tue: doc.schedule.tue,
+			wed: doc.schedule.wed,
+			thu: doc.schedule.thu,
+			fri: doc.schedule.fri,
+			sat: doc.schedule.sat,
+			sun: doc.schedule.sun
 		});
 		doc.businessId = db.business.findOne({ownerId:Meteor.userId()})._id;
 		db.business.update({ _id: doc.businessId }, {

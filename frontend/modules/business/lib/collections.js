@@ -1,38 +1,33 @@
-var base = "";
+var base = '';
 if (Meteor.isServer) {
-  base = process.env.PWD;
+	base = process.env.PWD;
+	imageStore = new FS.Store.FileSystem("images");
+}
+
+if (Meteor.isClient) {
+	imageStore = new FS.Store.FileSystem("images");
 }
 
 db.images = new FS.Collection("images", {
-  stores: [new FS.Store.FileSystem("images", {path: base + "/public/logo/"})]
+	stores: [imageStore],
+	filter: {
+		allow: {
+			contentTypes: ['image/*'] //allow only images in this FS.Collection
+		}
+	}
 });
 
-db.images.deny({
- insert: function(){
- return false;
- },
- update: function(){
- return false;
- },
- remove: function(){
- return false;
- },
- download: function(){
- return false;
- }
- });
-
 db.images.allow({
- insert: function(){
- return true;
- },
- update: function(){
- return true;
- },
- remove: function(){
- return true;
- },
- download: function(){
- return true;
- }
+	insert: function(userId){
+		return !!userId;
+	},
+	update: function(userId){
+		return !!userId;
+	},
+	remove: function(userId){
+		return !!userId;
+	},
+	download: function(){
+		return true;
+	}
 });

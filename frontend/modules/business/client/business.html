@@ -1,12 +1,20 @@
 <template name="business">
+    <button type="button" class="btn btn-lg btn-success" name='addVideo'>
+        <i class="fa fa-diamond">{{_ "buttons.store"}}</i>
+    </button>
+    <button type="button" class="btn btn-lg btn-success" name='back'>
+        <i class="fa fa-television">{{_ "buttons.show"}}</i>
+    </button>
+    <button type="button" class="btn btn-lg btn-success" name="edit">
+        <i class="fa fa-pencil-square-o">{{_ "buttons.edit"}}</i>
+    </button>
     {{#Layout template="businessCols"}}
         <div class="panel-heading">
             <li class="list-group-item">
                 <img src={{business.image}} width="150" height="150" alt="LOGO">
-                <input type="file" name="" class="myFileInput">
                 <span class="title"><h3>{{business.label}}</h3></span><br>
-                <b class="text-bold">Президент компании:</b>{{business.owner}}<br>
-                <b class="text-bold">Сфера деятельности:</b>{{business.actionSphere}}<br>
+                <b class="text-bold">{{_ "commonText.companyPresident"}}:</b>{{business.owner}}<br>
+                <b class="text-bold">{{_ "commonText.actionSphere"}}:</b>{{business.actionSphere}}<br>
             </li>
         </div>
         {{#contentFor "col2"}}
@@ -14,7 +22,7 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <h4>
-                            ИНН
+                            {{_ "commonText.inn"}}
                         </h4>
                         <p>
                             {{business.inn}}
@@ -22,10 +30,29 @@
                     </li>
                     <li class="list-group-item">
                         <h4>
-                            ОГРН
+                            {{_ "commonText.ogrn"}}
                         </h4>
                         <p>
                             {{business.ogrn}}
+                        </p>
+                    </li>
+                    <li class="list-group-item">
+                        <h4>
+                            {{_ "commonText.email"}}
+                        </h4>
+                        <p>
+                            {{business.email}}
+                        </p>
+                    </li>
+                    <li class="list-group-item">
+                        <h4>
+                            {{_ "commonText.contacts"}}
+                        </h4>
+                        <p>
+                            <b class="text-bold">{{_ "commonText.pageVK"}}:</b>{{business.contacts.vk}}<br>
+                            <b class="text-bold">{{_ "commonText.pageFacebook"}}:</b>{{business.contacts.facebook}}<br>
+                            <b class="text-bold">{{_ "commonText.phoneNumber"}}:</b>{{business.contacts.phone}}<br>
+                            <b class="text-bold">{{_ "commonText.adress"}}:</b>{{business.contacts.address}}<br>
                         </p>
                     </li>
                 </ul>
@@ -36,12 +63,11 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <h4>
-                            О нас
+                            {{_ "commonText.info"}}
                         </h4>
                         <p>
                             {{business.info}}
                         </p>
-                        <button type="button" class="btn btn-default" name="edit">Изменить</button>
                     </li>
                 </ul>
             </div>
@@ -50,37 +76,37 @@
             <table class="table table-striped">
                 <thead class="">
                 <tr>
-                    <td>График работы</td>
-                    <td><button type="button" class="btn btn-default" name="editSchedule">Изменить</button></td>
+                    <td>{{_ "commonText.schedule"}}</td>
+                    <td><button type="button" class="btn btn-default" name="editSchedule">{{_ "buttons.edit"}}</button></td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Пн</td>
+                    <td>{{_ "commonText.monday"}}</td>
                     <td>{{business.schedule.mon}}</td>
                 </tr>
                 <tr>
-                    <td>Вт</td>
+                    <td>{{_ "commonText.tuesday"}}</td>
                     <td>{{business.schedule.tue}}</td>
                 </tr>
                 <tr>
-                    <td>Ср</td>
+                    <td>{{_ "commonText.wednesday"}}</td>
                     <td>{{business.schedule.wed}}</td>
                 </tr>
                 <tr>
-                    <td>Чт</td>
+                    <td>{{_ "commonText.thursday"}}</td>
                     <td>{{business.schedule.thu}}</td>
                 </tr>
                 <tr>
-                    <td>Пт</td>
+                    <td>{{_ "commonText.friday"}}</td>
                     <td>{{business.schedule.fri}}</td>
                 </tr>
                 <tr>
-                    <td>Сб</td>
+                    <td>{{_ "commonText.saturday"}}</td>
                     <td>{{business.schedule.sat}}</td>
                 </tr>
                 <tr>
-                    <td>Вс</td>
+                    <td>{{_ "commonText.sunday"}}</td>
                     <td>{{business.schedule.sun}}</td>
                 </tr>
                 </tbody>

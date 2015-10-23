@@ -103,26 +103,5 @@ WlmSecurity.addMethods({
 	},
 	getChartData: {
 		roles: 'statistic'
-	},
-	insertBusiness: {
-		roles: 'all'
-	},
-	aboutEdit: {
-		roles: 'all'
-	},
-	scheduleEdit: {
-		roles: 'all'
-	},
-	'/cfs.images.filerecord/insert': {
-		authNotRequired: true,
-		roles: 'all'
-	},
-	'/cfs.images.filerecord/update': {
-		authNotRequired: true,
-		roles: 'all'
-	},
-	'logo': {
-		authNotRequired: false,
-		roles: 'all'
 	}
 });

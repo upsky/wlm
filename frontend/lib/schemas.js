@@ -204,43 +204,89 @@ Schemas.businessSchema = new SimpleSchema({
 		label: "ОГРН"
 	}
 });
-Schemas.businessColection = new SimpleSchema({
-	'inn': {
-		type: Number,
-		optional: true
+Schemas.businessEdit = new SimpleSchema({
+	label: {
+		type: String,
+		label: "Название компании",
+		max: 200
 	},
-	'info': {
-		type: String
+	actionSphere: {
+		type: String,
+		label: "Сфера деятельности"
+	},
+	info: {
+		type: String,
+		label: "Информация о компании"
+	},
+	inn: {
+		type: Number,
+		label: "ИНН"
+	},
+	ogrn: {
+		type: Number,
+		label: "ОГРН"
+	},
+	email:{
+		type: String,
+		regEx: SimpleSchema.RegEx.Email,
+		optional: true,
+		label: "Email"
+	},
+	contacts: {
+		type: Object,
+		optional: true,
+		label: "Контактная информация"
+	},
+	'contacts.vk': {
+		type: String,
+		label: "Ссылка Вконтакте"
+	},
+	'contacts.facebook': {
+		type: String,
+		label: "Ссылка FaceBook"
+	},
+	'contacts.address': {
+		type: String,
+		label: "Адресс"
+	},
+	'contacts.phone': {
+		type: Number,
+		label: "Телефон"
 	}
-
 });
 Schemas.schedule = new SimpleSchema({
-	'monday': {
-		type: String,
-		optional: true
+	schedule: {
+		type: Object,
+		optional: true,
+		label: "Дни недели"
 	},
-	'tuesday': {
+	'schedule.mon': {
 		type: String,
-		optional: true
+		label: "Понедельник"
 	},
-	'wednesday': {
+	'schedule.tue': {
 		type: String,
-		optional: true
+		label: "Вторник"
 	},
-	'thursday': {
+	'schedule.wed': {
 		type: String,
-		optional: true
+		label: "Среда"
 	},
-	'friday': {
+	'schedule.thu': {
 		type: String,
-		optional: true
+		label: "Четверг"
 	},
-	'saturday': {
+	'schedule.fri': {
 		type: String,
-		optional: true
+		label: "Пятница"
 	},
-	'sunday': {
+	'schedule.sat': {
 		type: String,
-		optional: true
+		label: "Суббота"
+	},
+	'schedule.sun': {
+		type: String,
+		label: "Воскресенье"
 	}
 });
+

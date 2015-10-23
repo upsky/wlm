@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Редактирование</h4>
+                    <h4 class="modal-title">{{_ "commonText.edit"}}</h4>
                 </div>
                 <div class="c-related-block">
                     <div class="p-fill">
@@ -12,15 +12,9 @@
                                 <div class="col-lg-12">
                                     <ul class="list-group">
                                         <li class="list-group-item">
-                                            {{> afQuickField name="monday" value=business.schedule.mon}}
-                                            {{> afQuickField name="tuesday" value=business.schedule.tue}}
-                                            {{> afQuickField name="wednesday" value=business.schedule.wed}}
-                                            {{> afQuickField name="thursday" value=business.schedule.thu}}
-                                            {{> afQuickField name="friday" value=business.schedule.fri}}
-                                            {{> afQuickField name="saturday" value=business.schedule.sat}}
-                                            {{> afQuickField name="sunday" value=business.schedule.sun}}
+                                            {{> afQuickField class="form-control input-lg" name="schedule" placeholder="schemaLabel" value=business.schedule}}
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary">{{_ "buttons.save"}}</button>
                                                 <button type="button" class="btn btn-lg btn-success" name='back'>{{_ "buttons.back"}}</button>
                                             </div>
                                         </li>

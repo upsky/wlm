@@ -8,7 +8,7 @@ if (Meteor.isClient) {
 				type: 'pie'
 			},
 			title: {
-				text: 'Статистика'
+				text: TAPi18n.__('commonText.statistic')
 			},
 			tooltip: {
 				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -27,7 +27,7 @@ if (Meteor.isClient) {
 				}
 			},
 			series: [{
-				name: "Всего",
+				name: TAPi18n.__('commonText.total'),
 				colorByPoint: true,
 				data: Session.get('chartData')
 			}]

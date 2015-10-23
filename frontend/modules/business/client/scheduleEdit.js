@@ -8,6 +8,18 @@ Template.scheduleEdit.events({
 		Modal.hide();
 	}
 });
+Template.scheduleEdit.onRendered(function () {
+	var data = db.business.findOne({ownerId: Meteor.userId()}).schedule;
+	if (!_.isEmpty(data)) {
+		$('[name="schedule.mon"]').val(data.mon);
+		$('[name="schedule.tue"]').val(data.tue);
+		$('[name="schedule.wed"]').val(data.wed);
+		$('[name="schedule.thu"]').val(data.thu);
+		$('[name="schedule.fri"]').val(data.fri);
+		$('[name="schedule.sat"]').val(data.sat);
+		$('[name="schedule.sun"]').val(data.sun);
+	}
+});
 AutoForm.hooks({
 	scheduleEdit: {
 		onError: function (type, error) {

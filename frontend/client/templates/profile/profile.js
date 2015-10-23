@@ -3,7 +3,7 @@ Template.profile.events({
 		if (db.business.findOne({ownerId: Meteor.user()._id})) {
 			Router.go('business');
 		} else {
-			Modal.show('businessFirstForm');
+			Modal.show('businessCreate');
 		}
 	}
 });
