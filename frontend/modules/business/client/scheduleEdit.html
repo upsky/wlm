@@ -7,20 +7,27 @@
                 </div>
                 <div class="c-related-block">
                     <div class="p-fill">
-                        {{#autoForm id="scheduleEdit" schema="Schemas.schedule" type="method" meteormethod="scheduleEdit" resetOnSuccess=true}}
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            {{> afQuickField class="form-control input-lg" name="schedule" placeholder="schemaLabel" value=business.schedule}}
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">{{_ "buttons.save"}}</button>
-                                                <button type="button" class="btn btn-lg btn-success" name='back'>{{_ "buttons.back"}}</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                        {{#autoForm id="scheduleEdit" schema="Schemas.schedule" type="method" meteormethod="scheduleEdit" doc=business resetOnSuccess=true}}
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>{{_ "commonText.monday"}}</td>
+                                    <td>{{_ "commonText.tuesday"}}</td>
+                                    <td>{{_ "commonText.wednesday"}}</td>
+                                    <td>{{_ "commonText.thursday"}}</td>
+                                    <td>{{_ "commonText.friday"}}</td>
+                                    <td>{{_ "commonText.saturday"}}</td>
+                                    <td>{{_ "commonText.sunday"}}</td>
+                                </tr>
+                                <tr>
+                                {{#afEachArrayItem name="days"}}
+                                    <td>{{> afQuickField}}</td>
+                                {{/afEachArrayItem}}
+                                </tr>
+                                <tr>
+                                    <td><button type="submit" class="btn btn-primary">{{_ "buttons.save"}}</button></td>
+                                    <td><button type="button" class="btn btn-lg btn-success" name='back'>{{_ "buttons.back"}}</button></td>
+                                </tr>
+                            </table>
                         {{/autoForm}}
                     </div>
                 </div>

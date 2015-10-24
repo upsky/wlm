@@ -255,38 +255,15 @@ Schemas.businessEdit = new SimpleSchema({
 	}
 });
 Schemas.schedule = new SimpleSchema({
-	'schedule': {
-		type: Object,
+	days: {
+		type: [String],
+		minCount: 7,
+		maxCount: 7,
 		optional: true,
-		label: "Дни недели"
-	},
-	'schedule.mon': {
-		type: String,
-		label: "Понедельник"
-	},
-	'schedule.tue': {
-		type: String,
-		label: "Вторник"
-	},
-	'schedule.wed': {
-		type: String,
-		label: "Среда"
-	},
-	'schedule.thu': {
-		type: String,
-		label: "Четверг"
-	},
-	'schedule.fri': {
-		type: String,
-		label: "Пятница"
-	},
-	'schedule.sat': {
-		type: String,
-		label: "Суббота"
-	},
-	'schedule.sun': {
-		type: String,
-		label: "Воскресенье"
+		autoform: {
+			afFieldInput: {
+				type: "text"
+			}
+		}
 	}
 });
-

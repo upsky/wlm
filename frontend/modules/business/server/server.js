@@ -56,7 +56,7 @@ Meteor.methods({
 		doc.businessId = obj._id;
 		if (obj.image) {
 			updateObj.image = obj.image;
-		};
+		}
 		db.business.update(doc.businessId, updateObj);
 		return updateObj;
 	},
@@ -64,13 +64,13 @@ Meteor.methods({
 		var editObject = {};
 		check(doc, Schemas.schedule);
 		_.extend(editObject, {
-			mon: doc.schedule.mon,
-			tue: doc.schedule.tue,
-			wed: doc.schedule.wed,
-			thu: doc.schedule.thu,
-			fri: doc.schedule.fri,
-			sat: doc.schedule.sat,
-			sun: doc.schedule.sun
+			mon: doc.days[0],
+			tue: doc.days[1],
+			wed: doc.days[2],
+			thu: doc.days[3],
+			fri: doc.days[4],
+			sat: doc.days[5],
+			sun: doc.days[6]
 		});
 		doc.businessId = db.business.findOne({ownerId:Meteor.userId()})._id;
 		db.business.update({ _id: doc.businessId }, {
