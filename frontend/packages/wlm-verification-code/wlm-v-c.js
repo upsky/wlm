@@ -36,9 +36,6 @@ var VerificationCode = function () {
 		var deltaTime = currentTime - createdTime;
 		var limit = 3 * 60 * 1000;//3 minutes
 
-		console.log('deltaTime', deltaTime);
-		console.log('limit', limit);
-
 		if (deltaTime < limit)
 			return false;
 		else

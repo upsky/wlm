@@ -185,7 +185,7 @@ Meteor.methods({
 
 
 			var verificationCode = WLmVerificationCode.create(doc.phone);
-			console.log('TODO SEND CODE ON PHONE -- ', verificationCode);
+			sendPhoneMeessage(doc.phone, verificationCode);
 
 		}
 		return db.users.update(this.userId, updateObj);
@@ -221,7 +221,7 @@ Meteor.methods({
 		check(doc, Schemas.phoneField);
 		this.unblock();
 		var verificationCode = WLmVerificationCode.create(doc.phone);
-		console.log('TODO SEND CODE ON PHONE -- ', verificationCode);
+		sendPhoneMeessage(doc.phone, verificationCode);
 	},
 	checkVerifyCodePhone: function (doc) {
 		check(doc, Schemas.verifyPhone);
@@ -239,3 +239,15 @@ Meteor.methods({
 
 	},
 });
+
+function sendPhoneMeessage (number, code) {
+	/**
+	 * TODO
+	 * parameterize and some method?
+	 */
+	var api_id = 'c2397d77-426e-7354-a9d5-3de46f6fc8d1';
+	var url = 'http://sms.ru/sms/send?api_id=' + api_id + '&to=' + number + '&text=' + code;
+	HTTP.post(url, function (res) {
+		console.log('HTTP.post res', res);
+	})
+}
