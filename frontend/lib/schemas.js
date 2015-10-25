@@ -182,3 +182,89 @@ Schemas.videosSchema = new SimpleSchema({
 		label: "Название блока"
 	}
 });
+Schemas.businessSchema = new SimpleSchema({
+	label: {
+		type: String,
+		label: "Название компании",
+		max: 200
+	},
+	actionSphere: {
+		type: String,
+		label: "Сфера деятельности"
+	},
+	info: {
+		type: String,
+		label: "Информация о компании"
+	},
+	inn: {
+		type: Number,
+		label: "ИНН"
+	},
+	ogrn: {
+		type: Number,
+		label: "ОГРН"
+	}
+});
+Schemas.businessEdit = new SimpleSchema({
+	label: {
+		type: String,
+		label: "Название компании",
+		max: 200
+	},
+	actionSphere: {
+		type: String,
+		label: "Сфера деятельности"
+	},
+	info: {
+		type: String,
+		label: "Информация о компании"
+	},
+	inn: {
+		type: Number,
+		label: "ИНН"
+	},
+	ogrn: {
+		type: Number,
+		label: "ОГРН"
+	},
+	email:{
+		type: String,
+		regEx: SimpleSchema.RegEx.Email,
+		optional: true,
+		label: "Email"
+	},
+	contacts: {
+		type: Object,
+		optional: true,
+		label: "Контактная информация"
+	},
+	'contacts.vk': {
+		type: String,
+		label: "Ссылка Вконтакте"
+	},
+	'contacts.facebook': {
+		type: String,
+		label: "Ссылка FaceBook"
+	},
+	'contacts.address': {
+		type: String,
+		label: "Адресс"
+	},
+	'contacts.phone': {
+		type: Number,
+		label: "Телефон"
+	}
+});
+Schemas.schedule = new SimpleSchema({
+	days: {
+		type: [String],
+		minCount: 7,
+		maxCount: 7,
+		optional: true,
+		autoform: {
+			afFieldInput: {
+				type: "text"
+			}
+		}
+	}
+});

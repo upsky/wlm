@@ -116,7 +116,10 @@ if (Meteor.pubSettings('isDown')) {
 	Router.route('/profile', {
 		layoutTemplate: 'fullLayout',
 		name: 'profile',
-		template: 'profile'
+		template: 'profile',
+		waitOn: function () {
+			return Meteor.subscribe('business');
+		}
 	});
 	Router.route('/qrcode', {
 		layoutTemplate: 'fullLayout',
@@ -163,11 +166,6 @@ if (Meteor.pubSettings('isDown')) {
 		layoutTemplate: 'defaultLayout',
 		template: 'forbidden',
 		name: 'forbidden'
-	});
-	Router.route('/statistic', {
-		layoutTemplate: 'fullLayout',
-		template: 'highcharts',
-		name: 'highcharts'
 	});
 	Router.route('/admin/panel', {
 		layoutTemplate: 'fullLayout',

@@ -1,0 +1,37 @@
+<template name = "scheduleEdit">
+    <div class="modal fade c-login-instructions-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{_ "commonText.edit"}}</h4>
+                </div>
+                <div class="c-related-block">
+                    <div class="p-fill">
+                        {{#autoForm id="scheduleEdit" schema="Schemas.schedule" type="method" meteormethod="scheduleEdit" doc=business resetOnSuccess=true}}
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>{{_ "commonText.monday"}}</td>
+                                    <td>{{_ "commonText.tuesday"}}</td>
+                                    <td>{{_ "commonText.wednesday"}}</td>
+                                    <td>{{_ "commonText.thursday"}}</td>
+                                    <td>{{_ "commonText.friday"}}</td>
+                                    <td>{{_ "commonText.saturday"}}</td>
+                                    <td>{{_ "commonText.sunday"}}</td>
+                                </tr>
+                                <tr>
+                                {{#afEachArrayItem name="days"}}
+                                    <td>{{> afQuickField}}</td>
+                                {{/afEachArrayItem}}
+                                </tr>
+                                <tr>
+                                    <td><button type="submit" class="btn btn-primary">{{_ "buttons.save"}}</button></td>
+                                    <td><button type="button" class="btn btn-lg btn-success" name='back'>{{_ "buttons.back"}}</button></td>
+                                </tr>
+                            </table>
+                        {{/autoForm}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

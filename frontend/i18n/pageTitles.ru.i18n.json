@@ -1,6 +1,5 @@
 {
   "pageTitles": {
-    "main": "Winlevel Market",
     "topTitle": "Winlevel Market",
     "index": "Привет",
     "loading": "Загрузка...",
@@ -20,6 +19,7 @@
     "editVideo": "Изменить видео",
     "addVideo": "Добавить видео",
     "highcharts": "Статистика",
-    "catalogAdmin": "Редактор каталогов"
+    "catalogAdmin": "Редактор каталогов",
+    "business":"Мой бизнес"
   }
 }

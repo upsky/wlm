@@ -9,3 +9,5 @@ db.videos = new Meteor.Collection('videos');
 db.navBars = new Meteor.Collection('navBars');
 
 db.logLogins = new Meteor.Collection('logLogins');
+
+db.business = new Meteor.Collection('business');

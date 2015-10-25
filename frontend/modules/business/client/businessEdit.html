@@ -1,0 +1,63 @@
+<template name = 'businessEdit'>
+    {{#if isInRole 'businessMan'}}
+        {{#Layout template="oneCol"}}
+            {{#autoForm id="businessEditForm" schema="Schemas.businessEdit" type="method" meteormethod="businessEdit" resetOnSuccess=true}}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                            <img src={{business.image}} width="150" height="150" alt="LOGO">
+                            <div class="input-group">
+                                <div class="btn btn-primary btn-file">
+                                    {{_ "buttons.browse"}}<input type="file" class="myFileInput">
+                                </div>
+                            </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="label" placeholder="schemaLabel" value=business.label}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="actionSphere" placeholder="schemaLabel" value=business.actionSphere}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="info" placeholder="schemaLabel" type="textarea" rows=10 value=business.info}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="inn" placeholder="schemaLabel" value=business.inn}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="ogrn" placeholder="schemaLabel" value=business.ogrn}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="email" placeholder="schemaLabel" value=business.email}}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    {{> afQuickField class="form-control input-lg" name="contacts" placeholder="schemaLabel" value=business.contacts}}
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-lg btn-success">{{_ "buttons.update"}}</button>
+                            <button type="button" class="btn btn-lg btn-success" name='back'>{{_ "buttons.back"}}</button>
+                        </div>
+                    </div>
+                </div>
+            {{/autoForm}}
+        {{/Layout}}
+    {{else}}
+        {{> forbidden }}
+    {{/if}}
+</template>

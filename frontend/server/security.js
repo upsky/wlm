@@ -105,7 +105,6 @@ WlmSecurity.addMethods({
 	getChartData: {
 		roles: 'statistic'
 	}
-
 });
 
 WlmSecurity.addPublish({

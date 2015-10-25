@@ -73,3 +73,7 @@ wlm:catalog
 wlm-messaging
 autoupdate
 wlm-notify
+cfs:standard-packages
+cfs:filesystem
+cfs:gridfs
+overtonik:statistic
