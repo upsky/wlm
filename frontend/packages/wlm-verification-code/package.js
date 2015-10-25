@@ -9,10 +9,14 @@ Package.describe({
 Package.onUse(function (api) {
 	api.versionsFrom('1.1.0.3');
 	api.use('wlm-security', 'server');
+
+	api.use('random');
 	api.use('check');
+	api.use('aldeed:simple-schema');
 
 
 	api.addFiles([
+		'lib/schemas.js',
 		'lib/collections.js'
 	]);
 

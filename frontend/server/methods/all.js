@@ -184,7 +184,8 @@ Meteor.methods({
 			};
 
 
-			var verificationCode = WLmVerificationCode.check(doc.phone);
+			var verificationCode = WLmVerificationCode.create(doc.phone);
+			console.log('TODO SEND CODE ON PHONE -- ', verificationCode);
 
 		}
 		return db.users.update(this.userId, updateObj);
@@ -217,24 +218,24 @@ Meteor.methods({
 		return db.users.update(Meteor.userId(), { $unset: { 'profile.phones': '' } });
 	},
 	sendVerifyCodePhone: function (doc) {
+		check(doc, Schemas.phoneField);
+		this.unblock();
+		var verificationCode = WLmVerificationCode.create(doc.phone);
+		console.log('TODO SEND CODE ON PHONE -- ', verificationCode);
+	},
+	checkVerifyCodePhone: function (doc) {
 		check(doc, Schemas.verifyPhone);
 		this.unblock();
+		WLmVerificationCode.checkCode(doc.verificationCode);
 
-		WLmVerificationCode.check('7777777');
+		db.users.update({
+			_id: Meteor.userId(),
+			"profile.phones.number": Meteor.user().profile.phones[0].number
+		}, {
+			'$set': {
+				'profile.phones.$.verified': true
+			}
+		});
 
-		//if (true) {
-		//	throw new Meteor.Error(400, 'code.invalid');
-		//}
-		//
-		//if (true) {
-		//	throw new Meteor.Error(400, 'code.overdue');
-		//}
-		//
-		//if (true) {
-		//	throw new Meteor.Error(400, 'code.overdue');
-		//}
-
-
-		return true;
 	},
 });

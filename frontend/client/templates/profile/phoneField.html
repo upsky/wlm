@@ -6,15 +6,24 @@
             {{#if user.profile.phones.[0].number}}
                 <div class="form-group">
                     <label for="">{{_ "formFields.phone.label"}}</label>
-                    <span class="label label-danger">{{_ "fieldStatus.notConfirmed"}}</span>
+
+                    {{#if user.profile.phones.[0].verified}}
+                        <span class="label label-success">{{_ "fieldStatus.confirmed"}}</span>
+                    {{else}}
+                        <span class="label label-danger">{{_ "fieldStatus.notConfirmed"}}</span>
+                    {{/if}}
+
                     <a href="#" id="delete-number" class="pull-right">{{_ "messages.removeCurrentPhone"}}</a>
                     <input type="text" class="form-control" value="{{user.profile.phones.[0].number}}"
                            disabled="disabled"/>
 
-                    <span class="help-block">
-                        {{_ "messages.phoneNoteVerify"}}
-                        <a href="#" id="send-phone-verification">{{_ "messages.reSendCode"}}</a>.
-                    </span>
+                    {{#unless user.profile.phones.[0].verified}}
+                        <span class="label label-success">{{_ "fieldStatus.confirmed"}}</span>
+                        <span class="help-block">
+                            {{_ "messages.phoneNoteVerify"}}
+                            <a href="#" id="send-phone-verification">{{_ "messages.reSendCode"}}</a>.
+                        </span>
+                    {{/unless}}
                 </div>
             {{else}}
                 {{> afQuickField type="tel" class="form-control" readonly="readonly" name="phone" value=user.profile.phones.[0].number dasabled='dasabled'}}
@@ -24,7 +33,7 @@
 
         {{#if user.profile.phones.[0].number}}
             {{#unless user.profile.phones.[0].verified}}
-                {{#autoForm id="verifyPhone" type="method" meteormethod="sendVerifyCodePhone" schema="Schemas.verifyPhone" }}
+                {{#autoForm id="verifyPhone" type="method" meteormethod="checkVerifyCodePhone" schema="Schemas.verifyPhone" }}
                     {{> afQuickField type="tel" class="form-control" name="verificationCode" }}
 
                     <button type="submit" class="btn btn-success">{{_ "buttons.save"}}</button>

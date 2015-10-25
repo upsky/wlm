@@ -111,6 +111,10 @@ WlmSecurity.addMethods({
 	sendVerifyCodePhone: {
 		authNotRequired: false,
 		roles: 'all'
+	},
+	checkVerifyCodePhone: {
+		authNotRequired: false,
+		roles: 'all'
 	}
 
 });

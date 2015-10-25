@@ -10,9 +10,9 @@ template.events({
 		Meteor.call('removeMyPhone');
 	},
 	'click #send-phone-verification': function () {
-		Meteor.call('sendVerifyCodePhone', function (res) {
-			console.log(res);
+		var phone = Meteor.user().profile.phones[0].number;
 
+		Meteor.call('sendVerifyCodePhone', { phone: phone }, function (res) {
 			if (res instanceof Error) {
 				WlmNotify.create({
 					text: TAPi18n.__(res.reason),
@@ -20,7 +20,7 @@ template.events({
 				})
 			} else {
 				WlmNotify.create({
-					text: TAPi18n.__('message.phoneVerificationSend'),
+					text: TAPi18n.__('messages.phoneVerificationSend'),
 					type: 'success'
 				})
 			}

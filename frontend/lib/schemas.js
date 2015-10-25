@@ -182,6 +182,7 @@ Schemas.videosSchema = new SimpleSchema({
 Schemas.phoneField = new SimpleSchema({
 	phone: {
 		type: Number,
+		min: 10
 	}
 });
 
