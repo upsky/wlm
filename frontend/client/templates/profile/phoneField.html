@@ -18,7 +18,6 @@
                            disabled="disabled"/>
 
                     {{#unless user.profile.phones.[0].verified}}
-                        <span class="label label-success">{{_ "fieldStatus.confirmed"}}</span>
                         <span class="help-block">
                             {{_ "messages.phoneNoteVerify"}}
                             <a href="#" id="send-phone-verification">{{_ "messages.reSendCode"}}</a>.

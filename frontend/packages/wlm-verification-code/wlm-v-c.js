@@ -71,36 +71,34 @@ var VerificationCode = function () {
 	function checkCode (code) {
 		console.log('check');
 		var phone = Meteor.user().profile.phones[0].number;
-		var items = db.verificationCode.find({ userId: Meteor.userId(), phoneNumber: phone }, {
+		var doc = db.verificationCode.findOne({ userId: Meteor.userId(), phoneNumber: phone }, {
 			sort: { created: -1 },
 			limit: 1
-		}).fetch();
-
-		var doc = items[0];
+		});
 
 		if (!doc) {
-			throw new Meteor.Error(400, 'code.notFound');
+			throw new Meteor.Error(400, 'errors.codeNotFound');
 		}
 
 		if (doc.attempt < 1) {
-			throw new Meteor.Error(400, 'code.attemptEnd');
+			throw new Meteor.Error(400, 'errors.codeAttemptEnd');
 		}
 
 		if (doc.used) {
-			throw new Meteor.Error(400, 'code.alreadyUsing');
-		}
-
-
-		if (checkTimeLive(doc.created)) {
-			throw new Meteor.Error(400, 'code.codeOverdue');
+			throw new Meteor.Error(400, 'errors.codeAlreadyUsing');
 		}
 
 		if (code !== doc.code) {
 			db.verificationCode.update(doc._id, {
 				$set: { attempt: --doc.attempt }
 			});
-			throw new Meteor.Error(400, 'code.invalid');
+			throw new Meteor.Error(400, 'errors.codeInvalid');
 		}
+
+		if (checkTimeLive(doc.created)) {
+			throw new Meteor.Error(400, 'errors.codeCodeOverdue');
+		}
+
 	}
 
 

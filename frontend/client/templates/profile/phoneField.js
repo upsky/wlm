@@ -41,3 +41,23 @@ template.helpers({
 		return (Meteor.user().profile.phones[0].number === '' ? '' : 'disabled');
 	}
 });
+
+
+AutoForm.hooks({
+	verifyPhone: {
+		onError: function (type, error) {
+			console.log(error)
+			WlmNotify.create({
+				type: 'error',
+				text: TAPi18n.__(error.reason)
+			});
+		},
+		onSuccess: function (type, res) {
+			WlmNotify.create({
+				type: 'success',
+				text: TAPi18n.__('messages.changesSaved')
+			});
+
+		}
+	}
+});

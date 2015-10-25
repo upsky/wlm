@@ -12,10 +12,10 @@
     "loginErrorTitle": "Ошибка входа в систему",
     "forbidden": "Доступ к данному <br> сервису сайта закрыт",
     "videoUsed": "Дублирование видео",
-    "code.notFound": "Код не найден.",
-    "code.attemptEnd": "Попытки кончились.",
-    "code.alreadyUsing": "Код использован.",
-    "code.codeOverdue": "Время регистрации этого кода истекло.",
-    "code.invalid": "Неверный код."
+    "codeNotFound": "Код не найден.",
+    "codeAttemptEnd": "Попытки кончились.",
+    "codeAlreadyUsing": "Код использован.",
+    "codeCodeOverdue": "Время регистрации этого кода истекло.",
+    "codeInvalid": "Неверный код."
   }
 }
