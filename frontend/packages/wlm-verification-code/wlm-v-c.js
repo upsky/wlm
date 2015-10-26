@@ -15,14 +15,14 @@ var VerificationCode = function () {
 
 	/**
 	 *
-	 * @returns {Number}
+	 * @returns {string}
 	 */
 	function getCode () {
 		var res = [];
 		for (var i = 0; i < 6; ++i) {
 			res.push(getRandomInt());
 		}
-		return parseInt(res.join(''), 10);
+		return res.join('');
 	}
 
 	/**
@@ -64,7 +64,10 @@ var VerificationCode = function () {
 		return code;
 	}
 
-
+	/**
+	 *
+	 * @param code
+	 */
 	function checkCode (code) {
 		console.log('check');
 		var phone = Meteor.user().profile.phones[0].number;

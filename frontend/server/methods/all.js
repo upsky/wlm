@@ -1,39 +1,3 @@
-/**
- *
- * @param doc
- * @returns {*}
- */
-
-Meteor.publish('videos', function () {
-	return db.videos.find();
-});
-WlmSecurity.addPublish({
-	videos: {
-		roles: 'all'
-	},
-	invite: {
-		authNotRequired: true,
-		roles: ['partner', 'president']
-	},
-	inviteEmail: {
-		authNotRequired: true,
-		roles: ['partner', 'president']
-	}
-});
-
-
-Meteor.publish('invite', function (_id) {
-	check(_id, Match.Id);
-	log.trace('publish invite');
-	return db.invites.find(_id, { fields: { emailHash: 0 } });
-});
-
-Meteor.publish('inviteEmail', function (_id) {
-	check(_id, Match.Id);
-	log.trace('publish inviteEmail');
-	return db.invites.find({ 'emailHash': _id });
-});
-
 registerPartner = function (doc) {
 	var newUserId, invite, lastInvite, path, targetPartner, uin, username;
 	check(doc, Schemas.registerPartner);
@@ -182,11 +146,12 @@ Meteor.methods({
 					verified: false
 				}
 			};
-
-
 			var verificationCode = WLmVerificationCode.create(doc.phone);
-			sendPhoneMeessage(doc.phone, verificationCode);
 
+			Meteor.call('sendSms', {
+				phoneNumber: doc.phone,
+				text: verificationCode
+			});
 		}
 		return db.users.update(this.userId, updateObj);
 	},
@@ -221,7 +186,11 @@ Meteor.methods({
 		check(doc, Schemas.phoneField);
 		this.unblock();
 		var verificationCode = WLmVerificationCode.create(doc.phone);
-		sendPhoneMeessage(doc.phone, verificationCode);
+
+		Meteor.call('sendSms', {
+			phoneNumber: doc.phone,
+			text: verificationCode
+		});
 	},
 	checkVerifyCodePhone: function (doc) {
 		check(doc, Schemas.verifyPhone);
@@ -237,17 +206,9 @@ Meteor.methods({
 			}
 		});
 
-	},
+	}
 });
 
-function sendPhoneMeessage (number, code) {
-	/**
-	 * TODO
-	 * parameterize and some method?
-	 */
-	var api_id = 'c2397d77-426e-7354-a9d5-3de46f6fc8d1';
-	var url = 'http://sms.ru/sms/send?api_id=' + api_id + '&to=' + number + '&text=' + code;
-	HTTP.post(url, function (res) {
-		console.log('HTTP.post res', res);
-	})
+function sendPhoneMeessage () {
+	console.log(arguments);
 }

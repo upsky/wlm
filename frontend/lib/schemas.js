@@ -180,15 +180,19 @@ Schemas.videosSchema = new SimpleSchema({
 });
 
 Schemas.phoneField = new SimpleSchema({
+	/**
+	 * TODO MASK AND call method sms loger
+	 */
 	phone: {
-		type: Number,
-		min: 10
+		type: String,
+		min: 10,
+		max: 10
 	}
 });
 
 Schemas.verifyPhone = new SimpleSchema({
 	verificationCode: {
-		type: Number,
+		type: String,
 		min: 6
 	}
 });

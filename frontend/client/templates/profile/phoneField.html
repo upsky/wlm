@@ -25,7 +25,17 @@
                     {{/unless}}
                 </div>
             {{else}}
-                {{> afQuickField type="tel" class="form-control" readonly="readonly" name="phone" value=user.profile.phones.[0].number dasabled='dasabled'}}
+                <div class="form-group {{#if afFieldIsInvalid name='phone'}} has-error{{/if}}">
+                    <label for="control-label">{{_ 'formFields.phone.label'}}</label>
+
+                    <div class="input-group">
+                        <div class="input-group-addon">+7</div>
+                        {{> afFieldInput type="tel" class="form-control" readonly="readonly" name="phone" value=user.profile.phones.[0].number dasabled='dasabled'}}
+                    </div>
+                    {{#if afFieldIsInvalid name='phone'}}
+                        <span class="help-block">{{afFieldMessage name='phone'}}</span>
+                    {{/if}}
+                </div>
                 <button type="submit" class="btn btn-success">{{_ "buttons.save"}}</button>
             {{/if}}
         {{/autoForm}}

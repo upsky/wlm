@@ -4,11 +4,12 @@ verificationCodeSchemas = new SimpleSchema({
 		regEx: SimpleSchema.RegEx.Id
 	},
 	phoneNumber: {
-		type: Number,
-		min: 10
+		type: String,
+		min: 10,
+		max: 10
 	},
 	code: {
-		type: Number
+		type: String
 	},
 	used: {
 		type: Boolean
