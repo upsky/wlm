@@ -5,15 +5,18 @@ package from {
         id :int:pk
         userId :string
         hash :string(32)
+        method :string
         rawData :json
+        response :json
         createdAt :dateTime
+        updatedAt :dateTime
     }
 }
 
 package result {
     object Currency {
         id :int:pk
-        code :int(3)
+        code :string(3)
         userData :json
     }
 
@@ -23,39 +26,47 @@ package result {
         currencyId :int:fk
         amount
         userData :json
+        createdAt :dateTime
+        updatedAt :dateTime
     }
 
     object Transaction {
         id :int:pk
         accountId :int:fk
-        createdAt :dateTime
         amount :numeric
-        currencyId :int:fk
+        invoiceId :int:fk
         userData :json
+        createdAt :dateTime
+        updatedAt :dateTime
     }
 
     object Invoice {
         id :int:pk
         ownerId :string
-        createdAt :dateTime
-        modifyAt :dateTime
         amount :numeric
         currencyId :int:fk
+        payToId :int:fk
         userData :json
+        createdAt :dateTime
+        updatedAt :dateTime
     }
 
     object ExchangeRate {
         fromCurrencyId :int:fk
         toCurrencyId :int:fk
         rate
-        date :date
+        userData :json
+        createdAt :dateTime
+        updatedAt :dateTime
     }
 
     object ExchangeRateHistory {
         fromCurrency :string(3)
         toCurrency :string(3)
         rate
-        date :date
+        userData :json
+        createdAt :dateTime
+        updatedAt :dateTime
     }
 
 }
@@ -66,7 +77,8 @@ Account -left-> Currency:c_id
 Transaction -down-> Account:a_id
 Transaction -down-> Currency:c_id
 Invoice -down-> Currency:c_id
-Invoice -down-> Account:a_id
+Invoice -down-> Account:pTo_id
+Account -up-> Invoice:a_id
 ExchangeRate -up-> Currency:fc_id
 ExchangeRate -up-> Currency:tc_id
 Transaction -left-> Invoice:i_id
