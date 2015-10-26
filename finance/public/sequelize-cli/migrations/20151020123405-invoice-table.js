@@ -16,6 +16,9 @@ module.exports = {
                 amount: {
                     type: Sequelize.STRING
                 },
+                amountInt: {
+                    type: Sequelize.BIGINT
+                },
                 currencyId: {
                     type: Sequelize.INTEGER,
                     references: {
@@ -31,7 +34,7 @@ module.exports = {
                     }
                 },
                 userData: {
-                    type: Sequelize.JSON
+                    type: Sequelize.BLOB
                 },
                 updatedAt: {
                     type: Sequelize.DATE

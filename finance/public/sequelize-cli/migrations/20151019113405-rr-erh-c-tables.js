@@ -20,10 +20,10 @@ module.exports = {
                     type: Sequelize.STRING
                 },
                 rawData: {
-                    type: Sequelize.JSON
+                    type: Sequelize.BLOB
                 },
                 response: {
-                    type: Sequelize.JSON
+                    type: Sequelize.BLOB
                 },
                 updatedAt: {
                     type: Sequelize.DATE
@@ -55,7 +55,7 @@ module.exports = {
                     type: Sequelize.INTEGER
                 },
                 userData: {
-                    type: Sequelize.JSON
+                    type: Sequelize.BLOB
                 },
                 updatedAt: {
                     type: Sequelize.DATE
@@ -81,7 +81,7 @@ module.exports = {
                     type: Sequelize.STRING(3)
                 },
                 userData: {
-                    type: Sequelize.JSON
+                    type: Sequelize.BLOB
                 },
                 updatedAt: {
                     type: Sequelize.DATE

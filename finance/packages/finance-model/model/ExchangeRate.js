@@ -21,7 +21,7 @@ ExchangeRate = Sequelize.define("exchangeRate",
             type: SLib.INTEGER
         },
         userData: {
-            type: SLib.JSON
+            type: SLib.BLOB
         },
         updatedAt: {
             type: SLib.DATE,

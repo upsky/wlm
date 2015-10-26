@@ -15,10 +15,10 @@ RawRequest = Sequelize.define("rawRequest",
             type: SLib.STRING
         },
         rawData: {
-            type: SLib.JSON
+            type: SLib.BLOB
         },
         response: {
-            type: SLib.JSON
+            type: SLib.BLOB
         },
         updatedAt: {
             type: SLib.DATE,

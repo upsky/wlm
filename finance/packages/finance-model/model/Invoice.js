@@ -11,6 +11,9 @@ Invoice = Sequelize.define("invoice",
         amount: {
             type: SLib.STRING
         },
+        amountInt: {
+            type: SLib.BIGINT
+        },
         currencyId: {
             type: SLib.INTEGER,
             references: {
@@ -24,7 +27,7 @@ Invoice = Sequelize.define("invoice",
             }
         },
         userData: {
-            type: SLib.JSON
+            type: SLib.BLOB
         },
         updatedAt: {
             type: SLib.DATE,

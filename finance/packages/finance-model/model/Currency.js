@@ -15,7 +15,7 @@ Currency = Sequelize.define("currency",
             }
         },
         userData: {
-            type: SLib.JSON
+            type: SLib.BLOB
         },
         updatedAt: {
             type: SLib.DATE,

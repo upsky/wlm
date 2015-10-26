@@ -26,8 +26,11 @@ Account = Sequelize.define("account",
             type: SLib.CHAR(100),
             defaultValue: "0"
         },
+        amountInt: {
+            type: SLib.BIGINT
+        },
         userData: {
-            type: SLib.JSON
+            type: SLib.BLOB
         },
         updatedAt: {
             type: SLib.DATE,

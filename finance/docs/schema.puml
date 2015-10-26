@@ -24,7 +24,8 @@ package result {
         id :int:pk
         ownerId :string
         currencyId :int:fk
-        amount
+        amount: string
+        amountInt: bigInt
         userData :json
         createdAt :dateTime
         updatedAt :dateTime
@@ -33,7 +34,8 @@ package result {
     object Transaction {
         id :int:pk
         accountId :int:fk
-        amount :numeric
+        amount: string
+        amountInt: bigInt
         invoiceId :int:fk
         userData :json
         createdAt :dateTime
@@ -43,7 +45,8 @@ package result {
     object Invoice {
         id :int:pk
         ownerId :string
-        amount :numeric
+        amount: string
+        amountInt: bigInt
         currencyId :int:fk
         payToId :int:fk
         userData :json

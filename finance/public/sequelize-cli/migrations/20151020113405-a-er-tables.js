@@ -28,7 +28,7 @@ module.exports = {
                     type: Sequelize.INTEGER
                 },
                 userData: {
-                    type: Sequelize.JSON
+                    type: Sequelize.BLOB
                 },
                 updatedAt: {
                     type: Sequelize.DATE
@@ -64,8 +64,11 @@ module.exports = {
                     type: Sequelize.STRING,
                     defaultValue: "0"
                 },
+                amountInt: {
+                    type: Sequelize.BIGINT
+                },
                 userData: {
-                    type: Sequelize.JSON
+                    type: Sequelize.BLOB
                 },
                 updatedAt: {
                     type: Sequelize.DATE
