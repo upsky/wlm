@@ -1,9 +1,4 @@
-var template = Template.phoneField;
-
-template.onRendered(function () {
-	//this.user = Meteor.user;
-
-});
+var template = Template.phoneVerify;
 
 template.events({
 	'click #delete-number': function () {
@@ -37,11 +32,16 @@ template.helpers({
 	user: function () {
 		return Meteor.user();
 	},
-	disabled: function () {
-		return (Meteor.user().profile.phones[0].number === '' ? '' : 'disabled');
+	phoneExist: function () {
+		return (Meteor.user().profile.phones && Meteor.user().profile.phones.length > 0 ? true : false);
+	},
+	phoneVerified: function () {
+		return (Meteor.user().profile.phones && Meteor.user().profile.phones.length && Meteor.user().profile.phones[0].verified ? true : false)
+	},
+	formType: function () {
+		return Meteor.user().profile.phones && Meteor.user().profile.phones.length > 0 ? 'disabled' : 'method';
 	}
 });
-
 
 AutoForm.hooks({
 	verifyPhone: {
