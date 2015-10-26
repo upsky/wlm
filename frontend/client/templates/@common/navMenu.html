@@ -24,7 +24,7 @@
 <template name="navMenuItem">
     {{#if rolePresent}}
     <li class="{{#if isCurrentRoute link}}active{{/if}}">
-        <a href="{{#if isRouterLink}}{{pathFor link}}{{else}}{{link}}{{/if}}">
+        <a id={{id}} href="{{#if isRouterLink}}{{pathFor link}}{{else}}{{link}}{{/if}}">
             <i class="fa {{icon}} nav-icon"></i>
                 <span class="nav-text">
                     {{_ title}}
