@@ -25,5 +25,20 @@
 
   "sysadminPass": "admin",
 
-  "recaptchaPrivate": "6LdpHw4TAAAAAIvqE_7HthHylJAP_Q8edi4WK4Vr"
+  "recaptchaPrivate": "6LdpHw4TAAAAAIvqE_7HthHylJAP_Q8edi4WK4Vr",
+
+  "loginServices": {
+    "support": {
+      "redirect_uri":"http://support.winlevel.ru/_oauth/pt",
+      "client_id": "dkfqlb153s",
+      "client_secret": "dkctrhtn153s"
+    },
+
+    "trainer": {
+      "redirect_uri": "http://couch.winlevel.ru/_oauth/wl",
+      "client_id": "nhtyth11s",
+      "client_secret": "cfyfdty12vx"
+    }
+  },
+  "smsRuApiKey": "c2397d77-426e-7354-a9d5-3de46f6fc8d1"
 }

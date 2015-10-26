@@ -5,20 +5,20 @@
     "scanQr": "Скачайте приложение и отсканируйте QR код для входа в свой кабинет",
     "inviteQrCode": "Откройте AppStore на iPhone или Play Market на Android и найдите приложение WL Market. Установите его и сканируйте код для подключения в вашу структуру",
     "inviteLink": "Ссылка для активации",
-    "scanQr": "Сканировать QR код",
     "technicalSupport": "Техническая поддержка",
     "videoTutorial": "Видеоинструкция",
-    "selectAuthenticationMethod": "Выбирете способ входа",
+    "selectAuthenticationMethod": "Выберите способ входа",
     "loginUsingQrCode": "Войти с помощью QR кода",
     "loginUsingQrLogin": "Войти с помощью логина и пароля",
     "recoverPass": "Забыли пароль?",
-    "emailSent": "Пиьсмо отправлено",
+    "emailSent": "Письмо отправлено",
     "yourEmail": "На вашу почту",
+    "passwordRecoverySubject": "Восстановление пароля WL Market",
+    "emailVerificationSubject": "Подтверждение почты WL Market",
     "sendEmailWithInstructions": "отправлено письмо с инструкцией по востановлению пароля!",
     "verifyEmailText": "Если письмо не пришло в течение пары минут, попробуйте поискать его в папке Спам Вашего почтового клиента.",
     "enterNewPassForUser": "Введите новый пароль для пользователя",
     "passwordChanged": "Пароль изменен",
-    "emailVerified": "Адрес эл. почты подтвержден",
     "videoNotFound": "Видео отсутствует.",
     "addVideo": "Видео добавленно",
     "passwordNotChanged": "Ошибка. Пароль не изменен",
@@ -29,6 +29,10 @@
     "unknown": "Неизвестно",
     "changesSaved": "Изменения сохранены",
     "incorrectDate": "Дата неизвестна",
+    "removeCurrentPhone": "Удалить текущий номер?",
+    "reSendCode": "выслать код повторно",
+    "phoneVerificationSend": "На Ваш номер отправлено сообщение с кодом подтверждения.",
+    "phoneNoteVerify": "На ваш номер был отправлен проверочный код, введите его в поле ниже. Если смс не приходит в течении минуты - проверьте правильность номера или попробуйте",
     "typeHere": "Введите сообщение..."
   },
   "vk": {
@@ -42,5 +46,9 @@
     "connecting": "Подключаемся к серверу",
     "connected": "Подключение установлено",
     "offline": "Подключение к серверу отсутствует"
+  },
+  "fieldStatus": {
+    "confirmed": "Подтвержден",
+    "notConfirmed": "Не подтвержден"
   }
 }

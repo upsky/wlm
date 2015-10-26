@@ -1,39 +1,3 @@
-/**
- *
- * @param doc
- * @returns {*}
- */
-
-Meteor.publish('videos', function () {
-	return db.videos.find();
-});
-WlmSecurity.addPublish({
-	videos: {
-		roles: 'all'
-	},
-	invite: {
-		authNotRequired: true,
-		roles: ['partner', 'president']
-	},
-	inviteEmail: {
-		authNotRequired: true,
-		roles: ['partner', 'president']
-	}
-});
-
-
-Meteor.publish('invite', function (_id) {
-	check(_id, Match.Id);
-	log.trace('publish invite');
-	return db.invites.find(_id, { fields: { emailHash: 0 } });
-});
-
-Meteor.publish('inviteEmail', function (_id) {
-	check(_id, Match.Id);
-	log.trace('publish inviteEmail');
-	return db.invites.find({ 'emailHash': _id });
-});
-
 registerPartner = function (doc) {
 	var newUserId, invite, lastInvite, path, targetPartner, uin, username;
 	check(doc, Schemas.registerPartner);
@@ -182,6 +146,12 @@ Meteor.methods({
 					verified: false
 				}
 			};
+			var verificationCode = WLmVerificationCode.create(doc.phone);
+
+			Meteor.call('sendSms', {
+				phoneNumber: doc.phone,
+				text: verificationCode
+			});
 		}
 		return db.users.update(this.userId, updateObj);
 	},
@@ -208,5 +178,37 @@ Meteor.methods({
 
 	resendVerificationEmail: function () {
 		return Accounts.sendVerificationEmail(Meteor.userId());
+	},
+	removeMyPhone: function () {
+		return db.users.update(Meteor.userId(), { $unset: { 'profile.phones': '' } });
+	},
+	sendVerifyCodePhone: function (doc) {
+		check(doc, Schemas.phoneField);
+		this.unblock();
+		var verificationCode = WLmVerificationCode.create(doc.phone);
+
+		Meteor.call('sendSms', {
+			phoneNumber: doc.phone,
+			text: verificationCode
+		});
+	},
+	checkVerifyCodePhone: function (doc) {
+		check(doc, Schemas.verifyPhone);
+		this.unblock();
+		WLmVerificationCode.checkCode(doc.verificationCode);
+
+		db.users.update({
+			_id: Meteor.userId(),
+			"profile.phones.number": Meteor.user().profile.phones[0].number
+		}, {
+			'$set': {
+				'profile.phones.$.verified': true
+			}
+		});
+
 	}
 });
+
+function sendPhoneMeessage () {
+	console.log(arguments);
+}

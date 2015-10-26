@@ -1,0 +1,34 @@
+<template name='oauthPage'>
+  {{#if check}} {{>spinner}} {{/if}}
+</template>
+
+<template name='loginOauth'>
+  {{> loginButtons}}
+</template>
+
+<template name="layoutOauth">
+  <div class="layout-fixed" style="height: 100%;">
+    <div style="" data-ui-view="" data-autoscroll="false" data-ng-class="app.viewAnimation" class="app-container ng-scope ng-fadeInLeft2">
+      <div ui-view="" autoscroll="false" class="ng-fadeOutZoom ng-fluid ng-scope">
+        <div class="abs-center wd-xl ng-scope" style="height: 66%;">
+          <div id="" class="panel panel-default b0">
+            <div class="portlet-handler ui-sortable-handle">
+              <div class="row row-table row-flush">
+                <div class="col-xs-4 {{bg}} text-center">
+                  <em class="fa {{fa}} fa-2x"></em>
+                </div>
+                <div class="col-xs-8">
+                  <div class="panel-body text-center">
+                    <h4 class="mt0">{{headerText}}</h4>
+                    <p class="mb0 text-muted">{{text}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{>yield}}
+</template>

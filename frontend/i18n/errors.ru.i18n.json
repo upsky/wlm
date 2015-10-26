@@ -11,6 +11,11 @@
     "loginOrPasswordIncorrect": "Логин или пароль неверный",
     "loginErrorTitle": "Ошибка входа в систему",
     "forbidden": "Доступ к данному <br> сервису сайта закрыт",
-    "videoUsed": "Дублирование видео"
+    "videoUsed": "Дублирование видео",
+    "codeNotFound": "Код не найден.",
+    "codeAttemptEnd": "Попытки кончились.",
+    "codeAlreadyUsing": "Код использован.",
+    "codeCodeOverdue": "Время регистрации этого кода истекло.",
+    "codeInvalid": "Неверный код."
   }
 }

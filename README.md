@@ -21,9 +21,9 @@
 1. Поправить версию
 
 ## Archive iOS для распространения
-
-Добавить в Build Settings > Header Search Paths
-  $(BUILT_PRODUCTS_DIR)/../emulator/include
+Билдить в XCode 7.0
+Если версия OS X - beta
+http://stackoverflow.com/questions/32174954/submitting-app-from-building-in-xcode-6-4/32233429#32233429
   
 ## Упаковка Android
  Перед этим необходимо удалить все из /public/i18n и запустить проект один раз для генерации файлов.

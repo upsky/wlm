@@ -34,9 +34,6 @@ Schemas.profileSchema = new SimpleSchema({
 	name: {
 		type: String
 	},
-	phone: {
-		type: String
-	},
 	email: {
 		type: String,
 		regEx: SimpleSchema.RegEx.Email
@@ -163,21 +160,39 @@ Schemas.statisticFilter = new SimpleSchema({
 
 
 Schemas.videosSchema = new SimpleSchema({
-  title: {
-    type: String,
-    label: "Название",
-    max: 200
-  },
-  youtubeId: {
-  	type: String,
-  	label: "Ссылка на youtube"
-  },
-  info: {
-    type: String,
-    label: "Инфо о видео"
-  },
-  _id: {
-  	type: String,
-	  label: "Название блока"
-  }
+	title: {
+		type: String,
+		label: "Название",
+		max: 200
+	},
+	youtubeId: {
+		type: String,
+		label: "Ссылка на youtube"
+	},
+	info: {
+		type: String,
+		label: "Инфо о видео"
+	},
+	_id: {
+		type: String,
+		label: "Название блока"
+	}
+});
+
+Schemas.phoneField = new SimpleSchema({
+	/**
+	 * TODO MASK AND call method sms loger
+	 */
+	phone: {
+		type: String,
+		min: 10,
+		max: 10
+	}
+});
+
+Schemas.verifyPhone = new SimpleSchema({
+	verificationCode: {
+		type: String,
+		min: 6
+	}
 });

@@ -6549,9 +6549,6 @@ i.fileinput-exists {
 	border-color: #aece4e;
 }
 
-.input-group-addon {
-	background-color: #76b6ec;
-}
 
 .input-group-addon:not(:first-child) {
 	border-left: 0;
