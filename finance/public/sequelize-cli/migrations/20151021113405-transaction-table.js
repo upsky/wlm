@@ -12,32 +12,39 @@ module.exports = {
                 },
                 accountId: {
                     type: Sequelize.INTEGER,
+                    allowNull: false,
                     references: {
                         model: "account",
                         key: "id"
                     }
                 },
                 amount: {
-                    type: Sequelize.STRING
+                    type: Sequelize.STRING,
+                    allowNull: false
                 },
                 amountInt: {
-                    type: Sequelize.BIGINT
+                    type: Sequelize.BIGINT,
+                    allowNull: false
                 },
                 invoiceId: {
                     type: Sequelize.INTEGER,
+                    allowNull: false,
                     references: {
                         model: "invoice",
                         key: "id"
                     }
                 },
                 userData: {
-                    type: Sequelize.BLOB
+                    type: Sequelize.TEXT,
+                    allowNull: true
                 },
                 updatedAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 createdAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 deletedAt: {
                     type: Sequelize.DATE,

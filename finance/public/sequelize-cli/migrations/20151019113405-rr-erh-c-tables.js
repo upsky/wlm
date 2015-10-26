@@ -11,25 +11,32 @@ module.exports = {
                     autoIncrement: true
                 },
                 userId: {
-                    type: Sequelize.STRING
+                    type: Sequelize.STRING,
+                    allowNull: false
                 },
                 hash: {
-                    type: Sequelize.STRING(32)
+                    type: Sequelize.STRING(32),
+                    allowNull: false
                 },
                 method: {
-                    type: Sequelize.STRING
+                    type: Sequelize.STRING,
+                    allowNull: false
                 },
                 rawData: {
-                    type: Sequelize.BLOB
+                    type: Sequelize.TEXT,
+                    allowNull: false
                 },
                 response: {
-                    type: Sequelize.BLOB
+                    type: Sequelize.TEXT,
+                    allowNull: true
                 },
                 updatedAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 createdAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 deletedAt: {
                     type: Sequelize.DATE,
@@ -46,22 +53,27 @@ module.exports = {
                     autoIncrement: true
                 },
                 fromCurrency: {
-                    type: Sequelize.STRING(3)
+                    type: Sequelize.STRING(3),
+                    allowNull: false
                 },
                 toCurrency: {
-                    type: Sequelize.STRING(3)
+                    type: Sequelize.STRING(3),
+                    allowNull: false
                 },
                 rate: {
-                    type: Sequelize.INTEGER
+                    type: Sequelize.INTEGER,
+                    allowNull: false
                 },
                 userData: {
                     type: Sequelize.BLOB
                 },
                 updatedAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 createdAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 deletedAt: {
                     type: Sequelize.DATE,
@@ -78,25 +90,22 @@ module.exports = {
                     autoIncrement: true
                 },
                 code: {
-                    type: Sequelize.STRING(3)
+                    type: Sequelize.STRING(3),
+                    allowNull: false,
+                    unique: true
                 },
                 userData: {
-                    type: Sequelize.BLOB
+                    type: Sequelize.BLOB,
+                    allowNull: true
                 },
                 updatedAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 createdAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 }
-            },
-            {
-                indexes: [
-                    {
-                        unique: true,
-                        fields: ['code']
-                    }
-                ]
             }
         );
     },

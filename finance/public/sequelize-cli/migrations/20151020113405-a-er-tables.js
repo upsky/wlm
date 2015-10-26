@@ -12,6 +12,7 @@ module.exports = {
                 },
                 fromCurrencyId: {
                     type: Sequelize.INTEGER,
+                    allowNull: false,
                     references: {
                         model: "currency",
                         key: "id"
@@ -19,22 +20,27 @@ module.exports = {
                 },
                 toCurrencyId: {
                     type: Sequelize.INTEGER,
+                    allowNull: false,
                     references: {
                         model: "currency",
                         key: "id"
                     }
                 },
                 rate: {
-                    type: Sequelize.INTEGER
+                    type: Sequelize.INTEGER,
+                    allowNull: false
                 },
                 userData: {
-                    type: Sequelize.BLOB
+                    type: Sequelize.BLOB,
+                    allowNull: true
                 },
                 updatedAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 createdAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 deletedAt: {
                     type: Sequelize.DATE,
@@ -51,10 +57,12 @@ module.exports = {
                     autoIncrement: true
                 },
                 ownerId: {
-                    type: Sequelize.STRING
+                    type: Sequelize.STRING,
+                    allowNull: false
                 },
                 currencyId: {
                     type: Sequelize.INTEGER,
+                    allowNull: false,
                     references: {
                         model: "currency",
                         key: "id"
@@ -62,19 +70,25 @@ module.exports = {
                 },
                 amount: {
                     type: Sequelize.STRING,
+                    allowNull: false,
                     defaultValue: "0"
                 },
                 amountInt: {
-                    type: Sequelize.BIGINT
+                    type: Sequelize.BIGINT,
+                    allowNull: false,
+                    defaultValue: 0
                 },
                 userData: {
-                    type: Sequelize.BLOB
+                    type: Sequelize.TEXT,
+                    allowNull: true
                 },
                 updatedAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 createdAt: {
-                    type: Sequelize.DATE
+                    type: Sequelize.DATE,
+                    allowNull: false
                 },
                 deletedAt: {
                     type: Sequelize.DATE,
