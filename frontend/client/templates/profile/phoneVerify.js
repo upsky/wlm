@@ -46,10 +46,10 @@ template.helpers({
 AutoForm.hooks({
 	verifyPhone: {
 		onError: function (type, error) {
-			console.log(error)
+			var errorText = (error.reason ? error.reason : error);
 			WlmNotify.create({
 				type: 'error',
-				text: TAPi18n.__(error.reason)
+				text: TAPi18n.__(errorText)
 			});
 		},
 		onSuccess: function (type, res) {

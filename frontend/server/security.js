@@ -112,7 +112,7 @@ WlmSecurity.addMethods({
 		authNotRequired: false,
 		roles: 'all'
 	},
-	sendSms: {
+	sendMeVerifySms: {
 		authNotRequired: false,
 		roles: 'all'
 	},

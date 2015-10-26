@@ -146,9 +146,11 @@ Meteor.methods({
 					verified: false
 				}
 			};
+			db.users.update(this.userId, updateObj);
+
 			var verificationCode = WLmVerificationCode.create(doc.phone);
 
-			Meteor.call('sendSms', {
+			return Meteor.call('sendMeVerifySms', {
 				phoneNumber: doc.phone,
 				text: verificationCode
 			});
@@ -187,7 +189,7 @@ Meteor.methods({
 		this.unblock();
 		var verificationCode = WLmVerificationCode.create(doc.phone);
 
-		Meteor.call('sendSms', {
+		Meteor.call('sendMeVerifySms', {
 			phoneNumber: doc.phone,
 			text: verificationCode
 		});

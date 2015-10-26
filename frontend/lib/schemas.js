@@ -181,12 +181,15 @@ Schemas.videosSchema = new SimpleSchema({
 
 Schemas.phoneField = new SimpleSchema({
 	phone: {
-		type: Number,
+		type: String,
+		min: 10,
+		max: 10
 	}
 });
 
 Schemas.verifyPhone = new SimpleSchema({
-	code: {
-		type: Number,
+	verificationCode: {
+		type: String,
+		min: 6
 	}
 });

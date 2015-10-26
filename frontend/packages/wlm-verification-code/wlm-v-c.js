@@ -18,10 +18,11 @@ var VerificationCode = function () {
 	 * @returns {string}
 	 */
 	function getCode () {
+		var numberCount = 6;
 		var res = [];
-		for (var i = 0; i < 6; ++i) {
+		for (var i = 0; i < numberCount; ++i)
 			res.push(getRandomInt());
-		}
+
 		return res.join('');
 	}
 
@@ -36,10 +37,10 @@ var VerificationCode = function () {
 		var deltaTime = currentTime - createdTime;
 		var limit = 3 * 60 * 1000;//3 minutes
 
-		if (deltaTime < limit)
-			return false;
-		else
+		if (deltaTime > limit)
 			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -48,7 +49,6 @@ var VerificationCode = function () {
 	 * @returns code
 	 */
 	function create (phoneNumber) {
-		console.log('create');
 		var code = getCode();
 		var doc = {
 			userId: Meteor.userId(),
@@ -69,7 +69,10 @@ var VerificationCode = function () {
 	 * @param code
 	 */
 	function checkCode (code) {
-		console.log('check');
+		if (!Meteor._get(Meteor.user(), "profile", "phones")) {
+			throw new Meteor.Error(400, 'errors.phoneNotFound');
+		}
+
 		var phone = Meteor.user().profile.phones[0].number;
 		var doc = db.verificationCode.findOne({ userId: Meteor.userId(), phoneNumber: phone }, {
 			sort: { created: -1 },
