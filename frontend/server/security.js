@@ -112,10 +112,6 @@ WlmSecurity.addMethods({
 		authNotRequired: false,
 		roles: 'all'
 	},
-	sendMeVerifySms: {
-		authNotRequired: false,
-		roles: 'all'
-	},
 	checkVerifyCodePhone: {
 		authNotRequired: false,
 		roles: 'all'

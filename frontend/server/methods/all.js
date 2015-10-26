@@ -150,8 +150,8 @@ Meteor.methods({
 
 			var verificationCode = WLmVerificationCode.create(doc.phone);
 
-			return Meteor.call('sendMeVerifySms', {
-				phoneNumber: doc.phone,
+			return WLmSms.send({
+				to: doc.phone,
 				text: verificationCode
 			});
 		}
@@ -189,8 +189,8 @@ Meteor.methods({
 		this.unblock();
 		var verificationCode = WLmVerificationCode.create(doc.phone);
 
-		Meteor.call('sendMeVerifySms', {
-			phoneNumber: doc.phone,
+		WLmSms.send({
+			to: doc.phone,
 			text: verificationCode
 		});
 	},
@@ -211,6 +211,3 @@ Meteor.methods({
 	}
 });
 
-function sendPhoneMeessage () {
-	console.log(arguments);
-}
