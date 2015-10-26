@@ -12,10 +12,11 @@ Npm.depends({
     "sequelize": "3.12.1", // ORM library
     "sequelize-cli": "2.0.0", // command line interface for ORM library
     "sequelize-transforms": "1.0.0", // property modifiers for ORM library
-    "pg": "4.4.2", // postgres library
-    "pg-native": "1.9.0", // native postgres library (faster?)
-    "pg-hstore": "https://github.com/scarney81/pg-hstore/archive/7347c348b2d76f5922369067f320a0e9e9e81743.tar.gz", // postgres library module needed by ORM
-    "bignumber.js": "2.0.8" // library for arbitrary-precision decimal and non-decimal arithmetic
+    //"pg": "4.4.2", // postgres library
+    //"pg-native": "1.9.0", // native postgres library (faster?)
+    //"pg-hstore": "https://github.com/scarney81/pg-hstore/archive/7347c348b2d76f5922369067f320a0e9e9e81743.tar.gz", // postgres library module needed by ORM
+    "bignumber.js": "2.0.8", // library for arbitrary-precision decimal and non-decimal arithmetic
+    "mysql": "2.9.0" // mysql|mariadb library
 });
 
 Package.onUse(function(api) {
@@ -26,6 +27,7 @@ Package.onUse(function(api) {
     api.use('jparker:crypto-md5');
     api.addFiles('sequelize.js', 'server');
     api.addFiles('bignumber.js', 'server');
+    api.addFiles('helpers.js', 'server');
     api.addFiles('model/Currency.js', 'server');
     api.addFiles('model/Account.js', 'server');
     api.addFiles('model/Invoice.js', 'server');

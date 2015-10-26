@@ -1,18 +1,20 @@
 // initialize sequelize library with plugins and database connection settings
 SLib = Npm.require("sequelize");
 
+var environment = process.env.NODE_ENV || "development";
+
 Sequelize = new SLib(
-    Meteor.settings.connection.database,
-    Meteor.settings.connection.username,
-    Meteor.settings.connection.password,
+    Meteor.settings[environment].database,
+    Meteor.settings[environment].username,
+    Meteor.settings[environment].password,
     {
-        host: Meteor.settings.connection.host,
-        dialect: Meteor.settings.connection.dialect,
+        host: Meteor.settings[environment].host,
+        dialect: Meteor.settings[environment].dialect,
 
         pool: {
             max: 5,
             min: 0,
-            idle: 10000
+            idle: 1000000
         }
     }
 );
