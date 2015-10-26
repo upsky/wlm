@@ -2,7 +2,8 @@ Invoice = Sequelize.define("invoice",
     {
         id: {
             type: SLib.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         ownerId: {
             type: SLib.STRING
