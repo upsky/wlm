@@ -1,0 +1,7 @@
+var path = require('path')
+
+module.exports = {
+	"models-path":      path.resolve('public', 'sequelize-cli', 'models'),
+	"migrations-path":  path.resolve('public', 'sequelize-cli', 'migrations'),
+	"seeders-path":     path.resolve('public', 'sequelize-cli', 'seeders'),
+}
