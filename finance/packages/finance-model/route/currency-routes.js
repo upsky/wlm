@@ -5,7 +5,7 @@ Router.route("/api/v1/currency/list", { where: "server", name: "currency.list" }
             this.request,
             this.response,
             Currency.getCurrencyList,
-            {attributes: ["id", "code"]}
+            {attributes: ["id", "code"], raw: true}
         );
     });
 
@@ -27,6 +27,6 @@ Router.route("/api/v1/currency/delete", { where: "server", name: "currency.delet
             this.request,
             this.response,
             Currency.deleteCurrency,
-            {userId: "userId", currencyId: "currencyId"}
+            {currencyId: "currencyId"}
         );
     });

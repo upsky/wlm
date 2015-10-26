@@ -7,6 +7,8 @@ Currency = Sequelize.define("currency",
         },
         code: {
             type: SLib.STRING(3),
+            allowNull: false,
+            unique: true,
             uppercase: true,
             validate: {
                 is: /^[A-Z]+$/,
@@ -15,24 +17,30 @@ Currency = Sequelize.define("currency",
             }
         },
         userData: {
-            type: SLib.BLOB
+            type: SLib.TEXT,
+            allowNull: true,
+            get: function() {
+                return this.getDataValue("userData") ?
+                    JSON.parse(this.getDataValue("userData"))
+                    : null;
+            },
+            set: function(value) {
+                return this.setDataValue("userData", JSON.stringify(value));
+            }
         },
         updatedAt: {
             type: SLib.DATE,
+            allowNull: false,
             defaultValue: SLib.NOW
         },
         createdAt: {
-            type: SLib.DATE
+            type: SLib.DATE,
+            allowNull: false,
+            defaultValue: SLib.NOW
         }
     },
     {
         tableName: "currency",
-        indexes: [
-            {
-                unique: true,
-                fields: ['code']
-            }
-        ],
 
         classMethods: {
             /**
@@ -42,11 +50,12 @@ Currency = Sequelize.define("currency",
              * @param {Function}    callback
              */
             getCurrencyList: function (params, callback) {
-                var attributes = {attributes: params.attributes} || {};
-                Currency.findAll(attributes).then(function (currencyList) {
-                    return callback ? callback(currencyList) : currencyList;
+                var attributes = params.attributes || {};
+                var raw = params.raw || false;
+                Currency.findAll({attributes: attributes, raw: raw}).then(function (currencyList) {
+                    return typeof(callback) == typeof(Function) ? callback(currencyList) : currencyList;
                 }).catch(function (err) {
-                    return callback ? callback(err) : err;
+                    return typeof(callback) == typeof(Function) ? callback(err) : err;
                 })
             },
 

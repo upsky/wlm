@@ -6,35 +6,52 @@ Invoice = Sequelize.define("invoice",
             autoIncrement: true
         },
         ownerId: {
-            type: SLib.STRING
+            type: SLib.STRING,
+            allowNull: false
         },
         amount: {
-            type: SLib.STRING
+            type: SLib.STRING,
+            allowNull: false
         },
         amountInt: {
-            type: SLib.BIGINT
+            type: SLib.BIGINT,
+            allowNull: false
         },
         currencyId: {
             type: SLib.INTEGER,
+            allowNull: false,
             references: {
                 model: Currency
             }
         },
         payToId: {
             type: SLib.INTEGER,
+            allowNull: false,
             references: {
                 model: Account
             }
         },
         userData: {
-            type: SLib.BLOB
+            type: SLib.TEXT,
+            allowNull: true,
+            get: function() {
+                return this.getDataValue("userData") ?
+                    JSON.parse(this.getDataValue("userData"))
+                    : null;
+            },
+            set: function(value) {
+                return this.setDataValue("userData", JSON.stringify(value));
+            }
         },
         updatedAt: {
             type: SLib.DATE,
+            allowNull: false,
             defaultValue: SLib.NOW
         },
         createdAt: {
-            type: SLib.DATE
+            type: SLib.DATE,
+            allowNull: false,
+            defaultValue: SLib.NOW
         },
         deletedAt: {
             type: SLib.DATE,
@@ -62,7 +79,10 @@ Invoice = Sequelize.define("invoice",
             createInvoice: function (params, callback) {
                 var attributes = params.attributes || {};
                 Invoice.create({
-                    ownerId: params.userId, payToId: params.payToId, amount: params.amount
+                    ownerId: params.userId,
+                    payToId: params.payToId,
+                    amount: params.amount,
+                    amountInt: FH.amountToInt(params.amount)
                 }).then(function (account) {
                     var parsedInvoice = _.pick(account, attributes);
 
@@ -90,11 +110,11 @@ Invoice = Sequelize.define("invoice",
             payInvoice: function (params, callback) {
                 Invoice.findOne({
                     where: {ownerId: params.userId, id: params.invoiceId},
-                    attributes: ["id", "ownerId", "currencyId", "amount"]
+                    attributes: ["id", "ownerId", "currencyId", "amount", "amountInt"]
                 }).then(function () {
                     Account.findOne({
                         where: {ownerId: params.userId, id: params.accountId},
-                        attributes: ["id", "ownerId", "currencyId", "amount", "payTo"]
+                        attributes: ["id", "ownerId", "currencyId", "amount", "amountInt", "payTo"]
                     }).then(function (account) {
                         Account.transferBTAccounts(
                             userId, account.get("id"), account.get("payTo"), invoice.get("amount"), callback

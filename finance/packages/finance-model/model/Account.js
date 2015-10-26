@@ -13,10 +13,12 @@ Account = Sequelize.define("account",
             autoIncrement: true
         },
         ownerId: {
-            type: SLib.STRING
+            type: SLib.STRING,
+            allowNull: false
         },
         currencyId: {
             type: SLib.INTEGER,
+            allowNull: false,
             references: {
                 model: "currency",
                 key: "id"
@@ -24,20 +26,35 @@ Account = Sequelize.define("account",
         },
         amount: {
             type: SLib.CHAR(100),
+            allowNull: false,
             defaultValue: "0"
         },
         amountInt: {
-            type: SLib.BIGINT
+            type: SLib.BIGINT,
+            allowNull: false,
+            defaultValue: 0
         },
         userData: {
-            type: SLib.BLOB
+            type: SLib.TEXT,
+            allowNull: true,
+            get: function() {
+                return this.getDataValue("userData") ?
+                    JSON.parse(this.getDataValue("userData"))
+                    : null;
+            },
+            set: function(value) {
+                return this.setDataValue("userData", JSON.stringify(value));
+            }
         },
         updatedAt: {
             type: SLib.DATE,
+            allowNull: false,
             defaultValue: SLib.NOW
         },
         createdAt: {
-            type: SLib.DATE
+            type: SLib.DATE,
+            allowNull: false,
+            defaultValue: SLib.NOW
         },
         deletedAt: {
             type: SLib.DATE,
@@ -135,7 +152,6 @@ Account = Sequelize.define("account",
                 return Sequelize.transaction(function (t) {
                     return Account.checkTransferAbility(params, function (result) {
                         if (result === Array) {
-                            console.log("[DEBUG] fire0", result);
                             return callback ? callback(result) : result;
                         }
                         var accounts = result;
@@ -143,25 +159,30 @@ Account = Sequelize.define("account",
                             ? accounts.shift()
                             : accounts.pop();
                         var toAccount = accounts[0];
-                        return fromAccount.set(
-                            "amount",
-                            (new BN(fromAccount.get("amount"))).minus(params.amount).toString()).save({transaction: t}
-                        )
+                        let amount = (new BN(fromAccount.get("amount"))).minus(params.amount).toString();
+                        let amountInt = FH.amountToInt(amount);
+
+                        return fromAccount.set("amount", amount).set("amountInt", amountInt).save({transaction: t})
                             .then(function () {
-                                return toAccount.set(
-                                    "amount",
-                                    (new BN(toAccount.get("amount"))).plus(params.amount).toString()).save({transaction: t}
-                                )
+                                let amount = (new BN(toAccount.get("amount"))).plus(params.amount).toString();
+                                let amountInt = FH.amountToInt(amount);
+                                return toAccount.set("amount", amount).set("amountInt", amountInt).save({transaction: t})
                                     .then(function () {
+                                        let amount = (new BN(params.amount)).times(-1).toString();
+                                        let negativeAmountInt = FH.amountToInt(amount);
+
+                                        let positiveAmountInt = FH.amountToInt(params.amount);
                                         return Transaction.bulkCreate([
                                             {
                                                 accountId: params.fromAccountId,
-                                                amount: (new BN(params.amount)).times(-1).toString(),
+                                                amount: amount,
+                                                amountInt: negativeAmountInt,
                                                 userData: {userId: params.userId}
                                             },
                                             {
                                                 accountId: params.toAccountId,
                                                 amount: params.amount,
+                                                amountInt: positiveAmountInt,
                                                 userData: {userId: params.userId}
                                             }
                                         ], {transaction: t});
@@ -196,9 +217,11 @@ Account = Sequelize.define("account",
                     return callback ? callback(error) : error;
                 }
 
+                // search accounts with same ownerId
+                //TODO: we definitely must have ability to transfer between different ownerId accounts
                 return Account.findAll({
                     where: {ownerId: params.userId, id: {$in: [params.fromAccountId, params.toAccountId]}},
-                    attributes: ["id", "currencyId", "amount"],
+                    attributes: ["id", "currencyId", "amount", "amountInt"],
                     include: {model: Currency, attributes: ["code"]},
                     transaction: transaction
                 }).then(function (accounts) {
@@ -217,6 +240,8 @@ Account = Sequelize.define("account",
                         return callback ? callback(error) : error;
                     }
 
+                    // check that accounts with same currency
+                    //TODO: is that necessary? maybe we need to make exchange to proper currency instead (from toAccount)?
                     var fromAccount = accounts[0].get("id") === params.fromAccountId
                         ? accounts.shift()
                         : accounts.pop();
@@ -229,6 +254,7 @@ Account = Sequelize.define("account",
                         return callback ? callback(error) : error;
                     }
 
+                    // checks amount >= 0
                     var amount = new BN(params.amount);
                     if (amount.lte(0)) {
                         let error = new RequestError(403, "WRONG-AMOUNT", "amount value is wrong");
@@ -236,8 +262,9 @@ Account = Sequelize.define("account",
                         return callback ? callback(error) : error;
                     }
 
+                    // check fromAccountAmount >= amount
                     var fromAccountAmount = new BN(fromAccount.get("amount"));
-                    if (fromAccountAmount.minus(amount).lt(0)) {
+                    if (fromAccountAmount.minus(amount).lte(0)) {
                         let error = new RequestError(
                             403, "WRONG-AMOUNT", "can not transfer more then account contains"
                         );
@@ -245,7 +272,9 @@ Account = Sequelize.define("account",
                         return callback ? callback(error) : error;
                     }
 
-                    return callback ? callback([fromAccount, toAccount]) : [fromAccount, toAccount];
+                    var returnAccounts = [fromAccount, toAccount];
+
+                    return callback ? callback(returnAccounts) : returnAccounts;
                 }).catch(function (err) {
                     return callback ? callback(err) : err;
                 });

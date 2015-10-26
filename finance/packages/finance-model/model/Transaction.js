@@ -7,31 +7,48 @@ Transaction = Sequelize.define("transaction",
         },
         accountId: {
             type: SLib.INTEGER,
+            allowNull: false,
             references: {
                 model: Account
             }
         },
         amount: {
-            type: SLib.STRING
+            type: SLib.STRING,
+            allowNull: false
+
         },
         amountInt: {
-            type: SLib.BIGINT
+            type: SLib.BIGINT,
+            allowNull: false
         },
         invoiceId: {
             type: SLib.INTEGER,
+            allowNull: false,
             references: {
                 model: Invoice
             }
         },
         userData: {
-            type: SLib.BLOB
+            type: SLib.TEXT,
+            allowNull: true,
+            get: function() {
+                return this.getDataValue("userData") ?
+                    JSON.parse(this.getDataValue("userData"))
+                    : null;
+            },
+            set: function(value) {
+                return this.setDataValue("userData", JSON.stringify(value));
+            }
         },
         updatedAt: {
             type: SLib.DATE,
-            defaultValue: SLib.NOW
+            defaultValue: SLib.NOW,
+            allowNull: false
         },
         createdAt: {
-            type: SLib.DATE
+            type: SLib.DATE,
+            allowNull: false,
+            defaultValue: SLib.NOW
         },
         deletedAt: {
             type: SLib.DATE,

@@ -1,12 +1,16 @@
 /**
  * Error object to handle check logic errors.
  *
- * @param status
- * @param statusString
- * @param message
+ * @param {int}     status
+ * @param {string}  statusString
+ * @param {string}  message
  * @constructor
  */
 function RequestError (status, statusString, message) {
+    check(status, Number);
+    check(statusString, String);
+    check(message, String);
+
     this.name = "RequestError";
     this.status = status;
     this.statusString = statusString;
@@ -25,6 +29,8 @@ BR = {
         if (!userId) {
             throw new RequestError(403, "ACCESS-DENIED", "user not defined")
         }
+
+        check(userId, String);
 
         if (userId === "902iojklasf") { return "fjds0j3lkahdf09u2ioj3knka"; }
 
@@ -45,6 +51,7 @@ BR = {
      * @returns {string}
      */
     generateHash: function (string) {
+        check(string, String);
         return CryptoJS.MD5(string).toString();
     },
 
@@ -83,6 +90,7 @@ BR = {
      * @param {Node.response}   response
      */
     onBeforeAction: function (requestBody, response) {
+        check(requestBody, Object);
         try {
             BR.checkRequest(requestBody);
         } catch (err) {
@@ -99,9 +107,10 @@ BR = {
     /**
      * Check DB query error and parse it before send to client.
      *
-     * @param {Object}  err
+     * @param {Object} err
      */
     parseDbQueryError: function (err) {
+        //check(err, Match);
         if (
             err.name !== "RequestError"
             && err.name !== "SequelizeValidationError"
@@ -112,6 +121,7 @@ BR = {
             err.statusString = "SERVER-ERROR";
             err.message = "unknown error"
         }
+        if (!err.status) { err.status = 500; }
 
         return {status: err.status, statusString: "WRONG-DATA", message: err.message};
     },
@@ -124,55 +134,36 @@ BR = {
      */
     makeResponseString: function (object) {
         object = object || {};
+        check(object, Object);
 
         return JSON.stringify(_.pick(_.defaults(object, {data: null}), "status", "statusString", "message", "data"));
     },
 
     makeResponse: function (object, response) {
+        check(object, Object);
         response.statusCode = object.status;
+
         return response.end(BR.makeResponseString(object));
     },
 
     /**
-     * Save rawRequest to DB.
+     * Save rawRequest to DB. Make error response if fails.
      *
      * @param {string}      method
      * @param {Object}      data
      * @param {Function}    callback
      */
     saveRequest: function (method, data, callback) {
-        data = data ? data.data : {};
-        RawRequest
-            .build({userId: data.userId, hash: data.hash, method: method, rawData: data.data})
-            .save()
-            .then(function (rawRequest) {
-                callback({status: true, rawRequestId: rawRequest.get("id")});
-            }).catch(function (err) {
-                callback({status: false, responseObject: BR.parseDbQueryError(err)});
-            });
-    },
-
-    /**
-     * Update rawRequest by ORM classMethod response.
-     * 
-     * @param {Object}      object
-     * @param {integer}     rawRequestId
-     * @param {Function}    callback
-     */
-    updateRequest: function (object, rawRequestId, callback) {
-        RawRequest.findOne(
-            {
-                where: {id: rawRequestId},
-                attributes: ["id"]
+        check(method, String);
+        check(data, Object);
+        RawRequest.createRawRequest(
+            {userId: data.userId, method: method, hash: data.hash,
+                rawData: data.data, attributes: ["id"]}, function (result) {
+            if (BR.checkOrmResult(result)) {
+                return callback(result.id);
+            } else {
+                return BR.makeResponse(BR.parseDbQueryError(result));
             }
-        ).then(function (rawRequest) {
-            rawRequest.set("response", object).save().then(function () {
-                callback(object);
-            }).catch(function (err) {
-                callback(BR.parseDbQueryError(err));
-            });
-        }).catch(function (err) {
-            callback(BR.parseDbQueryError(err));
         });
     },
 
@@ -184,6 +175,7 @@ BR = {
      */
     successResponseObject: function (data) {
         data = data || null;
+        //check(data, Match.OneOf(Object, null));
 
         return {status: 200, statusString: "REQUEST-OK", message: "request success", data: data};
     },
@@ -202,21 +194,22 @@ BR = {
         var checkRequest = BR.onBeforeAction(request.body, response);
         if (!checkRequest) { return false; }
 
-        BR.saveRequest(request.url, request.body, function (result) {
-            if (!result.status) {
-                return BR.makeResponse(result, response);
-            }
+        BR.saveRequest(request.url, request.body, function (rawRequestId) {
+            check(rawRequestId, Number);
             // fill methodParams blank object by request.body data
             _.each(methodParams, function (value, key) {
-                if (key !== "attributes") {
+                if (_.indexOf(["attributes", "raw", "order", "limit", "offset", "group"], key) === -1) {
                     methodParams[key] = request.body.data[key]
                 }
             });
+
+            // every model classMethod gets userId field as parameter
+            methodParams.userId = request.body.userId;
             methodParams = [methodParams];
             // add callback for query Promise
             methodParams.push(
                 (function (queryResult) {
-                    BR.end(BR.checkOrmResponse(queryResult), result.rawRequestId, response);
+                    BR.end(BR.parseOrmResult(queryResult), rawRequestId, response);
                 })
             );
             // and run ORM method
@@ -225,59 +218,47 @@ BR = {
     },
 
     /**
-     * Checks ORM classMethod response and parse it.
+     * Checks ORM classMethod response.
      *
-     * @param {Object} result
-     * @return {Object}
+     * @param {Object | string} result
+     * @return {boolean}
      */
-    checkOrmResponse: function (result) {
-        var response = "";
-        if (result && result.name) {
-            response = BR.parseDbQueryError(result);
-        } else {
-            response = BR.successResponseObject(result);
-        }
+    checkOrmResult: function (result) {
+        return !(result && result.name);
+    },
 
-        return response;
+    parseOrmResult: function (result) {
+        return BR.checkOrmResult(result) ? BR.successResponseObject(result) : BR.parseDbQueryError(result);
+    },
+
+    /**
+     * Update rawRequest by response field with ORM classMethod.
+     *
+     * @param {Object}      object
+     * @param {integer}     rawRequestId
+     * @param {Function}    callback
+     */
+    updateRawRequest: function (object, rawRequestId, callback) {
+        check(object, Object);
+        check(rawRequestId, Number);
+        RawRequest.updateRawRequest({object: object, id: rawRequestId}, callback);
     },
 
     /**
      * Updates rawRequest response field and send response to client.
      *
-     * @param {string}          responseString
+     * @param {string}          responseObject
      * @param {integer}         rawRequestId
      * @param {Node.response}   response
      */
-    end: function (responseString, rawRequestId, response) {
-        BR.updateRequest(responseString, rawRequestId, function (resStr) {
-            return BR.makeResponse(resStr, response);
+    end: function (responseObject, rawRequestId, response) {
+        check(responseObject, Object);
+        check(rawRequestId, Number);
+        BR.updateRawRequest(responseObject, rawRequestId, function () {
+            return BR.makeResponse(responseObject, response);
         });
     }
 };
-
-// should start working someday. iron:router issue.
-//Router.onBeforeAction(function () {
-//    try {
-//        BR.checkRequest(this.request.body);
-//    } catch (err) {
-//        if (err.name !== "RequestError") {
-//            console.log("RequestUnknownError", err);
-//            err.status = 500;
-//            err.statusString = "SERVER-ERROR";
-//            err.message = "Request check error"
-//        }
-//
-//        return this.response.end(JSON.stringify({
-//            status: err.status,
-//            statusString: err.statusString,
-//            message: err.message,
-//            data: null
-//        }));
-//    }
-//    BR.saveRequest(post);
-//
-//    this.next();
-//});
 
 // request data
 // {userId: <mongoId>, hash: <hashStr>, data: <data obj>}
