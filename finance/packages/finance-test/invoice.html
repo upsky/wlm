@@ -20,9 +20,9 @@
                 {{#if invoiceList }}
                     {{#each invoiceList}}
                         <li>
-                            {{id}} | {{amount}} | {{currency.code}} |
-                            <input type="button" id="do-invoice-delete-button" value="X"> |
-                            <input type="button" id="do-invoice-pay-button" value="p"> |
+                            {{id}} | {{amount}} | {{account.currencyId}} |
+                            <input type="button" id="do-invoice-delete-button" value="X" data-id="{{id}}"> |
+                            <input type="button" id="do-invoice-pay-button" value="$" data-id="{{id}}"> |
                         </li>
                     {{/each}}
                 {{else}}

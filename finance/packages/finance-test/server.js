@@ -49,7 +49,7 @@ Meteor.methods({
      * @return {*}
      */
     accountNew: function (userId, currencyId) {
-        return CR.httpCall("account/new", {userId: userId, data: {userId: userId, currencyId: +currencyId}});
+        return CR.httpCall("account/new", {userId: userId, data: {currencyId: +currencyId}});
     },
 
     /**
@@ -59,7 +59,7 @@ Meteor.methods({
      * @return {*}
      */
     accountDelete: function (userId, accountId) {
-        return CR.httpCall("account/delete", {userId: userId, data: {userId: userId, accountId: +accountId}});
+        return CR.httpCall("account/delete", {userId: userId, data: {accountId: +accountId}});
     },
 
     /**
@@ -73,7 +73,7 @@ Meteor.methods({
     accountTransfer: function (userId, fromAccountId, toAccountId, amount) {
         return CR.httpCall(
             "account/transfer",
-            {userId: userId, data: {userId: userId, fromAccountId: +fromAccountId, toAccountId: +toAccountId, amount: amount}}
+            {userId: userId, data: {fromAccountId: +fromAccountId, toAccountId: +toAccountId, amount: amount}}
         );
     },
 
@@ -93,7 +93,7 @@ Meteor.methods({
      * @return {*}
      */
     currencyNew: function (userId, currencyCode) {
-        return CR.httpCall("currency/new", {userId: userId, data: {userId: userId, currencyCode: currencyCode}});
+        return CR.httpCall("currency/new", {userId: userId, data: {currencyCode: currencyCode}});
     },
 
     /**
@@ -103,7 +103,7 @@ Meteor.methods({
      * @return {*}
      */
     currencyDelete: function (userId, currencyId) {
-        return CR.httpCall("currency/delete", {userId: userId, data: {userId: userId, currencyId: +currencyId}});
+        return CR.httpCall("currency/delete", {userId: userId, data: {currencyId: +currencyId}});
     },
 
     /**
@@ -123,7 +123,7 @@ Meteor.methods({
      * @return {*}
      */
     invoiceNew: function (userId, payToId, amount) {
-        return CR.httpCall("invoice/new", {userId: userId, data: {userId: userId, payToId: +payToId, amount: amount}});
+        return CR.httpCall("invoice/new", {userId: userId, data: {payToId: +payToId, amount: amount}});
     },
 
     /**
@@ -133,7 +133,7 @@ Meteor.methods({
      * @return {*}
      */
     invoiceDelete: function (userId, invoiceId) {
-        return CR.httpCall("invoice/delete", {userId: userId, data: {userId: userId, invoiceId: +invoiceId}});
+        return CR.httpCall("invoice/delete", {userId: userId, data: {invoiceId: +invoiceId}});
     },
 
     /**
@@ -143,6 +143,6 @@ Meteor.methods({
      * @return {*}
      */
     invoicePay: function (userId, invoiceId) {
-        return CR.httpCall("invoice/pay", {userId: userId, data: {userId: userId, invoiceId: +invoiceId}});
+        return CR.httpCall("invoice/pay", {userId: userId, data: {invoiceId: +invoiceId}});
     }
 });
