@@ -61,10 +61,12 @@ RawRequest = Sequelize.define("rawRequest",
         classMethods: {
             /**
              *
-             * @param {Object}      params {method, hash, rawData}
+             * @param {Object}      params {method, hash, rawData, [attributes]}
              * @param {Function}    callback
              */
             createRawRequest: function (params, callback) {
+                FH.checkClassMethodParams(params, callback);
+
                 var attributes = params.attributes || {};
                 RawRequest.create({
                     userId: params.userId, hash: params.hash, method: params.method, rawData: params.rawData
@@ -83,6 +85,8 @@ RawRequest = Sequelize.define("rawRequest",
              * @param {Function}    callback
              */
             updateRawRequest: function (params, callback) {
+                FH.checkClassMethodParams(params, callback);
+
                 RawRequest.findOne(
                     { where: {id: params.id} }
                 ).then(function (rawRequest) {

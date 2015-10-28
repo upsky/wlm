@@ -50,9 +50,13 @@ Currency = Sequelize.define("currency",
              * @param {Function}    callback
              */
             getCurrencyList: function (params, callback) {
+
                 var attributes = params.attributes || {};
-                var raw = params.raw || false;
-                Currency.findAll({attributes: attributes, raw: raw}).then(function (currencyList) {
+                Currency.findAll({
+                    attributes: attributes,
+                    raw: !!params.raw,
+                    nest: !!params.raw
+                }).then(function (currencyList) {
                     return typeof(callback) == typeof(Function) ? callback(currencyList) : currencyList;
                 }).catch(function (err) {
                     return typeof(callback) == typeof(Function) ? callback(err) : err;

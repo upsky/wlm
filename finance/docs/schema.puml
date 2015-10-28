@@ -47,8 +47,8 @@ package result {
         ownerId :string
         amount: string
         amountInt: bigInt
-        currencyId :int:fk
         payToId :int:fk
+        paid: :bool
         userData :json
         createdAt :dateTime
         updatedAt :dateTime
@@ -79,12 +79,11 @@ from -right-> result
 Account -left-> Currency:c_id
 Transaction -down-> Account:a_id
 Transaction -down-> Currency:c_id
-Invoice -down-> Currency:c_id
 Invoice -down-> Account:pTo_id
 Account -up-> Invoice:a_id
 ExchangeRate -up-> Currency:fc_id
 ExchangeRate -up-> Currency:tc_id
-Transaction -left-> Invoice:i_id
+Transaction -right-> Invoice:i_id
 ExchangeRateHistory -up- ExchangeRate
 
 legend right

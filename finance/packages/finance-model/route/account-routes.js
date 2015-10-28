@@ -5,7 +5,7 @@ Router.route("/api/v1/account/list", { where: "server", name: "account.list" })
             this.request,
             this.response,
             Account.getUserAccounts,
-            {userId: "userId", attributes: ["id", "amount"]}
+            {userId: "userId", attributes: ["id", "amount"], raw: true}
         );
     });
 

@@ -23,7 +23,7 @@ Transaction = Sequelize.define("transaction",
         },
         invoiceId: {
             type: SLib.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: Invoice
             }

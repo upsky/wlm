@@ -1,33 +1,14 @@
-/**
- * Error object to handle check logic errors.
- *
- * @param {int}     status
- * @param {string}  statusString
- * @param {string}  message
- * @constructor
- */
-function RequestError (status, statusString, message) {
-    check(status, Number);
-    check(statusString, String);
-    check(message, String);
-
-    this.name = "RequestError";
-    this.status = status;
-    this.statusString = statusString;
-    this.message = message;
-}
-
 BR = {
     /**
      * Get user token from mongo by given userId.
      *
-     * @throws RequestError
+     * @throws FH.RequestError
      * @param {string} userId
      * @returns {string | null}
      */
-    getToken: function (userId) {
+    getToken: function (userId) {return "fjds0j3lkahdf09u2ioj3knka";
         if (!userId) {
-            throw new RequestError(403, "ACCESS-DENIED", "user not defined")
+            throw new FH.RequestError(403, "ACCESS-DENIED", "user not defined")
         }
 
         check(userId, String);
@@ -58,26 +39,26 @@ BR = {
     /**
      * Checks if request.body object valid and throws error otherwise.
      *
-     * @throws RequestError
+     * @throws FH.RequestError
      * @param {Object} data
      */
     checkRequest: function (data) {
         if (!data) {
-            throw new RequestError(403, "ACCESS-DENIED", "data not received");
+            throw new FH.RequestError(403, "ACCESS-DENIED", "data not received");
         }
 
         check(data, Match.ObjectIncluding({userId: String, hash: String, data: Object}));
 
         var token = BR.getToken(data.userId);
         if (!token) {
-            throw new RequestError(403, "ACCESS-DENIED", "user is wrong");
+            throw new FH.RequestError(403, "ACCESS-DENIED", "user is wrong");
         }
 
         var rHash = data.hash;
         // hash = md5(concat(token, post.data))
         var gHash = BR.generateHash(token + JSON.stringify(data.data));
         if (rHash !== gHash) {
-            throw new RequestError(403, "ACCESS-DENIED", "hash string is wrong");
+            throw new FH.RequestError(403, "ACCESS-DENIED", "hash string is wrong");
         }
     },
 
@@ -123,7 +104,7 @@ BR = {
         }
         if (!err.status) { err.status = 500; }
 
-        return {status: err.status, statusString: "WRONG-DATA", message: err.message};
+        return {status: err.status, statusString: "WRONG-DATA", message: err.message, data: null};
     },
 
     /**
@@ -139,8 +120,16 @@ BR = {
         return JSON.stringify(_.pick(_.defaults(object, {data: null}), "status", "statusString", "message", "data"));
     },
 
+    /**
+     *
+     * @param {Object}          object
+     * @param {Node.response}   response
+     * @return {*|number}
+     */
     makeResponse: function (object, response) {
-        check(object, Object);
+        check(object, Match.ObjectIncluding(
+            {status: Number, statusString: String, message: String, data: Match.OneOf(Object, [Object], null)})
+        );
         response.statusCode = object.status;
 
         return response.end(BR.makeResponseString(object));
@@ -149,11 +138,12 @@ BR = {
     /**
      * Save rawRequest to DB. Make error response if fails.
      *
-     * @param {string}      method
-     * @param {Object}      data
-     * @param {Function}    callback
+     * @param {string}          method
+     * @param {Object}          data
+     * @param {Node.response}   response
+     * @param {Function}        callback
      */
-    saveRequest: function (method, data, callback) {
+    saveRequest: function (method, data, response, callback) {
         check(method, String);
         check(data, Object);
         RawRequest.createRawRequest(
@@ -162,7 +152,7 @@ BR = {
             if (BR.checkOrmResult(result)) {
                 return callback(result.id);
             } else {
-                return BR.makeResponse(BR.parseDbQueryError(result));
+                return BR.makeResponse(BR.parseDbQueryError(result), response);
             }
         });
     },
@@ -194,7 +184,7 @@ BR = {
         var checkRequest = BR.onBeforeAction(request.body, response);
         if (!checkRequest) { return false; }
 
-        BR.saveRequest(request.url, request.body, function (rawRequestId) {
+        BR.saveRequest(request.url, request.body, response, function (rawRequestId) {
             check(rawRequestId, Number);
             // fill methodParams blank object by request.body data
             _.each(methodParams, function (value, key) {

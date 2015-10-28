@@ -1,10 +1,3 @@
-function RequestError (status, statusString, message) {
-    this.name = "RequestError";
-    this.status = status;
-    this.statusString = statusString;
-    this.message = message;
-}
-
 Account = Sequelize.define("account",
     {
         id: {
@@ -48,7 +41,6 @@ Account = Sequelize.define("account",
         },
         updatedAt: {
             type: SLib.DATE,
-            allowNull: false,
             defaultValue: SLib.NOW
         },
         createdAt: {
@@ -69,15 +61,19 @@ Account = Sequelize.define("account",
             /**
              * Select accounts by params.userId with params.attributes.
              *
-             * @param {Object}      params {userId, attributes}
+             * @param {Object}      params {userId, attributes, raw}
              * @param {Function}    callback
              */
             getUserAccounts: function (params, callback) {
+                FH.checkClassMethodParams(params, callback);
+
                 var attributes = params.attributes || {};
                 Account.findAll({
                     where: {ownerId: params.userId},
                     attributes: attributes,
-                    include: {model: Currency, attributes: ["id", "code"]}
+                    include: {model: Currency, attributes: ["id", "code"] },
+                    raw: !!params.raw,
+                    nest: !!params.raw
                 }).then(function (accounts) {
                     return callback ? callback(accounts) : accounts;
                 }).catch(function (err) {
@@ -92,6 +88,8 @@ Account = Sequelize.define("account",
              * @param {Function}    callback
              */
             createAccount: function (params, callback) {
+                FH.checkClassMethodParams(params, callback);
+
                 var attributes = params.attributes || {};
                 Account.create({
                     ownerId: params.userId, currencyId: params.currencyId
@@ -111,25 +109,26 @@ Account = Sequelize.define("account",
              * @param {Function}    callback
              */
             deleteAccount: function (params, callback) {
+                FH.checkClassMethodParams(params, callback);
+
+                var attributes = params.attributes || null;
                 Account.findOne({
                     where: {id: params.accountId, ownerId: params.userId}
                 }).then(function (account) {
                     if (!account) {
-                        let error = new RequestError(404, "NOT-FOUND", "account not found with id " + params.accountId);
+                        let error = new FH.RequestError(404, "NOT-FOUND", `account not found with id={params.accountId}`);
 
                         return callback ? callback(error) : error;
                     }
 
                     if (account.get('amount') !== "0") {
-                        let error = new RequestError(403, "ACCESS-DENIED", "can not remove not empty account");
+                        let error = new FH.RequestError(403, "ACCESS-DENIED", "can not remove not empty account");
 
                         return callback ? callback(error) : error;
                     }
 
-                    account.destroy().then(function (result) {
-                        if (params.attributes) {
-                            result = _.pick(result, params.attributes);
-                        }
+                    account.destroy().then(function (deleteResult) {
+                        var result = _.pick(deleteResult, attributes);
 
                         return callback ? callback(result) : result;
                     }).catch(function (err) {
@@ -144,16 +143,19 @@ Account = Sequelize.define("account",
              * Transfer params.amount from params.fromAccountId to params.toAccountId.
              * Uses transaction.
              *
-             * @param params {userId, fromAccountId, toAccountId, amount}
-             * @param callback
+             * @param {Object}      params {userId, fromAccountId, toAccountId, amount}
+             * @param {Function}    callback
              * @return {Promise.<T>}
              */
             transferBTAccounts: function (params, callback) {
+                FH.checkClassMethodParams(params, callback);
+
                 return Sequelize.transaction(function (t) {
                     return Account.checkTransferAbility(params, function (result) {
-                        if (result === Array) {
+                        if (result instanceof FH.RequestError) {
                             return callback ? callback(result) : result;
                         }
+
                         var accounts = result;
                         var fromAccount = accounts[0].get("id") === params.fromAccountId
                             ? accounts.shift()
@@ -166,12 +168,14 @@ Account = Sequelize.define("account",
                             .then(function () {
                                 let amount = (new BN(toAccount.get("amount"))).plus(params.amount).toString();
                                 let amountInt = FH.amountToInt(amount);
+
                                 return toAccount.set("amount", amount).set("amountInt", amountInt).save({transaction: t})
                                     .then(function () {
                                         let amount = (new BN(params.amount)).times(-1).toString();
                                         let negativeAmountInt = FH.amountToInt(amount);
 
                                         let positiveAmountInt = FH.amountToInt(params.amount);
+
                                         return Transaction.bulkCreate([
                                             {
                                                 accountId: params.fromAccountId,
@@ -185,7 +189,15 @@ Account = Sequelize.define("account",
                                                 amountInt: positiveAmountInt,
                                                 userData: {userId: params.userId}
                                             }
-                                        ], {transaction: t});
+                                        ], {transaction: t, raw: true, attributes: ["amount"]}).then(function (transactions) {
+                                            var ts = [];
+                                            // notice: postgres return rows from DB, mysql not!
+                                            _.each(transactions, function (t) {
+                                                ts.push(_.pick(t, ["id", "amount"]));
+                                            });
+
+                                            return callback ? callback(ts) : ts;
+                                        });
                                     }).catch(function (err) {
                                         return callback ? callback(err) : err;
                                     });
@@ -209,8 +221,10 @@ Account = Sequelize.define("account",
              * @return {*}
              */
             checkTransferAbility: function (params, callback, transaction) {
+                FH.checkClassMethodParams(params, callback);
+
                 if (params.fromAccountId === params.toAccountId) {
-                    let error = new RequestError(
+                    let error = new FH.RequestError(
                         403, "WRONG-ACCOUNT", "can not transfer between the same account"
                     );
 
@@ -235,7 +249,7 @@ Account = Sequelize.define("account",
                                 : params.fromAccountId;
                         }
 
-                        let error = new RequestError(404, "NOT-FOUND", "account not found with id " + wrongId);
+                        let error = new FH.RequestError(404, "NOT-FOUND", "account not found with id " + wrongId);
 
                         return callback ? callback(error) : error;
                     }
@@ -247,7 +261,7 @@ Account = Sequelize.define("account",
                         : accounts.pop();
                     var toAccount = accounts[0];
                     if (fromAccount.get("currencyId") !== toAccount.get("currencyId")) {
-                        let error = new RequestError(
+                        let error = new FH.RequestError(
                             403, "WRONG-CURRENCY", "can not transfer between different currency accounts"
                         );
 
@@ -257,15 +271,15 @@ Account = Sequelize.define("account",
                     // checks amount >= 0
                     var amount = new BN(params.amount);
                     if (amount.lte(0)) {
-                        let error = new RequestError(403, "WRONG-AMOUNT", "amount value is wrong");
+                        let error = new FH.RequestError(403, "WRONG-AMOUNT", "amount value is wrong");
 
                         return callback ? callback(error) : error;
                     }
 
                     // check fromAccountAmount >= amount
                     var fromAccountAmount = new BN(fromAccount.get("amount"));
-                    if (fromAccountAmount.minus(amount).lte(0)) {
-                        let error = new RequestError(
+                    if (fromAccountAmount.minus(amount).lt(0)) {
+                        let error = new FH.RequestError(
                             403, "WRONG-AMOUNT", "can not transfer more then account contains"
                         );
 
