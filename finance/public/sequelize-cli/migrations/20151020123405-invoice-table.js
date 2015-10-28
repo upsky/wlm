@@ -22,14 +22,6 @@ module.exports = {
                     type: Sequelize.BIGINT,
                     allowNull: false
                 },
-                currencyId: {
-                    type: Sequelize.INTEGER,
-                    allowNull: false,
-                    references: {
-                        model: "currency",
-                        key: "id"
-                    }
-                },
                 payToId: {
                     type: Sequelize.INTEGER,
                     allowNull: false,
@@ -37,6 +29,11 @@ module.exports = {
                         model: "account",
                         key: "id"
                     }
+                },
+                paid: {
+                    type: Sequelize.BOOLEAN,
+                    allowNull: false,
+                    defaultValue: false
                 },
                 userData: {
                     type: Sequelize.TEXT,
