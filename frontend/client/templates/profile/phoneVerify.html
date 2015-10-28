@@ -1,6 +1,6 @@
 <template name="phoneVerify">
     {{#Layout template="panel" data=phoneField}}
-        {{#autoForm id="phoneField" type=formType meteormethod="updateProfile" schema="Schemas.phoneField" }}
+        {{#autoForm id="phoneField" type=formType meteormethod="updateProfile" schema="Schemas.phoneField" resetOnSuccess=false}}
             <div class="form-group {{#if afFieldIsInvalid name='phone'}} has-error{{/if}}">
                 <label class="control-label">{{_ "formFields.phone.label"}}</label>
 

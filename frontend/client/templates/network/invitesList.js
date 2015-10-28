@@ -17,6 +17,7 @@ Template.invitesList.helpers({
 				},
 				{
 					key: 'created', label: TAPi18n.__('formFields.created.label'),
+					sortOrder: 1, sortDirection: 'ascending',
 					fn: function (value) {
 						if (value instanceof Date) {
 							return moment(value).fromNow();

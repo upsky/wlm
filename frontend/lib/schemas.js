@@ -182,6 +182,7 @@ Schemas.videosSchema = new SimpleSchema({
 Schemas.phoneField = new SimpleSchema({
 	phone: {
 		type: String,
+		regEx: /^[0-9]{10}$/,
 		min: 10,
 		max: 10
 	}
@@ -190,6 +191,7 @@ Schemas.phoneField = new SimpleSchema({
 Schemas.verifyPhone = new SimpleSchema({
 	verificationCode: {
 		type: String,
+		regEx: /^[0-9]{6}$/,
 		min: 6
 	}
 });

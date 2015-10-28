@@ -13,7 +13,7 @@ registerPartner = function (doc) {
 	// update invite
 	db.invites.update({ _id: doc._id }, {
 		$set: {
-			status: 'used',
+			status: 'ready',
 			email: doc.email,
 			name: doc.name
 		}
@@ -40,7 +40,8 @@ registerPartner = function (doc) {
 		email: doc.email,
 		password: doc.newPass,
 		profile: {
-			name: doc.name
+			name: doc.name,
+			inviteId: invite._id
 		}
 	});
 
@@ -58,10 +59,8 @@ registerPartner = function (doc) {
 
 	db.invites.update(doc._id, {
 		$set: {
-			status: 'used',
 			userId: newUserId,
-			username: username,
-			used: new Date()
+			username: username
 		}
 	});
 
@@ -208,6 +207,15 @@ Meteor.methods({
 			}
 		});
 
+	},
+	firstUserLogin: function () {
+		var inviteId = Meteor.user().profile.inviteId;
+		db.invites.update({ _id: inviteId }, {
+			$set: {
+				status: 'used',
+				used: new Date()
+			}
+		});
 	}
 });
 
