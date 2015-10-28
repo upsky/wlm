@@ -1,6 +1,6 @@
 <template name="phoneVerify">
     {{#Layout template="panel" data=phoneField}}
-        {{#autoForm id="phoneField" type=formType meteormethod="updateProfile" schema="Schemas.phoneField" }}
+        {{#autoForm id="phoneField" type=formType meteormethod="updateProfile" schema="Schemas.phoneField" resetOnSuccess=false}}
             <div class="form-group {{#if afFieldIsInvalid name='phone'}} has-error{{/if}}">
                 <label class="control-label">{{_ "formFields.phone.label"}}</label>
 
@@ -17,9 +17,6 @@
                     <div class="input-group-addon">+7</div>
                     {{> afFieldInput type="tel" class="form-control" readonly="readonly" name="phone" value=user.profile.phones.[0].number}}
                 </div>
-                {{#if afFieldIsInvalid name='phone'}}
-                    <span class="help-block">{{afFieldMessage name='phone'}}</span>
-                {{/if}}
             </div>
             {{#unless phoneExist}}
                 <button type="submit" class="btn btn-success">{{_ "buttons.save"}}</button>
@@ -38,7 +35,7 @@
         {{#if phoneExist}}
             {{#unless phoneVerified}}
                 {{#autoForm id="verifyPhone" type="method" meteormethod="checkVerifyCodePhone" schema="Schemas.verifyPhone" }}
-                    {{> afQuickField type="tel" class="form-control" name="verificationCode" }}
+                    {{> afQuickField type="text" class="form-control" name="verificationCode" }}
 
                     <button type="submit" class="btn btn-success">{{_ "buttons.save"}}</button>
                 {{/autoForm}}

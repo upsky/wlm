@@ -1,5 +1,5 @@
 <template name="reg">
-    {{#unless inviteUsed}}
+    {{#if showIs 'active'}}
         {{#autoForm id="regForm" type="normal" schema="Schemas.registerPartner" resetOnSuccess=true}}
             <h4 class="text-center"> {{_ "messages.welcome"}}</h4>
             {{> afQuickField type="text" class="form-control input-lg" name="name" placeholder="schemaLabel" value=name}}
@@ -14,7 +14,15 @@
                 <input type="submit" class="btn btn-lg btn-success" value="{{_ "buttons.enter"}}"/>
             </div>
         {{/autoForm}}
-    {{else}}
+    {{/if}}
+
+
+    {{#if showIs 'ready'}}
+        <div class="alert alert-success" role="alert">{{_ 'messages.loading'}}</div>
+        {{> loading}}
+    {{/if}}
+
+    {{#if showIs 'used'}}
         <div class="error-page">
             <section class="text-left">
                 <div class="panel panel-default panel-block panel-error-block">
@@ -31,5 +39,5 @@
                 </div>
             </section>
         </div>
-    {{/unless}}
+    {{/if}}
 </template>

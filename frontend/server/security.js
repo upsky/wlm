@@ -112,7 +112,7 @@ WlmSecurity.addMethods({
 		authNotRequired: false,
 		roles: 'all'
 	},
-	sendSms: {
+	firstUserLogin: {
 		authNotRequired: false,
 		roles: 'all'
 	},

@@ -17,7 +17,8 @@ AutoForm.hooks({
 			var loginData = this.insertDoc;
 
 			Meteor.loginWithPassword(loginData.email, loginData.newPass, function (err) {
-				return Router.go('/');
+				Meteor.call("firstUserLogin");
+				Router.go('/');
 			});
 		},
 
@@ -53,8 +54,8 @@ Template.reg.helpers({
 	"iamreg": function () {
 		return 'iam reg';
 	},
-	inviteUsed: function () {
-		return this.status === 'used';
+	showIs: function (status) {
+		return (this.status === status ? true : false);
 	}
 });
 
