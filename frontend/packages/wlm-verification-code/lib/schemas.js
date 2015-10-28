@@ -1,3 +1,6 @@
+SimpleSchema.RegEx.Phone = /^[0-9]{10}$/;
+
+
 verificationCodeSchemas = new SimpleSchema({
 	userId: {
 		type: String,
@@ -5,7 +8,7 @@ verificationCodeSchemas = new SimpleSchema({
 	},
 	phoneNumber: {
 		type: String,
-		regEx: /^[0-9]{10}$/,
+		regEx: SimpleSchema.RegEx.Phone,
 		min: 10,
 		max: 10
 	},

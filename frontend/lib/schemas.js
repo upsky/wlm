@@ -1,7 +1,9 @@
 this.Schemas = {};
 
 SimpleSchema.debug = true;
-SimpleSchema.RegEx.Id = /^[2-9A-Za-z]{13,32}$/
+SimpleSchema.RegEx.Id = /^[2-9A-Za-z]{13,32}$/;
+SimpleSchema.RegEx.Phone = /^[0-9]{10}$/;
+SimpleSchema.RegEx.Code = /^[0-9]{6}$/;
 
 /**
  * TODO translate this
@@ -182,7 +184,7 @@ Schemas.videosSchema = new SimpleSchema({
 Schemas.phoneField = new SimpleSchema({
 	phone: {
 		type: String,
-		regEx: /^[0-9]{10}$/,
+		regEx: SimpleSchema.RegEx.Phone,
 		min: 10,
 		max: 10
 	}
@@ -191,7 +193,7 @@ Schemas.phoneField = new SimpleSchema({
 Schemas.verifyPhone = new SimpleSchema({
 	verificationCode: {
 		type: String,
-		regEx: /^[0-9]{6}$/,
+		regEx: SimpleSchema.RegEx.Code,
 		min: 6
 	}
 });

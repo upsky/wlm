@@ -17,9 +17,6 @@
                     <div class="input-group-addon">+7</div>
                     {{> afFieldInput type="tel" class="form-control" readonly="readonly" name="phone" value=user.profile.phones.[0].number}}
                 </div>
-                {{#if afFieldIsInvalid name='phone'}}
-                    <span class="help-block">{{afFieldMessage name='phone'}}</span>
-                {{/if}}
             </div>
             {{#unless phoneExist}}
                 <button type="submit" class="btn btn-success">{{_ "buttons.save"}}</button>
