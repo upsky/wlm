@@ -34,8 +34,6 @@ class Search {
 	}
 }
 
-// ------------------------
-
 class Source {
 	constructor (collection, options) {
 		check(collection, Mongo.Collection);
@@ -170,7 +168,7 @@ class Sync {
 		/** @type {?{ added: Map, updated: Map, removed: Set }} */
 		sync.pending = null;
 		sync.timeout = false;
-		sync.updated = this.updated(source.name) || new Date();
+		sync.updated = this.updated(source.name);
 
 		sync.reset = () => {
 			sync.pending = { added: new Map(), updated: new Map(), removed: new Set() };
@@ -202,18 +200,18 @@ class Sync {
 
 		sync.reset();
 
-		source.collection.find({
+		source.collection.find.apply(source.collection, sync.updated ? [{
 			$or: [
 				{ [source.fields.created]: { $gt: sync.updated } },
 				{ [source.fields.updated]: { $gt: sync.updated } }
 			]
-		}).observe({
+		}] : []).observe({
 			added (doc) {
 				let _created = source.created(doc);
-				if (!_created /* TODO save it to doc? */ || _created > sync.updated)
+				if (!_created /* TODO save it to doc? */ || _created > sync.updated || !sync.updated)
 					return void sync.add(doc);
 				let _updated = source.updated(doc);
-				if (_updated && _updated > sync.updated)
+				if (_updated && sync.updated && _updated > sync.updated)
 					sync.update(doc);
 			},
 			changed (after, before) {

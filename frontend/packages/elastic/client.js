@@ -6,9 +6,7 @@ class Search {
 	}
 
 	query (query) {
-		check(query, String);
-		query = query.trim();
-		if (query === '') {
+		if (this.isEmpty(query)) {
 			this._results.set([]);
 		} else {
 			Meteor.call(`search/${this._type}`, query, (error, result) => {
@@ -22,6 +20,11 @@ class Search {
 
 	results () {
 		return this._results.get();
+	}
+
+	//noinspection JSMethodCanBeStatic
+	isEmpty (query) { // may be overridden
+		return query === '';
 	}
 }
 

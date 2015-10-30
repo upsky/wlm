@@ -217,8 +217,11 @@ template.events({
 
 	'submit .catalog-search-form form': function (e) {
 		e.preventDefault();
-		var query = $(e.target).find('input[type=search]').val().trim();
-		if (query === '')
+		var query = {
+			text: $(e.target).find('input[type=search]').val().trim(),
+			sort: $(e.target).find('select').val()
+		};
+		if (query.text === '')
 			return;
 		var state = Template.instance().__state;
 		state.search.query(query);
@@ -418,7 +421,7 @@ templateProductForm.helpers({
 });
 
 templateProductForm.events({
-	'keyup input, keyup textarea': function(e, ti) {
+	'keyup input, keyup textarea': function(e, ti) { // TODO doesn't react to Chrome's autocomplete
 		var backup = ti._dataBackup.get();
 
 		backup[e.target.name] = e.target.value;
