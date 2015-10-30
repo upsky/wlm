@@ -15,6 +15,8 @@ Package.onUse(function(api) {
 	api.use('wlm:jquery-ui-drag-drop-resize');
 	api.use('twbs:bootstrap');
 	api.use('iron:router');
+	api.use('cfs:standard-packages');
+	api.use('cfs:graphicsmagick');
 
 	api.addFiles([
 		'collections.js',

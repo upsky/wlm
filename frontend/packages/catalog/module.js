@@ -11,8 +11,11 @@ CatalogConstructor = (function() {
 		var categories = {};
 		var collName = 'catalog';
 		var coll = CatalogCollection;
+		var goodsColl = GoodsCollection;
+		var imgColl = ImagesCollection;
 		var catName = _.isString(config) ? config : config.catalogName;
 
+		var imgSub = Meteor.subscribe('catalogImages');
 		var sub = Meteor.subscribe(collName, function() {
 			var doc = coll.find({ title: catName }, { limit: 1 });
 			var data = doc.fetch();
@@ -274,19 +277,17 @@ CatalogConstructor = (function() {
 			function goods(categoryId) {
 				var goods = {};
 				var ready = new ReactiveVar(false);
-				var goodsColl = GoodsCollection;
-				var sub = Meteor.subscribe('goods', function() {
+
+				var sub = Meteor.subscribe('goods', categoryId, function() {
 					ready.set(true);
 				});
 
 				// Функция создаёт класс продукта
-				var makeProduct = function(data) {
-					if (goods[data._id]) {
-						_.extend(goods[data._id]._data, data);
-
-						return goods[data._id];
+				var makeProduct = function(id) {
+					if (goods[id]) {
+						return goods[id];
 					} else {
-						return goods[data._id] = new ProductConstructor(data);
+						return goods[id] = new ProductConstructor(id);
 					}
 				};
 
@@ -295,7 +296,7 @@ CatalogConstructor = (function() {
 					check(id, String);
 
 					return goodsColl.find({ _id: id, limit: 1 }).map(function(doc) {
-						return makeProduct(doc);
+						return makeProduct(doc._id);
 					});
 				};
 				// Метод возвращает количество товаров в категории
@@ -305,7 +306,7 @@ CatalogConstructor = (function() {
 				// Метод возвращает товары из категории
 				this.getChildren = function() {
 					return goodsColl.find({ categories: { $all: [categoryId] } }).map(function(doc) {
-						return makeProduct(doc);
+						return makeProduct(doc._id);
 					});
 				};
 				// Метод создаёт товар
@@ -314,7 +315,14 @@ CatalogConstructor = (function() {
 						if (error) {
 							self.logError(error);
 						} else if (cb) {
-							cb(makeProduct(goodsColl.findOne(result)));
+							var product = makeProduct(result);
+
+							Meteor.autorun(function(c) {
+								if (product.ready()) {
+									c.stop();
+									cb(product);
+								}
+							});
 						}
 					});
 				};
@@ -328,10 +336,26 @@ CatalogConstructor = (function() {
 		}());
 
 		var ProductConstructor = (function() {
-			function product(data) {
-				check(data, Object);
+			function product(id) {
+				check(id, String);
 
-				this._data = data;
+				var product = this;
+				var ready = new ReactiveVar(false);
+
+				this._data = new ReactiveVar({});
+
+				setTimeout(function() {
+					Meteor.autorun(function() {
+						var data = goodsColl.findOne(id);
+
+						if (data) {
+							product._data.set(data);
+							if (!ready.curValue) {
+								ready.set(true);
+							}
+						}
+					});
+				}, 0);
 
 				// Метод возвращает ID
 				this.id = function() {
@@ -342,10 +366,14 @@ CatalogConstructor = (function() {
 					check(data, Match.Optional(Object));
 
 					if (data && !_.isEmpty(data)) {
-						_.extend(this._data, data);
+						var dt = this._data.get();
+
+						_.extend(dt, data);
+
+						return dt;
 					}
 
-					return this._data;
+					return this._data.get();
 				};
 				// Метод возвращает заголовок
 				this.title = function(title) {
@@ -363,13 +391,55 @@ CatalogConstructor = (function() {
 
 					return this.data(data).description || '';
 				};
+				// Метод возвращает ID картинки
+				this.imageId = function() {
+					return this.data().imageId;
+				};
 				// Метод возвращает адрес картинки
-				this.imageUrl = function(imageUrl) {
-					check(imageUrl, Match.Optional(String));
+				this.imageUrl = function(store) {
+					var imageId = this.data().imageId;
+					var image = imageId ? imgColl.findOne(imageId) : null;
 
-					var data = imageUrl ? { imageUrl: imageUrl } : {};
+					return image ? image.url({ store: store || 'thumbs' }) : '';
+				};
+				// Метод загружет картинку
+				this.setImage = function(image, cb) {
+					check(image, Match.OneOf(String, File));
 
-					return this.data(data).imageUrl || '';
+					if (_.isString(image) && (image.slice(0, 5) === 'http:' || image.slice(0, 6) === 'https:')) {
+						Meteor.apply('setProductImage', [image, this.id()], function(error) {
+							if (error) {
+								self.logError(error);
+							} else {
+								if (cb) {
+									cb();
+								}
+							}
+						});
+					} else {
+						var fsFile = new FS.File();
+
+						fsFile.attachData(image, function(error) {
+							if (error) {
+								self.logError(error);
+							} else {
+								fsFile.metadata = {
+									productId: product.id(),
+									uploadedUserId: Meteor.userId()
+								};
+
+								ImagesCollection.insert(fsFile, function(error, fileObj) {
+									if (error) {
+										self.logError(error);
+									} else {
+										if (cb) {
+											cb(fileObj);
+										}
+									}
+								});
+							}
+						});
+					}
 				};
 				// Метод сохраняет данные
 				this.save = function(cb) {
@@ -380,6 +450,10 @@ CatalogConstructor = (function() {
 							cb(result);
 						}
 					});
+				};
+
+				this.ready = function() {
+					return ready.get();
 				};
 			}
 

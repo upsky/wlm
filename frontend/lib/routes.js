@@ -137,7 +137,10 @@ if (Meteor.pubSettings('isDown')) {
 	Router.route('/main', {
 		layoutTemplate: 'defaultLayout',
 		template: 'main',
-		name: 'main'
+		name: 'main',
+		data: function() {
+			return new CatalogConstructor('main');
+		}
 	});
 	Router.route('/admin/video', {
 		layoutTemplate: 'fullLayout',

@@ -32,6 +32,7 @@ cfs:collection-filters@0.2.4
 cfs:data-man@0.0.6
 cfs:file@0.1.17
 cfs:filesystem@0.1.2
+cfs:graphicsmagick@0.0.18
 cfs:gridfs@0.0.33
 cfs:http-methods@0.0.30
 cfs:http-publish@0.0.13
@@ -116,6 +117,7 @@ npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 ordered-dict@1.0.4
 overtonik:log-logins@0.0.1
+overtonik:statistic@0.0.1
 peppelg:bootstrap-3-modal@1.0.3
 percolate:migrations@0.9.6
 percolatestudio:synced-cron@1.1.0

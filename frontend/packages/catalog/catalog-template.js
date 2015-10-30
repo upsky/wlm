@@ -353,9 +353,25 @@ templateProductForm.onCreated(function () {
 	this.autorun(function () {
 		var selected = self.view.lookup('selected')();
 
+		self.__last_img_src = '';
+
 		if (selected != lastSelected) {
-			self._dataBackup = new ReactiveVar({});
+			self._dataBackup = new ReactiveVar(selected._data ? _.reduceRight({ title: selected._data.title, description: selected._data.description }, function(memo, val, key) {
+				if (val) {
+					memo[key] = val;
+				}
+				return memo;
+			}, {}) : {});
 			lastSelected = selected;
+
+			delete self.__file;
+			if (self.data.__imgSrc) {
+				self.data.__imgSrc.set('');
+			}
+			if (self.data.__imgName) {
+				self.data.__imgName.set('');
+			}
+			$('#editor__product__image').val('');
 		}
 	});
 });
@@ -390,29 +406,128 @@ templateProductForm.helpers({
 		var data = this.data();
 
 		return (!_.isEmpty(backup) && _.some(backup, function(val, key) { return val != data[key]; })) ? '' : 'disabled';
+	},
+	imgSrc: function() {
+		var ti = Template.instance();
+
+		if (!ti.data.__imgSrc) {
+			ti.data.__imgSrc = new ReactiveVar('');
+			return ti.data.__imgSrc.get();
+		}
+
+		return ti.data.__imgSrc.get();
+	},
+	imgName: function() {
+		var ti = Template.instance();
+		var src = ti.data.__imgSrc && ti.data.__imgSrc.get() || '';
+
+		if (!ti.data.__imgName) {
+			ti.data.__imgName = new ReactiveVar('');
+		}
+
+		return /^blob/.test(src) ? ti.data.__imgName.get() : src;
+	},
+	fileSelected: function() {
+		return Template.instance()._dataBackup.get().fileSelected;
 	}
 });
 
 templateProductForm.events({
-	'keyup input, keyup textarea': function(e, ti) {
+	'keyup input, keyup textarea, change #editor__product__image_url': function(e, ti) {
+		if (ti.__last_img_src == e.target.value) {
+			return;
+		}
+
 		var backup = ti._dataBackup.get();
 
-		backup[e.target.name] = e.target.value;
+		if (e.target.id == 'editor__product__image_url') {
+			delete ti.__file;
+			$('#editor__product__image').val('');
+
+			var img = $('#editor__product__image_thumb');
+
+			img.one('load', function(e) {
+				img.off('error');
+				backup.fileSelected = true;
+				ti._dataBackup.set(backup);
+			}).one('error', function() {
+				img.off('load');
+
+				backup.fileSelected = false;
+				ti._dataBackup.set(backup);
+			});
+
+			ti.__last_img_src = e.target.value;
+			ti.data.__imgSrc.set(e.target.value);
+		} else {
+			backup[e.target.name] = e.target.value;
+			ti._dataBackup.set(backup);
+		}
+	},
+	'click #editor__product__image_select_btn': function(e, ti) {
+		ti.$('#editor__product__image').click();
+	},
+	'change #editor__product__image': function(e, ti) {
+		var file = e.target.files[0];
+
+		if (!file) {
+			return;
+		}
+
+		var name = file.name;
+		var backup = ti._dataBackup.get();
+
+		if (ti.__blobUrl) {
+			URL.revokeObjectURL(ti.__blobUrl);
+		}
+
+		ti.__file = file;
+		ti.data.__imgSrc.set(URL.createObjectURL(file));
+		ti.data.__imgName.set(name);
+
+		delete backup.imageUrl;
+
+		backup.fileSelected = true;
 
 		ti._dataBackup.set(backup);
 	},
 	'submit form': function(e, ti) {
 		e.preventDefault();
 
+		var backup = ti._dataBackup.get();
+		var imgSrc = ti.data.__imgSrc.get();
+		var img = backup.fileSelected ? (ti.__file || imgSrc) : null;
+		var setImage = function(product) {
+			product.setImage(img);
+			ti.data.__imgSrc.set('');
+			ti.data.__imgName.set('');
+		};
+
+		delete ti.__last_img_src;
+		delete backup.fileSelected;
+
 		if (!this._data) {
-			ti.data.goods.createChild(ti._dataBackup.get() || {});
+			ti.data.goods.createChild(backup || {}, function(product) {
+				if (img) {
+					setImage(product);
+				}
+			});
 		} else {
-			this.data(ti._dataBackup.get() || {});
-			this.save(function () {
+			var product = this;
+
+			this.data(backup || {});
+			this.save(function() {
 				ti._dataBackup.set({});
+				if (img) {
+					setImage(product);
+				}
 			});
 		}
 		ti.$('#editor__product__title').blur();
+
+		if (imgSrc) {
+			URL.revokeObjectURL(imgSrc);
+		}
 	}
 });
 

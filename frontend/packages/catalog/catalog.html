@@ -91,8 +91,17 @@
                         <textarea id="editor__product__description" name="description" class="form-control">{{description}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="editor__product__image_url" class="control-label">Ссылка на картинку:</label>
-                        <input id="editor__product__image_url" type="text" name="imageUrl" value="{{imageUrl}}" class="form-control">
+                        <label for="editor__product__image_url" class="control-label">Картинка:</label>
+                        <div class="product-thumb {{#unless fileSelected}}bad-url{{/unless}}">
+                            <img id="editor__product__image_thumb" src="{{imgSrc}}">
+                        </div>
+                        <div class="input-group">
+                            <input id="editor__product__image_url" type="text" name="imageUrl" value="{{imgName}}" class="form-control" placeholder="URL картинки">
+                            <input id="editor__product__image" type="file" accept="image/*">
+                            <span class="input-group-btn">
+                                <button id="editor__product__image_select_btn" class="btn btn-default" type="button"><i class="fa fa-picture-o"></i></button>
+                            </span>
+                        </div>
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-success {{disabledClass}}">{{#if _data}}Сохранить{{else}}Создать{{/if}}</button>
@@ -120,6 +129,8 @@
 <template name="product">
     <div class="product {{#if isSelected}}selected{{/if}}">
         <h5 class="title">{{title}}</h5>
-        <img src="{{imageUrl}}">
+        {{#if imageUrl}}
+            <img src="{{imageUrl}}">
+        {{/if}}
     </div>
 </template>

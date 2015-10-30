@@ -1,13 +1,14 @@
 
 <template name="main">
-    <div class="main-page">
+    <div class="main-page scrollable">
         {{> header}}
         <div class="content">
             <div class="row search-block">
-                <div class="col-sm-2 text-center">
-                    <a class="wl-tour">
+                <div class="col-sm-2 text-right">
+                    <a class="wl-tour text-left">
                         <span class="small-text">Быстрый тур по</span>
                         <span>WL Market</span>
+                        <i class="fa fa-play-circle"></i>
                     </a>
                 </div>
                 <div class="col-sm-8">
@@ -17,40 +18,70 @@
                             <button class="btn btn-default" type="button">Найти</button>
                         </span>
                     </div>
-                    <span class="example">Найдите например: <a>ПРОГУЛКИ ВЕРХОМ НА КОНЕ</a> или <a>САНТЕХНИК СРОЧНО</a></span>
+                    <span class="example">Найдите например: <a>прогулки верхом на коне</a> или <a>сантехник срочно</a></span>
                 </div>
             </div>
             <div class="row categories-block">
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="row">
-                        <div class="col-sm-6">
-
-                            <div class="row">
-                                <div class="col-sm-6">
-
-                                </div>
-                                <div class="col-sm-6">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-6">
-
-                                </div>
-                                <div class="col-sm-6">
-
-                                </div>
-                            </div>
-                        </div>
+                        {{#each catalogs}}
+                            {{> mainCatalog}}
+                        {{/each}}
                     </div>
                 </div>
                 <div class="col-sm-2 text-center">
-
+                    <a class="question text-center">
+                        <i class="fa fa-envelope-o"></i>
+                        <span>Задать<br>вопрос</span>
+                    </a>
+                </div>
+            </div>
+            <div class="row items-block">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="filters">
+                        Фильтры: <a>новые</a> <a>годные</a> <a>популярные</a> <a>лучшие</a> <a>уникальные</a> <a>VIP</a>
+                    </div>
+                    <div class="items">
+                        {{#each catalogItems}}
+                            {{> mainCatalogItem}}
+                        {{/each}}
+                    </div>
                 </div>
             </div>
         </div>
         {{> footer}}
+    </div>
+</template>
+
+<template name="mainCatalog">
+    <div class="col-sm-6 col-catalog">
+        <a class="btn btn-default btn-block">{{title}}</a>
+        <div class="row">
+            {{#each categories}}
+                {{> mainCategory}}
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="mainCategory">
+    <div class="col-sm-6 col-category">
+        <a class="btn btn-default btn-block">{{title}}</a>
+    </div>
+</template>
+
+<template name="mainCatalogItem">
+    <div class="col-sm-4 catalog-item">
+        <div class="catalog-title text-center">{{title}}</div>
+        {{#each items}}
+            {{> mainCategoryItem}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="mainCategoryItem">
+    <div class="col-sm-6 category-item">
+        <div class="main-item-image" style="{{background}}"></div>
+        <a class="item-more text-center">Подробнее</a>
     </div>
 </template>

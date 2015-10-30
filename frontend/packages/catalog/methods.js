@@ -132,6 +132,10 @@ Meteor.methods({
 
 		data.categories = [categoryId];
 
+		if (data.imageId && data.imageUrl) {
+			delete data.imageUrl;
+		}
+
 		check(data, Schemas.Goods);
 
 		return GoodsCollection.insert(data);
@@ -144,8 +148,39 @@ Meteor.methods({
 
 		delete data._id;
 
+		if (data.imageId && data.imageUrl) {
+			delete data.imageUrl;
+		}
+
 		check(data, Schemas.Goods);
 
 		return !!GoodsCollection.update(id, { $set: data });
+	},
+	// Метод добавляет картинку продукта
+	setProductImage: function(image, productId) {
+		check(image, String);
+		check(productId, String);
+
+		var product = GoodsCollection.findOne(productId);
+
+		if (!product) {
+			throw new Meteor.Error(400, 'Product not find');
+		}
+
+		var fsFile = new FS.File();
+
+		fsFile.metadata = {
+			productId: productId,
+			uploadedUserId: this.userId
+
+		};
+
+		fsFile.attachData(image, function(error) {
+			if (error) {
+				throw new Meteor.Error(400, 'Error loading image');
+			}
+
+			var fileObj = ImagesCollection.insert(fsFile);
+		});
 	}
 });

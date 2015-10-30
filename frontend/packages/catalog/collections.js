@@ -1,4 +1,36 @@
 
+ImagesCollection = new FS.Collection('catalogImages', {
+	stores: [
+		new FS.Store.FileSystem('thumbs', {
+			beforeWrite: function(fileObj) {
+				return {
+					extension: 'png',
+					type: 'image/png'
+				};
+			},
+			transformWrite: function(fileObj, readStream, writeStream) {
+				gm(readStream, fileObj.name()).resize('200', '200^').gravity('Center').extent('200', '200').quality(75).level('20', '100%', '0.80').stream('PNG').pipe(writeStream);
+			},
+			path: '~/meteor/wlm/uploads/catalog/products/thumbs'
+		}),
+		new FS.Store.FileSystem('fullImages', {
+			beforeWrite: function(fileObj) {
+				return {
+					extension: 'png',
+					type: 'image/png'
+				};
+			},
+			path: '~/meteor/wlm/uploads/catalog/products/images'
+		})
+	],
+	filter: {
+		maxSize: 10 * 1024 * 1024,
+		allow: {
+			contentTypes: ['image/*']
+		}
+	}
+});
+
 CatalogCollection = new Mongo.Collection('catalog');
 GoodsCollection = new Mongo.Collection('goods');
 
@@ -87,11 +119,10 @@ Schemas.Goods = new SimpleSchema({
 		max: 200,
 		optional: true
 	},
-	imageUrl: {
+	imageId: {
 		type: String,
-		label: '"Image url"',
-		regEx: SimpleSchema.RegEx.Url,
-		max: 1000
+		label: '"Image ID"',
+		optional: true
 	},
 	categories: {
 		type: [String],

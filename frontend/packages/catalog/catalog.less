@@ -152,10 +152,29 @@
         .product-form {
             margin-top: 10px;
             border-top: 1px solid #ccc;
+            .input-group {
+                width: 100%;
+            }
+            #editor__product__image {
+                display: none;
+            }
+            .product-thumb {
+                padding: 10px 0;
+                img {
+                    max-width: 100px;
+                }
+            }
+            .bad-url {
+                width: 0;
+                height: 0;
+                padding: 0;
+                overflow: hidden;
+            }
         }
 	}
     .goods {
         display: inline-block;
+        width: 1000px;
         min-height: 100%;
         margin-left: 10px;
         border-left: 1px solid #C7C7C7;

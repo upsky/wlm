@@ -108,6 +108,10 @@ WlmSecurity.addMethods({
 });
 
 WlmSecurity.addPublish({
+	catalogImages: {
+		authNotRequired: true,
+		roles: 'catalogAdmin'
+	},
 	catalog: {
 		authNotRequired: true,
 		roles: 'catalogAdmin'
@@ -139,6 +143,19 @@ WlmSecurity.addMethods({
 		roles: 'catalogAdmin'
 	},
 	updateProduct: {
+		roles: 'catalogAdmin'
+	},
+	setProductImage: {
+		roles: 'catalogAdmin'
+	},
+
+	'/cfs.catalogImages.filerecord/insert': {
+		roles: 'catalogAdmin'
+	},
+	'/cfs.catalogImages.filerecord/update': {
+		roles: 'catalogAdmin'
+	},
+	_cfs_getUrlInfo: {
 		roles: 'catalogAdmin'
 	}
 });
